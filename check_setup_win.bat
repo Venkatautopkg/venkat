@@ -36,3 +36,7 @@ if exist %UserProfile%\AppData\Local\Autopkg\config.json (
     echo  creating blank Autopkg config
     echo {} > %UserProfile%\AppData\Local\Autopkg\config.json
 )
+
+REM check visual studio build tools
+REM distutils.errors.DistutilsPlatformError: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
