@@ -10,7 +10,9 @@ assignees: ''
 Create the PRODUCT_NAME AutoPkg recipe to generate BigFix content
 
 - [ ] **Download Page:** https://example/download.html
-- [ ] **Example Download URL:** https://example/download_file.exe
+- [ ] **Example Download URL:** https://example/setup.exe
+- [ ] **Silent Install Command(s):**
+  - [ ] `setup.exe /S` (from chocolatey or existing BigFix example or similar)
 - [ ] **Working Example Fixlet:** (link to GitHub or BigFix.Me example)
 - [ ] **Download Recipe:** Vendor/ProductName-Win.download.recipe.yaml
 - [ ] **Fixlet/Task Mustache Template:** Vendor/ProductName-Win.bes.mustache
