@@ -1,6 +1,7 @@
 # bigfix-recipes
 AutoPkg recipes created by the BigFix org
 
+Check your Windows Dev Env Setup using `check_setup_win.bat`
 
 Related Documentation:
 
