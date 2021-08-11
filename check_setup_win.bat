@@ -73,7 +73,6 @@ if exist %UserProfile%\AppData\Local\Autopkg\config.json (
 REM TODO: check visual studio build tools
 REM vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
 REM distutils.errors.DistutilsPlatformError: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
-REM TODO: end script here if this requirement is not satisfied due to it being required for later pip commands
 REM ParentFolder: C:\ProgramData\Microsoft\VisualStudio\Packages\
 REM   SubFolders:
 REM     Microsoft.VisualCpp.Redist.14*
@@ -82,9 +81,88 @@ REM     Microsoft.PythonTools.BuildCore*
 REM     Microsoft.VisualStudio.PackageGroup.VC.Tools*
 REM     Microsoft.VisualStudio.Workload.MSBuildTools*
 REM     Microsoft.VisualStudio.Workload.VCTools*
-REM     Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Core
+REM     Microsoft.VisualStudio.ComponentGroup.NativeDesktop*
 REM     Win10SDK*
-
+if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualCpp.Redist.14* (
+    REM folder missing
+    echo.
+    echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
+    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualCpp.Redist.14*
+    echo Install Command:
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo.
+    exit 9
+)
+if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.Build* (
+    REM folder missing
+    echo.
+    echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
+    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.Build*
+    echo Install Command:
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo.
+    exit 9
+)
+if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.PythonTools.BuildCore* (
+    REM folder missing
+    echo.
+    echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
+    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.PythonTools.BuildCore*
+    echo Install Command:
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo.
+    exit 9
+)
+if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.PackageGroup.VC.Tools* (
+    REM folder missing
+    echo.
+    echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
+    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.PackageGroup.VC.Tools*
+    echo Install Command:
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo.
+    exit 9
+)
+if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.MSBuildTools* (
+    REM folder missing
+    echo.
+    echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
+    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.MSBuildTools*
+    echo Install Command:
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo.
+    exit 9
+)
+if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.VCTools* (
+    REM folder missing
+    echo.
+    echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
+    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.VCTools*
+    echo Install Command:
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo.
+    exit 9
+)
+if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.ComponentGroup.NativeDesktop* (
+    REM folder missing
+    echo.
+    echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
+    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.ComponentGroup.NativeDesktop*
+    echo Install Command:
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo.
+    exit 9
+)
+if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Win10SDK* (
+    REM folder missing
+    echo.
+    echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
+    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Win10SDK*
+    echo Install Command:
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo.
+    exit 9
+)
 
 echo.
 echo Upgrade pip:
