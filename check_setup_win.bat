@@ -80,8 +80,20 @@ echo besapi python module version:
 python -c "import besapi ; print(besapi.__version__)"
 
 echo.
-echo test besapi config and login:
-python -m besapi quit
+echo Check if besapi config file exists:
+REM %UserProfile%\.besapi.conf
+if exist %UserProfile%\.besapi.conf (
+    REM file exists
+    echo ~\.besapi.conf file found!
+    echo.
+    echo Test besapi config and login:
+    python -m besapi ls quit
+) else (
+    echo ERROR: ~\.besapi.conf file does not exist!
+    echo  copying blank besapi config
+    echo copy _setup\.besapi.conf %UserProfile%\.besapi.conf
+    copy _setup\.besapi.conf %UserProfile%\.besapi.conf
+)
 
 echo.
 echo Check for ..\autopkg git repo folder:
