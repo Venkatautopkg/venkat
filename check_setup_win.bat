@@ -81,7 +81,6 @@ REM     Microsoft.PythonTools.BuildCore*
 REM     Microsoft.VisualStudio.PackageGroup.VC.Tools*
 REM     Microsoft.VisualStudio.Workload.MSBuildTools*
 REM     Microsoft.VisualStudio.Workload.VCTools*
-REM     Microsoft.VisualStudio.ComponentGroup.NativeDesktop*
 REM     Win10SDK*
 if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualCpp.Redist.14* (
     REM folder missing
@@ -143,16 +142,16 @@ if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudi
     echo.
     exit 9
 )
-if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.ComponentGroup.NativeDesktop* (
-    REM folder missing
-    echo.
-    echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
-    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.ComponentGroup.NativeDesktop*
-    echo Install Command:
-    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
-    echo.
-    exit 9
-)
+@REM if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.ComponentGroup.NativeDesktop* (
+@REM     REM folder missing
+@REM     echo.
+@REM     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
+@REM     echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.ComponentGroup.NativeDesktop*
+@REM     echo Install Command:
+@REM     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+@REM     echo.
+@REM     exit 9
+@REM )
 if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Win10SDK* (
     REM folder missing
     echo.
