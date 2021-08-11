@@ -76,7 +76,8 @@ REM   .\vswhere.exe -all -legacy -products * -format json
 REM WMI Relevance check:
 REM   selects "* from MSFT_VSInstance" of wmis
 REM Install Powershell VSSetup module
-REM   powershell -ExecutionPolicy Bypass -command "Import-Module PowerShellGet ; Install-Module VSSetup -Scope CurrentUser -AcceptLicense -Confirm"
+REM   powershell -ExecutionPolicy Bypass -command "Import-Module PowerShellGet ; Install-Module VSSetup -Scope CurrentUser -AcceptLicense -Confirm ; Get-VSSetupInstance"
+REM   powershell -ExecutionPolicy Bypass -command "Import-Module PowerShellGet ; Install-Module VSSetup -Scope CurrentUser -AcceptLicense -Confirm ; (Get-VSSetupInstance | Select-VSSetupInstance -Product *).packages"
 REM Install command:
 REM   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
 REM distutils.errors.DistutilsPlatformError: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
