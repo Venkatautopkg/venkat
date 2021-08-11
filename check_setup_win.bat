@@ -19,29 +19,38 @@ echo.%CD% | FIND /I "\bigfix-recipes">Nul && (
 
 REM check python install
 echo.
-echo Python Version:
+echo Python Version:  (Python for Windows)
 python --version
 REM check pip install (generally included in python install)
 echo.
-echo Pip Version:
+echo Pip Version:  (Python for Windows)
 pip --version
 REM check GIT install
 echo.
-echo GIT Version:
+echo GIT Version:  (GIT for Windows)
 git --version
 
 REM check SSH keys (ssh-keygen included with GIT, but must be run)
 REM must generate SSH keys
 REM must copy public key to github
 echo.
-echo check ssh keys exist:
+echo check ssh keys exist: (~\.ssh\id_rsa.pub)
+if exist %UserProfile%\.ssh\id_rsa.pub (
+    REM file exists
+    echo    ~\.ssh\id_rsa.pub file found!
+) else (
+    REM file doesn't exist
+    echo ERROR: ~\.ssh\id_rsa.pub missing!
+    echo RUN: cmd /C "C:\Program Files\Git\usr\bin\ssh-keygen.exe"
+    exit 3
+)
 type %UserProfile%\.ssh\id_rsa.pub
 
 REM check if autopkg config file exists
 REM %UserProfile%\AppData\Local\AutoPkg\config.json
+echo.
 if exist %UserProfile%\AppData\Local\Autopkg\config.json (
     REM file exists
-    echo.
     echo Autopkg config found:
     type %UserProfile%\AppData\Local\Autopkg\config.json
     echo.
@@ -51,14 +60,12 @@ if exist %UserProfile%\AppData\Local\Autopkg\config.json (
         REM autopkg folder doesn't exist
         echo creating missing Autopkg user config folder
         mkdir %UserProfile%\AppData\Local\Autopkg
+        echo.
     )
-    echo.
     echo Autopkg config does not exist
     echo  creating blank Autopkg config
     echo {} > %UserProfile%\AppData\Local\Autopkg\config.json
 )
-
-
 
 REM TODO: check visual studio build tools
 REM distutils.errors.DistutilsPlatformError: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
@@ -73,7 +80,12 @@ python -m pip install --upgrade pip
 echo.
 echo check pip install requirements for bigfix-recipes:
 echo pip install -r .\requirements.txt --quiet --quiet
-REM pip install -r .\requirements.txt --quiet --quiet
+pip install -r .\requirements.txt --quiet --quiet
+if errorlevel 0 (
+    echo pip install for bigfix-recipes succeeded!
+) else (
+    echo ERROR: pip install for bigfix-recipes failed! exit code: %errorlevel%
+)
 
 echo.
 echo besapi python module version:
@@ -113,6 +125,11 @@ echo.
 echo check pip install requirements for AutoPkg:
 echo pip install -r ..\autopkg\requirements.txt --quiet --quiet
 pip install -r ..\autopkg\requirements.txt --quiet --quiet
+if errorlevel 0 (
+    echo pip install for autopkg succeeded!
+) else (
+    echo ERROR: pip install for autopkg failed! exit code: %errorlevel%
+)
 
 echo.
 echo AutoPkg Version: (WARNINGS are expected on Windows)
