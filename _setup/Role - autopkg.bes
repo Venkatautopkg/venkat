@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BESAPI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BESAPI.xsd">
+        <Role>
+                <Name>autopkg</Name>
+                <Description>role for the autopkg api test account</Description>
+                <MasterOperator>0</MasterOperator>
+                <CustomContent>1</CustomContent>
+                <ShowOtherActions>1</ShowOtherActions>
+                <StopOtherActions>0</StopOtherActions>
+                <CanCreateActions>1</CanCreateActions>
+                <PostActionBehaviorPrivilege>None</PostActionBehaviorPrivilege>
+                <ActionScriptCommandsPrivilege>None</ActionScriptCommandsPrivilege>
+                <CanSendMultipleRefresh>0</CanSendMultipleRefresh>
+                <CanSubmitQueries>1</CanSubmitQueries>
+                <CanLock>0</CanLock>
+                <UnmanagedAssetPrivilege>ShowNone</UnmanagedAssetPrivilege>
+                <InterfaceLogins>
+                        <Console>false</Console>
+                        <API>true</API>
+                </InterfaceLogins>
+                <Operators>
+                        <Explicit>API_AutoPkg</Explicit>
+                </Operators>
+                <Sites>
+                        <CustomSite>
+                                <Name>autopkg</Name>
+                                <Permission>Writer</Permission>
+                        </CustomSite>
+                </Sites>
+                <ComputerAssignments>
+                        <ByGroup Name="AutoPkg Test Machines" Type="Automatic"/>
+                </ComputerAssignments>
+        </Role>
+</BESAPI>

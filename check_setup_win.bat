@@ -1,21 +1,26 @@
 
+@echo.
 @echo Python Found: 
 @where python
 
 @echo off
 
 REM check python install
+echo.
 echo Python Version:
 python --version
 REM check pip install (generally included in python install)
+echo.
 echo Pip Version:
 pip --version
 REM check GIT install
+echo.
 echo GIT Version:
 git --version
 REM check SSH keys (ssh-keygen included with GIT, but must be run)
 REM must generate SSH keys
 REM must copy public key to github
+echo.
 echo check ssh keys exist
 type %UserProfile%\.ssh\id_rsa.pub
 
@@ -23,6 +28,7 @@ REM check if autopkg config file exists
 REM %UserProfile%\AppData\Local\AutoPkg\config.json
 if exist %UserProfile%\AppData\Local\Autopkg\config.json (
     REM file exists
+    echo.
     echo Autopkg config found:
     type %UserProfile%\AppData\Local\Autopkg\config.json
 ) else (
@@ -32,6 +38,7 @@ if exist %UserProfile%\AppData\Local\Autopkg\config.json (
         echo creating missing Autopkg user config folder
         mkdir %UserProfile%\AppData\Local\Autopkg
     )
+    echo.
     echo Autopkg config does not exist
     echo  creating blank Autopkg config
     echo {} > %UserProfile%\AppData\Local\Autopkg\config.json
@@ -40,3 +47,7 @@ if exist %UserProfile%\AppData\Local\Autopkg\config.json (
 REM check visual studio build tools
 REM distutils.errors.DistutilsPlatformError: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
 
+echo.
+echo.
+echo Check the _setup folder for other items
+pause
