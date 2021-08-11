@@ -5,18 +5,6 @@
 
 @echo off
 
-echo.
-echo Check Current Directory contains "bigfix-recipes"
-REM https://stackoverflow.com/a/25539569/861745
-echo.%CD% | FIND /I "\bigfix-recipes">Nul && ( 
-  Echo Run from within the correct directory: "bigfix-recipes"
-) || (
-  Echo ERROR: not run from "bigfix-recipes" directory
-  echo run from within the ~\Documents\_Code\bigfix-recipes or similar folder
-  echo.
-  exit 1
-)
-
 REM check python install
 echo.
 echo Python Version:  (Python for Windows)
@@ -30,6 +18,18 @@ echo.
 echo GIT Version:  (GIT for Windows)
 git --version
 
+REM check ssh-keygen.exe exists:
+if exist "%ProgramFiles%\Git\usr\bin\ssh-keygen.exe" (
+    REM file exists
+) else (
+    REM file doesn't exist
+    echo ERROR: "C:\Program Files\Git\usr\bin\ssh-keygen.exe" is missing
+    echo.
+    echo  - Did you install GIT for Windows? -
+    echo.
+    exit 2
+)
+
 REM check SSH keys (ssh-keygen included with GIT, but must be run)
 REM must generate SSH keys
 REM must copy public key to github
@@ -42,6 +42,9 @@ if exist %UserProfile%\.ssh\id_rsa.pub (
     REM file doesn't exist
     echo ERROR: ~\.ssh\id_rsa.pub missing!
     echo RUN: cmd /C "C:\Program Files\Git\usr\bin\ssh-keygen.exe"
+    echo          to generate ~\.ssh\id_rsa.pub
+    echo          NOTE: just hit enter at "Enter file in which to save the key (/c/Users/_USER_/.ssh/id_rsa):" prompt
+    echo      then copy the contents of ~\.ssh\id_rsa.pub to your GitHub account SSH keys at https://github.com/settings/keys
     exit 3
 )
 type %UserProfile%\.ssh\id_rsa.pub
@@ -68,6 +71,7 @@ if exist %UserProfile%\AppData\Local\Autopkg\config.json (
 )
 
 REM TODO: check visual studio build tools
+REM vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
 REM distutils.errors.DistutilsPlatformError: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
 REM TODO: end script here if this requirement is not satisfied due to it being required for later pip commands
 
@@ -77,15 +81,33 @@ echo Upgrade pip:
 echo python -m pip install --upgrade pip
 python -m pip install --upgrade pip
 
+REM NOTE: The following must be run from within the cloned git "bigfix-recipes" folder:
+echo.
+echo Check Current Directory contains "bigfix-recipes"
+REM https://stackoverflow.com/a/25539569/861745
+echo.%CD% | FIND /I "\bigfix-recipes">Nul && ( 
+  Echo Run from within the correct directory: "bigfix-recipes"
+) || (
+  Echo ERROR: not run from "bigfix-recipes" directory
+  echo run from within the ~\Documents\_Code\bigfix-recipes or similar folder
+  echo.
+  exit 1
+)
+
 echo.
 echo check pip install requirements for bigfix-recipes:
 echo pip install -r .\requirements.txt --quiet --quiet
 pip install -r .\requirements.txt --quiet --quiet
 if errorlevel 0 (
-    echo pip install for bigfix-recipes succeeded!
+    echo   - pip install for bigfix-recipes succeeded!  exit code: %errorlevel%
 ) else (
     echo ERROR: pip install for bigfix-recipes failed! exit code: %errorlevel%
+    echo   - Have you installed visual studio build tools?
+    REM https://github.com/bigfix/bigfix-recipes/issues/10
+    echo vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    exit %errorlevel%
 )
+REM https://stackoverflow.com/a/334890/861745
 
 echo.
 echo besapi python module version:
@@ -111,8 +133,9 @@ echo.
 echo Check for ..\autopkg git repo folder:
 if not exist ..\autopkg (
     echo ERROR: autopkg git folder missing!
+    REM TODO: Consider attempt at automatic fix with the following:
     REM CMD /C "cd .. && git clone https://github.com/jgstew/autopkg.git"
-    exit 2
+    exit 4
 ) else (
     echo ..\autopkg folder found!
 )
@@ -126,15 +149,21 @@ echo check pip install requirements for AutoPkg:
 echo pip install -r ..\autopkg\requirements.txt --quiet --quiet
 pip install -r ..\autopkg\requirements.txt --quiet --quiet
 if errorlevel 0 (
-    echo pip install for autopkg succeeded!
+    echo   - pip install for autopkg succeeded!  exit code: %errorlevel%
 ) else (
-    echo ERROR: pip install for autopkg failed! exit code: %errorlevel%
+    echo ERROR: pip install for autopkg failed!  exit code: %errorlevel%
+    echo   - Have you installed visual studio build tools?
+    REM https://github.com/bigfix/bigfix-recipes/issues/10
+    echo vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    exit %errorlevel%
 )
 
 echo.
-echo AutoPkg Version: (WARNINGS are expected on Windows)
+echo AutoPkg Version Check: (WARNINGS are expected on Windows)
 REM this is assuming you ran check_setup_win.bat from within the bigfix-recipes folder and that Autopkg is in a sibling folder
+echo python ..\autopkg\Code\autopkg version
 python ..\autopkg\Code\autopkg version
+echo      --- AutoPkg version (expected 2.3 or later)
 
 echo.
 echo Check the _setup folder for other items
