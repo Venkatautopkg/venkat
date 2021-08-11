@@ -74,6 +74,16 @@ REM TODO: check visual studio build tools
 REM vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
 REM distutils.errors.DistutilsPlatformError: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
 REM TODO: end script here if this requirement is not satisfied due to it being required for later pip commands
+REM ParentFolder: C:\ProgramData\Microsoft\VisualStudio\Packages\
+REM   SubFolders:
+REM     Microsoft.VisualCpp.Redist.14*
+REM     Microsoft.Build*
+REM     Microsoft.PythonTools.BuildCore*
+REM     Microsoft.VisualStudio.PackageGroup.VC.Tools*
+REM     Microsoft.VisualStudio.Workload.MSBuildTools*
+REM     Microsoft.VisualStudio.Workload.VCTools*
+REM     Microsoft.VisualStudio.ComponentGroup.NativeDesktop.Core
+REM     Win10SDK*
 
 
 echo.
