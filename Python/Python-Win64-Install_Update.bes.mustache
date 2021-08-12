@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>Install: Git v{{version}} - Windows (x64)</Title>
-		<Description><![CDATA[This task will download and install "Git v{{version}}" package onto selected endpoints <br><br><b>Installation Command:</b> {{file_name}} /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /NOICONS<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB]]></Description>
+		<Title>Install: Python v{{version}} - Windows (x64)</Title>
+		<Description><![CDATA[This task will download and install "Python v{{version}}" package onto selected endpoints <br><br><b>Installation Command:</b> {{file_name}}  /quiet InstallAllUsers=1 PrependPath=1 Include_test=0<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
-		<Relevance><![CDATA[not exists keys whose(value "DisplayName" of it as string contains "Git") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		<Relevance><![CDATA[not exists keys whose(value "DisplayName" of it as string starts with "Python {{version}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
 		<Source>https://github.com/bigfix/bigfix-recipes</Source>
@@ -23,7 +23,7 @@
 			<Description>
 				<PreLink>Click </PreLink>
 				<Link>here</Link>
-				<PostLink> to deploy Git v{{version}}.</PostLink>
+				<PostLink> to deploy Python v{{version}}.</PostLink>
 			</Description>
 			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
 // Download:
@@ -33,7 +33,7 @@
 override wait
 hidden=true
 completion=job
-wait __Download\{{{file_name}}} /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /NOICONS
+wait __Download\{{{file_name}}} /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
 </ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
