@@ -1,10 +1,10 @@
 ---
 Description: Generates BigFix Task for latest 7Zip
-Identifier: com.github.zanesand.bigfix.7Zip-Win64
+Identifier: com.github.bigfix.bigfix.7Zip-Win64
 Input:
   NAME: 7Zip
 MinimumVersion: '2.3'
-ParentRecipe: com.github.zanesand.download.7Zip-Win64
+ParentRecipe: com.github.bigfix.download.7Zip-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem

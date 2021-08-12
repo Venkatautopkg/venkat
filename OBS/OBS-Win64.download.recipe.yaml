@@ -1,0 +1,16 @@
+---
+Description: Downloads the latest OBS for Windows x64
+Identifier: com.github.bigfix.download.OBS-Win64
+Input:
+  NAME: OBSWin64
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://obsproject.com/download
+      # Example: https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.0.1-Full-Installer-x64.exe
+      re_pattern: 'OBS-Studio-(?P<latest_version>\d+\.\d+\.\d+)-Full-Installer-x64.exe'
+  - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
+    Arguments:
+      url: https://cdn-fastly.obsproject.com/downloads/OBS-Studio-%latest_version%-Full-Installer-x64.exe
+  - Processor: EndOfCheckPhase
