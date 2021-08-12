@@ -49,6 +49,24 @@ if exist %UserProfile%\.ssh\id_rsa.pub (
 )
 type %UserProfile%\.ssh\id_rsa.pub
 
+
+echo.
+REM https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/testing-your-ssh-connection
+REM https://stackoverflow.com/a/28469910/861745
+echo Test SSH connection to GitHub:
+echo ssh -T -o StrictHostKeyChecking=no git@github.com
+ssh -T -o StrictHostKeyChecking=no git@github.com
+if errorlevel 1 (
+    echo   - ssh test succeeded!  exit code: %errorlevel%
+) else if errorlevel 0 (
+    echo   - ssh test succeeded!  exit code: %errorlevel%
+) else (
+    echo ERROR: ssh test failed!  exit code: %errorlevel%
+    echo   - Have you copied ssh keys to your github account?
+    exit %errorlevel%
+)
+
+
 REM check if autopkg config file exists
 REM %UserProfile%\AppData\Local\AutoPkg\config.json
 echo.
@@ -264,12 +282,6 @@ echo python ..\autopkg\Code\autopkg version
 python ..\autopkg\Code\autopkg version
 echo      --- AutoPkg version (expected 2.3 or later)
 
-
-echo.
-REM https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/testing-your-ssh-connection
-echo Test SSH connection to GitHub:
-echo ssh -T git@github.com
-ssh -T git@github.com
 
 echo.
 echo Check the _setup folder for other items
