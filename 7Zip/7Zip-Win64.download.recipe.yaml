@@ -1,7 +1,7 @@
 ---
 Description: Downloads the latest version 7Zip 64-bit for Windows.
 # based upon https://github.com/autopkg/hansen-m-recipes/blob/master/UnixUtils/7zip-Win64.download.recipe
-Identifier: com.github.zanesand.download.7Zip-Win64
+Identifier: com.github.bigfix.download.7Zip-Win64
 Input:
   NAME: 7Zip
 MinimumVersion: '2.3'

@@ -1,7 +1,7 @@
 ---
 Description: Downloads the latest GIT for Windows x64
 # based upon https://github.com/jgstew/jgstew-recipes/tree/main/GitForWindows
-Identifier: com.github.zanesand.download.Git-Win64
+Identifier: com.github.bigfix.download.Git-Win64
 Input:
   NAME: GitWin64
 MinimumVersion: '2.3'
