@@ -1,0 +1,16 @@
+---
+Description: Downloads the latest Python for Windows x64
+Identifier: com.github.zanesand.download.Python-Win64
+Input:
+  NAME: PythonWin64
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.python.org/downloads/
+      # Example: https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe
+      re_pattern: 'python-(?P<latest_version>\d+\.\d+\.\d+)-amd64.exe'
+  - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
+    Arguments:
+      url: https://www.python.org/ftp/python/%latest_version%/python-%latest_version%-amd64.exe
+  - Processor: EndOfCheckPhase

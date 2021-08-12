@@ -23,7 +23,7 @@
 			<Description>
 				<PreLink>Click </PreLink>
 				<Link>here</Link>
-				<PostLink> to deploy {{PARENT_RECIPES}} v{{version}}.</PostLink>
+				<PostLink> to deploy 7Zip v{{version}}.</PostLink>
 			</Description>
 			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
 // Download:
@@ -44,7 +44,6 @@ endif
 
 // Install:
 waithidden msiexec.exe /i __Download\{{{file_name}}} /qn /norestart
-
 </ActionScript>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>

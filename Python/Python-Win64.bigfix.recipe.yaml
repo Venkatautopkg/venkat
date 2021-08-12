@@ -1,19 +1,19 @@
 ---
-Description: Generates BigFix Task for latest Git
-Identifier: com.github.zanesand.bigfix.Git-Win64
+Description: Generates BigFix Task for latest Python
+Identifier: com.github.zanesand.bigfix.Python-Win64
 Input:
-  NAME: GitWin64
+  NAME: PythonWin64
 MinimumVersion: '2.3'
-ParentRecipe: com.github.zanesand.download.Git-Win64
+ParentRecipe: com.github.zanesand.download.Python-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
-      template_version: "%version%"
+      template_version: "%latest_version%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./GIT/GitForWindows-Win64-Install_Update.bes.mustache"
+      template_file_path: "./Python/Python-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
     Arguments:
