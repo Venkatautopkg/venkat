@@ -264,6 +264,13 @@ echo python ..\autopkg\Code\autopkg version
 python ..\autopkg\Code\autopkg version
 echo      --- AutoPkg version (expected 2.3 or later)
 
+
+echo.
+REM https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/testing-your-ssh-connection
+echo Test SSH connection to GitHub:
+echo ssh -T git@github.com
+ssh -T git@github.com
+
 echo.
 echo Check the _setup folder for other items
 echo.
