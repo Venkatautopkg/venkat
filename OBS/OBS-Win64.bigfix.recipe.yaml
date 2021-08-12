@@ -1,10 +1,10 @@
 ---
 Description: Generates BigFix Task for latest OBS for Windows x64
-Identifier: com.github.zanesand.bigfix.OBS-Win64
+Identifier: com.github.bigfix.bigfix.OBS-Win64
 Input:
   NAME: OBSWin64
 MinimumVersion: '2.3'
-ParentRecipe: com.github.zanesand.download.OBS-Win64
+ParentRecipe: com.github.bigfix.download.OBS-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
