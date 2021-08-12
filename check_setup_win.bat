@@ -80,6 +80,10 @@ REM   powershell -ExecutionPolicy Bypass -command "Import-Module PowerShellGet ;
 REM   powershell -ExecutionPolicy Bypass -command "Import-Module PowerShellGet ; Install-Module VSSetup -Scope CurrentUser -AcceptLicense -Confirm ; (Get-VSSetupInstance | Select-VSSetupInstance -Product *).packages"
 REM Install command:
 REM   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+REM Relevance to generate relevance for folder check:
+REM   ("number of unique values of preceding texts of firsts %22,%22 of names of folders whose(name of it starts with %22" & it & "%22) of folders %22Microsoft\VisualStudio\Packages%22 of /* ProgramData */ csidl folders 35") of concatenations "%22 OR name of it starts with %22" of tuple string items of "Microsoft.VisualCpp.Redist.14, Microsoft.PythonTools.BuildCore, Microsoft.VisualStudio.Workload.MSBuildTools, Microsoft.VisualStudio.Workload.VCTools, Win10SDK"
+REM Relevance to detect required vsbuildtools are missing:
+REM   5 != number of unique values of preceding texts of firsts "," of names of folders whose(name of it starts with "Microsoft.VisualCpp.Redist.14.Latest" OR name of it starts with "Microsoft.PythonTools.BuildCore" OR name of it starts with "Microsoft.VisualStudio.Workload.MSBuildTools" OR name of it starts with "Microsoft.VisualStudio.Workload.VCTools" OR name of it starts with "Win10SDK") of folders "Microsoft\VisualStudio\Packages" of /* ProgramData */ csidl folders 35
 REM distutils.errors.DistutilsPlatformError: Microsoft Visual C++ 14.0 or greater is required. Get it with "Microsoft C++ Build Tools": https://visualstudio.microsoft.com/visual-cpp-build-tools/
 REM ParentFolder: C:\ProgramData\Microsoft\VisualStudio\Packages\
 REM   SubFolders:
