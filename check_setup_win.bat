@@ -47,8 +47,6 @@ if exist %UserProfile%\.ssh\id_rsa.pub (
     echo      then copy the contents of ~\.ssh\id_rsa.pub to your GitHub account SSH keys at https://github.com/settings/keys
     exit 3
 )
-type %UserProfile%\.ssh\id_rsa.pub
-
 
 echo.
 REM https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/testing-your-ssh-connection
@@ -63,6 +61,10 @@ if errorlevel 1 (
 ) else (
     echo ERROR: ssh test failed!  exit code: %errorlevel%
     echo   - Have you copied ssh keys to your github account?
+    echo.
+    type %UserProfile%\.ssh\id_rsa.pub
+    echo.
+    REM copy public key to clipboard? powershell -c [Windows.Forms.Clipboard]::SetText(???)
     exit %errorlevel%
 )
 
