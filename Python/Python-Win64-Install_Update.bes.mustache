@@ -5,7 +5,7 @@
 		<Description><![CDATA[This task will download and install "Python v{{version}}" package onto selected endpoints <br><br><b>Installation Command:</b> {{file_name}}  /quiet InstallAllUsers=1 PrependPath=1 Include_test=0<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
-		<Relevance><![CDATA[not exists keys whose(value "DisplayName" of it as string starts with "Python {{version}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		<Relevance><![CDATA[not exists (it as string ) whose(it starts with "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "Python") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
 		<Source>https://github.com/bigfix/bigfix-recipes</Source>
