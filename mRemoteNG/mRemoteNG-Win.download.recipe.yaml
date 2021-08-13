@@ -1,0 +1,15 @@
+---
+Description: Downloads the latest mRemoteNG for Windows x86
+Identifier: com.github.bigfix.download.mRemoteNG-Win
+Input:
+  NAME: mRemoteNGWin
+  TYPE: "msi"
+MinimumVersion: '2.3'
+Process:
+  - Processor: GitHubReleasesInfoProvider
+    Arguments:
+      github_repo: mRemoteNG/mRemoteNG
+      asset_regex: .*\.%TYPE%$
+      include_prereleases: False
+  - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
+  - Processor: EndOfCheckPhase
