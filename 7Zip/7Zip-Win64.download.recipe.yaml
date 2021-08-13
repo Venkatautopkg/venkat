@@ -16,7 +16,7 @@ Process:
       url: https://7-zip.org/download.html
       # Example: https://www.7-zip.org/a/7z1604.msi
       re_pattern: 'Download 7-Zip (?P<display_version>\d+(\.\d+))'
-  - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
+  - Processor: URLDownloaderPython
     Arguments:
       url: http://d.7-zip.org/a/7z%latest_version%-x64.msi
   - Processor: EndOfCheckPhase
