@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<BESAPI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BESAPI.xsd">
+        <Operator>
+                <Name>API_AutoPkg</Name>
+                <MasterOperator>false</MasterOperator>
+                <CustomContent>false</CustomContent>
+                <ShowOtherActions>false</ShowOtherActions>
+                <StopOtherActions>false</StopOtherActions>
+                <CanCreateActions>false</CanCreateActions>
+                <ActionScriptCommandsPrivilege>None</ActionScriptCommandsPrivilege>
+                <CanLock>false</CanLock>
+                <CanSendMultipleRefresh>false</CanSendMultipleRefresh>
+                <CanSubmitQueries>false</CanSubmitQueries>
+                <LoginPermission>RoleRestricted</LoginPermission>
+                <UnmanagedAssetPrivilege>ShowNone</UnmanagedAssetPrivilege>
+                <InterfaceLogins>
+                        <Console>false</Console>
+                        <WebUI>false</WebUI>
+                        <API>false</API>
+                        <Applications/>
+                </InterfaceLogins>
+                <ComputerAssignments/>
+        </Operator>
+</BESAPI>
