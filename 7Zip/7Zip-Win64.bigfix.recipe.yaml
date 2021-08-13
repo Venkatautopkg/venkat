@@ -1,5 +1,5 @@
 ---
-Description: Generates BigFix Task for latest 7Zip
+Description: Generates BigFix Task for latest 7Zip x64 MSI
 Identifier: com.github.bigfix.bigfix.7Zip-Win64
 Input:
   NAME: 7Zip
