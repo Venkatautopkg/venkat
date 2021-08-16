@@ -1,22 +1,25 @@
 ---
-Description: Generates BigFix Task for latest WinZip x64 MSI
+Description: Generates a BigFix Task for the latest version of WinZip 64-bit for Windows
 Identifier: com.github.bigfix.bigfix.WinZip-Win64
 Input:
-  NAME: WinZip
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: WinZip x64
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: Example Software DisplayaName
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.WinZip-Win64
+ParentRecipe: com.github.bigfix.download.Example
 Process:
+  # `FileHasher` will not be required in the future due to hashing behing handled by `URLDownloaderPython` instead
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
-      template_version: "%display_version%"
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./WinZip/WinZip-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
-    Arguments:
-      bes_file: "%content_file_pathname%"
-      bes_customsite: autopkg
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
