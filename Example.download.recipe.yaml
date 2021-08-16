@@ -1,8 +1,11 @@
+---
 Description: Downloads the latest Example
 Identifier: com.github.bigfix.download.Example
 Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: Example
-  DisplayName: Example Software DisplayName
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: Example Software DisplayaName
 MinimumVersion: '2.3'
 Process:
   - Processor: URLTextSearcher
