@@ -1,9 +1,17 @@
 ---
-Description: Downloads the latest WinZip x64
+Description: Downloads the latest version of WinZip 64-bit for Windows
 Identifier: com.github.bigfix.download.WinZip-Win64
 Input:
   NAME: WinZip-Win64
 MinimumVersion: '2.3'
 Process:
-  # TODO: get download link from webpage, download
+  - Processor: com.github.jgstew.SharedProcessors/URLTextSearcherArray
+    Arguments:
+      url: https://www.winzip.com/en/download/alternative/
+      re_pattern: 'winzip(?P<version>\d+)-64.msi'
+  - Processor: com.github.jgstew.SharedProcessors/VersionMaximumArray
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://download.winzip.com/winzip%version_maximum%-64.msi
+      download_version: "%version_maximum%"
   - Processor: EndOfCheckPhase
