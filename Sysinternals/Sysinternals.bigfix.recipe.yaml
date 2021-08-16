@@ -1,19 +1,16 @@
----
-Description: Generates BigFix Task for latest 7Zip x64 MSI
-Identifier: com.github.bigfix.bigfix.7Zip-Win64
+Description: Generates a BigFix Prefetch for the latest Sysinternals Utilities
+Identifier: com.github.bigfix.Sysinternals
 Input:
-  NAME: 7Zip
+  NAME: Sysinternals
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.7Zip-Win64
+ParentRecipe: com.github.bigfix.download.Sysinternals
 Process:
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
-    Arguments:
-      template_version: "%display_version%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./7Zip/7Zip-Win64-Install_Update.bes.mustache"
+      template_file_path: "./Sysinternals/Sysinternals-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
     Arguments:

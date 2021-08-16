@@ -10,7 +10,7 @@ Process:
       url: https://obsproject.com/download
       # Example: https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.0.1-Full-Installer-x64.exe
       re_pattern: 'OBS-Studio-(?P<latest_version>\d+\.\d+\.\d+)-Full-Installer-x64.exe'
-  - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
+  - Processor: URLDownloaderPython
     Arguments:
       url: https://cdn-fastly.obsproject.com/downloads/OBS-Studio-%latest_version%-Full-Installer-x64.exe
   - Processor: EndOfCheckPhase
