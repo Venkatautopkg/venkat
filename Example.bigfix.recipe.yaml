@@ -9,6 +9,7 @@ Input:
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.Example
 Process:
+  # `FileHasher` will not be required in the future due to hashing behing handled by `URLDownloaderPython` instead
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
