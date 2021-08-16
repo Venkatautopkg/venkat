@@ -1,0 +1,21 @@
+---
+Description: Generates BigFix Task for the latest version DBBrowserforSQLite for 64-bit Windows
+Identifier: com.github.bigfix.bigfix.DBBrowserforSQLite-Win64
+Input:
+  NAME: DBBrowserforSQLite
+MinimumVersion: '2.3'
+ParentRecipe: com.github.bigfix.download.DBBrowserforSQLite-Win64
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/FileHasher
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+    Arguments:
+      template_version: "%latest_version%"
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./DBBrowserforSQLite/DBBrowserforSQLite-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+    Arguments:
+      bes_file: "%content_file_pathname%"
+      bes_customsite: autopkg
