@@ -2,7 +2,10 @@
 Description: Downloads the latest version of WinZip 64-bit for Windows
 Identifier: com.github.bigfix.download.WinZip-Win64
 Input:
-  NAME: WinZip-Win64
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: WinZip x64
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: WinZip
 MinimumVersion: '2.3'
 Process:
   - Processor: com.github.jgstew.SharedProcessors/URLTextSearcherArray
@@ -14,4 +17,5 @@ Process:
     Arguments:
       url: https://download.winzip.com/winzip%version_maximum%-64.msi
       download_version: "%version_maximum%"
+      COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
