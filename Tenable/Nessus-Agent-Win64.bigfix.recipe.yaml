@@ -1,0 +1,24 @@
+---
+Description: Generates BigFix Task for the latest version Nessus Agent Windows 64bit
+Identifier: com.github.bigfix.bigfix.Nessus-Agent-Win64
+Input:
+  NAME: Nessus-Agent-Win64
+  DisplayName: Nessus Agent
+MinimumVersion: '2.3'
+ParentRecipe: com.github.jgstew.download.Nessus-Agent-Win64
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/FileHasher
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+    Arguments:
+      template_version: "%version%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./Tenable/Nessus-Agent-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+  # Processor: com.github.jgstew.SharedProcessors/BigFixActioner
