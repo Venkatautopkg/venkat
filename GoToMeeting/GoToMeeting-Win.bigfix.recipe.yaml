@@ -1,19 +1,21 @@
 ---
-Description: Generates BigFix Task for latest Git
-Identifier: com.github.bigfix.bigfix.Git-Win64
+Description: Generates BigFix Task for latest GoToMeeting
+Identifier: com.github.bigfix.bigfix.GoToMeeting-Win
 Input:
-  NAME: GitWin64
+  NAME: GoToMeeting
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.Git-Win64
+ParentRecipe: com.github.bigfix.download.GoToMeeting-Win
 Process:
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
       template_version: "%version%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "release_version"
+      append_value: "%release_version%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./GIT/GitForWindows-Win64-Install_Update.bes.mustache"
+      template_file_path: "./GoToMeeting/GoToMeeting-Win Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
-  - Processor: com.github.jgstew.SharedProcessors/BESImport
-  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner

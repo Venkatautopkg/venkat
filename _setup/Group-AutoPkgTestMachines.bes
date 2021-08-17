@@ -5,7 +5,7 @@
 		<Domain>BESC</Domain>
 		<JoinByIntersection>true</JoinByIntersection>
 		<SearchComponentRelevance Comparison="IsTrue">
-			<Relevance>exists computer names whose(it as lowercase contains "autopkgtest")</Relevance>
+			<Relevance>exists computer names whose(it as lowercase contains "autopkg")</Relevance>
 		</SearchComponentRelevance>
 	</ComputerGroup>
 </BES>

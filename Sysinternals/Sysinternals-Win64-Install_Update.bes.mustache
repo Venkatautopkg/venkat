@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
+	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
+		<Title>Install/Update: Microsoft Sysinternals Suite - Windows (x64)</Title>
+		<Description><![CDATA[This task will download and install "Microsoft Sysinternals Suite" package onto selected endpoints <BR><BR><B>Installation Command:</B> unzip.exe -qq -o -d&nbsp;"\Program Files\Sysinternals"&nbsp;__Download\{{file_name}}<BR><BR><B>Run Command As:</B> System User<BR><BR><B>Download Size:</B> {{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}} KB ]]></Description>
+		<Relevance>windows of operating system</Relevance>
+		<Relevance>x64 of operating system</Relevance>
+		<Relevance>not exists folder "Sysinternals" of program files x64 folders</Relevance>
+		<Category></Category>
+		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
+		<Source>https://github.com/bigfix/bigfix-recipes</Source>
+		<SourceID>BigFix</SourceID>
+		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
+		<SourceSeverity></SourceSeverity>
+		<CVENames></CVENames>
+		<SANSID></SANSID>
+		<MIMEField>
+			<Name>x-fixlet-modification-time</Name>
+			<Value>{{x-fixlet-modification-time}}</Value>
+		</MIMEField>
+		<Domain>BESC</Domain>
+		<DefaultAction ID="Action1">
+			<Description>
+				<PreLink>Click </PreLink>
+				<Link>here</Link>
+				<PostLink> to deploy Microsoft Sysinternals Suite.</PostLink>
+			</Description>
+			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
+action uses wow64 redirection {not x64 of operating system}
+
+// Download:
+{{{prefetch}}}
+prefetch unzip.exe sha1:84debf12767785cd9b43811022407de7413beb6f size:204800 http://software.bigfix.com/download/redist/unzip-6.0.exe sha256:2122557d350fd1c59fb0ef32125330bde673e9331eb9371b454c2ad2d82091ac
+
+//Identify the install directory
+parameter "sysinternalsFolder" = "{pathname of program files x64 folders &amp; "\Sysinternals"}"
+
+//Create the Sysinternals folder
+folder create "{parameter "sysinternalsFolder"}"
+
+// Unzip the file overwriting existing files
+waithidden __Download\unzip.exe -qq -o -d "{parameter "sysinternalsFolder"}" __Download\{{file_name}}
+
+//Add the Sysinternals Suite to the System Path
+waithidden cmd /c SETX /M PATH "%PATH%;{parameter "sysinternalsFolder"}"
+</ActionScript>
+			<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
+		</DefaultAction>
+	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
+</BES>

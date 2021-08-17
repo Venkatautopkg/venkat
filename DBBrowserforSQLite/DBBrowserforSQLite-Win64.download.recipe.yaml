@@ -1,0 +1,18 @@
+---
+Description: Downloads the latest version DBBrowserforSQLite for Windows.
+Identifier: com.github.bigfix.download.DBBrowserforSQLite-Win64
+Input:
+  NAME: DBBrowserforSQLite
+  FileType: msi
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://sqlitebrowser.org/dl/
+      # Example: latest release (3.12.2)
+      re_pattern: 'latest release \((?P<latest_version>\d+\.\d+\.\d+)\)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://download.sqlitebrowser.org/DB.Browser.for.SQLite-%latest_version%-win64.%FileType%
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

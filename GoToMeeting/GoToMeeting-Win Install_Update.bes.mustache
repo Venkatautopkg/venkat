@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
+	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
+		<Title>Install/Update: GoToMeeting {{release_version}} - Windows</Title>
+		<Description><![CDATA[&lt;enter a description of the task here&gt; ]]></Description>
+		<Relevance>windows of operating system</Relevance>
+		<Relevance><![CDATA[v(name of it = "Win7") of operating system OR (it starts with "Win10" AND it does not start with "Win20") of name of operating system]]></Relevance>
+		<Relevance><![CDATA[not exists values "PROCESSOR_ARCHITECTURE" whose (it as string as lowercase = "ia64") of keys "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" of registry]]></Relevance>
+		<Relevance><![CDATA[exists value "DisplayVersion" whose (it as string as version < "{{version}}") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\GoToMeeting" whose (value "DisplayName" of it as string contains "GoToMeeting") of registry]]></Relevance>
+		<Category></Category>
+		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
+		<Source>https://github.com/bigfix</Source>
+		<SourceID>bigfix</SourceID>
+		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
+		<SourceSeverity></SourceSeverity>
+		<CVENames></CVENames>
+		<SANSID></SANSID>
+		<MIMEField>
+			<Name>x-fixlet-modification-time</Name>
+			<Value>{{x-fixlet-modification-time}}</Value>
+		</MIMEField>
+		<Domain>BESC</Domain>
+		<DefaultAction ID="Action1">
+			<Description>
+				<PreLink>Click </PreLink>
+				<Link>here</Link>
+				<PostLink> to deploy this action.</PostLink>
+			</Description>
+			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
+// Download:
+{{{prefetch}}}
+
+// Install:
+wait "{pathname of system folder & "\msiexec.exe"}" /i "{(pathname of client folder of current site) & "\__Download\{{{file_name}}}"}" /qn /norestart
+
+// https://svenaelterman.wordpress.com/2016/05/23/performing-a-silent-install-of-sql-server-management-studio-2016/
+// https://msdn.microsoft.com/en-us/library/mt238290.aspx
+// https://go.microsoft.com/fwlink/?linkid=837453
+</ActionScript>
+		</DefaultAction>
+	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
+</BES>

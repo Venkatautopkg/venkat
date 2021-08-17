@@ -1,0 +1,19 @@
+---
+Description: Downloads the latest version MongoDB for Windows.
+Identifier: com.github.bigfix.download.MongoDB-Win64
+Input:
+  NAME: MongoDB
+  FileType: msi
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.mongodb.com/try/download/community?tck=docs_server
+      # Example: 5.0.2 (current)
+      re_pattern: '(?P<latest_version>\d\.\d\.\d) \(current\)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-%latest_version%-signed.%FileType%
+      prefetch_filename: True
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

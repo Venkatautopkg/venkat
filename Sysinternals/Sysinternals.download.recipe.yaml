@@ -1,0 +1,16 @@
+Description: Downloads the latest Sysinternals Utilities
+Identifier: com.github.bigfix.download.Sysinternals
+Input:
+  NAME: Sysinternals
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://docs.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite
+      # example match `Updated: July 27, 2021`
+      re_pattern: 'Updated: (?P<release_date>\w+ \d{1,2}, \d{4})'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://download.sysinternals.com/files/SysinternalsSuite.zip
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

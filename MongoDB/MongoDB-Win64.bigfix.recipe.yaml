@@ -1,10 +1,10 @@
 ---
-Description: Generates BigFix Task for latest Python
-Identifier: com.github.bigfix.bigfix.Python-Win64
+Description: Generates BigFix Task for the latest version MongoDB for Windows
+Identifier: com.github.bigfix.bigfix.MongoDB-Win64
 Input:
-  NAME: PythonWin64
+  NAME: MongoDB
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.Python-Win64
+ParentRecipe: com.github.bigfix.download.MongoDB-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -13,7 +13,7 @@ Process:
       template_version: "%latest_version%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Python/Python-Win64-Install_Update.bes.mustache"
+      template_file_path: "./MongoDB/MongoDB-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
