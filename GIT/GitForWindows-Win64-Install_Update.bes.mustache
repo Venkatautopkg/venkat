@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title><![CDATA[Install/Update: Git v{{version}} - Windows (x64)]]></Title>
-		<Description><![CDATA[This task will download and install "Git v{{version}}" package onto selected endpoints <br><br><b>Installation Command:</b> {{file_name}} /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /NOICONS<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB]]></Description>
+		<Title><![CDATA[Install/Update: {{DisplayName}} v{{version}} - Windows (x64)]]></Title>
+		<Description><![CDATA[This task will download and install "{{DisplayName}} v{{version}}" package onto selected endpoints <br><br><b>Installation Command:</b> {{file_name}} /VERYSILENT /NORESTART /NOCANCEL /SP- /CLOSEAPPLICATIONS /RESTARTAPPLICATIONS /NOICONS<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
-		<Relevance><![CDATA[not exists (it as string as version) whose(it >= "{{version}}" as version) of values "DisplayVersion" of keys whose(value "DisplayName" of it as string contains "Git") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		<Relevance><![CDATA[not exists (it as string as version) whose(it >= "{{version}}" as version) of values "DisplayVersion" of keys whose(value "DisplayName" of it as string contains "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
 		<Source>https://github.com/bigfix/bigfix-recipes</Source>
-		<SourceID>Internal</SourceID>
+		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
 		<CVENames></CVENames>
@@ -23,7 +23,7 @@
 			<Description>
 				<PreLink>Click </PreLink>
 				<Link>here</Link>
-				<PostLink> to deploy Git v{{version}}.</PostLink>
+				<PostLink> to deploy {{DisplayName}} v{{version}}.</PostLink>
 			</Description>
 			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
 // Download:
