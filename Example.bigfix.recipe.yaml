@@ -1,11 +1,11 @@
 ---
-Description: Generates a BigFix Task for the latest Example
-Identifier: com.github.bigfix.bigfix.Example
+Description: Generates a BigFix Task for the latest {{DisplayName}}
+Identifier: com.github.bigfix.bigfix.{{NAME}}
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: Example
+  NAME: "{{NAME}}"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Example Software DisplayaName
+  DisplayName: "{{DisplayName}}"
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.Example
 Process:
