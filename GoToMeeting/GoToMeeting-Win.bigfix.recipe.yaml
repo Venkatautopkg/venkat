@@ -10,12 +10,13 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
-      template_version: "%version%"
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "release_version"
-      append_value: "%release_version%"
+      template_version: "%version1%.%version2%"
+      template_file_sha1: "%file_sha1%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./GoToMeeting/GoToMeeting-Win Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+    Arguments:
+      bes_file: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+      bes_customsite: "AutoPKG"
