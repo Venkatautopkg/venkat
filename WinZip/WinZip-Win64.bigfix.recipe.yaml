@@ -20,9 +20,10 @@ Process:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
   - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
-      append_key: "ProductVersion"
-      append_value: "%ProductVersion%"
+      append_key: "PropertyVersion"
+      append_value: "%PropertyVersion%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./WinZip/WinZip-Win64-Install_Update.bes.mustache"
