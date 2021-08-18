@@ -1,22 +1,28 @@
 ---
-Description: Generates a BigFix Task for the latest version of WinZip 64-bit for Windows
-Identifier: com.github.bigfix.WinZip-Win64
+Description: Generates BigFix Task for latest WinZip x64 MSI
+Identifier: com.github.bigfix.bigfix.WinZip-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: WinZip x64
-  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  NAME: WinZip
+   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: WinZip
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.WinZip-Win64
 Process:
-  # `FileHasher` will not be required in the future due to hashing behing handled by `URLDownloaderPython` instead
+ # `FileHasher` will not be required in the future due to hashing behing handled by `URLDownloaderPython` instead
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+    Arguments:
+      template_version: "%version_maximum%"
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+    Arguments:
+      append_key: "ProductVersion"
+      append_value: "%ProductVersion%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./WinZip/WinZip-Win64-Install_Update.bes.mustache"
