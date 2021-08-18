@@ -23,6 +23,10 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "version"
+      append_value: "%version_maximum%"
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
