@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>Install/Update: {{DisplayName}} v{{PropertyVersion}} - Windows (x64)</Title>
+		<Title>Install/Update: {{DisplayName}} v{{ProductVersion}} - Windows (x64)</Title>
 		<Description><![CDATA[This task will download and install the {{DisplayName}} v{{ProductVersion}} package onto selected endpoints <br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
@@ -29,7 +29,7 @@
 // Download:
 {{{prefetch}}}
 
-// Install: Using options to prevent installation of the desktop icon
+// Install: Using options to prevent installation of the desktop icon and displaying vendor web page.
 override wait
 hidden=true
 completion=job
