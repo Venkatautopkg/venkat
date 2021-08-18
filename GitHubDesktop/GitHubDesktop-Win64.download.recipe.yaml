@@ -10,8 +10,8 @@ MinimumVersion: '2.3'
 Process:
   - Processor: com.github.jgstew.SharedProcessors/URLTextSearcherArray
     Arguments:
-      url: https://desktop.github.com/release-notes/
-      re_pattern: '(?P<version>\d+\.\d+\.\d+)'
+      url: https://api.github.com/repos/desktop/desktop/tags
+      re_pattern: '"release-(?P<version>\d+.\d+.\d+)"'
   - Processor: com.github.jgstew.SharedProcessors/VersionMaximumArray
   - Processor: URLDownloaderPython
     Arguments:
@@ -20,5 +20,3 @@ Process:
       User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
-
-
