@@ -1,0 +1,11 @@
+---
+Description: Gets the version from the Tableau Desktop
+Identifier: com.github.bigfix.versionwin.TableauDesktop
+Input:
+  NAME: TableauDesktop
+MinimumVersion: '2.3'
+ParentRecipe: com.github.bigfix.download.TableauDesktop
+Process:
+  - Processor: com.github.hansen-m.SharedProcessors/ExeVersionExtractor
+    Arguments:
+      sevenzip_path: 'C:\Program Files\7-Zip'
