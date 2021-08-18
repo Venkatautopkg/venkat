@@ -5,12 +5,15 @@ Input:
   NAME: GoToMeeting
 MinimumVersion: '2.3'
 Process:
-  # https://github.com/autopkg/homebysix-recipes/blob/master/GoToMeeting/GoToMeetingURLProvider.py
-  #- Processor: com.github.homebysix.download.GoToMeeting/GoToMeetingURLProvider
-  # URLDownloader seems to redownload the file if only the etag changed: https://github.com/jgstew/jgstew-recipes/issues/3
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://support.goto.com/meeting/help/install-via-msi-windows-g2m010013
+      re_pattern: 'Version (?P<version1>\d+\.\d+\.\d+), b(?P<version2>\d+) release notes\<\/a\> \(latest build\)'
   - Processor: URLDownloaderPython
     Arguments:
       url: https://link.gotomeeting.com/latest-msi
       prefetch_filename: True
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
+      download_version: "%version1%.%version2%"
   - Processor: EndOfCheckPhase
