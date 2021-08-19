@@ -1,5 +1,5 @@
 ---
-Description: Generates BigFix Task for latest GoToMeeting
+Description: Download GoToMeeting for Windows Generates BigFix Task for latest GoToMeeting
 Identifier: com.github.bigfix.bigfix.GoToMeeting-Win
 Input:
   NAME: GoToMeeting
@@ -11,7 +11,10 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
       template_version: "%version1%.%version2%"
-      template_file_sha1: "%file_sha1%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "file_sha1"
+      append_value: "%filehasher_sha1%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./GoToMeeting/GoToMeeting-Win Install_Update.bes.mustache"
