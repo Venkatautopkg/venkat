@@ -19,6 +19,6 @@ Process:
       re_pattern: 'Download 7-Zip (?P<display_version>\d+(\.\d+))'
   - Processor: URLDownloaderPython
     Arguments:
-      url: http://d.7-zip.org/a/7z%latest_version%-x64.%FileType%
+      url: https://d.7-zip.org/a/7z%latest_version%-x64.%FileType%
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
