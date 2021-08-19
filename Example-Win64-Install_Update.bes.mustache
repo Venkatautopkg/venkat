@@ -29,7 +29,7 @@
 				<Link>here</Link>
 				<PostLink> to deploy {{DisplayName}} v{{version}}.</PostLink>
 			</Description>
-			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
+			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[
 // Download:
 {{{prefetch}}}
 
@@ -38,7 +38,7 @@ override wait
 hidden=true
 completion=job
 wait msiexec.exe /i __Download\{{{file_name}}} /qn /norestart
-</ActionScript>
+]]></ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
