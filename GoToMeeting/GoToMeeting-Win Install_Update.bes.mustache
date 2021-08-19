@@ -38,7 +38,8 @@ continue if {not exists running application ("g2mlauncher.exe")}
 wait "{pathname of system folder &amp; "\msiexec.exe"}" /i "{(pathname of client folder of current site) &amp; "\__Download\{{{file_name}}}"}" /qn /norestart
 
 
-action may require restart "{{file_sha1}}"
+action may require restart{{#file_sha1}} "{{file_sha1}}"{{/file_sha1}}
+
 </ActionScript>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
