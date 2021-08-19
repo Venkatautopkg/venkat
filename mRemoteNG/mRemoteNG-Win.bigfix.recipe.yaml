@@ -3,10 +3,11 @@ Description: Generates BigFix Task for latest mRemoteNG
 Identifier: com.github.bigfix.bigfix.mRemoteNG-Win
 Input:
   NAME: mRemoteNGWin
+  # icon_url: https://mremoteng.readthedocs.io/en/master/_static/logo.png
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.mRemoteNG-Win
 Process:
-  - Processor: com.github.jgstew.SharedProcessors/FileHasher
+  #- Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
@@ -16,6 +17,4 @@ Process:
       template_file_path: "./mRemoteNG/mRemoteNG-Win-Install.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
-    Arguments:
-      bes_file: "%content_file_pathname%"
-      bes_customsite: autopkg
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
