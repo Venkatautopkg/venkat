@@ -20,4 +20,5 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: http://d.7-zip.org/a/7z%latest_version%-x64.%FileType%
+      COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
