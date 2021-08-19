@@ -15,6 +15,10 @@
 		<CVENames></CVENames>
 		<SANSID></SANSID>
 		<MIMEField>
+			<Name>action-ui-metadata</Name>
+			<Value>{ {{#version}}"version":"{{version}}",{{/version}}"size":{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}{{#icon_base64}},"icon":"data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}"{{/icon_base64}} }</Value>
+		</MIMEField>
+		<MIMEField>
 			<Name>x-fixlet-modification-time</Name>
 			<Value>{{x-fixlet-modification-time}}</Value>
 		</MIMEField>
