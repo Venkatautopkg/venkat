@@ -16,7 +16,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       # need to provide filename to not overwrite the setup file
-      filename: "7zip-icon.png"
+      filename: "%NAME%-icon.png"
       url: https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/7ziplogo.svg/320px-7ziplogo.svg.png
       COMPUTE_HASHES: False
   # get base64 of icon file
