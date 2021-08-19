@@ -13,4 +13,5 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://www.python.org/ftp/python/%latest_version%/python-%latest_version%-amd64.exe
+      COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
