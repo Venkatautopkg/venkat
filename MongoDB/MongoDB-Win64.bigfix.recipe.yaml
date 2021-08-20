@@ -6,11 +6,24 @@ Input:
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.MongoDB-Win64
 Process:
-  - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
       template_version: "%latest_version%"
+  # download icon file:
+  - Processor: URLDownloaderPython
+    Arguments:
+      # need to provide filename to not overwrite the setup file
+      filename: "%NAME%-icon.png"
+      url: https://webimages.mongodb.com/_com_assets/cms/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png
+      COMPUTE_HASHES: False
+  # get base64 of icon file
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  # add base64 of icon file to Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./MongoDB/MongoDB-Win64-Install_Update.bes.mustache"
