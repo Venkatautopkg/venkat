@@ -277,6 +277,10 @@ echo python ..\autopkg\Code\autopkg version
 python ..\autopkg\Code\autopkg version
 echo      --- AutoPkg version (expected 2.3 or later)
 
+echo.
+echo Add/Update jgstew-recipes to AutoPkg
+echo python ..\autopkg\Code\autopkg repo-add https://github.com/jgstew/jgstew-recipes
+python ..\autopkg\Code\autopkg repo-add https://github.com/jgstew/jgstew-recipes
 
 echo.
 echo Check the _setup folder for other items
