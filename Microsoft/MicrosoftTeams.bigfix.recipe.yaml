@@ -18,9 +18,14 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
-  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  # download icon file:
+  - Processor: URLDownloaderPython
     Arguments:
-      file_pathname: "Microsoft/%NAME%-icon.png"
+      # need to provide filename to not overwrite the setup file
+      filename: "%NAME%-icon.png"
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Teams_hi-res_icon_%282019%29.svg/262px-Teams_hi-res_icon_%282019%29.svg.png
+      COMPUTE_HASHES: False
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"
