@@ -8,8 +8,6 @@ Input:
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.TableauDesktop
 Process:
-  # `FileHasher` will not be required in the future due to hashing behing handled by `URLDownloaderPython` instead
-  - Processor: com.github.jgstew.SharedProcessors/FileHasher
   # `BigFixPrefetchItem` takes the hashes from `FileHasher` and in the future `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -18,12 +16,9 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
-  - Processor: URLDownloaderPython
-    Arguments:
-      filename: "%NAME%-icon.png"
-      url: https://logodix.com/logo/674263.png
-      COMPUTE_HASHES: False
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+    Arguments:
+      file_pathname: "Tableau/%NAME%-installer-icon.png"
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"
@@ -39,7 +34,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "BuildNumber"
-      append_value: "(%BuildNumber%)"
+      append_value: "%BuildNumber%"
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "UninstallName"
