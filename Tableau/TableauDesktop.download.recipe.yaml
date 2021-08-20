@@ -29,6 +29,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: "%url%"
-      download_version: "%version%"
+      download_version: "%BuildNumber%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
