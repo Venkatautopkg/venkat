@@ -1,0 +1,19 @@
+---
+Description: Download laytest version of WinSCP
+Identifier: com.github.bigfix.download.WinSCP-Win
+Input:
+  NAME: WinsCP
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://winscp.net/eng/download.php
+      re_pattern: 'WinSCP</strong> (?P<version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: "https://cdn.winscp.net/files/WinSCP-%version%-Setup.exe?secure=kpGYkpfATz8grCGF_2cQvw==,1629471907"
+      prefetch_filename: True
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+      COMPUTE_HASHES: True
+      download_version: "%version%"
+  - Processor: EndOfCheckPhase

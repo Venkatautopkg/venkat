@@ -3,6 +3,7 @@ Description: Generates BigFix Task for the latest version MongoDB for Windows
 Identifier: com.github.bigfix.bigfix.MongoDB-Win64
 Input:
   NAME: MongoDB
+  icon_url: https://webimages.mongodb.com/_com_assets/cms/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.MongoDB-Win64
 Process:
@@ -15,10 +16,13 @@ Process:
     Arguments:
       # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
-      url: https://webimages.mongodb.com/_com_assets/cms/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png
+      url: "%icon_url%"
       COMPUTE_HASHES: False
+  - Processor: com.github.jgstew.SharedProcessors/FileImageResize
   # get base64 of icon file
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+    Arguments:
+      file_pathname: "%file_path_resized%"
   # add base64 of icon file to Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:

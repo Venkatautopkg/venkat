@@ -1,9 +1,11 @@
-
-@echo.
-@echo Python Found: 
-@where python
-
 @echo off
+REM This script should be invoked with CMD
+REM This script checks autopkg setup and development on Windows
+echo.
+
+echo.
+echo Python location: 
+where python
 
 REM check python install
 echo.
@@ -27,6 +29,7 @@ if exist "%ProgramFiles%\Git\usr\bin\ssh-keygen.exe" (
     echo.
     echo  - Did you install GIT for Windows? -
     echo.
+    pause
     exit 2
 )
 
@@ -45,6 +48,7 @@ if exist %UserProfile%\.ssh\id_rsa.pub (
     echo          to generate ~\.ssh\id_rsa.pub
     echo          NOTE: just hit enter at "Enter file in which to save the key (/c/Users/_USER_/.ssh/id_rsa):" prompt
     echo      then copy the contents of ~\.ssh\id_rsa.pub to your GitHub account SSH keys at https://github.com/settings/keys
+    pause
     exit 3
 )
 
@@ -65,6 +69,7 @@ if errorlevel 1 (
     type %UserProfile%\.ssh\id_rsa.pub
     echo.
     REM copy public key to clipboard? powershell -c [Windows.Forms.Clipboard]::SetText(???)
+    pause
     exit %errorlevel%
 )
 
@@ -120,8 +125,9 @@ if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualCpp.R
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualCpp.Redist.14*
     echo Install Command:
-    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
+    pause
     exit 9
 )
 if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.Build* (
@@ -130,8 +136,9 @@ if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.Build* (
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.Build*
     echo Install Command:
-    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
+    pause
     exit 9
 )
 if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.PythonTools.BuildCore* (
@@ -140,8 +147,9 @@ if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.PythonTools
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.PythonTools.BuildCore*
     echo Install Command:
-    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
+    pause
     exit 9
 )
 if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.PackageGroup.VC.Tools* (
@@ -150,8 +158,9 @@ if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudi
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.PackageGroup.VC.Tools*
     echo Install Command:
-    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
+    pause
     exit 9
 )
 if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.MSBuildTools* (
@@ -160,8 +169,9 @@ if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudi
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.MSBuildTools*
     echo Install Command:
-    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
+    pause
     exit 9
 )
 if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.VCTools* (
@@ -170,28 +180,20 @@ if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudi
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.VCTools*
     echo Install Command:
-    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
+    pause
     exit 9
 )
-@REM if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.ComponentGroup.NativeDesktop* (
-@REM     REM folder missing
-@REM     echo.
-@REM     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
-@REM     echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.ComponentGroup.NativeDesktop*
-@REM     echo Install Command:
-@REM     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
-@REM     echo.
-@REM     exit 9
-@REM )
 if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Win10SDK* (
     REM folder missing
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Win10SDK*
     echo Install Command:
-    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
+    pause
     exit 9
 )
 
@@ -200,30 +202,20 @@ echo Upgrade pip:
 echo python -m pip install --upgrade pip
 python -m pip install --upgrade pip
 
-REM NOTE: The following must be run from within the cloned git "bigfix-recipes" folder:
 echo.
-echo Check Current Directory contains "bigfix-recipes"
-REM https://stackoverflow.com/a/25539569/861745
-echo.%CD% | FIND /I "\bigfix-recipes">Nul && ( 
-  Echo Run from within the correct directory: "bigfix-recipes"
-) || (
-  Echo ERROR: not run from "bigfix-recipes" directory
-  echo run from within the ~\Documents\_Code\bigfix-recipes or similar folder
-  echo.
-  exit 1
-)
+echo NOTE: The following should be run from within the cloned git "recipes" folder:
 
 echo.
-echo check pip install requirements for bigfix-recipes:
+echo check pip install requirements for cloned recipes:
 echo pip install -r .\requirements.txt --quiet --quiet
 pip install -r .\requirements.txt --quiet --quiet
 if errorlevel 0 (
-    echo   - pip install for bigfix-recipes succeeded!  exit code: %errorlevel%
+    echo   - pip install for recipes succeeded!  exit code: %errorlevel%
 ) else (
-    echo ERROR: pip install for bigfix-recipes failed! exit code: %errorlevel%
+    echo ERROR: pip install for recipes failed! exit code: %errorlevel%
     echo   - Have you installed visual studio build tools?
-    REM https://github.com/bigfix/bigfix-recipes/issues/10
     echo vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    pause
     exit %errorlevel%
 )
 REM https://stackoverflow.com/a/334890/861745
@@ -254,6 +246,7 @@ if not exist ..\autopkg (
     echo ERROR: autopkg git folder missing!
     REM TODO: Consider attempt at automatic fix with the following:
     REM CMD /C "cd .. && git clone https://github.com/jgstew/autopkg.git"
+    pause
     exit 4
 ) else (
     echo ..\autopkg folder found!
@@ -272,14 +265,14 @@ if errorlevel 0 (
 ) else (
     echo ERROR: pip install for autopkg failed!  exit code: %errorlevel%
     echo   - Have you installed visual studio build tools?
-    REM https://github.com/bigfix/bigfix-recipes/issues/10
     echo vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+    pause
     exit %errorlevel%
 )
 
 echo.
 echo AutoPkg Version Check: (WARNINGS are expected on Windows)
-REM this is assuming you ran check_setup_win.bat from within the bigfix-recipes folder and that Autopkg is in a sibling folder
+REM this is assuming you ran check_setup_win.bat from within the recipes folder and that Autopkg is in a sibling folder
 echo python ..\autopkg\Code\autopkg version
 python ..\autopkg\Code\autopkg version
 echo      --- AutoPkg version (expected 2.3 or later)
