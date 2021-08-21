@@ -16,7 +16,6 @@ Create the PRODUCT_NAME AutoPkg recipe to generate BigFix content
 - [ ] **Working Example Fixlet:** (link to GitHub or BigFix.Me example)
   - [ ] Suppress or Delete Desktop Shortcut
 - [ ] **Fixlet/Task Mustache Template:** Vendor/ProductName-Win.bes.mustache
-  - [ ] Icon File / Metadata for Self Service Application in mustache template
 - [ ] **Download Recipe:** Vendor/ProductName-Win.download.recipe.yaml
 - [ ] **BigFix Recipe:** Vendor/ProductName-Win.bigfix.recipe.yaml
 - [ ] **Test and Validate generated bigfix content**
