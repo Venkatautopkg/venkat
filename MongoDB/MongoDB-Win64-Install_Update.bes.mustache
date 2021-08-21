@@ -2,18 +2,22 @@
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 		<Title>Install/Update: MongoDB Community Edition v{{version}} - Windows (x64)</Title>
-		<Description><![CDATA[This task will download and install "MongoDB Community Edition v{{version}}" package onto selected endpoints <br><br><b>Installation Command:</b> msiexec.exe /i __Download\{{file_name}} ADDLOCAL="ServerService,Server,ProductFeature,Client,Router,MiscellaneousTools" /qn /norestart<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB]]></Description>
+		<Description><![CDATA[This task will download and install "MongoDB Community Edition v{{version}}" package onto selected endpoints <br><br><b>Installation Command:</b> msiexec.exe /i __Download\{{file_name}} ADDLOCAL="ServerService,Server,ProductFeature,Client,Router,MiscellaneousTools" /qn /norestart<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB  {{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:256px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}} ]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
-		<Relevance><![CDATA[not exists (it as string as version) whose(it <= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "MongoDB") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		<Relevance><![CDATA[not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "MongoDB") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>https://github.com/bigfix/bigfix-recipes</Source>
+		<Source>BigFix</Source>
 		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
 		<CVENames></CVENames>
 		<SANSID></SANSID>
+		<MIMEField>
+			<Name>action-ui-metadata</Name>
+			<Value>{ {{#version}}"version":"{{version}}",{{/version}}"size":{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}{{#icon_base64}},"icon":"data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}"{{/icon_base64}} }</Value>
+		</MIMEField>
 		<MIMEField>
 			<Name>x-fixlet-modification-time</Name>
 			<Value>{{x-fixlet-modification-time}}</Value>

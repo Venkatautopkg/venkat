@@ -1,23 +1,23 @@
 ---
-Description: Download GoToMeeting for Windows Generates BigFix Task for latest GoToMeeting
-Identifier: com.github.bigfix.bigfix.GoToMeeting-Win
+Description: Download WinSCP Generates BigFix Task for latest WinSCP
+Identifier: com.github.bigfix.bigfix.WinSCP-Win
 Input:
-  NAME: GoToMeeting
+  NAME: WinSCP
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.GoToMeeting-Win
+ParentRecipe: com.github.bigfix.download.WinSCP-Win
 Process:
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
-      template_version: "%version1%.%version2%"
+      template_version: "%version%"
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "file_sha1"
       append_value: "%filehasher_sha1%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./GoToMeeting/GoToMeeting-Win Install_Update.bes.mustache"
+      template_file_path: "./WinSCP/WinSCP-Win Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
     Arguments:

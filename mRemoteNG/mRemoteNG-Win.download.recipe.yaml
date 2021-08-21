@@ -12,4 +12,6 @@ Process:
       asset_regex: .*\.%TYPE%$
       include_prereleases: False
   - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
+    Arguments:
+      COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

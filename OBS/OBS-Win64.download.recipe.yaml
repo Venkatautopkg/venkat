@@ -13,4 +13,5 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://cdn-fastly.obsproject.com/downloads/OBS-Studio-%latest_version%-Full-Installer-x64.exe
+      COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

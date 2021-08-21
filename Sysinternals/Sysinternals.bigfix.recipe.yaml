@@ -1,13 +1,35 @@
 Description: Generates a BigFix Prefetch for the latest Sysinternals Utilities
-Identifier: com.github.bigfix.Sysinternals
+Identifier: com.github.bigfix.bigfix.Sysinternals
 Input:
   NAME: Sysinternals
+  icon_url: https://api.nuget.org/v3-flatcontainer/rb.sysinternals/2019.6.12.20190614/icon
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.Sysinternals
 Process:
-  - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "release_date"
+      append_value: "%release_date%"
+  # download icon file:
+  - Processor: URLDownloaderPython
+    Arguments:
+      # need to provide filename to not overwrite the setup file
+      filename: "%NAME%-icon.png"
+      url: "%icon_url%"
+      COMPUTE_HASHES: False
+  # resize / shrink icon file:
+  - Processor: com.github.jgstew.SharedProcessors/FileImageResize
+  # get base64 of icon file:
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+    Arguments:
+      file_pathname: "%file_path_resized%"
+  # add base64 of icon file to Template Dictionary:
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./Sysinternals/Sysinternals-Win64-Install_Update.bes.mustache"

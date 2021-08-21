@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>Install/Update: GoToMeeting {{{version}}} - Windows</Title>
+		<Title>Install/Update: WinSCP {{{version}}} - Windows</Title>
 		<Description><![CDATA[&lt;enter a description of the task here&gt; ]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance>(if( name of operating system starts with "Win" ) then platform id of operating system != 3 else false) AND (if exists property "in proxy agent context" then ( not in proxy agent context ) else true ) </Relevance>
 		<Relevance>not exists values "PROCESSOR_ARCHITECTURE" whose (it as string as lowercase = "ia64") of keys "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" of registry</Relevance>
 		<Relevance>version of client >= "7"</Relevance>
-		<Relevance>(name of it = "Win7") of operating system OR (it starts with "Win10" AND it does not start with "Win20") of name of operating system</Relevance>
-		<Relevance>exists value "DisplayVersion" whose (it as string as version &lt; "{{{version}}}") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\GoToMeeting" whose (value "DisplayName" of it as string contains "GoToMeeting") of registry</Relevance>
+		<Relevance>exists value "DisplayVersion" whose (it as string as version &lt; "{{{version}}}") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\winscp3_is1" whose (value "DisplayName" of it as string contains "WinSCP") of x32 registry</Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
 		<Source>https://github.com/bigfix</Source>
@@ -29,14 +28,11 @@
 				<PostLink> to deploy this action.</PostLink>
 			</Description>
 			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
-continue if {not exists running application ("g2mlauncher.exe")}
-
 // Download:
 <![CDATA[ {{{prefetch}}} ]]>
 
 // Install:
-wait "{pathname of system folder &amp; "\msiexec.exe"}" /i "{(pathname of client folder of current site) &amp; "\__Download\{{{file_name}}}"}" /qn /norestart
-
+wait "\__Download\{{{file_name}}}"}"  /verysilent /allusers /norestart /nocloseapplications
 
 action may require restart{{#file_sha1}} "{{file_sha1}}"{{/file_sha1}}
 

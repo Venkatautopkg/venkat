@@ -1,0 +1,33 @@
+---
+Description: Generates a BigFix Task for the latest Power BI Desktop for Windows (64-bit)
+Identifier: com.github.bigfix.bigfix.PowerBIDesktop-Win64
+Input:
+  NAME: PowerBIDesktop
+  DisplayName: Microsoft Power BI Desktop
+MinimumVersion: '2.3'
+ParentRecipe: com.github.bigfix.download.PowerBIDesktop-Win64
+Process:
+  # `FileHasher` will not be required in the future due to hashing behing handled by `URLDownloaderPython` instead
+  - Processor: com.github.jgstew.SharedProcessors/FileHasher
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Power_bi_logo_black.svg/240px-Power_bi_logo_black.svg.png
+      COMPUTE_HASHES: False
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./Microsoft/%NAME%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner

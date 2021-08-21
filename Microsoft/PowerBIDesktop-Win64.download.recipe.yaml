@@ -1,0 +1,20 @@
+---
+Description: Downloads the latest Power BI Desktop for Windows (64-bit)
+Identifier: com.github.bigfix.download.PowerBIDesktop-Win64
+Input:
+  NAME: PowerBIDesktop
+  DisplayName: Microsoft Power BI Desktop (x64)
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://aka.ms/pbiSingleInstaller
+      # example match 'Version: 2.96.701.0'
+      re_pattern: 'Version:\s+\<\/div\>\<p\>(?P<version>\d+\.\d+\.\d+\.\d+)\<\/p\>'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://download.microsoft.com/download/8/8/0/880BCA75-79DD-466A-927D-1ABF1F5454B0/PBIDesktopSetup_x64.exe
+      download_version: "%version%"
+      prefetch_filename: True
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

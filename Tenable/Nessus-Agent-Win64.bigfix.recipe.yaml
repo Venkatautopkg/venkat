@@ -1,36 +1,34 @@
 ---
-Description: Generates BigFix Task for the latest version MongoDB for Windows
-Identifier: com.github.bigfix.bigfix.MongoDB-Win64
+Description: Generates BigFix Task for the latest version Nessus Agent Windows 64bit
+Identifier: com.github.bigfix.bigfix.Nessus-Agent-Win64
 Input:
-  NAME: MongoDB
-  icon_url: https://webimages.mongodb.com/_com_assets/cms/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png
+  NAME: Nessus-Agent-Win64
+  DisplayName: Nessus Agent
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.MongoDB-Win64
+ParentRecipe: com.github.jgstew.download.Nessus-Agent-Win64
 Process:
+  - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
-      template_version: "%latest_version%"
-  # download icon file:
+      template_version: "%version%"
   - Processor: URLDownloaderPython
     Arguments:
-      # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
-      url: "%icon_url%"
+      url: https://logodix.com/logo/2096590.png
       COMPUTE_HASHES: False
-  - Processor: com.github.jgstew.SharedProcessors/FileImageResize
-  # get base64 of icon file
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
-    Arguments:
-      file_pathname: "%file_path_resized%"
-  # add base64 of icon file to Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"
       append_value: "%file_base64%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./MongoDB/MongoDB-Win64-Install_Update.bes.mustache"
+      template_file_path: "./Tenable/Nessus-Agent-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
