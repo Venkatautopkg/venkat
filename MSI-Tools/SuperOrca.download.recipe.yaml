@@ -1,0 +1,15 @@
+---
+Description: Downloads the latest SuperOrca
+Identifier: com.github.bigfix.download.SuperOrca
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "SuperOrca"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "SuperOrca"
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: http://www.pantaray.com/SuperOrcaSetup.exe
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

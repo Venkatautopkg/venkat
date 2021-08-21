@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest {{DisplayName}}
-Identifier: com.github.bigfix.bigfix.{{NAME}}
+Description: Generates a BigFix Task for the latest SuperOrca
+Identifier: com.github.bigfix.bigfix.SuperOrca
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "{{NAME}}"
+  NAME: SuperOrca
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "{{DisplayName}}"
+  DisplayName: SuperOrca
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.{{NAME}}
+ParentRecipe: com.github.bigfix.download.SuperOrca
 Process:
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
@@ -16,20 +16,28 @@ Process:
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
-
+    Arguments:
+      # TODO: get version from file!
+      template_version: "11.0.0.1"
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
-
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+    Arguments:
+      file_pathname: "MSI-Tools/%NAME%-icon.png"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Vendor/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./MSI-Tools/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
