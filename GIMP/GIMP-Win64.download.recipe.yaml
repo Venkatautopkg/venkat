@@ -1,0 +1,29 @@
+---
+Description: Downloads the latest GIMP For Windows x64
+Identifier: com.github.bigfix.download.GIMP-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "GIMP"
+  FileType: exe
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "GIMP"
+MinimumVersion: '2.3'
+Process:
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.gimp.org/downloads/
+      # example match `example`
+      re_pattern: 'The current stable release of GIMP is \((?P<latest_version>\d+\.\d+\.\d+)\)'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.gimp.org/downloads/
+      # example match `example`
+      re_pattern: '//download.gimp.org/pub/gimp/v\(?P<major_version>\d+(\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://download.gimp.org/mirror/pub/gimp/v%major_version%/windows/gimp-%version%-setup.%FileType%
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
