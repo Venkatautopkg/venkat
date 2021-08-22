@@ -1,5 +1,6 @@
 chevron
 certifi
+hachoir
 generate_bes_from_template
 validate_bes_xml
 bigfix_prefetch
