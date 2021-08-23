@@ -6,3 +6,4 @@ validate_bes_xml
 bigfix_prefetch
 besapi
 Pillow
+GitPython
