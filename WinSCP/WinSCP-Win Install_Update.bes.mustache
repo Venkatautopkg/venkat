@@ -10,8 +10,8 @@
 		<Relevance>/*App exist but older version*/(exists value "DisplayVersion" whose (it as string as version &lt; "{{version}}") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\winscp3_is1" whose (value "DisplayName" of it as string contains "WinSCP") of x32 registry) OR /*App does not exist*/ not exist keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\winscp3_is1" of x32 registry</Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>https://github.com/bigfix</Source>
-		<SourceID>bigfix</SourceID>
+		<Source>BigFix</Source>
+		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
 		<CVENames></CVENames>
