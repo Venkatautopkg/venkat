@@ -28,3 +28,4 @@ Process:
     Arguments:
       bes_file: "%RECIPE_CACHE_DIR%/%NAME%.bes"
       bes_customsite: "AutoPKG"
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
