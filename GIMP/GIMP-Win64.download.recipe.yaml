@@ -1,0 +1,23 @@
+---
+Description: Downloads the latest GIMP For Windows x64
+Identifier: com.github.bigfix.download.GIMP-Win64
+Input:
+  NAME: "GIMP"
+  FileType: exe
+  DisplayName: "GIMP"
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.gimp.org/downloads/
+      re_pattern: 'The current stable release of GIMP is <b>(?P<latest_version>\d+\.\d+\.\d+)'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.gimp.org/downloads/
+      re_pattern: '//download.gimp.org/pub/gimp/v(?P<major_version>\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://download.gimp.org/mirror/pub/gimp/v%major_version%/windows/gimp-%latest_version%-setup.%FileType%
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

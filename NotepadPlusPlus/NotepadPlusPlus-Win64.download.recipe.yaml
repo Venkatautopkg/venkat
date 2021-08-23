@@ -1,0 +1,23 @@
+---
+Description: Downloads the latest Notepad++ For Windows x64
+Identifier: com.github.zanesand.download.Notepad++-Win64
+Input:
+  NAME: "Notepad++"
+  FileType: exe
+  DisplayName: "Notepad++"
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://notepad-plus-plus.org/downloads/
+      re_pattern: '<strong>Current Version (?P<latest_version>\d+\.\d+\.\d+)'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://notepad-plus-plus.org/downloads/v%latest_version%/
+      re_pattern: '<p>Release Date: (?P<release_date>\d{4}-\d{2}-\d{2})'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v%latest_version%/npp.%latest_version%.Installer.x64.%FileType%
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
