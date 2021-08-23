@@ -4,14 +4,14 @@ about: Track creation of AutoPkg Recipe
 title: 'Recipe: PRODUCT_NAME'
 labels: recipe
 assignees: ''
-
 ---
 
 Create the PRODUCT_NAME AutoPkg recipe to generate BigFix content
 
+## ToDo:
 - [ ] **Assign yourself this issue**
   - Add yourself under "Assignees" in right side column
-  - Add this issue to Project "AutoPkg BigFix Automation"
+  - Add this issue to Project "AutoPkg BigFix Automation" in right side column
   - Set issue to "in progress" under project once started
   - Mark yourself as assigned in "Software Priorities" spreadsheet in Teams
   - Check for duplicate entries in "Software Priorities" spreadsheet
@@ -25,4 +25,5 @@ Create the PRODUCT_NAME AutoPkg recipe to generate BigFix content
 - [ ] **Download Recipe:** Vendor/ProductName-Win.download.recipe.yaml
 - [ ] **BigFix Recipe:** Vendor/ProductName-Win.bigfix.recipe.yaml
 - [ ] **Test and Validate generated bigfix content**
+  - Test on Windows 10 x64-bit
 - [ ] **Set Issue to "Done"** Under project in right side column
