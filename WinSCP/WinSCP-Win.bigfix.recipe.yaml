@@ -13,7 +13,7 @@ Process:
       template_version: "%version%"
   - Processor: URLDownloaderPython
     Arguments:
-      filename: "%NAME%-icon.png"
+      filename: "%NAME%-icon.jpg"
       url: https://winscp.net/eng/images/og_logo_240x240.jpg
       COMPUTE_HASHES: False
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
