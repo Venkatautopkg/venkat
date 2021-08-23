@@ -12,5 +12,5 @@ Process:
       url: https://www.apple.com/itunes/download/win64
       prefetch_filename: True
       COMPUTE_HASHES: True
-  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
   - Processor: EndOfCheckPhase
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
