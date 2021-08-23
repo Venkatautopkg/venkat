@@ -19,7 +19,7 @@ Process:
       re_pattern: 'data-latest-firefox="(?P<version>(\d+\.\d\.\d))'
   - Processor: URLDownloaderPython
     Arguments:
-      url:  https://download-installer.cdn.mozilla.net/Firefox+Setup+%version%.msi
+      url:  https://download-installer.cdn.mozilla.net/Firefox%20Setup%20%version%.msi
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
