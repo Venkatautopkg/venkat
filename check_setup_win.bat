@@ -21,11 +21,13 @@ echo GIT Version:  (GIT for Windows)
 git --version
 
 REM check ssh-keygen.exe exists:
-if exist "%ProgramFiles%\Git\usr\bin\ssh-keygen.exe" (
+REM if exist "%ProgramFiles%\Git\usr\bin\ssh-keygen.exe" (
+FOR /F "tokens=2,*" %%I IN ('reg query HKEY_LOCAL_MACHINE\SOFTWARE\GitForWindows /v InstallPath') DO SET GITPATH=%%J
+if exist "%GITPATH%\usr\bin\ssh-keygen.exe" (
     REM file exists
 ) else (
     REM file doesn't exist
-    echo ERROR: "C:\Program Files\Git\usr\bin\ssh-keygen.exe" is missing
+    echo ERROR: "%GITPATH%\usr\bin\ssh-keygen.exe" is missing
     echo.
     echo  - Did you install GIT for Windows? -
     echo.
@@ -44,7 +46,7 @@ if exist %UserProfile%\.ssh\id_rsa.pub (
 ) else (
     REM file doesn't exist
     echo ERROR: ~\.ssh\id_rsa.pub missing!
-    echo RUN: cmd /C "C:\Program Files\Git\usr\bin\ssh-keygen.exe"
+    echo RUN: cmd /C "%GITPATH%\usr\bin\ssh-keygen.exe"
     echo          to generate ~\.ssh\id_rsa.pub
     echo          NOTE: just hit enter at "Enter file in which to save the key (/c/Users/_USER_/.ssh/id_rsa):" prompt
     echo      then copy the contents of ~\.ssh\id_rsa.pub to your GitHub account SSH keys at https://github.com/settings/keys
