@@ -15,7 +15,7 @@ Process:
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
     Arguments:
-      file_name: FirefoxSetup%version%.msi
+      file_name: Firefox_x64_Setup_%version%.msi
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
