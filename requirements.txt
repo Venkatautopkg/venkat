@@ -8,3 +8,4 @@ besapi
 Pillow
 GitPython
 pre-commit
+yamllint
