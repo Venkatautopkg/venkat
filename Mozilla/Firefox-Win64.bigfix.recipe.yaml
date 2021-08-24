@@ -3,7 +3,7 @@ Description: Generates a BigFix Task for the latest Firefox x64 installer
 Identifier: com.github.bigfix.bigfix.firefox
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "Mozilla Firefox"
+  NAME: "MozillaFirefox"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Mozilla Firefox (x64 en-US)"
 MinimumVersion: '2.3'
@@ -32,7 +32,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./Mozilla/Firefox-Win64-Install_Update.bes.mustache"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/Firefox.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
   #   Which server and credentials are used is dictated by `~/.besapi.conf`

@@ -3,7 +3,7 @@ Description: Downloads the latest Firefox x64 installer
 Identifier: com.github.bigfix.download.firefox
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "Mozilla Firefox"
+  NAME: "MozillaFirefox"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Mozilla Firefox (x64 en-US)"
 MinimumVersion: '2.3'
@@ -19,7 +19,6 @@ Process:
       re_pattern: 'data-latest-firefox="(?P<version>(\d+\.\d\.\d))'
   - Processor: URLDownloaderPython
     Arguments:
-      url:  https://download-installer.cdn.mozilla.net/Firefox%20Setup%20%version%.msi
-      download_version: "%version%"
+      url: https://download-installer.cdn.mozilla.net/pub/firefox/releases/Firefox/%version%/win64/en-US/Firefox Setup %version%.msi
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
