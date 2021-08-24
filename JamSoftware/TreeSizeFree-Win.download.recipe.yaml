@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest TreeSizeFree For Windows
-Identifier: com.github.zanesand.download.TreeSizeFree-Win
+Identifier: com.github.bigfix.download.TreeSizeFree-Win
 Input:
   NAME: "TreeSizeFree"
   FileType: exe
