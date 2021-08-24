@@ -4,11 +4,7 @@ extends: default
 
 rules:
   # for some reason my github actions YAML trip this one but I don't understand why
-  truthy:
-    level: warning
+  truthy: disable
   # 88 chars should be enough, but don't fail if a line is longer
-  line-length:
-    max: 88
-    level: warning
-  new-lines:
-    level: warning
+  line-length: disable
+  new-lines: disable
