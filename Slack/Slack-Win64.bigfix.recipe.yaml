@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest Notepad++ For Windows x64
-Identifier: com.github.bigfix.bigfix.Notepad++-Win64
+Description: Generates a BigFix Task for the latest Slack For Windows x64
+Identifier: com.github.bigfix.bigfix.Slack-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "Notepad++"
+  NAME: "Slack"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Notepad++"
+  DisplayName: "Slack"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.Notepad++-Win64
+ParentRecipe: com.github.bigfix.download.Slack-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -23,7 +23,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Notepad%2B%2B_Logo.svg/277px-Notepad%2B%2B_Logo.svg.png
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Slack_Technologies_Logo.svg/320px-Slack_Technologies_Logo.svg.png
       COMPUTE_HASHES: False
 
   # get base64 of icon file:
@@ -43,17 +43,12 @@ Process:
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
-      append_key: "release_date"
-      append_value: '%release_date%'
-
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
       append_key: "version"
       append_value: '%latest_version%'
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Don Ho/Notepad++-Win64-Install_Update.bes.mustache"
+      template_file_path: "./%NAME%/%DisplayName%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

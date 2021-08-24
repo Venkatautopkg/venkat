@@ -7,7 +7,9 @@ Input:
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.mRemoteNG-Win
 Process:
-  #- Processor: com.github.jgstew.SharedProcessors/FileHasher
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:

@@ -3,7 +3,7 @@ Description: Downloads the latest Firefox x64 installer
 Identifier: com.github.bigfix.download.firefox
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "Mozilla Firefox"
+  NAME: "MozillaFirefox"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Mozilla Firefox (x64 en-US)"
   FilePrefix: Firefox%20Setup%20
