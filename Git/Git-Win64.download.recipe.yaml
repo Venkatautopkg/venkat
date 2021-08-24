@@ -9,7 +9,7 @@ Input:
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
-  #- Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
 
   - Processor: URLTextSearcher
     Arguments:
