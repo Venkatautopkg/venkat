@@ -1,0 +1,22 @@
+---
+Description: Downloads the latest TreeSizeFree For Windows
+Identifier: com.github.bigfix.download.TreeSizeFree-Win
+Input:
+  NAME: "TreeSizeFree"
+  FileType: exe
+  DisplayName: "TreeSize Free"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.jam-software.com/treesize_free/changes.shtml
+      re_pattern: 'collapsed-item__ttl">Version (?P<latest_version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.%FileType%
+      download_version: "%latest_version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

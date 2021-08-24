@@ -36,7 +36,7 @@
 <![CDATA[ {{{prefetch}}} ]]>
 
 // Install:
-wait __Download\{{{file_name}}}  /verysilent /allusers /norestart /nocloseapplications
+wait __Download\{{{file_name}}}  /verysilent /allusers /norestart /nocloseapplications /MERGETASKS=!desktopicon
 
 action may require restart{{#file_sha1}} "{{file_sha1}}"{{/file_sha1}}
 
