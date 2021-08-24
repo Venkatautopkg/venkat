@@ -11,7 +11,7 @@ Process:
       re_pattern: 'WinSCP</strong> (?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: "https://cdn.winscp.net/files/WinSCP-%version%-Setup.exe?secure=kpGYkpfATz8grCGF_2cQvw==,1629471907"
+      url: "https://cfhcable.dl.sourceforge.net/project/winscp/WinSCP/%version%/WinSCP-%version%-Setup.exe"
       prefetch_filename: True
       User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True

@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest {{DisplayName}}
-Identifier: com.github.bigfix.download.{{NAME}}
+Description: Downloads the latest Firefox x64 installer
+Identifier: com.github.bigfix.download.firefox
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "{{NAME}}"
+  NAME: "Mozilla Firefox"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "{{DisplayName}}"
+  DisplayName: "Mozilla Firefox (x64 en-US)"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://example
+      url: https://www.mozilla.org/en-US/firefox/all/#product-desktop-release
       # example match `example`
-      re_pattern: 'example(?P<version>\d+)-64.msi'
+      re_pattern: 'data-latest-firefox="(?P<version>(\d+\.\d\.\d))'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://example%version%.msi
+      url:  https://download-installer.cdn.mozilla.net/Firefox%20Setup%20%version%.msi
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

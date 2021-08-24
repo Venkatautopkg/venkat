@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>Install/Update: WinSCP {{{version}}} - Windows</Title>
-		<Description><![CDATA[&lt;enter a description of the task here&gt; ]]></Description>
+		<Title>Install/Update: WinSCP {{{version}}} - Windows (x86)</Title>
+		<Description><![CDATA[This task will download and install "WinSCP v{{version}}" package onto selected endpoints <br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance>(if( name of operating system starts with "Win" ) then platform id of operating system != 3 else false) AND (if exists property "in proxy agent context" then ( not in proxy agent context ) else true ) </Relevance>
 		<Relevance>not exists values "PROCESSOR_ARCHITECTURE" whose (it as string as lowercase = "ia64") of keys "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" of registry</Relevance>
 		<Relevance>version of client >= "7"</Relevance>
-		<Relevance>exists value "DisplayVersion" whose (it as string as version &lt; "{{{version}}}") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\winscp3_is1" whose (value "DisplayName" of it as string contains "WinSCP") of x32 registry</Relevance>
+		<Relevance>/*App exist but older version*/(exists value "DisplayVersion" whose (it as string as version &lt; "{{version}}") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\winscp3_is1" whose (value "DisplayName" of it as string contains "WinSCP") of x32 registry) OR /*App does not exist*/ not exist keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\winscp3_is1" of x32 registry</Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>https://github.com/bigfix</Source>
-		<SourceID>bigfix</SourceID>
+		<Source>BigFix</Source>
+		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
 		<CVENames></CVENames>
 		<SANSID></SANSID>
+		<MIMEField>
+			<Name>action-ui-metadata</Name>
+			<Value>{ {{#version}}"version":"{{version}}",{{/version}}"size":{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}{{#icon_base64}},"icon":"data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}"{{/icon_base64}} }</Value>
+		</MIMEField>
 		<MIMEField>
 			<Name>x-fixlet-modification-time</Name>
 			<Value>{{x-fixlet-modification-time}}</Value>
@@ -32,11 +36,13 @@
 <![CDATA[ {{{prefetch}}} ]]>
 
 // Install:
-wait "\__Download\{{{file_name}}}"}"  /verysilent /allusers /norestart /nocloseapplications
+wait __Download\{{{file_name}}}  /verysilent /allusers /norestart /nocloseapplications /MERGETASKS=!desktopicon
 
 action may require restart{{#file_sha1}} "{{file_sha1}}"{{/file_sha1}}
 
 </ActionScript>
+      <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
+		
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 </BES>
