@@ -1,0 +1,30 @@
+---
+Description: Downloads the latest Oracle VitrualBox
+Identifier: com.github.bigfix.download.VirtualBox
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "VirtualBox"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "{{DisplayName}}"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.virtualbox.org/wiki/Downloads
+      # example match `example`
+      re_pattern: 'VirtualBox(?P<version>\d+.\d+.\d+)platformpackages'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.virtualbox.org/wiki/Downloads
+      # example match `example`
+      re_pattern: 'VirtualBox-(?P<downloadFile>\d+.\d+.\d+-\d+)-Win.exe'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://download.virtualbox.org/virtualbox/%version%/VirtualBox-%downloadFile%-Win.exe
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
