@@ -1,14 +1,16 @@
 ---
 Description: Generates a BigFix Task for the latest Slack For Windows x64
-Identifier: com.github.zanesand.bigfix.Slack-Win64
+Identifier: com.github.bigfix.bigfix.Slack-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "Slack"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Slack"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.zanesand.download.Slack-Win64
+ParentRecipe: com.github.bigfix.download.Slack-Win64
 Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
