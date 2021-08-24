@@ -1,0 +1,19 @@
+---
+Description: Downloads the latest Slack For Windows x64
+Identifier: com.github.zanesand.download.Slack-Win64
+Input:
+  NAME: "Slack"
+  FileType: msi
+  DisplayName: "Slack"
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://slack.com/intl/en-au/downloads/windows
+      re_pattern: '__version">Version (?P<latest_version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://downloads.slack-edge.com/releases/windows/%latest_version%/prod/x64/slack-standalone-%latest_version%.0.msi
+      download_version: "%latest_version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
