@@ -1,0 +1,20 @@
+---
+Description: Downloads the latest Git for Windows x64
+# based upon https://github.com/jgstew/jgstew-recipes/tree/main/GitForWindows
+Identifier: com.github.bigfix.download.Git-Win64
+Input:
+  NAME: "Git"
+  FileType: exe
+  DisplayName: "Git"
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://gitforwindows.org
+      re_pattern: 'title="Version (?P<latest_version>\d+\.\d+\.\d+)'
+  - Processor: GitHubReleasesInfoProvider
+    Arguments:
+      github_repo: git-for-windows/git
+      asset_regex: Git-.*-64-bit.%FileType%
+  - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
+  - Processor: EndOfCheckPhase
