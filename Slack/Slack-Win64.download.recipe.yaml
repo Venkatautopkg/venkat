@@ -1,12 +1,14 @@
 ---
 Description: Downloads the latest Slack For Windows x64
-Identifier: com.github.zanesand.download.Slack-Win64
+Identifier: com.github.bigfix.download.Slack-Win64
 Input:
   NAME: "Slack"
   FileType: msi
   DisplayName: "Slack"
 MinimumVersion: '2.3'
 Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: URLTextSearcher
     Arguments:
       url: https://slack.com/intl/en-au/downloads/windows

@@ -1,12 +1,15 @@
 ---
 Description: Downloads the latest Notepad++ For Windows x64
-Identifier: com.github.zanesand.download.Notepad++-Win64
+Identifier: com.github.bigfix.download.Notepad++-Win64
 Input:
   NAME: "Notepad++"
   FileType: exe
   DisplayName: "Notepad++"
 MinimumVersion: '2.3'
 Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  
   - Processor: URLTextSearcher
     Arguments:
       url: https://notepad-plus-plus.org/downloads/

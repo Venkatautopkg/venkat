@@ -1,14 +1,16 @@
 ---
 Description: Generates a BigFix Task for the latest Notepad++ For Windows x64
-Identifier: com.github.zanesand.bigfix.Notepad++-Win64
+Identifier: com.github.bigfix.bigfix.Notepad++-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "Notepad++"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Notepad++"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.zanesand.download.Notepad++-Win64
+ParentRecipe: com.github.bigfix.download.Notepad++-Win64
 Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
