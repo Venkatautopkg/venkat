@@ -7,3 +7,5 @@ bigfix_prefetch
 besapi
 Pillow
 GitPython
+pre-commit
+yamllint

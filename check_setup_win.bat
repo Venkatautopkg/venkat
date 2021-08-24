@@ -104,7 +104,7 @@ REM Install Powershell VSSetup module
 REM   powershell -ExecutionPolicy Bypass -command "Import-Module PowerShellGet ; Install-Module VSSetup -Scope CurrentUser -AcceptLicense -Confirm ; Get-VSSetupInstance"
 REM   powershell -ExecutionPolicy Bypass -command "Import-Module PowerShellGet ; Install-Module VSSetup -Scope CurrentUser -AcceptLicense -Confirm ; (Get-VSSetupInstance | Select-VSSetupInstance -Product *).packages"
 REM Install command:
-REM   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.NativeDesktop --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
+REM   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
 REM Relevance to generate relevance for folder check:
 REM   ("number of unique values of preceding texts of firsts %22,%22 of names of folders whose(name of it starts with %22" & it & "%22) of folders %22Microsoft\VisualStudio\Packages%22 of /* ProgramData */ csidl folders 35") of concatenations "%22 OR name of it starts with %22" of tuple string items of "Microsoft.VisualCpp.Redist.14, Microsoft.PythonTools.BuildCore, Microsoft.VisualStudio.Workload.MSBuildTools, Microsoft.VisualStudio.Workload.VCTools, Win10SDK"
 REM Relevance to detect required vsbuildtools are missing:
