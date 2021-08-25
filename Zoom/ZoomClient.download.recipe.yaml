@@ -17,7 +17,7 @@ Process:
       url: https://zoom.us/download
       # example match `example`
       # /client/5.7.6.1055/ZoomInstallerFull.msi?archType=x64
-      re_pattern: '\/client\/(?P<latest_version>\d+\.\d+\.\d+\.\d+)\/ZoomInstallerFull\.msi\?archType?x64'
+      re_pattern: '\/client\/(?P<latest_version>\d+\.\d+\.\d+\.\d+)\/ZoomInstallerFull\.msi\?archType=x64'
   - Processor: URLDownloaderPython
     Arguments:
       url: https://www.zoom.us/client/latest/ZoomInstallerFull.msi
