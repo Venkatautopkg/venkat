@@ -1,0 +1,38 @@
+---
+Description: Generates BigFix Task for the latest version MongoDB Compass for Windows.
+Identifier: com.github.bigfix.bigfix.MongoDBCompass-Win64
+Input:
+  NAME: "MongoDB"
+  DisplayName: "MongoDB Compass"
+  icon_url: https://cdn-assets-cloud.frontify.com/s3/frontify-cloud-files-us/eyJwYXRoIjoiZnJvbnRpZnlcL2FjY291bnRzXC9hMVwvMzAwNzdcL3Byb2plY3RzXC8xOTc5MDRcL2Fzc2V0c1wvZWVcLzMzMjg3NzlcLzg0YzE1YTM4ZWEyMjY1YTA4NGU0Y2Q4YTFjZjY0NzUwLTE1NjIwMDMyMzYucG5nIn0:frontify:VbAI_RP5wrjQQex7AWSHaAwICU6EQ7igtXQc4DLUOWo?width=2400
+MinimumVersion: '2.3'
+ParentRecipe: com.github.bigfix.download.MongoDBCompass-Win64
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+    Arguments:
+      template_version: "%latest_version%"
+  # download icon file:
+  - Processor: URLDownloaderPython
+    Arguments:
+      # need to provide filename to not overwrite the setup file
+      filename: "%NAME%-icon.png"
+      url: "%icon_url%"
+      COMPUTE_HASHES: False
+  # get base64 of icon file
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  # add base64 of icon file to Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./MongoDB/MongoDBCompass-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
