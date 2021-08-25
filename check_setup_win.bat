@@ -1,5 +1,6 @@
 @echo off
 REM This script should be invoked with CMD
+REM This script will not work properly if invoked with CMD from Git Bash
 REM This script checks autopkg setup and development on Windows
 echo.
 
@@ -204,6 +205,18 @@ python -m pip install --upgrade pip
 
 echo.
 echo NOTE: The following should be run from within the cloned git "recipes" folder:
+if exist .git (
+    echo .git folder found
+    echo.
+) else (
+    echo ERROR: .git folder not found!
+    echo Are you running this from the cloned git "recipes" folder?
+    echo NOTE: this error is expected if you are running this script independantly
+    echo         to check intial setup. You should later run this from a cloned repo.
+    pause
+    exit 99
+)
+
 
 echo.
 echo check pip install requirements for cloned recipes:
@@ -281,6 +294,9 @@ echo.
 echo Add/Update jgstew-recipes to AutoPkg
 echo python ..\autopkg\Code\autopkg repo-add https://github.com/jgstew/jgstew-recipes
 python ..\autopkg\Code\autopkg repo-add https://github.com/jgstew/jgstew-recipes
+
+REM ToDo: add pre-commit:
+pre-commit install --install-hooks --allow-missing-config
 
 echo.
 echo Check the _setup folder for other items
