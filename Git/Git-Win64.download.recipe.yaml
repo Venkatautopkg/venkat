@@ -14,7 +14,7 @@ Process:
   - Processor: URLTextSearcher
     Arguments:
       url: https://gitforwindows.org
-      re_pattern: 'title="Version (?P<latest_version>\d+\.\d+\.\d+.\d+)'
+      re_pattern: 'title="Version (?P<latest_version>\d+\.\d+\.\d+)'
   - Processor: GitHubReleasesInfoProvider
     Arguments:
       github_repo: git-for-windows/git
