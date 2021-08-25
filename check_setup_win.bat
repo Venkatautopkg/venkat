@@ -282,6 +282,9 @@ echo Add/Update jgstew-recipes to AutoPkg
 echo python ..\autopkg\Code\autopkg repo-add https://github.com/jgstew/jgstew-recipes
 python ..\autopkg\Code\autopkg repo-add https://github.com/jgstew/jgstew-recipes
 
+REM ToDo: add pre-commit:
+REM pre-commit install --install-hooks
+
 echo.
 echo Check the _setup folder for other items
 echo.
