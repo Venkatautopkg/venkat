@@ -4,7 +4,7 @@ REM This script checks autopkg setup and development on Windows
 echo.
 
 echo.
-echo Python location: 
+echo Python location:
 where python
 
 REM check python install
