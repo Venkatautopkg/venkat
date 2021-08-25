@@ -1,5 +1,6 @@
 @echo off
 REM This script should be invoked with CMD
+REM This script will not work properly if invoked with CMD from Git Bash
 REM This script checks autopkg setup and development on Windows
 echo.
 
@@ -204,6 +205,15 @@ python -m pip install --upgrade pip
 
 echo.
 echo NOTE: The following should be run from within the cloned git "recipes" folder:
+if exist .git (
+    echo .git folder found
+    echo.
+) else (
+    echo ERROR: .git folder not found!
+    pause
+    exit 99
+)
+
 
 echo.
 echo check pip install requirements for cloned recipes:
