@@ -6,11 +6,11 @@
 This task will download and install "{{DisplayName}} v{{version}}" package onto selected endpoints <br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}}
 {{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:256px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}}
 		]]></Description>
-		<Relevance>windows of operating system</Relevance>
-		<Relevance><![CDATA[x64 of operating system]]></Relevance>
-		<Relevance><![CDATA[
-not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)
-		]]></Relevance>
+<Relevance>windows of operating system</Relevance>
+		<Relevance>(if( name of operating system starts with "Win" ) then platform id of operating system != 3 else false) AND (if exists property "in proxy agent context" then ( not in proxy agent context ) else true ) </Relevance>
+		<Relevance>not exists values "PROCESSOR_ARCHITECTURE" whose (it as string as lowercase = "ia64") of keys "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" of registry</Relevance>
+		<Relevance>version of client >= "7"</Relevance>
+		<Relevance>/*App exist but older version*/(exists value "DisplayVersion" whose (it as string as version &lt; "{{version}}") of keys whose (value "DisplayName" of it as string as lowercase contains "oracle vm virtualbox")  of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\" of native registry) OR /*App does not exist*/ not exist keys whose (value "DisplayName" of it as string as lowercase contains "oracle vm virtualbox")  of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\" of native registry</Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
 		<Source>BigFix</Source>
@@ -42,7 +42,7 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 override wait
 hidden=true
 completion=job
-wait  __Download\{{{file_name}}} --silent --ignore-reboot --msiparams VBOXINSTALLDESKTOPSHORTCUT=0, VBOX_INSTALLQUICKLAUNCHSHORTCUT=0
+wait __Download\{{{file_name}}} --silent --ignore-reboot --msiparams VBOX_INSTALLDESKTOPSHORTCUT=0, VBOX_INSTALLQUICKLAUNCHSHORTCUT=0
 ]]></ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
