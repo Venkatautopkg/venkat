@@ -38,11 +38,27 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 // Download:
 {{{prefetch}}}
 
-// Install:
+// Extract MSI files:
 override wait
 hidden=true
 completion=job
-wait __Download\{{{file_name}}} DESKTOP_SHORTCUTS=0 /qn /norestart
+wait __Download\{{{file_name}}} /extract
+
+// Install MSI files:
+override wait
+hidden=true
+completion=job
+wait msiexec.exe /i AppleMobileDeviceSupport64.msi /qn /norestart DESKTOP_SHORTCUTS=0 ALLUSERS=1
+
+override wait
+hidden=true
+completion=job
+wait msiexec.exe /i Bonjour64.msi /qn /norestart DESKTOP_SHORTCUTS=0 ALLUSERS=1
+
+override wait
+hidden=true
+completion=job
+wait msiexec.exe /i iTunes64.msi /qn /norestart REGSRCH_DESKTOP_SHORTCUTS=0 ALLUSERS=1 DESKTOP_SHORTCUTS=0 REENABLEAUTORUN=0
 ]]></ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
