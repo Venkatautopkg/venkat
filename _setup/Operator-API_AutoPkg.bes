@@ -2,6 +2,7 @@
 <BESAPI xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BESAPI.xsd">
         <Operator>
                 <Name>API_AutoPkg</Name>
+                <Password>K4eF@MVKxrKED4qB3Erzta!bW1W@rP</Password>
                 <MasterOperator>false</MasterOperator>
                 <CustomContent>false</CustomContent>
                 <ShowOtherActions>false</ShowOtherActions>

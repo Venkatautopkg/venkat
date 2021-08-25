@@ -1,10 +1,11 @@
 @echo off
 REM This script should be invoked with CMD
+REM This script will not work properly if invoked with CMD from Git Bash
 REM This script checks autopkg setup and development on Windows
 echo.
 
 echo.
-echo Python location: 
+echo Python location:
 where python
 
 REM check python install
@@ -204,6 +205,21 @@ python -m pip install --upgrade pip
 
 echo.
 echo NOTE: The following should be run from within the cloned git "recipes" folder:
+if exist .git (
+    echo .git folder found
+    echo.
+) else (
+    echo ERROR: .git folder not found!
+    echo Are you running this from the cloned git "recipes" folder?
+    echo NOTE: this error is expected if you are running this script independantly
+    echo         to check intial setup. You should later run this from a cloned repo.
+    pause
+    exit 99
+)
+
+echo Update Current Repo:
+echo git pull
+git pull
 
 echo.
 echo check pip install requirements for cloned recipes:
@@ -222,6 +238,7 @@ REM https://stackoverflow.com/a/334890/861745
 
 echo.
 echo besapi python module version:
+echo python -c "import besapi ; print(besapi.__version__)"
 python -c "import besapi ; print(besapi.__version__)"
 
 echo.
@@ -254,7 +271,13 @@ if not exist ..\autopkg (
 
 echo.
 echo check autopkg on dev branch:
+echo CMD /C "cd ..\autopkg && git checkout dev"
 CMD /C "cd ..\autopkg && git checkout dev"
+
+echo.
+echo update autopkg repo:
+echo CMD /C "cd ..\autopkg && git pull"
+CMD /C "cd ..\autopkg && git pull"
 
 echo.
 echo check pip install requirements for AutoPkg:
@@ -281,6 +304,9 @@ echo.
 echo Add/Update jgstew-recipes to AutoPkg
 echo python ..\autopkg\Code\autopkg repo-add https://github.com/jgstew/jgstew-recipes
 python ..\autopkg\Code\autopkg repo-add https://github.com/jgstew/jgstew-recipes
+
+REM ToDo: add pre-commit:
+pre-commit install --install-hooks --allow-missing-config
 
 echo.
 echo Check the _setup folder for other items

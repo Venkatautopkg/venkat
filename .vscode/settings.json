@@ -1,4 +1,5 @@
 {
+    "git.autofetch": true,
     "python.linting.pylintEnabled": true,
     "python.analysis.diagnosticSeverityOverrides": {
         "reportMissingImports": "information"

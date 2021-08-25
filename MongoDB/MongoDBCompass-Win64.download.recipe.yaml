@@ -1,0 +1,21 @@
+---
+Description: Downloads the latest version MongoDB Compass for Windows.
+Identifier: com.github.bigfix.download.MongoDBCompass-Win64
+Input:
+  NAME: "MongoDB"
+  DisplayName: "MongoDB Compass"
+  FileType: msi
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.mongodb.com/try/download/compass
+      # Example: 1.28.1 (Stable)
+      re_pattern: '\"(?P<latest_version>\d+\.\d+\.\d+) \(Stable\)\"'
+  - Processor: URLDownloaderPython
+    Arguments:
+      # Example https://downloads.mongodb.com/compass/mongodb-compass-1.28.1-win32-x64.msi
+      url: https://downloads.mongodb.com/compass/mongodb-compass-%latest_version%-win32-x64.%FileType%
+      prefetch_filename: True
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
