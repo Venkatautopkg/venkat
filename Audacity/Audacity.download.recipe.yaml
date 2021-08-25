@@ -1,0 +1,25 @@
+---
+Description: Downloads the latest Audacity for Windows x64
+Identifier: com.github.bigfix.download.audacity-win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "Audacity"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Audacity"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.audacityteam.org/download/windows/
+      # example match `example`
+      re_pattern: 'Current Version: (?P<latest_version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://github.com/audacity/audacity/releases/download/Audacity-%latest_version%/audacity-win-%latest_version%-x64.exe
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
