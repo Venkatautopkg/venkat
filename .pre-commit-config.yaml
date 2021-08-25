@@ -15,7 +15,7 @@ repos:
       - id: check-yaml
       - id: check-json
       - id: check-added-large-files
-        args: ['--maxkb=500']
+        args: ['--maxkb=150']
       - id: check-ast
       - id: check-case-conflict
       - id: check-merge-conflict
