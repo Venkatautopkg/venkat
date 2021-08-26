@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "ZoomClient"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Zoom Client"
+  DisplayName: "Zoom"
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.zoomclient-win64
 Process:
@@ -40,13 +40,16 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
-
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "version"
+      append_value: '%msi_property_value%'
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Vendor/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./Zoom/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
