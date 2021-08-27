@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest Cisco WebEx Teams
-Identifier: com.github.bigfix.bigfix.CiscoWebExTeams
+Description: Generates a BigFix Task for the latest WebEx
+Identifier: com.github.bigfix.bigfix.WebEx
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: CiscoWebExTeams
+  NAME: WebEx
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Cisco WebEx Teams
+  DisplayName: Webex
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.CiscoWebExTeams
+ParentRecipe: com.github.bigfix.download.WebEx
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods

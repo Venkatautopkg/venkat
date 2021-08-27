@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest Cisco WebEx Teams
-Identifier: com.github.bigfix.download.CiscoWebExTeams
+Description: Downloads the latest WebEx 
+Identifier: com.github.bigfix.download.WebEx
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: CiscoWebExTeams
+  NAME: WebEx
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Cisco WebEx Teams
+  DisplayName: Webex
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
