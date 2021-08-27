@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest CoreFTP For Windows x64
-Identifier: com.github.zanesand.download.CoreFTP-Win64
+Identifier: com.github.bigfix.download.CoreFTP-Win64
 Input:
   NAME: "CoreFTP"
   FileType: exe
