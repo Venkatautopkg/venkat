@@ -121,77 +121,79 @@ REM     Microsoft.VisualStudio.PackageGroup.VC.Tools*
 REM     Microsoft.VisualStudio.Workload.MSBuildTools*
 REM     Microsoft.VisualStudio.Workload.VCTools*
 REM     Win10SDK*
-if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualCpp.Redist.14* (
+
+FOR /F "tokens=2,*" %%I IN ('reg query HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\Setup /v CachePath') DO SET VSToolsPATH=%%J
+if not exist %VSToolsPATH%\Microsoft.VisualCpp.Redist.14* (
     REM folder missing
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
-    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualCpp.Redist.14*
+    echo ERROR: missing folder %VSToolsPATH%\Microsoft.VisualCpp.Redist.14*
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
     pause
     exit 9
 )
-if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.Build* (
+if not exist %VSToolsPATH%\Microsoft.Build* (
     REM folder missing
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
-    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.Build*
+    echo ERROR: missing folder %VSToolsPATH%\Microsoft.Build*
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
     pause
     exit 9
 )
-if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.PythonTools.BuildCore* (
+if not exist %VSToolsPATH%\Microsoft.PythonTools.BuildCore* (
     REM folder missing
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
-    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.PythonTools.BuildCore*
+    echo ERROR: missing folder %VSToolsPATH%\Microsoft.PythonTools.BuildCore*
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
     pause
     exit 9
 )
-if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.PackageGroup.VC.Tools* (
+if not exist %VSToolsPATH%\Microsoft.VisualStudio.PackageGroup.VC.Tools* (
     REM folder missing
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
-    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.PackageGroup.VC.Tools*
+    echo ERROR: missing folder %VSToolsPATH%\Microsoft.VisualStudio.PackageGroup.VC.Tools*
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
     pause
     exit 9
 )
-if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.MSBuildTools* (
+if not exist %VSToolsPATH%\Microsoft.VisualStudio.Workload.MSBuildTools* (
     REM folder missing
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
-    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.MSBuildTools*
+    echo ERROR: missing folder %VSToolsPATH%\Microsoft.VisualStudio.Workload.MSBuildTools*
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
     pause
     exit 9
 )
-if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.VCTools* (
+if not exist %VSToolsPATH%\Microsoft.VisualStudio.Workload.VCTools* (
     REM folder missing
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
-    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Microsoft.VisualStudio.Workload.VCTools*
+    echo ERROR: missing folder %VSToolsPATH%\Microsoft.VisualStudio.Workload.VCTools*
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
     pause
     exit 9
 )
-if not exist %ProgramData%\Microsoft\VisualStudio\Packages\Win10SDK* (
+if not exist %VSToolsPATH%\Win10SDK* (
     REM folder missing
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
-    echo ERROR: missing folder %ProgramData%\Microsoft\VisualStudio\Packages\Win10SDK*
+    echo ERROR: missing folder %VSToolsPATH%\Win10SDK*
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
