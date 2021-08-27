@@ -13,7 +13,7 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 		]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>BigFix</Source>
+		<Source>LibreOffice</Source>
 		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
@@ -38,27 +38,11 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 // Download:
 {{{prefetch}}}
 
-// Extract MSI files:
+// Install:
 override wait
 hidden=true
 completion=job
-wait __Download\{{{file_name}}} /extract
-
-// Install MSI files:
-override wait
-hidden=true
-completion=job
-wait msiexec.exe /i AppleMobileDeviceSupport64.msi /qn /norestart DESKTOP_SHORTCUTS=0 ALLUSERS=1
-
-override wait
-hidden=true
-completion=job
-wait msiexec.exe /i Bonjour64.msi /qn /norestart DESKTOP_SHORTCUTS=0 ALLUSERS=1
-
-override wait
-hidden=true
-completion=job
-wait msiexec.exe /i iTunes64.msi /qn /norestart REGSRCH_DESKTOP_SHORTCUTS=0 ALLUSERS=1 DESKTOP_SHORTCUTS=0 REENABLEAUTORUN=0
+wait msiexec.exe /i __Download\{{{file_name}}} CREATEDESKTOPLINK=0 RebootYesNo=No /qn
 ]]></ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>

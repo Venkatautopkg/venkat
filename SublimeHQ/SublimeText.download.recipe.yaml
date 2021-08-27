@@ -1,0 +1,26 @@
+---
+Description: Downloads the latest Sublime Text for Windows x64
+Identifier: com.github.bigfix.download.sublimetext-win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "SublimeText"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Sublime Text"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.sublimetext.com/download
+      # example match `example`Version:</i> Build 4113
+      re_pattern: 'Version:<\/i> Build (?P<version>\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      # https://download.sublimetext.com/sublime_text_build_4113_x64_setup.exe
+      url: https://download.sublimetext.com/sublime_text_build_%version%_x64_setup.exe
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

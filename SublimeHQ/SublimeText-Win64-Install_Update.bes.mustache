@@ -9,7 +9,7 @@ This task will download and install "{{DisplayName}} v{{version}}" package onto 
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
 		<Relevance><![CDATA[
-not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)
+if (exists folder ((program files x64 folder as string) & "\Sublime Text")) then (if (exists (file "sublime_text.exe" of folder ((program files x64 folder as string) & "\Sublime Text"))) then (not exists (file "sublime_text.exe" of folder ((program files x64 folder as string) & "\Sublime Text")) whose (version of it >= "4113")) else ( true )) else true
 		]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
@@ -38,29 +38,13 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 // Download:
 {{{prefetch}}}
 
-// Extract MSI files:
+// Install:
 override wait
 hidden=true
 completion=job
-wait __Download\{{{file_name}}} /extract
-
-// Install MSI files:
-override wait
-hidden=true
-completion=job
-wait msiexec.exe /i AppleMobileDeviceSupport64.msi /qn /norestart DESKTOP_SHORTCUTS=0 ALLUSERS=1
-
-override wait
-hidden=true
-completion=job
-wait msiexec.exe /i Bonjour64.msi /qn /norestart DESKTOP_SHORTCUTS=0 ALLUSERS=1
-
-override wait
-hidden=true
-completion=job
-wait msiexec.exe /i iTunes64.msi /qn /norestart REGSRCH_DESKTOP_SHORTCUTS=0 ALLUSERS=1 DESKTOP_SHORTCUTS=0 REENABLEAUTORUN=0
+wait __Download\{{{file_name}}} /VERYSILENT /NORESTART /TASKS=contextentry
 ]]></ActionScript>
-      <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
+      		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 </BES>

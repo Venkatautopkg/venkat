@@ -1,0 +1,17 @@
+---
+Description: Downloads the latest Zoom Client for Windows x64
+Identifier: com.github.bigfix.download.zoomclient-win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "ZoomClient"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Zoom Client"
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://www.zoom.us/client/latest/ZoomInstallerFull.msi?archType=x64
+      #download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+  - Processor: EndOfCheckPhase

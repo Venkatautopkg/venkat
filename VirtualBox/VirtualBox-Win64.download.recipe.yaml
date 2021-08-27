@@ -1,12 +1,11 @@
 ---
-Description: Downloads the latest Firefox x64 installer
-Identifier: com.github.bigfix.download.firefox
+Description: Downloads the latest Oracle VitrualBox
+Identifier: com.github.bigfix.download.VirtualBox
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "MozillaFirefox"
+  NAME: "VirtualBox"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Mozilla Firefox (x64 en-US)"
-  FilePrefix: Firefox%20Setup%20
+  DisplayName: "{{DisplayName}}"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
@@ -15,14 +14,17 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.mozilla.org/en-US/firefox/all/#product-desktop-release
+      url: https://www.virtualbox.org/wiki/Downloads
       # example match `example`
-      re_pattern: 'data-latest-firefox="(?P<version>(\d+\.\d\.\d))'
+      re_pattern: 'VirtualBox(?P<version>\d+.\d+.\d+)platformpackages'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.virtualbox.org/wiki/Downloads
+      # example match `example`
+      re_pattern: 'VirtualBox-(?P<downloadFile>\d+.\d+.\d+-\d+)-Win.exe'
   - Processor: URLDownloaderPython
     Arguments:
-      # https://download-installer.cdn.mozilla.net/pub/firefox/releases/91.0.1/win64/en-US/Firefox%20Setup%2091.0.1.msi
-      # url: https://download-installer.cdn.mozilla.net/Firefox+Setup+%version%.msi
-      url: "https://download-installer.cdn.mozilla.net/pub/firefox/releases/%version%/win64/en-US/%FilePrefix%%version%.msi"
+      url: https://download.virtualbox.org/virtualbox/%version%/VirtualBox-%downloadFile%-Win.exe
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

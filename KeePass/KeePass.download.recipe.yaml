@@ -1,0 +1,25 @@
+---
+Description: Downloads the latest KeePass
+Identifier: com.github.bigfix.download.keepass-win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "KeePass"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "KeePass"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://keepass.info/download.html
+      # example match `KeePass 2.48.1 Source Code Package`
+      re_pattern: 'KeePass (?P<version>\d+\.\d+\.\d+) Source Code Package'
+  - Processor: URLDownloaderPython
+    Arguments: 
+      url: https://sourceforge.net/projects/keepass/files/KeePass%202.x/%version%/KeePass-%version%-Setup.exe
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
