@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest Zoom Client for Windows x64
-Identifier: com.github.bigfix.bigfix.zoomclient-win64
+Description: Generates a BigFix Task for the latest LibreOffice
+Identifier: com.github.bigfix.bigfix.LibreOffice
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "ZoomClient"
+  NAME: "LibreOffice"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Zoom"
+  DisplayName: "LibreOffice"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.zoomclient-win64
+ParentRecipe: com.github.bigfix.download.LibreOffice
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -18,17 +18,18 @@ Process:
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+    Arguments:
+      template_version: "%version_maximum%"
 
-  # download icon file:
   - Processor: URLDownloaderPython
     Arguments:
+      # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Zoom_Communications_Logo.svg/320px-Zoom_Communications_Logo.svg.png
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Logo-libreoffice.svg/199px-Logo-libreoffice.svg.png"
       COMPUTE_HASHES: False
-
-  # get base64 of icon file:
+  # get base64 of icon file
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
-
+  # add base64 of icon file to Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"
@@ -40,16 +41,13 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "version"
-      append_value: '%msi_property_value%'
+
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Zoom/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./LibreOffice/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

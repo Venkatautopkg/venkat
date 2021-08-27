@@ -2,13 +2,18 @@
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 		<Title>Install/Update: 7Zip v{{version}} - Windows (x64)</Title>
-		<Description><![CDATA[This task will download and install "7Zip v{{version}}" package onto selected endpoints <br><br><b>Installation Command:</b> msiexec.exe /i {{file_name}} /qn /norestart<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB]]></Description>
+		<Description><![CDATA[
+			This task will download and install "7Zip v{{version}}" package onto selected endpoints <br><br><b>Installation Command:</b> msiexec.exe /i {{file_name}} /qn /norestart<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}}
+			{{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:256px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}}
+			]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
-		<Relevance><![CDATA[(exists key whose (value "DisplayName" of it as string as lowercase contains "7-zip" AND (if exists value "DisplayVersion" of it then value "DisplayVersion" of it as string as version else maximum of (matches (regex "([0-9]+\.[0-9]+)") of (value "DisplayName" of it as string) as version)) < "{{version}}") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" of ((x64 registries; x32 registries))) OR (not exists key whose (value "DisplayName" of it as string as lowercase contains "7-zip") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" of ((x64 registries; x32 registries)))]]></Relevance>
+		<Relevance><![CDATA[
+			not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "7-Zip") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)
+			]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>BigFix</Source>
+		<Source>7-Zip</Source>
 		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
@@ -29,7 +34,7 @@
 				<Link>here</Link>
 				<PostLink> to deploy 7Zip v{{version}}.</PostLink>
 			</Description>
-			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
+			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[
 // Download:
 {{{prefetch}}}
 
@@ -48,7 +53,8 @@ endif
 
 // Install:
 waithidden msiexec.exe /i __Download\{{{file_name}}} /qn /norestart
-</ActionScript>
+]]></ActionScript>
+			<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 </BES>

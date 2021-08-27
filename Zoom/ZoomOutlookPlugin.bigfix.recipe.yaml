@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest Zoom Client for Windows x64
-Identifier: com.github.bigfix.bigfix.zoomclient-win64
+Description: Generates a BigFix Task for the latest Zoom Outlook Plugin for Windows x64
+Identifier: com.github.bigfix.bigfix.zoomoutlookplugin-win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "ZoomClient"
+  NAME: "ZoomOutlookPlugin"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Zoom"
+  DisplayName: "Zoom Outlook Plugin"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.zoomclient-win64
+ParentRecipe: com.github.bigfix.download.zoomoutlookplugin-win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods

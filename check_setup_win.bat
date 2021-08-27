@@ -301,11 +301,20 @@ python ..\autopkg\Code\autopkg version
 echo      --- AutoPkg version (expected 2.3 or later)
 
 echo.
-echo Add/Update jgstew-recipes to AutoPkg
+echo Add/Update jgstew-recipes in AutoPkg
 echo python ..\autopkg\Code\autopkg repo-add https://github.com/jgstew/jgstew-recipes
 python ..\autopkg\Code\autopkg repo-add https://github.com/jgstew/jgstew-recipes
 
-REM ToDo: add pre-commit:
+REM hansen-m-recipes
+echo.
+echo Add/Update hansen-m-recipes in AutoPkg
+echo python ..\autopkg\Code\autopkg repo-add hansen-m-recipes
+python ..\autopkg\Code\autopkg repo-add hansen-m-recipes
+
+REM add pre-commit:
+echo.
+echo Add pre-commit hooks:
+echo pre-commit install --install-hooks --allow-missing-config
 pre-commit install --install-hooks --allow-missing-config
 
 echo.
