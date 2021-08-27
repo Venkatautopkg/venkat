@@ -1,0 +1,20 @@
+---
+Description: Downloads the latest CoreFTP For Windows x64
+Identifier: com.github.zanesand.download.CoreFTP-Win64
+Input:
+  NAME: "CoreFTP"
+  FileType: exe
+  DisplayName: "Core FTP"
+MinimumVersion: '2.3'
+Process:
+  # - Processor: URLTextSearcher
+  #   Arguments:
+  #     url: http://www.coreftp.com/
+  #     re_pattern: '<br><h4>Version (?P<latest_version>\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: http://www.coreftp.com/download/coreftplite64.%FileType%
+      download_version: "%latest_version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
