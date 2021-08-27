@@ -43,6 +43,24 @@ override wait
 hidden=true
 completion=job
 wait __Download\{{{file_name}}} /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /MERGETASKS="!desktopicon"
+
+// Create no auto-update XML
+createfile until _I_SAID_STOP_
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Application>
+		<Start>
+			<CheckForUpdate>false</CheckForUpdate>
+			<CheckForUpdateConfigured>true</CheckForUpdateConfigured>
+		</Start>
+	</Application>
+</Configuration>
+_I_SAID_STOP_
+
+parameter "keepassdir" = "{program files x64 folder as string & "\KeePass Password Safe 2"}"
+parameter "updatexml" = "KeePass.config.enforced.xml"
+move "__createfile" "{parameter "keepassdir"}\{parameter "updatexml"}"
+
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
