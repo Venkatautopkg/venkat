@@ -1,13 +1,13 @@
 ---
 Description: Generates a BigFix Task for the latest FilezillaFor Windows x64
-Identifier: com.github.zanesand.bigfix.Filezilla-Win64
+Identifier: com.github.bigfix.bigfix.Filezilla-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "Filezilla"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Filezilla"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.zanesand.download.Filezilla-Win64
+ParentRecipe: com.github.bigfix.download.Filezilla-Win64
 Process:
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block

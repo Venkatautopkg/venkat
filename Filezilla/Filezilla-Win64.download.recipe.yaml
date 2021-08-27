@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Filezilla For Windows x64
-Identifier: com.github.zanesand.download.Filezilla-Win64
+Identifier: com.github.bigfix.download.Filezilla-Win64
 Input:
   NAME: "Filezilla"
   FileType: exe
