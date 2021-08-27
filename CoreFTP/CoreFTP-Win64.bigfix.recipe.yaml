@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "CoreFTP"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "CoreFTP"
+  DisplayName: "Core FTP"
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.CoreFTP-Win64
 Process:
@@ -41,7 +41,7 @@ Process:
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./CoreFTP/CoreFTP-Win64-Install_Update.bes.mustache"
+      template_file_path: "./CoreFTP/CoreFTP-Win64-Install.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
