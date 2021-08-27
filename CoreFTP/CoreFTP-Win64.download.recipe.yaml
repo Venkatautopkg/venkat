@@ -7,14 +7,18 @@ Input:
   DisplayName: "Core FTP"
 MinimumVersion: '2.3'
 Process:
-  # - Processor: URLTextSearcher
-  #   Arguments:
-  #     url: http://www.coreftp.com/
-  #     re_pattern: '<br><h4>Version (?P<latest_version>\d+\.\d+)'
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: http://www.coreftp.com/
+      re_pattern: '<br><h4>Version (?P<version>\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
       url: http://www.coreftp.com/download/coreftplite64.%FileType%
-      download_version: "%latest_version%"
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
-  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+  #- Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
