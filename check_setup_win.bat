@@ -31,7 +31,7 @@ if exist "%ProgramFiles%\Git\usr\bin\ssh-keygen.exe" (
     echo  - Did you install GIT for Windows? -
     echo.
     pause
-    exit 2
+    REM exit 2
 )
 
 REM check SSH keys (ssh-keygen included with GIT, but must be run)
