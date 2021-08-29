@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>Install/Update: GoToMeeting {{{version}}} - Windows</Title>
-		<Description><![CDATA[&lt;enter a description of the task here&gt; ]]></Description>
+		<Title>Install/Update: {{DisplayName}} by LogMeIn - {{{version}}} - Windows</Title>
+		<Description><![CDATA[
+			<p>This will Install/Update {{DisplayName}} by LogMeIn.</p>
+			{{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:44px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}}
+		]]></Description>
 		<Relevance>windows of operating system</Relevance>
-		<Relevance>(if( name of operating system starts with "Win" ) then platform id of operating system != 3 else false) AND (if exists property "in proxy agent context" then ( not in proxy agent context ) else true ) </Relevance>
-		<Relevance>not exists values "PROCESSOR_ARCHITECTURE" whose (it as string as lowercase = "ia64") of keys "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" of registry</Relevance>
-		<Relevance>version of client >= "7"</Relevance>
-		<Relevance>(name of it = "Win7") of operating system OR (it starts with "Win10" AND it does not start with "Win20") of name of operating system</Relevance>
-		<Relevance>exists value "DisplayVersion" whose (it as string as version &lt; "{{{version}}}") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\GoToMeeting" whose (value "DisplayName" of it as string contains "GoToMeeting") of registry</Relevance>
+		<Relevance><![CDATA[
+not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}" AND value "UninstallString" of it as string contains "G2MUninstall") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)
+		]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>https://github.com/bigfix</Source>
+		<Source>GoToMeeting</Source>
 		<SourceID>bigfix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
 		<CVENames></CVENames>
 		<SANSID></SANSID>
+		<MIMEField>
+			<Name>action-ui-metadata</Name>
+			<Value>{ {{#version}}"version":"{{version}}",{{/version}}"size":{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}{{#icon_base64}},"icon":"data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}"{{/icon_base64}} }</Value>
+		</MIMEField>
 		<MIMEField>
 			<Name>x-fixlet-modification-time</Name>
 			<Value>{{x-fixlet-modification-time}}</Value>
@@ -28,19 +33,19 @@
 				<Link>here</Link>
 				<PostLink> to deploy this action.</PostLink>
 			</Description>
-			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
+			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[
 continue if {not exists running application ("g2mlauncher.exe")}
 
 // Download:
-<![CDATA[ {{{prefetch}}} ]]>
+{{{prefetch}}}
 
 // Install:
-wait "{pathname of system folder &amp; "\msiexec.exe"}" /i "{(pathname of client folder of current site) &amp; "\__Download\{{{file_name}}}"}" /qn /norestart
+wait msiexec.exe /i "{(pathname of client folder of current site) & "\__Download\{{{file_name}}}"}" /qn /norestart G2MINSTALLFORALLUSERS=1 G2MRUNATLOGON=false
 
-
-action may require restart{{#file_sha1}} "{{file_sha1}}"{{/file_sha1}}
-
-</ActionScript>
+// Technically user Logout/Login may be sufficient:
+action may require restart "Install_{{SourceReleaseDate}}_{{DisplayName}}"
+]]></ActionScript>
+			<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 </BES>
