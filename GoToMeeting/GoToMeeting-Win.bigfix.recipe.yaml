@@ -6,20 +6,25 @@ Input:
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.GoToMeeting-Win
 Process:
-  - Processor: com.github.jgstew.SharedProcessors/FileHasher
+  # - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
       template_version: "%version1%.%version2%"
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+    Arguments:
+      file_pathname: GoToMeeting/GoToMeeting-Icon.png
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
-      append_key: "file_sha1"
-      append_value: "%filehasher_sha1%"
+      append_key: "DisplayName"
+      append_value: "%NAME%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./GoToMeeting/GoToMeeting-Win Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
-    Arguments:
-      bes_file: "%RECIPE_CACHE_DIR%/%NAME%.bes"
-      bes_customsite: "AutoPKG"
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
