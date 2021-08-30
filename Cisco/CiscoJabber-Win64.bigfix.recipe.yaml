@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest WebEx
-Identifier: com.github.bigfix.bigfix.WebEx
+Description: Generates a BigFix Task for the latest Cisco Jabber
+Identifier: com.github.bigfix.bigfix.CiscoJabber-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: WebEx
+  NAME: CiscoJabber
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Webex
+  DisplayName: Cisco Jabber
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.WebEx
+ParentRecipe: com.github.bigfix.download.CiscoJabber-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -29,18 +29,6 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
-  - Processor: com.github.jgstew.SharedProcessors/FileImageResize
-    Arguments:
-      file_pathname: Cisco/Webex-icon.png
-  # get base64 of icon file
-  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
-    Arguments:
-      file_pathname: "%file_path_resized%"
-  # add base64 of icon file to Template Dictionary
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "icon_base64"
-      append_value: "%file_base64%"
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary

@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest Cisco Jabber
-Identifier: com.github.bigfix.download.CiscoJabber
+Description: Downloads the latest Dell Command Update
+Identifier: com.github.bigfix.download.DellCommandUpdate-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: CiscoJabber
+  NAME: DellCommandUpdate
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Cisco Jabber
+  DisplayName: Dell Command Update
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
@@ -19,7 +19,7 @@ Process:
   #     re_pattern: 'example(?P<version>\d+)-64.msi'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://binaries.webex.com/jabberclientwindows/20210603033202/CiscoJabberSetup.msi
-#      download_version: "%version%"
+      url: https://dl.dell.com/FOLDER07582851M/2/Dell-Command-Update-Application_8D5MC_WIN_4.3.0_A00_01.EXE?uid=e28a0289-a8b8-4a67-faef-d21b09c75fb8&fn=Dell-Command-Update-Application_8D5MC_WIN_4.3.0_A00_01.EXE
+  #    download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

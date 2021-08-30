@@ -1,13 +1,13 @@
 ---
 Description: Generates a BigFix Task for the latest Mozilla Foundation - Thunderbird
-Identifier: com.github.bigfix.bigfix.MozillaFoundationThunderbird
+Identifier: com.github.bigfix.bigfix.Thunderbird-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: MozillaFoundationThunderbird
+  NAME: Thunderbird
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Mozilla Foundation - Thunderbird
+  DisplayName: Thunderbird
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.MozillaFoundationThunderbird
+ParentRecipe: com.github.bigfix.download.Thunderbird-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
