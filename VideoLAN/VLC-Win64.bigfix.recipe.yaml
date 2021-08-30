@@ -1,11 +1,11 @@
 ---
-Description: Generates a BigFix Task for the latest OpenOffice For Windows x64
+Description: Generates a BigFix Task for the latest VLC For Windows x64
 Identifier: com.github.bigfix.bigfix.VLC-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "OpenOffice"
+  NAME: "VLC"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "OpenOffice"
+  DisplayName: "VLC"
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.VLC-Win64
 Process:
@@ -41,7 +41,7 @@ Process:
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Apache/OpenOffice-Win-Install_Update.bes.mustache"
+      template_file_path: "./VideoLAN/VLC-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

@@ -3,7 +3,7 @@ Description: Downloads the latest VLC For Windows x64
 Identifier: com.github.bigfix.download.VLC-Win64
 Input:
   NAME: "VLC"
-  FileType: msi
+  FileType: exe
   DisplayName: "VLC"
 MinimumVersion: '2.3'
 Process:
@@ -13,8 +13,8 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.videolan.org/vlc/download-windows.html
-      re_pattern: 'href='//get.videolan.org/vlc/(?P<version>\d+\.\d+.\d+)'
+      url: 'https://www.videolan.org/vlc/download-windows.html'
+      re_pattern: 'vlc-(?P<version>\d+\.\d+.\d+)-win64.exe'
   - Processor: URLDownloaderPython
     Arguments:
       url: https://get.videolan.org/vlc/%version%/win64/vlc-%version%-win64.%FileType%
