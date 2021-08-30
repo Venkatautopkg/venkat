@@ -1,0 +1,27 @@
+---
+Description: Downloads the latest Opera for Windows
+Identifier: com.github.bigfix.download.Opera
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "Opera"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Opera"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: com.github.jgstew.SharedProcessors/URLTextSearcherArray
+    Arguments:
+      #Example: '>78.0.4093.184/<'
+      url: https://get.geo.opera.com/pub/opera/desktop/
+      re_pattern: '\>(?P<version>\d+\.\d+\.\d+\.\d+)\/\<'
+  - Processor: com.github.jgstew.SharedProcessors/VersionMaximumArray
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://get.geo.opera.com/pub/opera/desktop/%version_maximum%/win/Opera_%version_maximum%_Setup_x64.exe
+      prefetch_filename: True
+      download_version: "%version_maximum%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
