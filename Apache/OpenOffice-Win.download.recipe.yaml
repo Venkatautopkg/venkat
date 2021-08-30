@@ -1,0 +1,24 @@
+---
+Description: Downloads the latest OpenOffice For Windows
+Identifier: com.github.bigfix.download.OpenOffice-Win
+Input:
+  NAME: "OpenOffice"
+  FileType: exe
+  DisplayName: "OpenOffice"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.openoffice.org/download/
+      re_pattern: 'Released: Apache OpenOffice (?P<version>\d+\.\d+.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://ixpeering.dl.sourceforge.net/project/openofficeorg.mirror/%version%/binaries/en-US/Apache_OpenOffice_%version%_Win_x86_install_en-US.%FileType%
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
+  #- Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
