@@ -1,0 +1,28 @@
+---
+Description: Downloads the latest CoreFTP For Windows x64
+Identifier: com.github.bigfix.download.WinRAR-Win64
+Input:
+  NAME: "WinRAR"
+  FileType: exe
+  DisplayName: "WinRAR"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.win-rar.com/download.html?&L=0
+      re_pattern: 'WinRAR (?P<version>\d+\.\d+) English 64 bit'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.win-rar.com/download.html?&L=0
+      re_pattern: '<a href="/fileadmin/winrar-versions/winrar/winrar-x64-(?P<major_version>\d+\.)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-%major_version%%FileType%
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
+  #- Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
