@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest Dell Command Update
-Identifier: com.github.bigfix.bigfix.DellCommandUpdate
+Description: Generates a BigFix Task for the latest Opera for Windows
+Identifier: com.github.bigfix.bigfix.Opera
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: DellCommandUpdate
+  NAME: "Opera"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Dell Command | Update
+  DisplayName: "Opera"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.DellCommandUpdate
+ParentRecipe: com.github.bigfix.download.Opera
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -19,7 +19,21 @@ Process:
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
-      template_version: "4.3.0"
+      template_version: "%version_maximum%"
+
+  - Processor: URLDownloaderPython
+    Arguments:
+      # need to provide filename to not overwrite the setup file
+      filename: "%NAME%-icon.png"
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opera_2015_icon.svg/240px-Opera_2015_icon.svg.png"
+      COMPUTE_HASHES: False
+  # get base64 of icon file
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  # add base64 of icon file to Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
 
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
@@ -33,7 +47,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Dell/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./Opera/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest WebEx 
-Identifier: com.github.bigfix.download.WebEx
+Identifier: com.github.bigfix.download.WebEx-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: WebEx

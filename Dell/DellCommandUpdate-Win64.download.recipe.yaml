@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Dell Command Update
-Identifier: com.github.bigfix.download.DellCommandUpdate
+Identifier: com.github.bigfix.download.DellCommandUpdate-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: DellCommandUpdate
