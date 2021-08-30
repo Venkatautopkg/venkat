@@ -43,7 +43,7 @@ continue if {not exists running application ("g2mlauncher.exe")}
 wait msiexec.exe /i "{(pathname of client folder of current site) & "\__Download\{{{file_name}}}"}" /qn /norestart G2MINSTALLFORALLUSERS=1 G2MRUNATLOGON=false
 
 // Technically user Logout/Login may be sufficient:
-action may require restart "Install_{{SourceReleaseDate}}_{{DisplayName}}"
+action requires restart "Install_{{SourceReleaseDate}}_{{DisplayName}}"
 ]]></ActionScript>
 			<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
