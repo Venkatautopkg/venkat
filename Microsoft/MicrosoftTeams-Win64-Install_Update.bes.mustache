@@ -50,7 +50,23 @@ endif
 override wait
 hidden=true
 completion=job
-wait msiexec.exe /i __Download\{{{file_name}}} /qn /norestart ALLUSERS=1 DISABLEDESKTOPSHORTCUT=0 ADDDESKTOPICON=0 ADDSTARTMENU=1
+wait msiexec.exe /i __Download\{{{file_name}}} /qn /norestart ALLUSERS=1 DISABLEDESKTOPSHORTCUT=0 ADDDESKTOPICON=0 ADDSTARTMENU=1 OPTIONS="noAutoStart=true"
+
+// if 1 user logged on:
+if { 1 = number of unique values of names of (current users;logged on users) }
+
+// if teams installer run key exists:
+if { exists ( preceding texts of firsts ".exe " of it , following texts of firsts ".exe " of it) of (preceding text of last "%00" of it | it) whose(it does not contain "%22") of (it as string) of values whose(name of it = "TeamsMachineInstaller") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" of (x64 registries; x32 registries) }
+override run
+Hidden=true
+RunAs=currentuser
+run cmd /c START /MIN "InvokeTeamsInstall" cmd /C "{ ("%22" & item 0 of it & "%22 " & item 1 of it) of ( preceding text of first ".exe " of it , following text of first ".exe " of it) of (preceding text of last "%00" of it | it) whose(it does not contain "%22") of (it as string) of values whose(name of it = "TeamsMachineInstaller") of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" of (x64 registries; x32 registries) }"
+
+// END: if teams installer run key exists
+endif
+// END: if 1 user logged on
+endif
+
 ]]></ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
