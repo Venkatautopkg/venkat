@@ -3,9 +3,9 @@ Description: Downloads the latest Mozilla Foundation - Thunderbird
 Identifier: com.github.bigfix.download.Thunderbird-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: Thunderbird
+  NAME: "Thunderbird"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Thunderbird
+  DisplayName: "Mozilla Thunderbird (x64 en-US)"
   FilePrefix: Thunderbird%20Setup%20
 MinimumVersion: '2.3'
 Process:
