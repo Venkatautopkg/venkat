@@ -44,7 +44,7 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 override wait
 hidden=true
 completion=job
-wait __Download\{{{file_name}}} /S /v /qn REBOOT=R
+wait __Download\{{{file_name}}} /S /v"/qn REBOOT=R"
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
