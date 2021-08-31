@@ -11,6 +11,11 @@ ParentRecipe: com.github.bigfix.download.Thunderbird-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      dictionary_name: download_info
+      append_key: file_name
+      append_value: ThunderbirdSetup.msi
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -25,6 +30,11 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      dictionary_name: template_dictionary
+      append_key: file_name
+      append_value: ThunderbirdSetup.msi
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
