@@ -20,6 +20,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://example%version%.msi
-      download_version: "%version%"
+      # download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

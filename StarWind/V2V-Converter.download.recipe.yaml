@@ -1,0 +1,18 @@
+---
+Description: Downloads the latest V2V Converter
+Identifier: com.github.bigfix.download.V2V-Converter
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: V2V-Converter
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: V2V Converter
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://www.starwindsoftware.com/tmplink/starwindconverter.exe
+      COMPUTE_HASHES: True
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+  - Processor: EndOfCheckPhase
