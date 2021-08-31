@@ -1,0 +1,24 @@
+---
+Description: Downloads the latest VLC For Windows x64
+Identifier: com.github.bigfix.download.VLC-Win64
+Input:
+  NAME: "VLC"
+  FileType: exe
+  DisplayName: "VLC"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: 'https://www.videolan.org/vlc/download-windows.html'
+      re_pattern: 'vlc-(?P<version>\d+\.\d+.\d+)-win64.exe'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://get.videolan.org/vlc/%version%/win64/vlc-%version%-win64.%FileType%
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
+  #- Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
