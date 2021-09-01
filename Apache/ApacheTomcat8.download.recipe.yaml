@@ -1,0 +1,27 @@
+---
+Description: Downloads the latest Apache Tomcat 8
+Identifier: com.github.bigfix.download.ApacheTomcat8
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "ApacheTomcat8"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Apache Tomcat"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://tomcat.apache.org/tomcat-8.5-doc/index.html
+      # example match `Version 8.5.70,`
+      re_pattern: 'Version (?P<version>\d+\.\d+\.\d+)\,'
+  - Processor: URLDownloaderPython
+    Arguments:
+      # example url: https://downloads.apache.org/tomcat/tomcat-8/v8.5.70/bin/apache-tomcat-8.5.70.exe
+      url: https://downloads.apache.org/tomcat/tomcat-8/v%version%/bin/apache-tomcat-%version%.exe
+      download_version: "%version%"
+      prefetch_filename: True
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

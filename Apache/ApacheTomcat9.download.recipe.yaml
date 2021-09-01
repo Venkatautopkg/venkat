@@ -1,0 +1,27 @@
+---
+Description: Downloads the latest Apache Tomcat 9
+Identifier: com.github.bigfix.download.ApacheTomcat9
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "ApacheTomcat9"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Apache Tomcat"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://tomcat.apache.org/tomcat-9.0-doc/index.html
+      # example match `Version 9.0.52,`
+      re_pattern: 'Version (?P<version>\d+\.\d+\.\d+)\,'
+  - Processor: URLDownloaderPython
+    Arguments:
+      # example url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.52/bin/apache-tomcat-9.0.52.exe
+      url: https://downloads.apache.org/tomcat/tomcat-9/v%version%/bin/apache-tomcat-%version%.exe
+      download_version: "%version%"
+      prefetch_filename: True
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
