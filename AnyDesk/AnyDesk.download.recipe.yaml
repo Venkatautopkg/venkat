@@ -6,7 +6,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "AnyDesk"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "AnyDesk"
+  DisplayName: "AnyDesk MSI"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
@@ -27,5 +27,6 @@ Process:
     Arguments:
       url: https://download.anydesk.com/AnyDesk.msi
       COMPUTE_HASHES: True
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
 
   - Processor: EndOfCheckPhase
