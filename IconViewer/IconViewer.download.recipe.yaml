@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest {{DisplayName}}
-Identifier: com.github.bigfix.download.{{NAME}}
+Description: Downloads the latest IconViewer
+Identifier: com.github.bigfix.download.IconViewer
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "{{NAME}}"
+  NAME: IconViewer
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "{{DisplayName}}"
+  DisplayName: "%NAME%"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://example
-      # example match `example`
-      re_pattern: 'example(?P<version>\d+)-64.msi'
+      url: https://www.botproductions.com/iconview/download.html
+      # example match `"download/IconViewer3.02-Setup-x64.exe"`
+      re_pattern: 'IconViewer(?P<version>\d+.\d+)-Setup-x64.exe'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://example%version%.msi
-      # download_version: "%version%"
+      url: https://www.botproductions.com/iconview/download/IconViewer%version%-Setup-x64.exe
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
