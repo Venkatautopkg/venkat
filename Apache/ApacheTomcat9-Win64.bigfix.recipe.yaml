@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest Apache Tomcat 8
-Identifier: com.github.bigfix.bigfix.ApacheTomcat8
+Description: Generates a BigFix Task for the latest Apache Tomcat 9
+Identifier: com.github.bigfix.bigfix.ApacheTomcat9-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "ApacheTomcat8"
+  NAME: "ApacheTomcat9"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Apache Tomcat"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.ApacheTomcat8
+ParentRecipe: com.github.bigfix.download.ApacheTomcat9-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
