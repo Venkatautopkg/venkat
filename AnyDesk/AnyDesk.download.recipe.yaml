@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest AnyDesk
-Identifier: com.github.bigfix.download.AnyDesk
+Identifier: com.github.bigfix.download.AnyDesk-Win
 # David Campbell 2021-09-02
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
