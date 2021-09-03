@@ -1,13 +1,13 @@
 ---
 Description: Generates a BigFix Task for the latest Amazon Corretto 8 (JRE)
-Identifier: com.github.bigfix.bigfix.AmazonCorretto8JRE
+Identifier: com.github.bigfix.bigfix.AmazonCorretto8JRE-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "AmazonCorretto8JRE"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Amazon Corretto JRE 8 (x64)"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.AmazonCorretto8JRE
+ParentRecipe: com.github.bigfix.download.AmazonCorretto8JRE-Win64
 Process:
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block

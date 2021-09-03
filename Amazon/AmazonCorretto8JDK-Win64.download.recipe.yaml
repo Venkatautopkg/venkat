@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Amazon Corretto 8 (JDK)
-Identifier: com.github.bigfix.download.AmazonCorretto8JDK
+Identifier: com.github.bigfix.download.AmazonCorretto8JDK-Win64
 Input:
   NAME: "AmazonCorretto8JDK"
   DisplayName: "Amazon Corretto 8 (x64)"
