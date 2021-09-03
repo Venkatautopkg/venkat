@@ -1,6 +1,6 @@
 ---
-Description: Downloads the latest Microsoft Visual C++ 2015-2019 Redistributable (x86)
-Identifier: com.github.bigfix.download.VisualC++Redistx86
+Description: Downloads the latest Microsoft Visual C++ 2015-2019 Redistributable (x86) for Win64
+Identifier: com.github.bigfix.download.VisualC++Redistx86-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "VisualC++Redistx86"

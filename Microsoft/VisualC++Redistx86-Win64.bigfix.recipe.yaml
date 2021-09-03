@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest Microsoft Visual C++ 2015-2019 Redistributable (x64)
-Identifier: com.github.bigfix.bigfix.VisualC++Redistx64
+Description: Generates a BigFix Task for the latest Microsoft Visual C++ 2015-2019 Redistributable (x86) for Win64
+Identifier: com.github.bigfix.bigfix.VisualC++Redistx86-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "VisualC++Redistx64"
+  NAME: "VisualC++Redistx86"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Microsoft Visual C++ 2015-2019 Redistributable (x64)"
+  DisplayName: "Microsoft Visual C++ 2015-2019 Redistributable (x86)"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.VisualC++Redistx64
+ParentRecipe: com.github.bigfix.download.VisualC++Redistx86-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
