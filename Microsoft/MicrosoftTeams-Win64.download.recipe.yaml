@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Microsoft Teams
-Identifier: com.github.bigfix.download.MicrosoftTeams
+Identifier: com.github.bigfix.download.MicrosoftTeams-Win64
 Input:
   NAME: "MicrosoftTeams"
   DisplayName: "Microsoft Teams"
