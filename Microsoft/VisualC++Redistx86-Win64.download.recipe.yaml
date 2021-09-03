@@ -17,4 +17,3 @@ Process:
       url: https://aka.ms/vs/16/release/vc_redist.x86.exe
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
-  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
