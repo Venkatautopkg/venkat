@@ -1,0 +1,32 @@
+---
+Description: Downloads the latest AnyDesk
+Identifier: com.github.bigfix.download.AnyDesk-Win
+# David Campbell 2021-09-02
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "AnyDesk"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "AnyDesk MSI"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  # - Processor: URLTextSearcher
+  #   Arguments:
+  #     url: https://example
+  #     # example match `example`
+  #     re_pattern: 'example(?P<version>\d+)-64.msi'
+  # - Processor: URLDownloaderPython
+  #   Arguments:
+  #     url: https://example%version%.msi
+  #     # download_version: "%version%"
+  #     COMPUTE_HASHES: True
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://download.anydesk.com/AnyDesk.msi
+      COMPUTE_HASHES: True
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+
+  - Processor: EndOfCheckPhase
