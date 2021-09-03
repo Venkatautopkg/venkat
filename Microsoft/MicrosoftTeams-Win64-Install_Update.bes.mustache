@@ -6,7 +6,6 @@
 		{{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:256px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}}
 		]]></Description>
 		<Relevance>windows of operating system</Relevance>
-		<Relevance><![CDATA[x64 of operating system]]></Relevance>
 		<Relevance><![CDATA[not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{UninstallName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
@@ -31,16 +30,43 @@
 				<Link>here</Link>
 				<PostLink> to deploy {{DisplayName}} v{{version}}.</PostLink>
 			</Description>
-			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell">
+			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[
 // Download:
 {{{prefetch}}}
+
+// Determine if a previous version of {{UninstallName}} exists
+if {exists (it as string as version) whose(it < "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{UninstallName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)}
+
+// Uninstall previous version of {{UninstallName}} to avoid error 1638
+override wait
+hidden=true
+completion=job
+wait msiexec.exe /x {name of keys whose(value "DisplayName" of it as string starts with "{{UninstallName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)} /qn /norestart
+
+endif
 
 // Install:
 override wait
 hidden=true
 completion=job
-wait msiexec.exe /i __Download\{{{file_name}}} /qn /norestart ALLUSERS=1 DISABLEDESKTOPSHORTCUT=0 ADDDESKTOPICON=0 ADDSTARTMENU=1
-</ActionScript>
+wait msiexec.exe /i __Download\{{{file_name}}} /qn /norestart ALLUSERS=1 DISABLEDESKTOPSHORTCUT=0 ADDDESKTOPICON=0 ADDSTARTMENU=1 OPTIONS="noAutoStart=true"
+
+// if 1 user logged on:
+if { 1 = number of unique values of names of (current users;logged on users) }
+
+// if teams installer exists:
+if { exists unique values of pathnames of files "Teams.exe" of folders "Teams Installer" of program files x32 folders }
+override run
+Hidden=true
+RunAs=currentuser
+run "{unique value of pathnames of files "Teams.exe" of folders "Teams Installer" of program files x32 folders}"
+
+// END: if teams installer run key exists
+endif
+// END: if 1 user logged on
+endif
+
+]]></ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>

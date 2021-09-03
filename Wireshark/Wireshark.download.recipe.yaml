@@ -1,0 +1,25 @@
+---
+Description: Downloads the latest Wireshark for Windows x64
+Identifier: com.github.bigfix.download.wireshark-win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "Wireshark"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Wireshark"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.wireshark.org/#download
+      # example match `The current stable release of Wireshark is 3.4.8`
+      re_pattern: 'The current stable release of Wireshark is (?P<version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://1.as.dl.wireshark.org/win64/Wireshark-win64-%version%.exe
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

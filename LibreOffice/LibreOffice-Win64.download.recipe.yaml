@@ -1,0 +1,26 @@
+---
+Description: Downloads the latest LibreOffice for Win64
+Identifier: com.github.bigfix.download.LibreOffice-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "LibreOffice"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "LibreOffice"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: com.github.jgstew.SharedProcessors/URLTextSearcherArray
+    Arguments:
+      #Example: '>7.2.0<'
+      url: https://www.libreoffice.org/download/download/
+      re_pattern: '>(?P<version>\d+\.\d+\.\d+)<'
+  - Processor: com.github.jgstew.SharedProcessors/VersionMaximumArray
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://download.documentfoundation.org/libreoffice/stable/%version_maximum%/win/x86_64/LibreOffice_%version_maximum%_Win_x64.msi
+      download_version: "%version_maximum%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

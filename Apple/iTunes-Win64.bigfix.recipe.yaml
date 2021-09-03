@@ -1,0 +1,31 @@
+---
+Description: Generates a BigFix Task for the latest Apple iTunes 64-bit
+Identifier: com.github.bigfix.bigfix.iTunes-Win64
+Input:
+  NAME: "iTunes"
+  DisplayName: "iTunes"
+MinimumVersion: '2.3'
+ParentRecipe: com.github.bigfix.download.iTunes-Win64
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: https://support.apple.com/library/content/dam/edam/applecare/images/en_US/macos/macos-high-sierra-itunes-app-icon.png
+      COMPUTE_HASHES: False
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./Apple/%NAME%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner

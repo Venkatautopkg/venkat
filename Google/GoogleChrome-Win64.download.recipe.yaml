@@ -1,0 +1,26 @@
+---
+Description: Downloads the latest Google Chrome
+Identifier: com.github.bigfix.download.GoogleChrome-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "GoogleChrome"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Google Chrome"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://omahaproxy.appspot.com/all
+      # Example: win64,stable,92.0.4515.159,
+      re_pattern: 'win64\,stable\,(?P<version>.+?)\,'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi
+      prefetch_filename: True
+      download_version: '%version%'
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
