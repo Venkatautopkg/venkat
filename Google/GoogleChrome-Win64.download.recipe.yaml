@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Google Chrome
-Identifier: com.github.bigfix.download.GoogleChrome
+Identifier: com.github.bigfix.download.GoogleChrome-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "GoogleChrome"
