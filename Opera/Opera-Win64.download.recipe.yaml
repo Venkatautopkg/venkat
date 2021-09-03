@@ -1,6 +1,6 @@
 ---
-Description: Downloads the latest Opera for Windows
-Identifier: com.github.bigfix.download.Opera
+Description: Downloads the latest Opera for Windows 64-bit
+Identifier: com.github.bigfix.download.Opera-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "Opera"

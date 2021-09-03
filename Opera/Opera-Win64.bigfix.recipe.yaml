@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest Opera for Windows
-Identifier: com.github.bigfix.bigfix.Opera
+Description: Generates a BigFix Task for the latest Opera for Windows 64-bit
+Identifier: com.github.bigfix.bigfix.Opera-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "Opera"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Opera"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.Opera
+ParentRecipe: com.github.bigfix.download.Opera-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
