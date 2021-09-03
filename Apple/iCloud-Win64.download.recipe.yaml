@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Apple iCloud for Windows
-Identifier: com.github.bigfix.download.iCloud
+Identifier: com.github.bigfix.download.iCloud-Win64
 Input:
   NAME: "iCloud"
   DisplayName: "iCloud"

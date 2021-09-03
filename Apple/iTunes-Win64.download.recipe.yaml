@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Apple iTunes 64-bit
-Identifier: com.github.bigfix.download.iTunes
+Identifier: com.github.bigfix.download.iTunes-Win64
 Input:
   NAME: "iTunes"
   DisplayName: "iTunes"
