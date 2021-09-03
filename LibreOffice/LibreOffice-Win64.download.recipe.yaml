@@ -1,6 +1,6 @@
 ---
-Description: Downloads the latest LibreOffice
-Identifier: com.github.bigfix.download.LibreOffice
+Description: Downloads the latest LibreOffice for Win64
+Identifier: com.github.bigfix.download.LibreOffice-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "LibreOffice"

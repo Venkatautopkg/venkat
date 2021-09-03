@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest LibreOffice
-Identifier: com.github.bigfix.bigfix.LibreOffice
+Description: Generates a BigFix Task for the latest LibreOffice for Win64
+Identifier: com.github.bigfix.bigfix.LibreOffice-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "LibreOffice"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "LibreOffice"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.LibreOffice
+ParentRecipe: com.github.bigfix.download.LibreOffice-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
