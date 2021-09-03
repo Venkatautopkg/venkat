@@ -1,6 +1,6 @@
 ---
-Description: Downloads the latest Tableau Desktop
-Identifier: com.github.bigfix.download.TableauDesktop
+Description: Downloads the latest Tableau Desktop for Win64
+Identifier: com.github.bigfix.download.TableauDesktop-Win64
 Input:
   NAME: "TableauDesktop"
   DisplayName: "Tableau"

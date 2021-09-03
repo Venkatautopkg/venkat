@@ -1,12 +1,12 @@
 ---
-Description: Generates a BigFix Task for the latest Tableau Desktop
-Identifier: com.github.bigfix.bigfix.TableauDesktop
+Description: Generates a BigFix Task for the latest Tableau Desktop for Win64
+Identifier: com.github.bigfix.bigfix.TableauDesktop-Win64
 Input:
   NAME: "TableauDesktop"
   DisplayName: "Tableau Desktop"
   UninstallName: "Tableau"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.TableauDesktop
+ParentRecipe: com.github.bigfix.download.TableauDesktop-Win64
 Process:
   # `BigFixPrefetchItem` takes the hashes from `FileHasher` and in the future `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
