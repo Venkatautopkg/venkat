@@ -130,3 +130,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+closed.txt
+AzureDataStudio/AzureDataStudio-Win64-icon.png
+AzureDataStudio/AzureDataStudio-Win64.jpg

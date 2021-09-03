@@ -1,0 +1,31 @@
+---
+Description: Downloads the latest Azure Data Studio
+Identifier: com.github.bigfix.download.AzureDataStudio-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "AzureDataStudio"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Azure Data Studio"
+  DocLink: https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15
+MinimumVersion: '1.27'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://github.com/microsoft/azuredatastudio/releases/latest
+      #re_pattern: 'Version (?P<version>\d+\.\d+\.\d+)'
+      re_pattern: 'Version (?P<version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      #url: https://go.microsoft.com/fwlink/?linkid=2170400
+      url: https://sqlopsbuilds.azureedge.net/stable/4a45ba7cf20dd4129f1a08e5e776dfb33e3d1d1e/azuredatastudio-windows-setup-%version%.exe
+      download_version: "%version%"
+      #url: https://sqlopsbuilds.azureedge.net/stable/59c4b8e90cf2d3a24bed72623197f10f8d090fdc/azuredatastudio-windows-setup-1.30.0.exe
+      #download_version: "1.30.0"
+      #url: https://sqlopsbuilds.azureedge.net/stable/765c7064d46253d88393e0e1ff78874b6fe8fa64/azuredatastudio-windows-setup-1.27.0.exe
+      #download_version: "1.27.0"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
