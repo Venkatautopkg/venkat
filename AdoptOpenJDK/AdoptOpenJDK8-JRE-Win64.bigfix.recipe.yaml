@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest Amazon Corretto 8 (JDK)
-Identifier: com.github.bigfix.bigfix.AmazonCorretto8JDK-Win64
+Description: Generates a BigFix Task for the latest AdoptOpenJDK8 (JRE) for Win64
+Identifier: com.github.bigfix.bigfix.AdoptOpenJDK8-JRE
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "AmazonCorretto8JDK"
+  NAME: "AdoptOpenJDK8-JRE"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Amazon Corretto 8 (x64)"
+  DisplayName: "Eclipse Temurin JRE with Hotspot"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.AmazonCorretto8JDK-Win64
+ParentRecipe: com.github.bigfix.download.AdoptOpenJDK8-JRE
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -25,7 +25,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://avatars.githubusercontent.com/u/44104058?s=200&v=4
+      url: https://projects.eclipse.org/sites/default/files/Logo_Adoptium_2021_03_08_JRR_RGB-V3C%20%281%29.png
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -52,7 +52,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Amazon/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./AdoptOpenJDK/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

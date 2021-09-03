@@ -1,16 +1,19 @@
 ---
-Description: Generates a BigFix Task for the latest Yubico Authenticator
-Identifier: com.github.bigfix.bigfix.YubicoAuthenticator
+Description: Generates a BigFix Task for the latest AdoptOpenJDK11 (JDK) for Win64
+Identifier: com.github.bigfix.bigfix.AdoptOpenJDK11-JDK
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "YubicoAuthenticator"
+  NAME: "AdoptOpenJDK11-JDK"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Yubico Authenticator"
+  DisplayName: "Eclipse Temurin JDK with Hotspot"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.YubicoAuthenticator
+ParentRecipe: com.github.bigfix.download.AdoptOpenJDK11-JDK
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -18,18 +21,15 @@ Process:
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
-    Arguments:
-      template_version: "%version_maximum%"
 
   - Processor: URLDownloaderPython
     Arguments:
-      # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
-      url: "https://avatars.githubusercontent.com/u/531825?s=200&v=4"
+      url: https://projects.eclipse.org/sites/default/files/Logo_Adoptium_2021_03_08_JRR_RGB-V3C%20%281%29.png
       COMPUTE_HASHES: False
-  # get base64 of icon file
+
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
-  # add base64 of icon file to Template Dictionary
+
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"
@@ -42,12 +42,17 @@ Process:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
 
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "version"
+      append_value: '%msi_property_value%'
+
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Yubico/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./AdoptOpenJDK/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

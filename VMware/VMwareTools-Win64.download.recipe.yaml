@@ -1,24 +1,28 @@
 ---
-Description: Downloads the latest Google Chrome
-Identifier: com.github.bigfix.download.GoogleChrome-Win64
+Description: Downloads the latest VMware Tools for Win64
+Identifier: com.github.bigfix.download.VMwareTools-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "GoogleChrome"
+  NAME: "VMwareTools"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Google Chrome"
+  DisplayName: "VMware Tools"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
+
   - Processor: URLTextSearcher
     Arguments:
-      url: https://omahaproxy.appspot.com/all
-      # Example: win64,stable,92.0.4515.159,
-      re_pattern: 'win64\,stable\,(?P<version>.+?)\,'
+      url: https://packages.vmware.com/tools/releases/latest/windows/x64/
+      # Example: VMware-tools-11.3.0-18090558-x86_64.exe
+      re_pattern: '\<A.*?\=\"(?P<filename>VMware\-tools\-.*?\-x86\_64\.exe)\"\>'
+
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi
+      url: https://packages.vmware.com/tools/releases/latest/windows/x64/%filename%
+      prefetch_filename: True
       COMPUTE_HASHES: True
+
   - Processor: EndOfCheckPhase

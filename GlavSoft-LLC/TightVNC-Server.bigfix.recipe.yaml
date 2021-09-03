@@ -1,4 +1,3 @@
----
 Description: Generates a BigFix Task for the latest TightVNC Server for Windows x64
 Identifier: com.github.bigfix.bigfix.tightvnc-server-win64
 Input:
@@ -6,6 +5,7 @@ Input:
   NAME: "TightVNC-Server"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "TightVNC"
+  ComponentName: "Server"
 MinimumVersion: '2.3.2'
 ParentRecipe: com.github.bigfix.download.tightvnc-win64
 Process:
@@ -44,6 +44,10 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "ComponentName"
+      append_value: "%ComponentName%"
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
