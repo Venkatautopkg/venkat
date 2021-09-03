@@ -1,16 +1,19 @@
 ---
-Description: Generates a BigFix Task for the latest VMware Workstation
-Identifier: com.github.bigfix.bigfix.VMwareWorkstation
+Description: Generates a BigFix Task for the latest VMware Player for Win64
+Identifier: com.github.bigfix.bigfix.VMwarePlayer-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "VMwareWorkstation"
+  NAME: "VMwarePlayer"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "VMware Workstation"
+  DisplayName: "VMware Player"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.VMwareWorkstation
+ParentRecipe: com.github.bigfix.download.VMwarePlayer-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -22,7 +25,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Vmware_workstation_16_icon.svg/240px-Vmware_workstation_16_icon.svg.png
+      url: https://upload.wikimedia.org/wikipedia/en/7/7d/VMware_Player_logo.png
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64

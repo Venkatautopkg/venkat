@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest VMware Tools
-Identifier: com.github.bigfix.download.VMwareTools
+Description: Downloads the latest VMware Player for Win64
+Identifier: com.github.bigfix.download.VMwarePlayer-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "VMwareTools"
+  NAME: "VMwarePlayer"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "VMware Tools"
+  DisplayName: "VMware Player"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
@@ -13,18 +13,13 @@ Process:
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
 
-  - Processor: URLTextSearcher
-    Arguments:
-      url: https://packages.vmware.com/tools/releases/latest/windows/x64/
-      # Example: VMware-tools-11.3.0-18090558-x86_64.exe
-      re_pattern: '\<A.*?\=\"(?P<filename>VMware\-tools\-.*?\-x86\_64\.exe)\"\>'
-
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://packages.vmware.com/tools/releases/latest/windows/x64/%filename%
-      prefetch_filename: True
+      url: https://www.vmware.com/go/getplayer-win
+  #    prefetch_filename: True
+  #   Prefetch is not working correctly for this site.  Need to define a static filename that is used for the download.
+      filename: VMware-player-setup.exe
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
 
   - Processor: EndOfCheckPhase
-
-  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
