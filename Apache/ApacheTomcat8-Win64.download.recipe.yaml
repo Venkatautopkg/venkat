@@ -21,7 +21,5 @@ Process:
     Arguments:
       # example url: https://downloads.apache.org/tomcat/tomcat-8/v8.5.70/bin/apache-tomcat-8.5.70.exe
       url: https://downloads.apache.org/tomcat/tomcat-8/v%version%/bin/apache-tomcat-%version%.exe
-      download_version: "%version%"
-      prefetch_filename: True
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

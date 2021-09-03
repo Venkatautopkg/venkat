@@ -21,7 +21,5 @@ Process:
     Arguments:
       # example url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.52/bin/apache-tomcat-9.0.52.exe
       url: https://downloads.apache.org/tomcat/tomcat-9/v%version%/bin/apache-tomcat-%version%.exe
-      download_version: "%version%"
-      prefetch_filename: True
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
