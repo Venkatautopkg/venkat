@@ -24,7 +24,5 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://developers.yubico.com/yubioath-desktop/Releases/yubioath-desktop-%version_maximum%-win64.msi
-      prefetch_filename: True
-      download_version: "%version_maximum%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
