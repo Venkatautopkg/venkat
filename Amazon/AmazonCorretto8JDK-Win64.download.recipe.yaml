@@ -10,5 +10,4 @@ Process:
     Arguments:
       url: https://corretto.aws/downloads/latest/amazon-corretto-8-x64-windows-jdk.msi
       COMPUTE_HASHES: True
-  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
   - Processor: EndOfCheckPhase
