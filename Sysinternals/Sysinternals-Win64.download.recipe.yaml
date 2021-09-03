@@ -1,5 +1,6 @@
-Description: Downloads the latest Sysinternals Utilities
-Identifier: com.github.bigfix.download.Sysinternals
+---
+Description: Downloads the latest Sysinternals Utilities for Win64
+Identifier: com.github.bigfix.download.Sysinternals-Win64
 Input:
   NAME: Sysinternals
 MinimumVersion: '2.3'

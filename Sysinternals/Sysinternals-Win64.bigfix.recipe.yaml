@@ -1,10 +1,11 @@
-Description: Generates a BigFix Prefetch for the latest Sysinternals Utilities
-Identifier: com.github.bigfix.bigfix.Sysinternals
+---
+Description: Generates a BigFix Prefetch for the latest Sysinternals Utilities for Win64
+Identifier: com.github.bigfix.bigfix.Sysinternals-Win64
 Input:
   NAME: Sysinternals
   icon_url: https://api.nuget.org/v3-flatcontainer/rb.sysinternals/2019.6.12.20190614/icon
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.Sysinternals
+ParentRecipe: com.github.bigfix.download.Sysinternals-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
@@ -36,4 +37,3 @@ Process:
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
-  
