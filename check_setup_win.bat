@@ -124,17 +124,7 @@ REM     Microsoft.VisualStudio.Workload.VCTools*
 REM     Win10SDK*
 
 FOR /F "tokens=2,*" %%I IN ('reg query HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\Setup /v CachePath') DO SET VSToolsPATH=%%J
-if not exist %VSToolsPATH%\Microsoft.VisualCpp.Redist.14* (
-    REM folder missing
-    echo.
-    echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
-    echo ERROR: missing folder %VSToolsPATH%\Microsoft.VisualCpp.Redist.14*
-    echo Install Command:
-    echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
-    echo.
-    pause
-    exit 9
-)
+
 if not exist %VSToolsPATH%\Microsoft.Build* (
     REM folder missing
     echo.
