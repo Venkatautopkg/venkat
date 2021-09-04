@@ -125,6 +125,9 @@ REM     Win10SDK*
 
 FOR /F "tokens=2,*" %%I IN ('reg query HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\Setup /v CachePath') DO SET VSToolsPATH=%%J
 
+REM set default path if query above doesn't work
+IF "%VSToolsPATH%"=="" SET VSToolsPATH=%ProgramData%\Microsoft\VisualStudio\Packages
+
 if not exist %VSToolsPATH%\Microsoft.Build* (
     REM folder missing
     echo.
