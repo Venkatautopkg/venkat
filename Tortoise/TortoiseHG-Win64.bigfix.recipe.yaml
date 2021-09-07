@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: TortoiseHG
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: TortoiseHG
+  DisplayName: TortoiseHg
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.TortoiseHG-Win64
 Process:
