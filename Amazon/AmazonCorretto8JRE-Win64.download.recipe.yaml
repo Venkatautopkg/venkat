@@ -1,0 +1,13 @@
+---
+Description: Downloads the latest Amazon Corretto 8 (JRE)
+Identifier: com.github.bigfix.download.AmazonCorretto8JRE-Win64
+Input:
+  NAME: "AmazonCorretto8JRE"
+  DisplayName: "Amazon Corretto JRE 8 (x64)"
+MinimumVersion: '2.3'
+Process:
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://corretto.aws/downloads/latest/amazon-corretto-8-x64-windows-jre.msi
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

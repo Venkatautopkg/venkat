@@ -13,7 +13,7 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 		]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>Apple</Source>
+		<Source>Yubico</Source>
 		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
@@ -38,28 +38,13 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 // Download:
 {{{prefetch}}}
 
-// Extract MSI files:
+// Install:
 override wait
 hidden=true
 completion=job
-wait __Download\{{{file_name}}} /extract
-
-override wait
-hidden=true
-completion=job
-wait msiexec.exe /i AppleApplicationSupport.msi /qn
-
-override wait
-hidden=true
-completion=job
-wait msiexec.exe /i AppleApplicationSupport64.msi /qn
-
-override wait
-hidden=true
-completion=job
-wait msiexec.exe /i iCloud64.msi REBOOT=ReallySuppress /qn
+wait msiexec.exe /i __Download\{{{file_name}}} /qn /norestart ALLUSERS=1 DISABLEDESKTOPSHORTCUT=1 ADDDESKTOPICON=0 ADDSTARTMENU=1
 ]]></ActionScript>
-      <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
+      		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 </BES>

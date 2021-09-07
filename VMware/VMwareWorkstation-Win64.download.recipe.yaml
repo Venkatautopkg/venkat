@@ -1,0 +1,25 @@
+---
+Description: Downloads the latest VMware Workstation for Win64
+Identifier: com.github.bigfix.download.VMwareWorkstation-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "VMwareWorkstation"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "VMware Workstation"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+
+  - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
+    Arguments:
+      url: https://www.vmware.com/go/getworkstation-win
+      # prefetch_filename: True
+      # Prefetch is not working correctly for this site.  Need to define a static filename that is used for the download.
+      filename: VMware-workstation-full-setup.exe
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+      COMPUTE_HASHES: True
+
+  - Processor: EndOfCheckPhase
