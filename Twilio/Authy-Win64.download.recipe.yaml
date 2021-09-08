@@ -15,7 +15,9 @@ Process:
     Arguments:
       #https://s3.amazonaws.com/authy-electron-repository-production/authy/stable/1.8.4/win32/x64/Authy%20Desktop%20Setup%201.8.4.exe
       url: https://electron.authy.com/download?channel=stable&arch=x64&platform=win32&version=latest&product=authy
-      download_version: "%version%"
+      prefetch_filename: True
+      #download_version: "%version%"
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
-  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+  #- Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
