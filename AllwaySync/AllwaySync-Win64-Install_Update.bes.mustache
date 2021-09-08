@@ -42,7 +42,7 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 override wait
 hidden=true
 completion=job
-wait msiexec.exe /i __Download\{{{file_name}}} /verysilent /norestart
+wait __Download\{{{file_name}}} /verysilent /norestart DESKTOP_SHORTCUT=false
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>

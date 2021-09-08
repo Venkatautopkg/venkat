@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: GOMPlayer
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: GOMPlayer
+  DisplayName: GOM Player
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.GOMPlayer-Win64
 Process:
