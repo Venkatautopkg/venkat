@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest {{DisplayName}}
-Identifier: com.github.bigfix.download.{{NAME}}
+Description: Downloads the latest Inkscape
+Identifier: com.github.bigfix.download.Inkscape-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "{{NAME}}"
+  NAME: Inkscape
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "{{DisplayName}}"
+  DisplayName: Inkscape
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://example
+      url: https://inkscape.org/
       # example match `example`
-      re_pattern: 'example(?P<version>\d+)-64.msi'
+      re_pattern: 'Welcome to Inkscape (?P<version>\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://example%version%.msi
-      # download_version: "%version%"
+      url: https://media.inkscape.org/dl/resources/file/inkscape-%version%-x64.msi
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
