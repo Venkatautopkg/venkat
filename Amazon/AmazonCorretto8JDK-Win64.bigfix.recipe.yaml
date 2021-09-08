@@ -9,6 +9,11 @@ Input:
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.AmazonCorretto8JDK-Win64
 Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem

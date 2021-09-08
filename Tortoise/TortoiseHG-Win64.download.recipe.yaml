@@ -1,0 +1,25 @@
+---
+Description: Downloads the latest TortoiseHG
+Identifier: com.github.bigfix.download.TortoiseHG-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: TortoiseHG
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: TortoiseHg
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://tortoisehg.bitbucket.io/download/index.html
+      # example match `example`
+      re_pattern: 'https://www.mercurial-scm.org/release/tortoisehg/windows/tortoisehg-(?P<version>\d+\.\d+\.\d+)-x64.msi'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://www.mercurial-scm.org/release/tortoisehg/windows/tortoisehg-%version%-x64.msi
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

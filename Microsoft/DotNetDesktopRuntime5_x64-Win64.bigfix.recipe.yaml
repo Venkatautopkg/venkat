@@ -1,0 +1,67 @@
+---
+Description: Generates a BigFix Task for the latest Microsoft .NET Desktop Runtime 5 (x64) for Win64
+Identifier: com.github.bigfix.bigfix.DotNetDesktopRuntime5_x64-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "DotNetDesktopRuntime5_x64-Win64"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Microsoft .NET Desktop Runtime"
+  UninstallName: "Microsoft Windows Desktop Runtime"
+MinimumVersion: '2.3'
+ParentRecipe: com.github.bigfix.download.DotNetDesktopRuntime5_x64-Win64
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+
+  # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
+  #   Then it assembles them into a BigFix Prefetch Statement or Block
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+
+  # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
+  #   If `SourceReleaseDate` is not provided, it will be set to today
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+
+  - Processor: URLDownloaderPython
+    Arguments:
+      # need to provide filename to not overwrite the setup file
+      filename: "%NAME%-icon.png"
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/.NET_Logo.svg/240px-.NET_Logo.svg.png
+      COMPUTE_HASHES: False
+
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+
+  # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
+  #   This is only needed if the template uses extra variables
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "UninstallName"
+      append_value: "%UninstallName%"
+
+  # `ContentFromTemplate` generates bigfix content from a mustache template file
+  #   The file is filled out with variables from the Template Dictionary
+  #   If variables are missing from the Template Dictionary, then that area will be blank
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./Microsoft/%NAME%-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+
+  # `BESImport` imports the generated BES content into a BigFix Server
+  #   Which server and credentials are used is dictated by `~/.besapi.conf`
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+
+  # `BigFixActioner` creates an action from the imported BigFix Content
+  #   The action is an offer that requires user interaction to run in self service application
+  #   The action targets all computers whose name contains `autopkg`
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner

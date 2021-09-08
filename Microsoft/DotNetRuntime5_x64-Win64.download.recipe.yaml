@@ -1,30 +1,35 @@
 ---
-Description: Downloads the latest Yubico Authenticator
-Identifier: com.github.bigfix.download.YubicoAuthenticator
+Description: Downloads the latest Microsoft .NET Runtime 5 (x64) for Win64
+Identifier: com.github.bigfix.download.DotNetRuntime5_x64-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "YubicoAuthenticator"
+  NAME: "DotNetRuntime5_x64-Win64"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Yubico Authenticator"
+  DisplayName: "Microsoft .NET Runtime"
+  DotNetVer: "5.0"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  
+
   - Processor: com.github.jgstew.SharedProcessors/URLTextSearcherArray
     Arguments:
-      #Example: '>yubioath-desktop-5.0.5-win64.msi<'
-      url: https://developers.yubico.com/yubioath-desktop/Releases/
-      re_pattern: '>yubioath-desktop-(?P<version>\d+\.\d+\.\d+)-win64.msi<'
-  
+      #Example: '>5.0.9<'
+      url: https://dotnet.microsoft.com/download/dotnet/%DotNetVer%
+      re_pattern: '>(?P<version>\d+\.\d+\.\d+)<'
+
   - Processor: com.github.jgstew.SharedProcessors/VersionMaximumArray
+
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-%version_maximum%-windows-x64-installer
+      re_pattern: '\"Direct link (?P<url>https\:\/\/.*?)\"'
 
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://developers.yubico.com/yubioath-desktop/Releases/yubioath-desktop-%version_maximum%-win64.msi
-      prefetch_filename: True
-      download_version: "%version_maximum%"
+      url: "%url%"
       COMPUTE_HASHES: True
+
   - Processor: EndOfCheckPhase

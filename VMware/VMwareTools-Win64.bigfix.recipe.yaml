@@ -1,16 +1,19 @@
 ---
-Description: Generates a BigFix Task for the latest Anydesk
-Identifier: com.github.bigfix.bigfix.AnyDesk-Win
+Description: Generates a BigFix Task for the latest VMware Tools for Win64
+Identifier: com.github.bigfix.bigfix.VMwareTools-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "AnyDesk"
+  NAME: "VMwareTools"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "AnyDesk MSI"
+  DisplayName: "VMware Tools"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.AnyDesk-Win
+ParentRecipe: com.github.bigfix.download.VMwareTools-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -19,6 +22,19 @@ Process:
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
 
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Antu_vmware.svg/240px-Antu_vmware.svg.png
+      COMPUTE_HASHES: False
+
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
@@ -26,18 +42,12 @@ Process:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
 
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "version"
-      append_value: '%msi_property_value%'
-
-
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./AnyDesk/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./VMware/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
