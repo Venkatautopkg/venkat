@@ -41,7 +41,7 @@ not exists unique values whose(it >= "{{BuildNumber}}") of (it as version) of fo
 override wait
 hidden=true
 completion=job
-wait __Download\{{{file_name}}} /quiet /norestart ACCEPTEULA=1 DESKTOPSHORTCUT=0
+wait __Download\{{{file_name}}} /quiet /norestart ACCEPTEULA=1 DESKTOPSHORTCUT=0 REMOVEINSTALLEDAPP=1
 </ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
