@@ -1,0 +1,23 @@
+---
+Description: Downloads the latest PeaZip For Windows x64
+Identifier: com.github.bigfix.download.PeaZip-Win64
+Input:
+  NAME: "PeaZip"
+  FileType: exe
+  DisplayName: "PeaZip"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://peazip.github.io/peazip-64bit.html
+      re_pattern: '<big>PeaZip\n64 bit (?P<latest_version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: 'https://github.com/peazip/PeaZip/releases/download/%latest_version%/peazip-%latest_version%.WIN64.exe'
+      download_version: "%latest_version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
