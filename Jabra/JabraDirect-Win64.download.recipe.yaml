@@ -1,0 +1,25 @@
+---
+Description: Downloads the latest JabraDirect
+Identifier: com.github.bigfix.download.JabraDirect-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: JabraDirect
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: JabraDirect
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.jabra.in/Support/release-notes/release-note-jabra-direct
+      # example match `example`
+      re_pattern: 'Release version:</strong> (?P<version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://jabraxpressonlineprdstor.blob.core.windows.net/jdo/JabraDirectSetup.exe?_gl=1*10m0lxr*_ga*MjEwNzUyOTY0NS4xNjMxMDg4MDg2*_ga_PKCKVQ89WH*MTYzMTA4ODA4NS4xLjAuMTYzMTA4ODA5MC4w
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
