@@ -1,0 +1,23 @@
+---
+Description: Downloads the latest PlantronicsHub For Windows x64
+Identifier: com.github.bigfix.download.PlantronicsHub-Win64
+Input:
+  NAME: "PlantronicsHub"
+  FileType: exe
+  DisplayName: "Plantronics Hub Software"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.poly.com/au/en/support/downloads-apps/hub-desktop
+      re_pattern: 'hub-desktop/release-notes">Version (?P<latest_version>\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: 'https://www.poly.com/content/dam/www/software/PlantronicsHubInstaller.%FileType%'
+      download_version: "%latest_version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

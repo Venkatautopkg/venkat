@@ -1,23 +1,26 @@
 ---
-Description: Downloads the latest Authy For Windows x64
-Identifier: com.github.bigfix.download.Authy-Win64
+Description: Downloads the latest Tableau Reader For Windows x64
+Identifier: com.github.bigfix.download.TableauReader-Win64
 Input:
-  NAME: "Authy"
+  NAME: "TableauReader"
   FileType: exe
-  DisplayName: "Authy"
+  DisplayName: "Tableau Reader"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.tableau.com/support/releases
+      # example match `2021.2.1`
+      re_pattern: 'current version (?P<build_version>\d{4}\.\d\.?\d*)'
   - Processor: URLDownloaderPython
     Arguments:
-      #https://s3.amazonaws.com/authy-electron-repository-production/authy/stable/1.8.4/win32/x64/Authy%20Desktop%20Setup%201.8.4.exe
-      url: https://electron.authy.com/download?channel=stable&arch=x64&platform=win32&version=latest&product=authy
-      prefetch_filename: True
-      #download_version: "%version%"
-      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+      url: 'https://www.tableau.com/downloads/reader/pc64'
+      download_version: "%version%"
       COMPUTE_HASHES: True
+      prefetch_filename: True
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
   - Processor: EndOfCheckPhase
-  #- Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor

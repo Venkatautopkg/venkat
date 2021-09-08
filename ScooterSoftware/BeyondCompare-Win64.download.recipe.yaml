@@ -1,0 +1,26 @@
+---
+Description: Downloads the latest BeyondCompare For Windows x64
+Identifier: com.github.bigfix.download.BeyondCompare-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "BeyondCompare"
+  FileType: exe
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Beyond Compare"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.scootersoftware.com/download.php
+      # example match `example`
+      re_pattern: 'Current Version:&nbsp; (?P<version>\d+\.\d+\.\d+), build (?P<build_version>\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://www.scootersoftware.com/BCompare-%version%.%build_version%.%FileType%
+      # download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

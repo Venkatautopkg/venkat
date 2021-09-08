@@ -1,18 +1,18 @@
 ---
-Description: Generates a BigFix Task for the latest Authy For Windows x64
-Identifier: com.github.bigfix.bigfix.Authy-Win64
+Description: Generates a BigFix Task for the latest SeaMonkey For Windows x64
+Identifier: com.github.bigfix.bigfix.SeaMonkey-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "Authy"
+  NAME: "SeaMonkey"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Authy"
+  DisplayName: "SeaMonkey"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.Authy-Win64
+ParentRecipe: com.github.bigfix.download.SeaMonkey-Win64
 Process:
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
+  # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
-  #- Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
 
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
@@ -22,7 +22,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://twilio-cms-prod.s3.amazonaws.com/images/Authy-Logo-white-background.width-808.png
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/SeaMonkey.svg/240px-SeaMonkey.svg.png
       COMPUTE_HASHES: False
   # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -39,9 +39,14 @@ Process:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
 
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "version"
+      append_value: '%latest_version%'
+
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Twilio/Authy-Win64-Install_Update.bes.mustache"
+      template_file_path: "./Mozilla/SeaMonkey-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
