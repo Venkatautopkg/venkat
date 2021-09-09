@@ -23,7 +23,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Zoom_Communications_Logo.svg/320px-Zoom_Communications_Logo.svg.png
+      url: https://store-images.s-microsoft.com/image/apps.44610.31fc453a-d49f-48c7-8963-bf12d4fd3374.a2a00468-0987-4794-997b-2d5029b3a429.243e6688-c0b8-4bb4-bf79-439c33a98965.png
       COMPUTE_HASHES: False
 
   # get base64 of icon file:
