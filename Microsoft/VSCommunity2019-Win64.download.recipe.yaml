@@ -1,0 +1,21 @@
+---
+Description: Downloads the latest Visual Studio Community 2019
+Identifier: com.github.bigfix.download.VSCommunity2019
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "VSCommunity2019"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Visual Studio Community 2019"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://aka.ms/vs/16/release/vs_Community.exe
+      # download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
