@@ -5,7 +5,8 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "DotNetRuntime5_x64-Win64"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Microsoft .NET Runtime"
+  DisplayName: "Microsoft .NET Runtime (x64)"
+  UninstallName: "Microsoft .NET Runtime"
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.DotNetRuntime5_x64-Win64
 Process:
@@ -42,6 +43,11 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "UninstallName"
+      append_value: "%UninstallName%"
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
