@@ -9,7 +9,7 @@ This task will download and install "{{DisplayName}} v{{version}}" package onto 
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
 		<Relevance><![CDATA[
-not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{UninstallName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)
+not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{UninstallName}}" and value "DisplayName" of it as string ends with "(x64)") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)
 		]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>

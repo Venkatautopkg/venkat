@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "ASPDotNetCoreRuntime5_x64-Win64"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Microsoft ASP.NET Core Runtime"
+  DisplayName: "Microsoft ASP.NET Core Runtime (x64)"
   DotNetVer: "5.0"
 MinimumVersion: '2.3'
 Process:
