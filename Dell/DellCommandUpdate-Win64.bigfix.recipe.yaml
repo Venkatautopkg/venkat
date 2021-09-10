@@ -1,13 +1,13 @@
 ---
 Description: Generates a BigFix Task for the latest Dell Command Update
-Identifier: com.github.bigfix.bigfix.DellCommandUpdate-Win64
+Identifier: com.github.bigfix.bigfix.DellCommandUpdate-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: DellCommandUpdate
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: Dell Command | Update
-MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.DellCommandUpdate-Win64
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.download.DellCommandUpdate-Win
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -44,3 +44,5 @@ Process:
   #   The action is an offer that requires user interaction to run in self service application
   #   The action targets all computers whose name contains `autopkg`
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+# <Relevance>/* DELL Only */ exists values "vendor" whose(it as string as uppercase contains "DELL") of structures "bios_information" of smbios</Relevance>
+# <Relevance>/* check for supported model: OptiPlex, Latitude, Precision, Venue Tablets, XPS */ exists ((value "product_name" of structures "system_information" of smbios) as string as uppercase) whose(it starts with "OPTIPLEX" OR it starts with "LATITUDE" OR it starts with "PRECISION" OR it starts with "XPS" OR it starts with "VENUE")</Relevance>
