@@ -6,12 +6,11 @@ Input:
   NAME: "ZoomOutlookPlugin"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Zoom Outlook Plugin"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://zoom.us/client/latest/ZoomOutlookPluginSetup.msi
       #download_version: "%version%"
       COMPUTE_HASHES: True
-  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
   - Processor: EndOfCheckPhase
