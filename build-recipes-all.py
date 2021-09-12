@@ -107,13 +107,17 @@ def run_first_or_oldreceipt_recipes(recipe_identifiers, min_age_hours=12):
             recipe_identifiers.remove(name)
             previous_recipes.append(name)
 
+    max_age_minutes = 0
     # add back recipes that haven't been run for min_age_hours
     for recipe_id in previous_recipes:
         duration_s = (datetime_NOW - get_last_runtime_recipe(recipe_id)).total_seconds()
+        # https://stackoverflow.com/a/47207182/861745
+        max_age_minutes = max(max_age_minutes, int(divmod(duration_s, 60)[0]))
         duration_h = int(divmod(duration_s, 3600)[0])
         if duration_h > min_age_hours:
             recipe_identifiers.append(recipe_id)
 
+    print(f"Oldest Recipe Run: {max_age_minutes} minutes ago.")
     run_all_recipes(recipe_identifiers)
 
 
