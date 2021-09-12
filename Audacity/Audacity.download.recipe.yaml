@@ -6,7 +6,7 @@ Input:
   NAME: "Audacity"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Audacity"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -20,6 +20,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://github.com/audacity/audacity/releases/download/Audacity-%latest_version%/audacity-win-%latest_version%-x64.exe
-      download_version: "%version%"
+      download_version: "%latest_version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
