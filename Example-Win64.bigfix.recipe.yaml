@@ -7,6 +7,7 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "{{DisplayName}}"
   VendorFolder: Vendor
+  RecipeStatus: To do
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.{{NAME}}
 Process:
