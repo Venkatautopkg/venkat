@@ -3,7 +3,9 @@
 run all AutoPkg recipes in repo
 """
 import os
+import random
 import subprocess
+import time
 
 import yaml
 
@@ -58,8 +60,13 @@ def run_all_recipes(recipe_path_array):
     print(len(recipe_path_array))
     recipe_identifiers = get_all_identifiers(recipe_path_array)
 
+    # randomize list of recipes to not run same vendor in order
+    random.shuffle(recipe_identifiers)
+
     for recipe_id in recipe_identifiers:
         run_recipe(recipe_id)
+        # sleep 5 seconds between each
+        time.sleep(5)
 
 
 def main():
