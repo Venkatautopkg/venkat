@@ -39,7 +39,35 @@ def bigfix_login():
     else:
         bigfix_cli.do_saveconf()
 
-    return bigfix_cli.bes_conn
+    return bigfix_cli
+
+
+def get_user_resource(bigfix_conn, user_name="autopkg"):
+    # print function name:
+    print(sys._getframe().f_code.co_name + "()")
+
+    result_users = bigfix_conn.get(f"operator/{user_name}")
+
+    if result_users and "Operator does not exist" not in str(result_users):
+        # print(result_users)
+        return result_users.besobj.Operator.attrib["Resource"]
+
+
+def create_user(bigfix_conn, bes_file_path):
+    # print function name:
+    print(sys._getframe().f_code.co_name + "()")
+
+    xml_parsed = lxml.etree.parse(bes_file_path)
+    new_user_name = xml_parsed.xpath("/BESAPI/Operator/Name/text()")[0]
+    result_user = get_user_resource(bigfix_conn, new_user_name)
+
+    if result_user:
+        print(f"WARNING: User Already Exists: {new_user_name}")
+        return result_user
+    print(f"Creating User {new_user_name}")
+    user_result = bigfix_conn.post("operators", lxml.etree.tostring(xml_parsed))
+    # print(user_result)
+    return get_user_resource(bigfix_conn, new_user_name)
 
 
 def get_group_resource(
@@ -64,16 +92,19 @@ def create_group(bigfix_conn, bes_file_path, site_path="master"):
     existing_group_resource = get_group_resource(bigfix_conn, site_path, new_group_name)
 
     if existing_group_resource:
-        print("WARNING: Group Already Exists")
+        print(f"WARNING: Group Already Exists: {new_group_name}")
         return existing_group_resource
 
-    print(lxml.etree.tostring(xml_parsed))
+    # print(lxml.etree.tostring(xml_parsed))
 
-    result_new_group = bigfix_conn.post(
-        f"computergroups/{site_path}", lxml.etree.tostring(xml_parsed)
-    )
+    _ = bigfix_conn.post(f"computergroups/{site_path}", lxml.etree.tostring(xml_parsed))
 
     return get_group_resource(bigfix_conn, site_path, new_group_name)
+
+
+def get_site_resource():
+    # print function name:
+    print(sys._getframe().f_code.co_name + "()")
 
 
 def main():
@@ -85,12 +116,13 @@ def main():
     if exit_code != 0:
         print("ERROR: XML Validation!")
         sys.exit(exit_code)
-    bigfix_conn = bigfix_login()
+    bigfix_cli = bigfix_login()
     group_resource = create_group(
-        bigfix_conn,
+        bigfix_cli.bes_conn,
         r"./_setup/Group-AutoPkgTestMachines.bes",
     )
     print(group_resource)
+    print(create_user(bigfix_cli.bes_conn, r"./_setup/Operator-API_AutoPkg.bes"))
 
 
 if __name__ == "__main__":
