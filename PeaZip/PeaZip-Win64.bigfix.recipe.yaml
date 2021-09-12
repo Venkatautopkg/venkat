@@ -6,7 +6,7 @@ Input:
   NAME: "PeaZip"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "PeaZip"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.PeaZip-Win64
 Process:
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
@@ -38,11 +38,11 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
-      
+
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "version"
-      append_value: '%latest_version%'
+      append_value: "%latest_version%"
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
