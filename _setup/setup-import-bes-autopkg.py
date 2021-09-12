@@ -18,6 +18,7 @@ def rand_password(length=20):
 
     all = string.ascii_letters + string.digits + "!#()*+,-.:;<=>?[]^_|~"
     # print(all)
+    # https://medium.com/analytics-vidhya/create-a-random-password-generator-using-python-2fea485e9da9
     password = "".join(random.sample(all, length))
     return password
 
