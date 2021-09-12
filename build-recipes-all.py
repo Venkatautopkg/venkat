@@ -5,6 +5,7 @@ run all AutoPkg recipes in repo
 import os
 import random
 import subprocess
+import sys
 import time
 
 import yaml
@@ -55,12 +56,12 @@ def run_recipe(recipe_id):
         print(f"ERROR: {recipe_id}")
 
 
-def run_all_recipes(recipe_path_array):
+def run_all_recipes(recipe_identifiers):
     print("run_all_recipes()")
-    print(len(recipe_path_array))
-    recipe_identifiers = get_all_identifiers(recipe_path_array)
+    print(f"Number of Recipes to Run: {len(recipe_identifiers)}")
 
     # randomize list of recipes to not run same vendor in order
+    # https://stackoverflow.com/questions/9252373/random-iteration-in-python
     random.shuffle(recipe_identifiers)
 
     for recipe_id in recipe_identifiers:
@@ -69,10 +70,27 @@ def run_all_recipes(recipe_path_array):
         time.sleep(5)
 
 
+def run_firsttime_recipes(recipe_identifiers):
+    # print function name:
+    print(sys._getframe().f_code.co_name + "()")
+    print(f"Total Recipes: {len(recipe_identifiers)}")
+    # ~/Library/AutoPkg/Cache
+    autopkg_cache_path = os.path.expanduser("~/Library/AutoPkg/Cache")
+    # get directories in cache
+    dir_listing = os.listdir(autopkg_cache_path)
+    for name in dir_listing:
+        if name in recipe_identifiers:
+            # remove recipe_id if directory in cache
+            recipe_identifiers.remove(name)
+
+    run_all_recipes(recipe_identifiers)
+
+
 def main():
     print("main()")
     recipe_path_array = get_all_files()
-    run_all_recipes(recipe_path_array)
+    recipe_identifiers = get_all_identifiers(recipe_path_array)
+    run_firsttime_recipes(recipe_identifiers)
 
 
 if __name__ == "__main__":
