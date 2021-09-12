@@ -8,8 +8,8 @@ import string
 import sys
 
 import bescli
-import validate_bes_xml
 import lxml.etree
+import validate_bes_xml
 
 
 def rand_password(length=20):
@@ -65,7 +65,7 @@ def create_user(bigfix_conn, bes_file_path):
         print(f"WARNING: User Already Exists: {new_user_name}")
         return result_user
     print(f"Creating User {new_user_name}")
-    user_result = bigfix_conn.post("operators", lxml.etree.tostring(xml_parsed))
+    _user_result = bigfix_conn.post("operators", lxml.etree.tostring(xml_parsed))
     # print(user_result)
     return get_user_resource(bigfix_conn, new_user_name)
 
