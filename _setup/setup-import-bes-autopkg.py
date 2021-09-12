@@ -102,9 +102,32 @@ def create_group(bigfix_conn, bes_file_path, site_path="master"):
     return get_group_resource(bigfix_conn, site_path, new_group_name)
 
 
-def get_site_resource():
+def get_site_output(bigfix_conn, site_path="custom", site_name="autopkg"):
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
+    result_site = bigfix_conn.get(f"site/{site_path}/{site_name}")
+    print(result_site)
+
+    if result_site and "does not exist" not in str(result_site):
+        # print(result_users)
+        return result_site
+
+
+def create_site(bigfix_conn, bes_file_path, site_path="custom"):
+    # print function name:
+    print(sys._getframe().f_code.co_name + "()")
+    xml_parsed = lxml.etree.parse(bes_file_path)
+    new_site_name = xml_parsed.xpath("/BES/CustomSite/Name/text()")[0]
+    print(new_site_name)
+    result_site = get_site_output(bigfix_conn, site_path, new_site_name)
+
+    if result_site:
+        print(f"WARNING: Site already exists: {new_site_name}")
+        return result_site
+
+    _ = bigfix_conn.post(f"sites", lxml.etree.tostring(xml_parsed))
+
+    return get_site_output(bigfix_conn, site_path, new_site_name)
 
 
 def main():
@@ -123,6 +146,8 @@ def main():
     )
     print(group_resource)
     print(create_user(bigfix_cli.bes_conn, r"./_setup/Operator-API_AutoPkg.bes"))
+
+    print(create_site(bigfix_cli.bes_conn, r"./_setup/Site-autopkg.bes"))
 
 
 if __name__ == "__main__":
