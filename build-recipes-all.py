@@ -2,6 +2,8 @@
 """
 run all AutoPkg recipes in repo
 """
+import datetime
+import glob
 import os
 import random
 import subprocess
@@ -9,6 +11,8 @@ import sys
 import time
 
 import yaml
+
+datetime_NOW = datetime.datetime.now()
 
 
 def get_all_files(extension=".bigfix.recipe.yaml"):
@@ -38,7 +42,11 @@ def get_all_identifiers(recipe_path_array):
     print("get_all_identifiers(recipe_path_array)")
     recipe_identifiers = []
     for path in recipe_path_array:
-        recipe_identifiers.append(get_recipe_identifier(path))
+        recipe_id = get_recipe_identifier(path)
+        if recipe_id:
+            recipe_identifiers.append(recipe_id)
+        else:
+            print(f"ERROR: No Identifier Found for {path}")
     return recipe_identifiers
 
 
@@ -70,7 +78,21 @@ def run_all_recipes(recipe_identifiers):
         time.sleep(5)
 
 
-def run_firsttime_recipes(recipe_identifiers):
+def get_last_runtime_recipe(recipe_identifier):
+
+    recipe_receipt_dir = os.path.expanduser(
+        f"~/Library/AutoPkg/Cache/{recipe_identifier}/receipts"
+    )
+    # https://stackoverflow.com/a/39327156/861745
+    files_path = os.path.join(recipe_receipt_dir, "*.plist")
+    list_of_files = glob.iglob(files_path)
+    latest_file = max(list_of_files, key=os.path.getctime)
+    # print(latest_file)
+    # datetime.datetime.fromtimestamp(t)
+    return datetime.datetime.fromtimestamp(os.path.getmtime(latest_file))
+
+
+def run_first_or_oldreceipt_recipes(recipe_identifiers, min_age_hours=12):
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
     print(f"Total Recipes: {len(recipe_identifiers)}")
@@ -78,10 +100,19 @@ def run_firsttime_recipes(recipe_identifiers):
     autopkg_cache_path = os.path.expanduser("~/Library/AutoPkg/Cache")
     # get directories in cache
     dir_listing = os.listdir(autopkg_cache_path)
+    previous_recipes = []
     for name in dir_listing:
         if name in recipe_identifiers:
             # remove recipe_id if directory in cache
             recipe_identifiers.remove(name)
+            previous_recipes.append(name)
+
+    # add back recipes that haven't been run for min_age_hours
+    for recipe_id in previous_recipes:
+        duration_s = (datetime_NOW - get_last_runtime_recipe(recipe_id)).total_seconds()
+        duration_h = int(divmod(duration_s, 3600)[0])
+        if duration_h > min_age_hours:
+            recipe_identifiers.append(recipe_id)
 
     run_all_recipes(recipe_identifiers)
 
@@ -90,7 +121,7 @@ def main():
     print("main()")
     recipe_path_array = get_all_files()
     recipe_identifiers = get_all_identifiers(recipe_path_array)
-    run_firsttime_recipes(recipe_identifiers)
+    run_first_or_oldreceipt_recipes(recipe_identifiers)
 
 
 if __name__ == "__main__":
