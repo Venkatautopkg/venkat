@@ -12,7 +12,7 @@ def get_all_files(extension=".bigfix.recipe.yaml"):
     # https://stackoverflow.com/a/3964691/861745
     print("get_all_files()")
     file_paths = []
-    for root, dirs, files in os.walk("."):
+    for root, _, files in os.walk("."):
         for file in files:
             if file.endswith(extension):
                 if "Example" not in file:
