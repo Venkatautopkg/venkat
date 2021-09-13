@@ -1,5 +1,5 @@
 ---
-Description: Generates a BigFix Task for the latest Apple iTunes 64-bit
+Description: Generates a BigFix Task for the latest Apple iCloud 64-bit
 Identifier: com.github.bigfix.bigfix.iCloud-Win64
 Input:
   NAME: "iCloud"

@@ -1,16 +1,19 @@
 ---
 Description: Generates a BigFix Task for the latest BlueJeans
-Identifier: com.github.bigfix.bigfix.BlueJeans
+Identifier: com.github.bigfix.bigfix.BlueJeans-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: BlueJeans
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: BlueJeans
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.BlueJeans
+ParentRecipe: com.github.bigfix.download.BlueJeans-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+ # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -18,6 +21,19 @@ Process:
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: https://play-lh.googleusercontent.com/QEiMRRt0Lu_OsI5RSGf9d0dabnjqN3FbDSfPLgG8D_MTJPS68JF3oR6Lk_TweOtWXQs
+      COMPUTE_HASHES: False
+
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
 
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables

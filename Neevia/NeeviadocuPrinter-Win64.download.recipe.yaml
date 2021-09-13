@@ -1,0 +1,19 @@
+---
+Description: Downloads the latest NeeviadocuPrinter
+Identifier: com.github.bigfix.download.NeeviadocuPrinter
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: NeeviadocuPrinter
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "docuPrinter LT"
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://neevia.com/prods/dplt.msi
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

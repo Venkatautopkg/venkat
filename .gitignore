@@ -1,5 +1,6 @@
 *_resized256.png
-
+# ignore macos metadata file:
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

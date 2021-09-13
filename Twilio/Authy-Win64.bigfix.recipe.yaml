@@ -11,7 +11,8 @@ ParentRecipe: com.github.bigfix.download.Authy-Win64
 Process:
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
-  - Processor: com.github.jgstew.SharedProcessors/FileHasher
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  #- Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
 
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
@@ -23,9 +24,6 @@ Process:
       filename: "%NAME%-icon.png"
       url: https://twilio-cms-prod.s3.amazonaws.com/images/Authy-Logo-white-background.width-808.png
       COMPUTE_HASHES: False
-  - Processor: com.github.jgstew.SharedProcessors/FileImageResize
-    Arguments:
-      file_pathname: "%NAME%-icon.png"
   # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
 

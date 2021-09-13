@@ -21,6 +21,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://download.gimp.org/mirror/pub/gimp/v%major_version%/windows/gimp-%latest_version%-setup.%FileType%
-      download_version: "%version%"
+      download_version: "%latest_version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

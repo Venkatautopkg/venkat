@@ -1,0 +1,18 @@
+---
+Description: Downloads the latest Dell Catalog - Dell Command Update feed
+Identifier: com.github.bigfix.download.DellCatalog
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: DellCatalog
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: Dell Catalog
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: http://ftp.dell.com/catalog/CatalogPC.cab
+      # download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

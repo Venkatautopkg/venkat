@@ -2,10 +2,10 @@
 Description: Generates BigFix Task for the latest version MongoDB Compass for Windows.
 Identifier: com.github.bigfix.bigfix.MongoDBCompass-Win64
 Input:
-  NAME: "MongoDB"
-  DisplayName: "MongoDB Compass"
+  NAME: MongoDBCompass
+  DisplayName: MongoDB Compass
   icon_url: https://cdn-assets-cloud.frontify.com/s3/frontify-cloud-files-us/eyJwYXRoIjoiZnJvbnRpZnlcL2FjY291bnRzXC9hMVwvMzAwNzdcL3Byb2plY3RzXC8xOTc5MDRcL2Fzc2V0c1wvZWVcLzMzMjg3NzlcLzg0YzE1YTM4ZWEyMjY1YTA4NGU0Y2Q4YTFjZjY0NzUwLTE1NjIwMDMyMzYucG5nIn0:frontify:VbAI_RP5wrjQQex7AWSHaAwICU6EQ7igtXQc4DLUOWo?width=2400
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.MongoDBCompass-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem

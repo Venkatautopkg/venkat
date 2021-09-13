@@ -1,0 +1,25 @@
+---
+Description: Downloads the latest GPU-Z
+Identifier: com.github.bigfix.download.GPUZ
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "GPUZ"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "TechPowerUp GPU-Z"
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.techpowerup.com/download/techpowerup-gpu-z/
+      # example match `example`
+      re_pattern: 'GPU\-Z\.(?P<version>\d+\.\d+\.\d+)\.exe'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://us2-dl.techpowerup.com/files/5zBgikPVp7xxc0SUyvk1Nw/1631070596/GPU-Z.%version%.exe
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

@@ -1,0 +1,20 @@
+---
+Description: Downloads the latest Dell SDPC Catalog - SCCM Update Feed
+Identifier: com.github.bigfix.download.DellSDPCCatalog
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: DellSDPCCatalog
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: Dell SDPC Catalog
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://downloads.dell.com/Catalog/DellSDPCatalogPC.cab
+      # download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
+# Related:
+# - https://www.recastsoftware.com/resources/configmgr-docs/configmgr-topics/manufacturer-tools/

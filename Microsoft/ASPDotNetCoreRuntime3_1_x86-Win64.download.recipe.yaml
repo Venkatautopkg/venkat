@@ -1,0 +1,35 @@
+---
+Description: Downloads the latest Microsoft ASP.NET Core Runtime 3.1.x (x86) for Win64
+Identifier: com.github.bigfix.download.ASPDotNetCoreRuntime3_1_x86-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "ASPDotNetCoreRuntime3_1_x86-Win64"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Microsoft ASP.NET Core Runtime (x86)"
+  DotNetVer: "3.1"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+
+  - Processor: com.github.jgstew.SharedProcessors/URLTextSearcherArray
+    Arguments:
+      #Example: '>5.0.9<'
+      url: https://dotnet.microsoft.com/download/dotnet/%DotNetVer%
+      re_pattern: '>(?P<version>\d+\.\d+\.\d+)<'
+
+  - Processor: com.github.jgstew.SharedProcessors/VersionMaximumArray
+
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://dotnet.microsoft.com/download/dotnet/thank-you/runtime-aspnetcore-%version_maximum%-windows-x86-installer
+      re_pattern: '\"Direct link (?P<url>https\:\/\/.*?)\"'
+
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: "%url%"
+      COMPUTE_HASHES: True
+
+  - Processor: EndOfCheckPhase

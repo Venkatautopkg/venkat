@@ -1,0 +1,25 @@
+---
+Description: Downloads the latest Bandicut
+Identifier: com.github.bigfix.download.Bandicut-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: Bandicut
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: Bandicut
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.bandicam.com/bandicut-video-cutter/download/
+      # example match `example`
+      re_pattern: 'Bandicut (?P<version>\d+\.\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://dl.bandicam.com/bandicut/bandicut-setup.exe
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

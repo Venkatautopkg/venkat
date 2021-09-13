@@ -1,25 +1,25 @@
 ---
-Description: Downloads the latest Dell Command Update
-Identifier: com.github.bigfix.download.DellCommandUpdate-Win64
+Description: Downloads the latest VNC Server
+Identifier: com.github.bigfix.download.VNCServer
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: DellCommandUpdate
+  NAME: "VNCServer"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Dell Command Update
+  DisplayName: "VNC Server"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  # - Processor: URLTextSearcher
-  #   Arguments:
-  #     url: https://example
-  #     # example match `example`
-  #     re_pattern: 'example(?P<version>\d+)-64.msi'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.realvnc.com/en/connect/download/vnc/
+      # example match `example`
+      re_pattern: 'VNC\-Server\-(?P<version>\d+\.\d+\.\d+)\-Windows\-msi\.zip'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://dl.dell.com/FOLDER07582851M/2/Dell-Command-Update-Application_8D5MC_WIN_4.3.0_A00_01.EXE?uid=e28a0289-a8b8-4a67-faef-d21b09c75fb8&fn=Dell-Command-Update-Application_8D5MC_WIN_4.3.0_A00_01.EXE
-  #    download_version: "%version%"
+      url: https://www.realvnc.com/download/file/vnc.files/VNC-Server-%version%-Windows-msi.zip
+      # download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

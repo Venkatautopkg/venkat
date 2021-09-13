@@ -1,0 +1,8 @@
+---
+Description: Downloads the latest VisualStudio Product BuildTools
+Identifier: com.github.bigfix.bigfix.VisualStudioProductBuildTools-Win
+Input:
+  NAME: VisualStudioProductBuildTools-Win
+MinimumVersion: "2.3"
+ParentRecipe: com.github.jgstew.bigfix.VisualStudioProductBuildTools-Win
+# FYI, the process is located within the ParentRecipe

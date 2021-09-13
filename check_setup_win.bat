@@ -52,7 +52,7 @@ if exist %UserProfile%\.ssh\id_rsa.pub (
     echo          NOTE: just hit enter at "Enter file in which to save the key (/c/Users/_USER_/.ssh/id_rsa):" prompt
     echo      then copy the contents of ~\.ssh\id_rsa.pub to your GitHub account SSH keys at https://github.com/settings/keys
     pause
-    exit 3
+    REM exit 3
 )
 
 echo.
@@ -73,7 +73,7 @@ if errorlevel 1 (
     echo.
     REM copy public key to clipboard? powershell -c [Windows.Forms.Clipboard]::SetText(???)
     pause
-    exit %errorlevel%
+    REM exit %errorlevel%
 )
 
 
@@ -313,6 +313,12 @@ echo.
 echo Add pre-commit hooks:
 echo pre-commit install --install-hooks --allow-missing-config
 pre-commit install --install-hooks --allow-missing-config
+
+echo.
+echo Run test recipe for 7zip:
+echo python ..\autopkg\Code\autopkg run -v com.github.jgstew.test.FileExeVersionExtractor-Win
+python ..\autopkg\Code\autopkg run -v com.github.jgstew.test.FileExeVersionExtractor-Win
+echo Expected output `Found Version: 19.0.0.0`
 
 echo.
 echo Check the _setup folder for other items

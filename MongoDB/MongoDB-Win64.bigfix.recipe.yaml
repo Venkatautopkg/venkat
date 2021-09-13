@@ -7,6 +7,7 @@ Input:
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.MongoDB-Win64
 Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
