@@ -43,6 +43,11 @@ override wait
 hidden=true
 completion=job
 wait msiexec.exe /i __Download\{{{file_name}}} AUTOOC=0 /qn
+
+if { exists (now - it) whose(it < 2 * minute) of creation times of files "Webex.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
+delete "{pathnames of files "Webex.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
+endif
+
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>

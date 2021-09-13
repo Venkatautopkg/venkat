@@ -6,6 +6,7 @@ Input:
   FileType: msi
 MinimumVersion: '2.3'
 Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: URLTextSearcher
     Arguments:
       url: https://www.mongodb.com/try/download/community?tck=docs_server
@@ -14,6 +15,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-%latest_version%-signed.%FileType%
-      prefetch_filename: True
+      #prefetch_filename: True
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest TeamViewer
-Identifier: com.github.bigfix.download.TeamViewer-Win64
+Description: Downloads the latest Bandicut
+Identifier: com.github.bigfix.download.Bandicut-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "TeamViewer"
+  NAME: Bandicut
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: TeamViewer
+  DisplayName: Bandicut
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.teamviewer.com/en-us/download/windows/
+      url: https://www.bandicam.com/bandicut-video-cutter/download/
       # example match `example`
-      re_pattern: 'Current version: (?P<version>\d+\.\d+\.\d+)'
+      re_pattern: 'Bandicut (?P<version>\d+\.\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe
+      url: https://dl.bandicam.com/bandicut/bandicut-setup.exe
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

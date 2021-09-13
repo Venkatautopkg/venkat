@@ -14,9 +14,9 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://allwaysync.com/
+      url: https://allwaysync.com/download/
       # example match `example`
-      re_pattern: 'Allway Sync (?P<version>\d+\.\d+\.\d+)'
+      re_pattern: 'Latest version: <strong>(?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
       url: https://allwaysync.com/content/download/allwaysync-x64.exe

@@ -1,35 +1,33 @@
 ---
-Description: Generates a BigFix Task for the latest MalwareBytes
-Identifier: com.github.bigfix.bigfix.Malwarebytes-Win64
+Description: Generates a BigFix Task for the latest NextCloud Desktop Client
+Identifier: com.github.bigfix.bigfix.NextCloudDesktopClient-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-
-  NAME: Malwarebytes
-    # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Malwarebytes
-MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.Malwarebytes-Win64
+  NAME: NextCloudDesktopClient
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: Nextcloud
+  VendorFolder: Vendor
+  RecipeStatus: To do
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.download.NextCloudDesktopClient-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+ # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
-
-  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
-    Arguments:
-      version_string: FileVersion
-
 
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
 
-
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://www.freeiconspng.com/uploads/malwarebytes-icon-14.png
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Nextcloud_Logo.svg/800px-Nextcloud_Logo.svg.png
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -38,7 +36,6 @@ Process:
     Arguments:
       append_key: "icon_base64"
       append_value: "%file_base64%"
-
 
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
@@ -52,7 +49,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./%NAME%/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./NextCloud/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

@@ -34,8 +34,24 @@ def get_recipe_identifier(recipe_path):
             yaml_data = yaml.safe_load(stream)
         except yaml.YAMLError as err:
             print(err)
+    try:
+        # check if recipe has icon
+        recipe_process = yaml_data["Process"]
+        for item in recipe_process:
+            # print(item["Processor"])
+            if "com.github.jgstew.SharedProcessors/FileGetBase64" in item["Processor"]:
+                return yaml_data["Identifier"]
+            else:
+                if "Arguments" in item:
+                    if "append_key" in item["Arguments"]:
+                        if "icon_base64" in item["Arguments"]["append_key"]:
+                            return yaml_data["Identifier"]
+    except KeyError:
+        print(f"ERROR: Yaml KeyError {recipe_path}")
+        return None
     # https://stackoverflow.com/a/50432697/861745
-    return yaml_data["Identifier"]
+    print(f"ERROR: icon_base64 missing: {recipe_path}")
+    return None
 
 
 def get_all_identifiers(recipe_path_array):
@@ -46,7 +62,7 @@ def get_all_identifiers(recipe_path_array):
         if recipe_id:
             recipe_identifiers.append(recipe_id)
         else:
-            print(f"ERROR: No Identifier Found for {path}")
+            print(f"WARNING: skipping {path}")
     return recipe_identifiers
 
 
