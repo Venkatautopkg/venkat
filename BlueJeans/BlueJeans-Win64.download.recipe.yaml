@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest BlueJeans
-Identifier: com.github.bigfix.download.BlueJeans
+Identifier: com.github.bigfix.download.BlueJeans-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "BlueJeans"

@@ -1,12 +1,12 @@
 ---
-Description: Downloads the latest GPU-Z
-Identifier: com.github.bigfix.download.GPUZ
+Description: Downloads the latest Bandicut
+Identifier: com.github.bigfix.download.Bandicut-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "GPUZ"
+  NAME: Bandicut
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "TechPowerUp GPU-Z"
-MinimumVersion: "2.3"
+  DisplayName: Bandicut
+MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.techpowerup.com/download/techpowerup-gpu-z/
+      url: https://www.bandicam.com/bandicut-video-cutter/download/
       # example match `example`
-      re_pattern: 'GPU\-Z\.(?P<version>\d+\.\d+\.\d+)\.exe'
+      re_pattern: 'Bandicut (?P<version>\d+\.\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://us2-dl.techpowerup.com/files/5zBgikPVp7xxc0SUyvk1Nw/1631070596/GPU-Z.%version%.exe
+      url: https://dl.bandicam.com/bandicut/bandicut-setup.exe
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

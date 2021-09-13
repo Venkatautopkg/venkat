@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest TeamViewer
-Identifier: com.github.bigfix.download.TeamViewer
+Identifier: com.github.bigfix.download.TeamViewer-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "TeamViewer"

@@ -19,7 +19,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: 'https://www.tableau.com/downloads/reader/pc64'
-      download_version: "%version%"
+      download_version: "%build_version%"
       COMPUTE_HASHES: True
       prefetch_filename: True
       User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0

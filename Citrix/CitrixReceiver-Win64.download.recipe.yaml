@@ -6,20 +6,20 @@ Input:
   NAME: CitrixReceiver
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: Citrix Receiver
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  - Processor: URLTextSearcher
-    Arguments:
-      url: https://www.citrix.com/en-in/downloads/citrix-receiver/windows/receiver-for-windows-latest.html
-      # example match `example`
-      re_pattern: 'Receiver (?P<version>\d+\.\d+)'
+  # - Processor: URLTextSearcher
+  #   Arguments:
+  #     url: https://www.citrix.com/en-in/downloads/citrix-receiver/windows/receiver-for-windows-latest.html
+  #     # example match `example`
+  #     re_pattern: 'Receiver (?P<version>\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://downloads.citrix.com/14726/CitrixReceiver.exe?__gda__=exp=1631024457~acl=/*~hmac=c8b88ab2a27c7663f356e775646b513d399533c12eb8a08e6927b0613e50ba52
-#      download_version: "%version%"
+      url: https://downloadplugins.citrix.com/Windows/CitrixReceiver.exe
+      # download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

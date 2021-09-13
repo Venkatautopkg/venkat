@@ -5,7 +5,7 @@ Input:
   NAME: "MongoDB"
   DisplayName: "MongoDB Compass"
   FileType: msi
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   - Processor: URLTextSearcher
     Arguments:
@@ -16,6 +16,7 @@ Process:
     Arguments:
       # Example https://downloads.mongodb.com/compass/mongodb-compass-1.28.1-win32-x64.msi
       url: https://downloads.mongodb.com/compass/mongodb-compass-%latest_version%-win32-x64.%FileType%
+      download_version: "%latest_version%"
       prefetch_filename: True
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

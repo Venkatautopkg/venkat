@@ -13,7 +13,7 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 		]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>BigFix</Source>
+		<Source>VMware</Source>
 		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
@@ -37,17 +37,28 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[
 // Download:
 {{{prefetch}}}
+prefetch 7za.exe sha1:4e9d49a41201e25cf56658578b23f7384a13dc6d size:733696 http://software.bigfix.com/download/tema/lmt/7za.exe sha256:77613cca716edf68b9d5bab951463ed7fade5bc0ec465b36190a76299c50f117
 
-// Install:
-override wait
-hidden=true
-completion=job
-wait msiexec.exe /i __Download\{{{file_name}}} DESKTOP_SHORTCUT=false /qn /norestart
+// Create the vmrc temporary folder
+parameter "temp_folder" = "{pathname of client folder of current site}\__Download\vmrc"
+folder create "{parameter "temp_folder"}"
 
-if { exists (now - it) whose(it < 2 * minute) of creation times of files "Cisco Jabber.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
-delete "{pathnames of files "Cisco Jabber.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
+// Extract the executable from the tar file
+move __Download\7za.exe "{parameter "temp_folder" as string}\7za.exe"
+waithidden cmd.exe /c ""{parameter "temp_folder" as string}\7za.exe" x "__Download\{{{file_name}}}" -o"{parameter "temp_folder" }" -y"
+
+if {(not active of action) OR (exists file whose (name of it starts with "VMware-VMRC-" and name of it ends with ".exe") of folder (parameter "temp_folder"))}
+
+	// Install:
+	override wait
+	hidden=true
+	completion=job
+	wait {pathname of file whose (name of it starts with "VMware-VMRC-" and name of it ends with ".exe") of folder (parameter "temp_folder")} /s /v "/qn EULAS_AGREED=1 AUTOSOFTWAREUPDATE=0 DATACOLLECTION=0 REBOOT=ReallySuppress
+
 endif
 
+// Cleanup
+folder delete "{parameter "temp_folder"}"
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>

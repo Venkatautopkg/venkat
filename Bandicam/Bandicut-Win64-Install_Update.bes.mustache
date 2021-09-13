@@ -42,12 +42,10 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 override wait
 hidden=true
 completion=job
-wait msiexec.exe /i __Download\{{{file_name}}} DESKTOP_SHORTCUT=false /qn /norestart
-
-if { exists (now - it) whose(it < 2 * minute) of creation times of files "Cisco Jabber.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
-delete "{pathnames of files "Cisco Jabber.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
+wait __Download\{{{file_name}}} DESKTOP_SHORTCUT=false /S /norestart
+if { exists (now - it) whose(it < 2 * minute) of creation times of files "Bandicut.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
+delete "{pathnames of files "Bandicut.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
 endif
-
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
