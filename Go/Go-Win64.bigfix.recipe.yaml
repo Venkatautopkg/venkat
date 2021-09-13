@@ -1,0 +1,27 @@
+---
+Description: Generates a BigFix Task for the latest Go Programming Language (Win64)
+Identifier: com.github.bigfix.bigfix.Go-Win64
+Input:
+  NAME: "Go"
+  DisplayName: "Go Programming Language"
+MinimumVersion: '2.3'
+ParentRecipe: com.github.bigfix.download.Go-Win64
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./Go/%NAME%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
