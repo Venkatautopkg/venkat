@@ -43,6 +43,10 @@ override wait
 hidden=true
 completion=job
 wait __Download\{{{file_name}}} /verysilent /norestart DESKTOP_SHORTCUT=false
+
+if { exists (now - it) whose(it < 2 * minute) of creation times of files "Allway Sync.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
+delete "{pathnames of files "Allway Sync.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
+endif
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
