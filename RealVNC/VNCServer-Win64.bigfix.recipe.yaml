@@ -26,6 +26,25 @@ Process:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
 
+  # download icon file:
+  - Processor: URLDownloaderPython
+    Arguments:
+      # need to provide filename to not overwrite the setup file
+      filename: "%NAME%-icon.png"
+      url: https://static.realvnc.com/static/244111702/img/favicon.ico
+      COMPUTE_HASHES: False
+  # resize / shrink icon file:
+  - Processor: com.github.jgstew.SharedProcessors/FileImageResize
+  # get base64 of icon file:
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+    Arguments:
+      file_pathname: "%file_path_resized%"
+  # add base64 of icon file to Template Dictionary:
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
