@@ -7,15 +7,22 @@ repos:
   - repo: https://github.com/homebysix/pre-commit-macadmin
     rev: v1.10.1
     hooks:
+      # - id: check-autopkg-recipe-list
       - id: check-autopkg-recipes
-        args: ["--recipe-prefix=com.github.bigfix.", "--strict", "--"]
+        args:
+          [
+            "--recipe-prefix=com.github.bigfix.",
+            "--override-prefix=com.github.",
+            "--strict",
+            "--",
+          ]
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.0.1
     hooks:
       - id: check-yaml
       - id: check-json
       - id: check-added-large-files
-        args: ['--maxkb=150']
+        args: ["--maxkb=150"]
       - id: check-ast
       - id: check-case-conflict
       - id: check-merge-conflict

@@ -15,8 +15,8 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/URLTextSearcherArray
     Arguments:
       #Example: '>7.2.0<'
-      url: https://www.libreoffice.org/download/download/
-      re_pattern: '>(?P<version>\d+\.\d+\.\d+)<'
+      url: https://download.documentfoundation.org/libreoffice/stable/
+      re_pattern: '>(?P<version>\d+\.\d+\.\d+)\/<'
   - Processor: com.github.jgstew.SharedProcessors/VersionMaximumArray
   - Processor: URLDownloaderPython
     Arguments:

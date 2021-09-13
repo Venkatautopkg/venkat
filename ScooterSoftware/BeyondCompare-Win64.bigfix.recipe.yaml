@@ -6,7 +6,7 @@ Input:
   NAME: "BeyondCompare"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Beyond Compare"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.BeyondCompare-Win64
 Process:
   # `SharedUtilityMethods` must come first

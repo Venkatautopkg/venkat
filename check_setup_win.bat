@@ -315,6 +315,12 @@ echo pre-commit install --install-hooks --allow-missing-config
 pre-commit install --install-hooks --allow-missing-config
 
 echo.
+echo Run test recipe for 7zip:
+echo python ..\autopkg\Code\autopkg run -v com.github.jgstew.test.FileExeVersionExtractor-Win
+python ..\autopkg\Code\autopkg run -v com.github.jgstew.test.FileExeVersionExtractor-Win
+echo Expected output `Found Version: 19.0.0.0`
+
+echo.
 echo Check the _setup folder for other items
 echo.
 pause

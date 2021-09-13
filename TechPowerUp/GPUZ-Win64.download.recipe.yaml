@@ -6,7 +6,7 @@ Input:
   NAME: "GPUZ"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "TechPowerUp GPU-Z"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -20,6 +20,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://us2-dl.techpowerup.com/files/5zBgikPVp7xxc0SUyvk1Nw/1631070596/GPU-Z.%version%.exe
-      # download_version: "%version%"
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

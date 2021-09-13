@@ -5,7 +5,7 @@ Input:
   NAME: "PeaZip"
   FileType: exe
   DisplayName: "PeaZip"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -17,7 +17,7 @@ Process:
       re_pattern: '<big>PeaZip\n64 bit (?P<latest_version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: 'https://github.com/peazip/PeaZip/releases/download/%latest_version%/peazip-%latest_version%.WIN64.exe'
+      url: "https://github.com/peazip/PeaZip/releases/download/%latest_version%/peazip-%latest_version%.WIN64.exe"
       download_version: "%latest_version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
