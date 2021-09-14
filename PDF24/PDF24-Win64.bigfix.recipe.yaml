@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest WinMerge
-Identifier: com.github.bigfix.bigfix.WinMerge-Win64
+Description: Generates a BigFix Task for the latest PDF24
+Identifier: com.github.bigfix.bigfix.PDF24-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: WinMerge
+  NAME: PDF24
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: WinMerge
+  DisplayName: PDF24
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.WinMerge-Win64
+ParentRecipe: com.github.bigfix.download.PDF24-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -25,7 +25,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/7/79/WinMergeLogo.png
+      url: https://upload.wikimedia.org/wikipedia/commons/c/c0/PDF24_Creator_application_logo_256x256.png
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -47,7 +47,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./WinMerge/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./PDF24/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
