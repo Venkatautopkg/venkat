@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: RemoteDesktopManager
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Remote Desktop Manager Enterprise
+  DisplayName: Remote Desktop Manager
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
