@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: RemoteDesktopManager
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Remote Desktop Manager Enterprise (x64)
+  DisplayName: Remote Desktop Manager Enterprise
   VendorFolder: Devolutions
   RecipeStatus: To do
 MinimumVersion: "2.3"
@@ -17,6 +17,8 @@ Process:
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
 
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
@@ -27,6 +29,11 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "version"
+      append_value: '%msi_property_value%'
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary

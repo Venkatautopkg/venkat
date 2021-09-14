@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: RemoteDesktopManager
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Remote Desktop Manager Enterprise (x64)
+  DisplayName: Remote Desktop Manager Enterprise
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://remotedesktopmanager.com/home/download
+      url: https://remotedesktopmanager.com/home/thankyou/rdmmsi
       # example match `example`
-      re_pattern: Version (?P<version>\d+) |
+      re_pattern: 'href\=\"(?P<url>.*?)\"\>click here\<'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://cdn.devolutions.net/download/Setup.RemoteDesktopManager.%version%.msi
-      # download_version: "%version%"
+      url: '%url%'
+      prefetch_filename: True
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
