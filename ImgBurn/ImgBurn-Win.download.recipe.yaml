@@ -1,0 +1,20 @@
+---
+Description: Downloads the latest {{DisplayName}}
+Identifier: com.github.bigfix.download.ImgBurn-Win
+Input:
+  NAME: "ImgBurn"
+  DisplayName: "ImgBurn"
+  FileType: exe
+MinimumVersion: "2.3"
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.imgburn.com/index.php?act=download
+      re_pattern: 'Current version: (?P<version>\d+\.\d+\.\d+.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://download.imgburn.com/SetupImgBurn_%version%.%FileType%
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
