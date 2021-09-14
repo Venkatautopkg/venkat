@@ -1,0 +1,25 @@
+---
+Description: Downloads the latest WinMerge
+Identifier: com.github.bigfix.download.WinMerge-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: WinMerge
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: WinMerge
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://winmerge.org/downloads/?lang=en
+      # example match `example`
+      re_pattern: 'The current WinMerge version is <strong>(?P<version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://github.com/WinMerge/winmerge/releases/download/v%version%/WinMerge-%version%-x64-Setup.exe
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
