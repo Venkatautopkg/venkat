@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Remote Download Manager (x64)
-Identifier: com.github.bigfix.download.remotedesktopmanager
+Identifier: com.github.bigfix.download.remotedesktopmanager-win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "{{NAME}}"
