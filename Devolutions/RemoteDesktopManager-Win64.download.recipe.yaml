@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest {{DisplayName}}
-Identifier: com.github.bigfix.download.{{NAME}}
+Description: Downloads the latest Remote Desktop Manager Enterprise
+Identifier: com.github.bigfix.download.remotedesktopmanager-win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "{{NAME}}"
+  NAME: RemoteDesktopManager
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "{{DisplayName}}"
+  DisplayName: Remote Desktop Manager Enterprise (x64)
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://example
+      url: https://remotedesktopmanager.com/home/download
       # example match `example`
-      re_pattern: 'example(?P<version>\d+)-64.msi'
+      re_pattern: Version (?P<version>\d+) |
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://example%version%.msi
+      url: https://cdn.devolutions.net/download/Setup.RemoteDesktopManager.%version%.msi
       # download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
