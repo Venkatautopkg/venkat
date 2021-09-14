@@ -17,6 +17,9 @@ Process:
     Arguments:
       url: https://remotedesktopmanager.com/home/thankyou/rdmmsi
       filename: setupremotedesktopmanager.msi
-      # download_version: "%version%"
       COMPUTE_HASHES: True
+
+
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+
   - Processor: EndOfCheckPhase
