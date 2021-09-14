@@ -19,7 +19,4 @@ Process:
       filename: setupremotedesktopmanager.msi
       COMPUTE_HASHES: True
 
-
-  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
-
   - Processor: EndOfCheckPhase

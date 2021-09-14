@@ -28,6 +28,14 @@ Process:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
 
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "version"
+      append_value: '%msi_property_value%'
+  
+
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
