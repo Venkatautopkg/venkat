@@ -1,16 +1,21 @@
 ---
-Description: Generates a BigFix Task for the latest VNC Viewer
-Identifier: com.github.bigfix.bigfix.VNCViewer
+Description: Generates a BigFix Task for the latest NextCloud Desktop Client
+Identifier: com.github.bigfix.bigfix.NextCloudDesktopClient-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "VNCViewer"
+  NAME: NextCloudDesktopClient
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "VNC Viewer"
-MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.VNCViewer
+  DisplayName: Nextcloud
+  VendorFolder: Vendor
+  RecipeStatus: To do
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.download.NextCloudDesktopClient-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+ # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -19,6 +24,19 @@ Process:
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
 
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Nextcloud_Logo.svg/800px-Nextcloud_Logo.svg.png
+      COMPUTE_HASHES: False
+
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
@@ -26,31 +44,12 @@ Process:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
 
-  # download icon file:
-  - Processor: URLDownloaderPython
-    Arguments:
-      # need to provide filename to not overwrite the setup file
-      filename: "%NAME%-icon.png"
-      url: https://static.realvnc.com/static/244111702/img/favicon.ico
-      COMPUTE_HASHES: False
-  # resize / shrink icon file:
-  - Processor: com.github.jgstew.SharedProcessors/FileImageResize
-  # get base64 of icon file:
-  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
-    Arguments:
-      file_pathname: "%file_path_resized%"
-  # add base64 of icon file to Template Dictionary:
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "icon_base64"
-      append_value: "%file_base64%"
-
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./RealVNC/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./NextCloud/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

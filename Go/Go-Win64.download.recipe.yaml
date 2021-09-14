@@ -1,0 +1,18 @@
+---
+Description: Downloads the latest Go (Win64)
+Identifier: com.github.bigfix.download.Go-Win64
+Input:
+  NAME: "Go"
+  DisplayName: "Go Programming Language"
+MinimumVersion: '2.3'
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://golang.org/dl/
+      re_pattern: 'go(?P<version>\d+\.\d+\.\d+).windows-amd64.msi'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://golang.org/dl/go%version%.windows-amd64.msi
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
