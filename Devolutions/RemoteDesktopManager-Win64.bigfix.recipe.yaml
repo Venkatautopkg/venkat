@@ -13,6 +13,7 @@ ParentRecipe: com.github.bigfix.download.remotedesktopmanager-win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -28,12 +29,10 @@ Process:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
 
-  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
-
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+  - Processor: URLTextSearcher
     Arguments:
-      append_key: "version"
-      append_value: '%msi_property_value%'
+      url: https://remotedesktopmanager.com/home/downloadenterprise
+      re_pattern: 'Version (?P<fidplsy_version>\d+) |'
 
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
