@@ -9,7 +9,7 @@ Input:
   VendorFolder: Devolutions
   RecipeStatus: To do
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.RemoteDesktopManager-win64
+ParentRecipe: com.github.bigfix.download.remotedesktopmanager-win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
