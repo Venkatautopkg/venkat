@@ -47,7 +47,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "UninstallName"
-      append_value: "%UninstallName%"
+      append_value: "%UninstallName% - %version_maximum%"
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
