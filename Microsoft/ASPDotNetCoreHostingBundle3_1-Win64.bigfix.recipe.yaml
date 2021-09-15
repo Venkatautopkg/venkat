@@ -6,7 +6,7 @@ Input:
   NAME: "ASPDotNetCoreHostingBundle3_1-Win64"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Microsoft ASP.NET Core Hosting Bundle Runtime"
-  UninstallName1: "Microsoft .NET"
+  UninstallName1: "Microsoft .NET Core"
   UninstallName2: "Windows Server Hosting"
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.ASPDotNetCoreHostingBundle3_1-Win64
@@ -48,7 +48,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "UninstallName1"
-      append_value: "%UninstallName1%"
+      append_value: "%UninstallName1% %DotNetVer%"
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
