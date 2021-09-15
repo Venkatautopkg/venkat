@@ -1,3 +1,5 @@
+[core]
+    hideDotFiles = true
 [rebase]
     autoStash = true
 [pull]
