@@ -22,7 +22,7 @@ Process:
     Arguments:
       url: https://www.fosshub.com/Classic-Shell.html
       # example match `example`
-      re_pattern: href\=\"(?P<url>.*?)\" data.*?English<
+      re_pattern: href\=\"(?P<url>.*?)\" data.*?English
 
   - Processor: URLDownloaderPython
     Arguments:
