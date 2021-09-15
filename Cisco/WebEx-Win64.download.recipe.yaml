@@ -3,9 +3,9 @@ Description: Downloads the latest WebEx
 Identifier: com.github.bigfix.download.WebEx-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: WebEx
+  NAME: "WebEx"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Webex
+  DisplayName: "Webex"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first

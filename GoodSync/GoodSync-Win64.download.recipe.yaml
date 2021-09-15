@@ -3,9 +3,9 @@ Description: Downloads the latest GoodSync
 Identifier: com.github.bigfix.download.GoodSync-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: GoodSync
+  NAME: "GoodSync"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: GoodSync
+  DisplayName: "GoodSync"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first

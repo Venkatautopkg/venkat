@@ -3,9 +3,9 @@ Description: Downloads the latest Everything
 Identifier: com.github.bigfix.download.Everything-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: Everything
+  NAME: "Everything"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Everything
+  DisplayName: "Everything"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first

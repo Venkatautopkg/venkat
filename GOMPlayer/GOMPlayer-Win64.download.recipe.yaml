@@ -3,9 +3,9 @@ Description: Downloads the latest GOMPlayer
 Identifier: com.github.bigfix.download.GOMPlayer-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: GOMPlayer
+  NAME: "GOMPlayer"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: GOM Player
+  DisplayName: "GOM Player"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first

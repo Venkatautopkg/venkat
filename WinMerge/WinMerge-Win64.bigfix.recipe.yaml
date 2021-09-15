@@ -3,9 +3,9 @@ Description: Generates a BigFix Task for the latest WinMerge
 Identifier: com.github.bigfix.bigfix.WinMerge-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: WinMerge
+  NAME: "WinMerge"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: WinMerge
+  DisplayName: "WinMerge"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.WinMerge-Win64
 Process:

@@ -3,9 +3,9 @@ Description: Generates a BigFix Task for the latest TeamViewer
 Identifier: com.github.bigfix.bigfix.TeamViewer-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: TeamViewer
+  NAME: "TeamViewer"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: TeamViewer
+  DisplayName: "TeamViewer"
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.TeamViewer-Win64
 Process:

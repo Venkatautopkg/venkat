@@ -3,9 +3,9 @@ Description: Downloads the latest JabraDirect
 Identifier: com.github.bigfix.download.JabraDirect-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: JabraDirect
+  NAME: "JabraDirect"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Jabra Direct
+  DisplayName: "Jabra Direct"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first

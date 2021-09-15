@@ -3,9 +3,9 @@ Description: Generates a BigFix Task for the latest Inkscape
 Identifier: com.github.bigfix.bigfix.Inkscape-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: Inkscape
+  NAME: "Inkscape"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Inkscape
+  DisplayName: "Inkscape"
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.Inkscape-Win64
 Process:

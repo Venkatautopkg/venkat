@@ -3,9 +3,9 @@ Description: Downloads the latest R for Windows
 Identifier: com.github.bigfix.download.RforWindows-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: RforWindows
+  NAME: "RforWindows"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: R for Windows
+  DisplayName: "R for Windows"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first

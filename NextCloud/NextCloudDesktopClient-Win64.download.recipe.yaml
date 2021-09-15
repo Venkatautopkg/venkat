@@ -3,9 +3,9 @@ Description: Downloads the latest NextCloud Desktop Client
 Identifier: com.github.bigfix.download.NextCloudDesktopClient-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: NextCloud Desktop Client
+  NAME: "NextCloud Desktop Client"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Nextcloud
+  DisplayName: "Nextcloud"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first

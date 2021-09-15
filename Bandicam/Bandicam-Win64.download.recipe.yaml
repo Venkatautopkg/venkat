@@ -3,9 +3,9 @@ Description: Downloads the latest Bandicam
 Identifier: com.github.bigfix.download.Bandicam-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: Bandicam
+  NAME: "Bandicam"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Bandicam
+  DisplayName: "Bandicam"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first

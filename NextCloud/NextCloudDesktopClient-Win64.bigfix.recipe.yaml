@@ -3,9 +3,9 @@ Description: Generates a BigFix Task for the latest NextCloud Desktop Client
 Identifier: com.github.bigfix.bigfix.NextCloudDesktopClient-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: NextCloudDesktopClient
+  NAME: "NextCloudDesktopClient"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Nextcloud
+  DisplayName: "Nextcloud"
   VendorFolder: Vendor
   RecipeStatus: To do
 MinimumVersion: "2.3"
