@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest {{DisplayName}}
-Identifier: com.github.bigfix.download.{{NAME}}
+Description: Downloads the latest Classic Shell
+Identifier: com.github.bigfix.download.ClassicShell-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "{{NAME}}"
+  NAME: ClassicShell
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "{{DisplayName}}"
+  DisplayName: Classic Shell
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,19 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://example
+      url: http://www.classicshell.net/
       # example match `example`
-      re_pattern: 'example(?P<version>\d+)-64.msi'
+      re_pattern: The latest stable version .*?\>(?P<version>.*?)<
+
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.fosshub.com/Classic-Shell.html
+      # example match `example`
+      re_pattern: href\=\"(?P<url>.*?)\" data.*?English<
+
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://example%version%.msi
-      # download_version: "%version%"
+      url: '%url%'
+      prefetch_filename: True
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
