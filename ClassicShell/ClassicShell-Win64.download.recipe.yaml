@@ -27,6 +27,5 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: '%url%'
-      prefetch_filename: True
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
