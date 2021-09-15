@@ -215,11 +215,9 @@ if exist .git (
 )
 
 echo.
-echo set git config options:
-echo git config pull.rebase true
-git config pull.rebase true
-echo git config rebase.autoStash true
-git config rebase.autoStash true
+echo include repo .gitconfig:
+echo git config --local include.path ../.gitconfig
+git config --local include.path ../.gitconfig
 
 echo.
 echo Update Current Repo:
