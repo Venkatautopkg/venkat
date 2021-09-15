@@ -1,5 +1,5 @@
 ---
-Description: Generates a BigFix Task for the latest Remote Desktop Manager Enterprise (x64)
+Description: Generates a BigFix Task for the latest Remote Desktop Manager Enterprise (x86)
 Identifier: com.github.bigfix.bigfix.RemoteDesktopManager-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
