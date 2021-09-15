@@ -214,6 +214,14 @@ if exist .git (
     exit 99
 )
 
+echo.
+echo set git config options:
+echo git config pull.rebase true
+git config pull.rebase true
+echo git config rebase.autoStash true
+git config rebase.autoStash true
+
+echo.
 echo Update Current Repo:
 echo git pull
 git pull
