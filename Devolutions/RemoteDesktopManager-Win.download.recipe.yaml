@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Remote Desktop Manager Enterprise
-Identifier: com.github.bigfix.download.remotedesktopmanager-win64
+Identifier: com.github.bigfix.download.RemoteDesktopManager-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: RemoteDesktopManager

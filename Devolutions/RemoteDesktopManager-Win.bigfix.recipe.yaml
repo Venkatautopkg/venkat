@@ -1,6 +1,6 @@
 ---
 Description: Generates a BigFix Task for the latest Remote Desktop Manager Enterprise (x64)
-Identifier: com.github.bigfix.bigfix.remotedesktopmanager-win64
+Identifier: com.github.bigfix.bigfix.RemoteDesktopManager-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: RemoteDesktopManager
@@ -9,7 +9,7 @@ Input:
   VendorFolder: Devolutions
   RecipeStatus: To do
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.remotedesktopmanager-win64
+ParentRecipe: com.github.bigfix.download.RemoteDesktopManager-Win
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
