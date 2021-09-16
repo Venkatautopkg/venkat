@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest GoodSync
-Identifier: com.github.bigfix.download.GoodSync-Win64
+Description: Downloads the latest Archi
+Identifier: com.github.bigfix.download.Archi-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "GoodSync"
+  NAME: "Archi"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "GoodSync"
+  DisplayName: "Archi"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.goodsync.com/download
+      url: https://www.archimatetool.com/download/
       # example match `example`
-      re_pattern: 'Version (?P<version>\d+) has been released'
+      re_pattern: 'version="(?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://www.goodsync.com/download/GoodSync-v%version%-Setup.exe
-      #download_version: "%version%"
+      url: https://www.archimatetool.com/downloads/archi/
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

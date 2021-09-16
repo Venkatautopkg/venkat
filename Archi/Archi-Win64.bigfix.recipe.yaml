@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest AiViewer
-Identifier: com.github.bigfix.bigfix.AiViewer-Win64
+Description: Generates a BigFix Task for the latest Archi
+Identifier: com.github.bigfix.bigfix.Archi-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "AiViewer"
+  NAME: "Archi"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "AiViewer"
+  DisplayName: "Archi"
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.AiViewer-Win64
+ParentRecipe: com.github.bigfix.download.Archi-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -25,7 +25,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://aiviewer.com/images/front.gif
+      url: https://www.archimatetool.com/wp-content/uploads/2018/07/header.png
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -47,7 +47,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./AiViewer/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./Archi/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
