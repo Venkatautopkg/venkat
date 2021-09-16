@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest 3DXMLPlayer
-Identifier: com.github.bigfix.download.3DXMLPlayer-Win64
+Description: Downloads the latest Reflector
+Identifier: com.github.bigfix.download.Reflector-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "3DXMLPlayer"
+  NAME: "Reflector"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "3D XML Player"
+  DisplayName: "Reflector"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.3ds.com/products-services/3d-xml/downloads/
+      url: https://www.airsquirrels.com/reflector/download
       # example match `example`
-      re_pattern: '<b>Version</b>: (?P<version>\d+\.\d+\.\d+)'
+      re_pattern: '>Version (?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://www.3ds.com/fileadmin/PRODUCTS-SERVICES/3DXML/3DXMLPlayer_x64.msi
+      url: https://download.airsquirrels.com/Reflector4/Windows/Reflector-4.0.2-64.msi
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

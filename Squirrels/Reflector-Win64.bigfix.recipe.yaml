@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest 3DXMLPlayer
-Identifier: com.github.bigfix.bigfix.3DXMLPlayer-Win64
+Description: Generates a BigFix Task for the latest Reflector
+Identifier: com.github.bigfix.bigfix.Reflector-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "3DXMLPlayer"
+  NAME: "Reflector"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "3D XML Player"
+  DisplayName: "Reflector"
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.3DXMLPlayer-Win64
+ParentRecipe: com.github.bigfix.download.Reflector-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -25,7 +25,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://www.fileviewpro.com/images/software/200x200/1139_3d-xml-player.png
+      url: https://store.airsquirrels.com/hubfs/Logos/Reflector%20Logos/Reflector%204/01%20Logo/Grey%20Text/rf4-grey-small.png
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -47,7 +47,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./3DXMLPlayer/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./Squirrels/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
