@@ -3,9 +3,9 @@ Description: Generates a BigFix Task for the latest Allway Sync
 Identifier: com.github.bigfix.bigfix.AllwaySync-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: AllwaySync
+  NAME: "AllwaySync"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Allway Sync
+  DisplayName: "Allway Sync"
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.AllwaySync-Win64
 Process:

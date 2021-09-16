@@ -1,18 +1,19 @@
 ---
-Description: Generates a BigFix Task for the latest Remote Desktop Manager
-Identifier: com.github.bigfix.bigfix.remotedesktopmanager
+Description: Generates a BigFix Task for the latest GoodSync
+Identifier: com.github.bigfix.bigfix.GoodSync-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "{{NAME}}"
+  NAME: "GoodSync"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "{{DisplayName}}"
-  VendorFolder: Vendor
-  RecipeStatus: To do
+  DisplayName: "GoodSync"
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.{{NAME}}
+ParentRecipe: com.github.bigfix.download.GoodSync-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+ # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -20,6 +21,19 @@ Process:
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: https://www.goodsync.com/images/download/gs-download.png
+      COMPUTE_HASHES: False
+
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
 
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
@@ -33,7 +47,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./GoodSync/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

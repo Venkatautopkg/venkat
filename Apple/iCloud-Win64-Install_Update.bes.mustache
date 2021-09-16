@@ -47,17 +47,17 @@ wait __Download\{{{file_name}}} /extract
 override wait
 hidden=true
 completion=job
-wait msiexec.exe /i AppleApplicationSupport.msi /qn
+wait msiexec.exe /i AppleApplicationSupport.msi /qn /norestart
 
 override wait
 hidden=true
 completion=job
-wait msiexec.exe /i AppleApplicationSupport64.msi /qn
+wait msiexec.exe /i AppleApplicationSupport64.msi /qn /norestart
 
 override wait
 hidden=true
 completion=job
-wait msiexec.exe /i iCloud64.msi REBOOT=ReallySuppress /qn
+wait msiexec.exe /i iCloud64.msi /qn /norestart
 ]]></ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>

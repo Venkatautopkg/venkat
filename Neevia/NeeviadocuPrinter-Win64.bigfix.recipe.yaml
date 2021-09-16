@@ -1,13 +1,13 @@
 ---
 Description: Generates a BigFix Task for the latest NeeviadocuPrinter
-Identifier: com.github.bigfix.bigfix.NeeviadocuPrinter
+Identifier: com.github.bigfix.bigfix.NeeviadocuPrinter-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: NeeviadocuPrinter
+  NAME: "NeeviadocuPrinter"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: docuPrinter LT
+  DisplayName: "docuPrinter LT"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.NeeviadocuPrinter
+ParentRecipe: com.github.bigfix.download.NeeviadocuPrinter-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods

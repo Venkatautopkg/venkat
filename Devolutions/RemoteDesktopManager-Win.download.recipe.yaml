@@ -1,0 +1,25 @@
+---
+Description: Downloads the latest Remote Desktop Manager Enterprise
+Identifier: com.github.bigfix.download.RemoteDesktopManager-Win
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: RemoteDesktopManager
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: Remote Desktop Manager
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://remotedesktopmanager.com/home/thankyou/rdmmsi
+      # example match `example`
+      re_pattern: 'href\=\"(?P<url>.*?)\"\>click here\<'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: '%url%'
+      prefetch_filename: True
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

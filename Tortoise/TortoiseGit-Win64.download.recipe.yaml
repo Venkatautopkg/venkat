@@ -3,9 +3,9 @@ Description: Downloads the latest Tortoise Git
 Identifier: com.github.bigfix.download.TortoiseGit-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: TortoiseGit
+  NAME: "TortoiseGit"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: TortoiseGit
+  DisplayName: "TortoiseGit"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first

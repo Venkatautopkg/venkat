@@ -12,6 +12,20 @@ Process:
 
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
 
+  # download icon file:
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon-320_120.png"
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/320px-Go_Logo_Blue.svg.png
+      COMPUTE_HASHES: False
+
+  # get base64 of icon file:
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "DisplayName"

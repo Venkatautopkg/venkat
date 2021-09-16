@@ -5,6 +5,7 @@ chevron
 generate_bes_from_template
 GitPython
 hachoir
+icoextract
 Pillow
 pre-commit
 validate_bes_xml

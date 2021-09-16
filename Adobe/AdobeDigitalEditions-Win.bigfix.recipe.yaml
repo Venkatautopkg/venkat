@@ -1,0 +1,38 @@
+---
+Description: Generates a BigFix Task for the latest Adobe Digital Editions
+Identifier: com.github.bigfix.bigfix.AdobeDigitalEditions-Win
+Input:
+  NAME: "AdobeDigitalEditions"
+  DisplayName: "Adobe Digital Editions"
+  VendorFolder: Adobe
+  RecipeStatus: To do
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.download.AdobeDigitalEditions-Win
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: https://upload.wikimedia.org/wikipedia/en/thumb/3/34/Adobe_Digital_Editions_Logo.svg/320px-Adobe_Digital_Editions_Logo.svg.png
+      COMPUTE_HASHES: False
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "MajorVersion"
+      append_value: "%major_version%"
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./%VendorFolder%/%NAME%-Win-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner

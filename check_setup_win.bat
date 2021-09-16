@@ -214,6 +214,12 @@ if exist .git (
     exit 99
 )
 
+echo.
+echo include repo .gitconfig:
+echo git config --local include.path ../.gitconfig
+git config --local include.path ../.gitconfig
+
+echo.
 echo Update Current Repo:
 echo git pull
 git pull

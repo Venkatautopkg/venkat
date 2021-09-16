@@ -3,9 +3,9 @@ Description: Downloads the latest TortoiseHG
 Identifier: com.github.bigfix.download.TortoiseHG-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: TortoiseHG
+  NAME: "TortoiseHG"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: TortoiseHg
+  DisplayName: "TortoiseHg"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
