@@ -1,11 +1,11 @@
 ---
 Description: Downloads the latest PDF24
-Identifier: com.github.bigfix.download.PDF24-Win64
+Identifier: com.github.bigfix.download.PDF24Creator-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "PDF24"
+  NAME: "PDF24Creator"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "PDF24"
+  DisplayName: "PDF24 Creator"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
