@@ -3,9 +3,9 @@ Description: Generates a BigFix Task for the latest Remote Desktop Manager Free 
 Identifier: com.github.bigfix.bigfix.RemoteDesktopManagerFree-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: RemoteDesktopManagerFree
+  NAME: "RemoteDesktopManagerFree"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Remote Desktop Manager Free
+  DisplayName: "Remote Desktop Manager Free"
   VendorFolder: Devolutions
   RecipeStatus: To do
 MinimumVersion: "2.3"
