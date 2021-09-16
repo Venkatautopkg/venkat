@@ -1,11 +1,11 @@
 ---
-Description: Generates a BigFix Task for the latest Zotero for Windows x64
-Identifier: com.github.bigfix.bigfix.Zotero-Win64
+Description: Generates a BigFix Task for the latest Zotero for Windows x86
+Identifier: com.github.bigfix.bigfix.Zotero-Win
 Input:
   NAME: "Zotero"
   DisplayName: "Zotero"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.Zotero-Win64
+ParentRecipe: com.github.bigfix.download.Zotero-Win
 Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -33,7 +33,7 @@ Process:
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Zotero/Zotero-Win64-Install_Update.bes.mustache"
+      template_file_path: "./Zotero/Zotero-Win-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   - Processor: com.github.jgstew.SharedProcessors/BESImport
