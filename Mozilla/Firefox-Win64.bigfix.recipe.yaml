@@ -1,21 +1,17 @@
 ---
 Description: Generates a BigFix Task for the latest Firefox x64 installer
-Identifier: com.github.bigfix.bigfix.firefox
+Identifier: com.github.bigfix.bigfix.Firefox-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "MozillaFirefox"
+  NAME: "Firefox"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Mozilla Firefox (x64 en-US)"
+  DisplayName: "Mozilla Firefox"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.firefox
+ParentRecipe: com.github.bigfix.download.Firefox-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      dictionary_name: download_info
-      append_key: file_name
-      append_value: FirefoxSetup.msi
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -29,18 +25,13 @@ Process:
       dictionary_name: template_dictionary
       append_key: "DisplayName"
       append_value: "%DisplayName%"
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      dictionary_name: template_dictionary
-      append_key: file_name
-      append_value: FirefoxSetup.msi
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Mozilla/Firefox-Win64-Install_Update.bes.mustache"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/Firefox.bes"
+      template_file_path: "./Mozilla/%NAME%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   # `BESImport` imports the generated BES content into a BigFix Server
   #   Which server and credentials are used is dictated by `~/.besapi.conf`
   - Processor: com.github.jgstew.SharedProcessors/BESImport

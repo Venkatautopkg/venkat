@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Firefox x64 installer
-Identifier: com.github.bigfix.download.firefox
+Identifier: com.github.bigfix.download.Firefox-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "MozillaFirefox"
@@ -13,16 +13,11 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  - Processor: URLTextSearcher
-    Arguments:
-      url: https://www.mozilla.org/en-US/firefox/all/#product-desktop-release
-      # example match `example`
-      re_pattern: 'data-latest-firefox="(?P<version>(\d+\.\d\.\d))'
   - Processor: URLDownloaderPython
     Arguments:
-      # https://download-installer.cdn.mozilla.net/pub/firefox/releases/91.0.1/win64/en-US/Firefox%20Setup%2091.0.1.msi
-      # url: https://download-installer.cdn.mozilla.net/Firefox+Setup+%version%.msi
-      url: "https://download-installer.cdn.mozilla.net/pub/firefox/releases/%version%/win64/en-US/%FilePrefix%%version%.msi"
-      download_version: "%version%"
+      url: https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US
+      filename: firefox_setup.exe
+      #download_version: "%version%"
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
