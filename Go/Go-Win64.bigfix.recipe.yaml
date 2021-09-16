@@ -15,7 +15,7 @@ Process:
   # download icon file:
   - Processor: URLDownloaderPython
     Arguments:
-      filename: "%NAME%-icon-147-160.png"
+      filename: "%NAME%-icon-320_120.png"
       url: https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/320px-Go_Logo_Blue.svg.png
       COMPUTE_HASHES: False
 
