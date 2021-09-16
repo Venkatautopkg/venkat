@@ -1,15 +1,15 @@
 ---
 Description: Generates a BigFix Task for the latest NAPS2
-Identifier: com.github.bigfix.bigfix.naps2-win
+Identifier: com.github.bigfix.bigfix.naps2-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: NAPS2
+  NAME: "NAPS2"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: NAPS2
+  DisplayName: "NAPS2"
   VendorFolder: NAPS2
   RecipeStatus: To do
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.naps2-win
+ParentRecipe: com.github.bigfix.download.naps2-Win
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods

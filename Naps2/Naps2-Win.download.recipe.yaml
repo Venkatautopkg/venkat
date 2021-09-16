@@ -1,11 +1,11 @@
 ---
 Description: Downloads the latest NAPS2
-Identifier: com.github.bigfix.download.naps2-win
+Identifier: com.github.bigfix.download.naps2-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: NAPS2
+  NAME: "NAPS2"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: NAPS2
+  DisplayName: "NAPS2"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
@@ -16,7 +16,7 @@ Process:
     Arguments:
       url: https://www.naps2.com/download.html
       # example match `example`
-      re_pattern: naps2-(?P<version>.*?)-setup.exe
+      re_pattern: 'naps2-(?P<version>.*?)-setup.msi'
   - Processor: URLDownloaderPython
     Arguments:
       url: https://github.com/cyanfish/naps2/releases/download/v%version%/naps2-%version%-setup.msi
