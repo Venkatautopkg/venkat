@@ -16,7 +16,7 @@ Process:
     Arguments:
       url: https://www.voidtools.com/downloads/
       # example match `example`
-      re_pattern: 'Download Everything (?P<version>\d+\.\d+\.\d+\.\d+)'
+      re_pattern: 'Download Everything (?P<version>\d+\.\d+\.\d+\.\d+)</h2><a style'
   - Processor: URLDownloaderPython
     Arguments:
       url: https://www.voidtools.com/Everything-%version%.x64.msi
