@@ -45,7 +45,7 @@ action uses wow64 redirection {not x64 of operating system}
 override wait
 hidden=true
 completion=job
-wait __Download\cpu-z_{{{version}}}-en.exe /SP- /SILENT /VERYSILENT /SUPRESSMSGBOXES /NORESTART
+wait __Download\cpu-z_{{{version}}}-en.exe /SP- /SILENT /VERYSILENT /SUPRESSMSGBOXES /NORESTART /MERGETASKS=!desktopicon
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
