@@ -6,7 +6,7 @@ Input:
   NAME: "KeePass"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "KeePass"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -16,9 +16,9 @@ Process:
     Arguments:
       url: https://keepass.info/download.html
       # example match `KeePass 2.48.1 Source Code Package`
-      re_pattern: 'KeePass (?P<version>\d+\.\d+\.\d+) Source Code Package'
+      re_pattern: 'KeePass (?P<version>\d+\.\d+\.*\d*) Source Code Package'
   - Processor: URLDownloaderPython
-    Arguments: 
+    Arguments:
       url: https://sourceforge.net/projects/keepass/files/KeePass%202.x/%version%/KeePass-%version%-Setup.exe
       download_version: "%version%"
       COMPUTE_HASHES: True
