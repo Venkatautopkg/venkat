@@ -25,7 +25,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://aiviewer.com/images/front.gif
+      url: https://play-lh.googleusercontent.com/HpVMSLIifhgZAgFc3QYy2eb8wV1ja6HZGM3gKMu23rYg4r7NKHXA26aJn7C7gA53sJu6=s180
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64

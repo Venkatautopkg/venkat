@@ -3,7 +3,7 @@ Description: Downloads the latest AtlassianSourcetree
 Identifier: com.github.bigfix.download.AtlassianSourcetree-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "AtlassianSourcetree"
+  NAME: "Sourcetree"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Sourcetree"
 MinimumVersion: "2.3"

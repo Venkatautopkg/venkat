@@ -1,25 +1,25 @@
 ---
-Description: Downloads the latest Airtame
-Identifier: com.github.bigfix.download.Airtame-Win64
+Description: Downloads the latest Huddle
+Identifier: com.github.bigfix.download.Huddle-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "Airtame"
+  NAME: "Huddle"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Airtame"
+  DisplayName: "Huddle"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  - Processor: URLTextSearcher
-    Arguments:
-      url: https://www.archimatetool.com/download/
-      # example match `example`
-      re_pattern: 'version="(?P<version>\d+\.\d+\.\d+)'
+  # - Processor: URLTextSearcher
+  #   Arguments:
+  #     url: https://www.goodsync.com/download
+  #     # example match `example`
+  #     re_pattern: 'Version (?P<version>\d+) has been released'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://airtame-app.b-cdn.net/app/latest/win/Airtame-4.2.1-setup.exe
-      download_version: "%version%"
+      url: https://public.huddle.com/apps/huddledesktop/uk/HuddleEnterpriseDeploy.msi
+      #download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
