@@ -1,6 +1,6 @@
 ---
-Description: Downloads the latest CPU-Z
-Identifier: com.github.bigfix.download.CPUZ
+Description: Downloads the latest CPU-Z For Windows X64
+Identifier: com.github.bigfix.download.CPUZ-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "CPUZ"

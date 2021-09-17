@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest CPU-Z
-Identifier: com.github.bigfix.bigfix.CPUZ
+Description: Generates a BigFix Task for the latest CPU-Z for Windows x64
+Identifier: com.github.bigfix.bigfix.CPUZ-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "CPUZ"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "CPUID CPU-Z"
 MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.CPUZ
+ParentRecipe: com.github.bigfix.download.CPUZ-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
