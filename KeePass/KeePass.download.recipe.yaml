@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest KeePass
-Identifier: com.github.bigfix.download.keepass-win64
+Identifier: com.github.bigfix.download.KeePass-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "KeePass"
