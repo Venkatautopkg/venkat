@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest PDF24
-Identifier: com.github.bigfix.download.PDF24-Win64
+Description: Downloads the latest NAPS2
+Identifier: com.github.bigfix.download.naps2-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "PDF24"
+  NAME: "NAPS2"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "PDF24"
+  DisplayName: "NAPS2"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://tools.pdf24.org/en/creator
+      url: https://www.naps2.com/download.html
       # example match `example`
-      re_pattern: '"version">Version (?P<version>\d+\.\d+\.\d+)'
+      re_pattern: 'naps2-(?P<version>.*?)-setup.msi'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://stx.pdf24.org/products/pdf-creator/download/pdf24-creator-%version%.msi
-      download_version: "%version%"
+      url: https://github.com/cyanfish/naps2/releases/download/v%version%/naps2-%version%-setup.msi
+      # download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

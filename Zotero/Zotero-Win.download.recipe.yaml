@@ -1,6 +1,6 @@
 ---
 Description: Downloads the latest Zotero
-Identifier: com.github.bigfix.download.Zotero-Win64
+Identifier: com.github.bigfix.download.Zotero-Win
 Input:
   NAME: "Zotero"
   DisplayName: "Zotero"

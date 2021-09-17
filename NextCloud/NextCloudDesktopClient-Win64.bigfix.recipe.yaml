@@ -6,7 +6,7 @@ Input:
   NAME: "NextCloudDesktopClient"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Nextcloud"
-  VendorFolder: Vendor
+  VendorFolder: Nextcloud
   RecipeStatus: To do
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.NextCloudDesktopClient-Win64
@@ -49,7 +49,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./NextCloud/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

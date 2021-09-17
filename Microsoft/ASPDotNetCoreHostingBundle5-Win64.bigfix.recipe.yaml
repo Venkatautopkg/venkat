@@ -48,7 +48,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "UninstallName1"
-      append_value: "%UninstallName1%"
+      append_value: "%UninstallName1% %DotNetVer%"
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:

@@ -1,21 +1,18 @@
 ---
-Description: Generates a BigFix Task for the latest Microsoft ASP.NET Core Hosting Bundle Runtime 3.1.x for Win64
-Identifier: com.github.bigfix.bigfix.ASPDotNetCoreHostingBundle3_1-Win64
+Description: Generates a BigFix Task for the latest Termius for Windows x64
+Identifier: com.github.bigfix.bigfix.Termius-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "ASPDotNetCoreHostingBundle3_1-Win64"
+  NAME: "Termius"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Microsoft ASP.NET Core Hosting Bundle Runtime"
-  UninstallName1: "Microsoft .NET Core"
-  UninstallName2: "Windows Server Hosting"
-MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.ASPDotNetCoreHostingBundle3_1-Win64
+  DisplayName: "Termius"
+  VendorFolder: Termius
+  RecipeStatus: To do
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.download.Termius-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
-
-  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
-
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -26,11 +23,11 @@ Process:
 
   - Processor: URLDownloaderPython
     Arguments:
-      # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/.NET_Logo.svg/240px-.NET_Logo.svg.png
+      url: https://images-na.ssl-images-amazon.com/images/I/61KN7CZja3L.png
       COMPUTE_HASHES: False
 
+    # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
@@ -45,22 +42,12 @@ Process:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
 
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "UninstallName1"
-      append_value: "%UninstallName1% %DotNetVer%"
-
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "UninstallName2"
-      append_value: "%UninstallName2%"
-
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Microsoft/%NAME%-Install_Update.bes.mustache"
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

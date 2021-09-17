@@ -1,23 +1,25 @@
 ---
-Description: Downloads the latest Firefox x64 installer
-Identifier: com.github.bigfix.download.Firefox-Win64
+Description: Downloads the latest PDF24
+Identifier: com.github.bigfix.download.PDF24Creator-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "MozillaFirefox"
+  NAME: "PDF24Creator"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Mozilla Firefox (x64 en-US)"
-  FilePrefix: Firefox%20Setup%20
-MinimumVersion: '2.3'
+  DisplayName: "PDF24 Creator"
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://tools.pdf24.org/en/creator
+      # example match `example`
+      re_pattern: '"version">Version (?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US
-      filename: firefox_setup.exe
-      #download_version: "%version%"
-      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+      url: https://stx.pdf24.org/products/pdf-creator/download/pdf24-creator-%version%.msi
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

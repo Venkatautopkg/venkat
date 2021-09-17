@@ -1,19 +1,18 @@
 ---
-Description: Generates a BigFix Task for the latest PDF24
-Identifier: com.github.bigfix.bigfix.PDF24-Win64
+Description: Generates a BigFix Task for the latest Apache Directory Studio (Win64)
+Identifier: com.github.bigfix.bigfix.ApacheDirectoryStudio-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "PDF24"
+  NAME: "ApacheDirectoryStudio-Win64"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "PDF24"
+  DisplayName: "Apache Directory Studio (Win64)"
+  VendorFolder: Apache
+  RecipeStatus: To do
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.PDF24-Win64
+ParentRecipe: com.github.bigfix.download.ApacheDirectoryStudio-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
-
- # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
-
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -22,14 +21,15 @@ Process:
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
 
+    # download icon file:
   - Processor: URLDownloaderPython
     Arguments:
-      filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/c/c0/PDF24_Creator_application_logo_256x256.png
+      filename: "%NAME%-icon-212-240.png"
+      url: https://upload.wikimedia.org/wikipedia/en/thumb/c/c8/Apache_Directory_Logo.svg/212px-Apache_Directory_Logo.svg.png
       COMPUTE_HASHES: False
 
+  # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
-
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"
@@ -47,7 +47,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./PDF24/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

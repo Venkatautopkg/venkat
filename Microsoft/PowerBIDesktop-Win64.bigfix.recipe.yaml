@@ -14,7 +14,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Power_bi_logo_black.svg/240px-Power_bi_logo_black.svg.png
+      url: https://upload.wikimedia.org/wikipedia/en/thumb/2/20/Power_BI_logo.svg/240px-Power_BI_logo.svg.png
       COMPUTE_HASHES: False
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
