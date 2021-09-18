@@ -1,0 +1,26 @@
+---
+Description: Downloads the latest DockerDesktop
+Identifier: com.github.bigfix.download.DockerDesktop-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "DockerDesktop"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Docker Desktop"
+  FilePrefix: Docker%20Desktop%20Installer
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://docs.docker.com/desktop/windows/release-notes/
+      # example match `example`
+      re_pattern: '>Docker Desktop (?P<version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://desktop.docker.com/win/main/amd64/%FilePrefix%.exe
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
