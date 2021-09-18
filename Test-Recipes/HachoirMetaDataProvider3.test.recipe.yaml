@@ -3,7 +3,7 @@ Description: Test HachoirMetaDataProvider3 Processor
 Identifier: com.github.bigfix.test.HachoirMetaDataProvider3
 Input:
   NAME: HachoirMetaDataProvider3Test
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
