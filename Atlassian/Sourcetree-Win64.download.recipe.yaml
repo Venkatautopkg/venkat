@@ -1,6 +1,6 @@
 ---
-Description: Downloads the latest AtlassianSourcetree
-Identifier: com.github.bigfix.download.AtlassianSourcetree-Win64
+Description: Downloads the latest Sourcetree
+Identifier: com.github.bigfix.download.Sourcetree-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "Sourcetree"
