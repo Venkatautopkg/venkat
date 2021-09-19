@@ -3,16 +3,17 @@ Description: Generates a BigFix Task for the latest PDF24
 Identifier: com.github.bigfix.bigfix.PDF24Creator-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "PDF24Creator"
+  NAME: PDF24Creator
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "PDF24 Creator"
+  DisplayName: PDF24 Creator
+  VendorFolder: PDF24Tools
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.PDF24Creator-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
 
- # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+  # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
 
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
@@ -47,7 +48,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./PDF24/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
