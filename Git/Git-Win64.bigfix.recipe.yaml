@@ -2,14 +2,14 @@
 Description: Generates BigFix Task for latest GIT
 Identifier: com.github.bigfix.bigfix.Git-Win64
 Input:
-  NAME: "Git"
-  DisplayName: "Git"
-MinimumVersion: '2.3'
+  NAME: Git
+  DisplayName: Git
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Git-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
-  - Processor: com.github.jgstew.SharedProcessors/FileHasher
+  # - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
 
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
@@ -40,7 +40,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "version"
-      append_value: '%latest_version%'
+      append_value: "%latest_version%"
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
