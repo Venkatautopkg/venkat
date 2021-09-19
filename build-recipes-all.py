@@ -90,12 +90,12 @@ def run_all_recipes(recipe_identifiers):
 
     for recipe_id in recipe_identifiers:
         run_recipe(recipe_id)
-        # sleep 5 seconds between each
-        time.sleep(5)
+        # sleep 2 seconds between each
+        time.sleep(2)
 
 
 def get_last_runtime_recipe(recipe_identifier):
-
+    # print(recipe_identifier)
     recipe_receipt_dir = os.path.expanduser(
         f"~/Library/AutoPkg/Cache/{recipe_identifier}/receipts"
     )
