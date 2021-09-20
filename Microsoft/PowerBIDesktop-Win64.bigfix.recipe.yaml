@@ -4,17 +4,18 @@ Identifier: com.github.bigfix.bigfix.PowerBIDesktop-Win64
 Input:
   NAME: PowerBIDesktop
   DisplayName: Microsoft Power BI Desktop
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.PowerBIDesktop-Win64
 Process:
-  # `FileHasher` will not be required in the future due to hashing behing handled by `URLDownloaderPython` instead
-  - Processor: com.github.jgstew.SharedProcessors/FileHasher
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
       url: https://upload.wikimedia.org/wikipedia/en/thumb/2/20/Power_BI_logo.svg/240px-Power_BI_logo.svg.png
+      download_version: ""
       COMPUTE_HASHES: False
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
