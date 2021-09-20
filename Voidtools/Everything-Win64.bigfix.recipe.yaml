@@ -12,8 +12,6 @@ Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
 
- # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
-
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -22,13 +20,9 @@ Process:
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
 
-  - Processor: URLDownloaderPython
-    Arguments:
-      filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/5/52/Everything_%28software%29_logo.png
-      COMPUTE_HASHES: False
-
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+    Arguments:
+      file_pathname: Voidtools/Everything-Icon.png
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
