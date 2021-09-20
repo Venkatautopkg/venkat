@@ -16,10 +16,10 @@ Process:
     Arguments:
       url: https://www.naps2.com/download.html
       # example match `example`
-      re_pattern: 'naps2-(?P<version>.*?)-setup.msi'
+      re_pattern: "naps2-(?P<version>.*?)-setup.msi"
   - Processor: URLDownloaderPython
     Arguments:
       url: https://github.com/cyanfish/naps2/releases/download/v%version%/naps2-%version%-setup.msi
-      # download_version: "%version%"
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

@@ -7,7 +7,7 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "NAPS2"
   VendorFolder: NAPS2
-  RecipeStatus: To do
+  RecipeStatus: Verified
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.naps2-Win
 Process:
@@ -21,7 +21,6 @@ Process:
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
 
-
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
@@ -34,7 +33,6 @@ Process:
     Arguments:
       append_key: "icon_base64"
       append_value: "%file_base64%"
-
 
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
