@@ -2,9 +2,9 @@
 Description: Downloads the latest Zotero
 Identifier: com.github.bigfix.download.Zotero-Win
 Input:
-  NAME: "Zotero"
-  DisplayName: "Zotero"
-MinimumVersion: '2.3'
+  NAME: Zotero
+  DisplayName: Zotero
+MinimumVersion: "2.3"
 Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: URLTextSearcher
@@ -16,4 +16,5 @@ Process:
       url: https://www.zotero.org/download/client/dl?channel=release&platform=win32
       prefetch_filename: True
       COMPUTE_HASHES: True
+      download_version: "%version%"
   - Processor: EndOfCheckPhase
