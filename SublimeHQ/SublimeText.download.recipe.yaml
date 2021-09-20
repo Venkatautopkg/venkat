@@ -1,12 +1,12 @@
 ---
 Description: Downloads the latest Sublime Text for Windows x64
-Identifier: com.github.bigfix.download.sublimetext-win64
+Identifier: com.github.bigfix.download.SublimeText-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "SublimeText"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Sublime Text"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
