@@ -59,7 +59,10 @@ _I_SAID_STOP_
 
 parameter "keepassdir" = "{program files x64 folder as string & "\KeePass Password Safe 2"}"
 parameter "updatexml" = "KeePass.config.enforced.xml"
-move "__createfile" "{parameter "keepassdir"}\{parameter "updatexml"}"
+
+// NOTE: this will overwrite existing configs, which is not ideal:
+delete "{parameter "keepassdir"}\{parameter "updatexml"}"
+copy "__createfile" "{parameter "keepassdir"}\{parameter "updatexml"}"
 
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>

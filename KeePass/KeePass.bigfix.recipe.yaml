@@ -6,7 +6,7 @@ Input:
   NAME: "KeePass"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "KeePass"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.KeePass-Win64
 Process:
   # `SharedUtilityMethods` must come first
@@ -25,6 +25,7 @@ Process:
       filename: "%NAME%-icon.png"
       url: https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/KeePass_icon.svg/256px-KeePass_icon.svg.png
       COMPUTE_HASHES: False
+      download_version: ""
 
   # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
