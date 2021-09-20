@@ -4,7 +4,7 @@ Identifier: com.github.bigfix.download.Go-Win64
 Input:
   NAME: "Go"
   DisplayName: "Go Programming Language"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: URLTextSearcher
@@ -15,4 +15,5 @@ Process:
     Arguments:
       url: https://golang.org/dl/go%version%.windows-amd64.msi
       COMPUTE_HASHES: True
+      download_version: "%version%"
   - Processor: EndOfCheckPhase

@@ -4,7 +4,7 @@ Identifier: com.github.bigfix.bigfix.Go-Win64
 Input:
   NAME: "Go"
   DisplayName: "Go Programming Language"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Go-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -18,6 +18,7 @@ Process:
       filename: "%NAME%-icon-320_120.png"
       url: https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/320px-Go_Logo_Blue.svg.png
       COMPUTE_HASHES: False
+      download_version: ""
 
   # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
