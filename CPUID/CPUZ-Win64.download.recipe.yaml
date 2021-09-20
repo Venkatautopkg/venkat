@@ -1,12 +1,12 @@
 ---
-Description: Downloads the latest CPU-Z For Windows X64
-Identifier: com.github.bigfix.download.CPUZ-Win64
+Description: Downloads the latest CPU-Z For Windows
+Identifier: com.github.bigfix.download.CPUZ-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "CPUZ"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "CPUID CPU-Z"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -20,6 +20,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://download.cpuid.com/cpu-z/cpu-z_%version%-en.exe
-      # download_version: "%version%"
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest CPU-Z for Windows x64
-Identifier: com.github.bigfix.bigfix.CPUZ-Win64
+Description: Generates a BigFix Task for the latest CPU-Z for Windows
+Identifier: com.github.bigfix.bigfix.CPUZ-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "CPUZ"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "CPUID CPU-Z"
-MinimumVersion: '2.3'
-ParentRecipe: com.github.bigfix.download.CPUZ-Win64
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.download.CPUZ-Win
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -33,6 +33,8 @@ Process:
       filename: "%NAME%-icon.png"
       url: https://www.cpuid.com/medias/images/softwares/cpu-z.png
       COMPUTE_HASHES: False
+      download_version: ""
+
   # resize / shrink icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileImageResize
   # get base64 of icon file:
@@ -50,7 +52,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./CPUID/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./CPUID/%NAME%-Win-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
