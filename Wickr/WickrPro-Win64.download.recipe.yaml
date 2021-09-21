@@ -12,14 +12,14 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  # - Processor: URLTextSearcher
-  #   Arguments:
-  #     url: https://pro-download.wickr.com/#/version/pro
-  #     # example match `example`
-  #     re_pattern: '>Version (?P<version>\d+\.\d+\.\d+)'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://pro-download.wickr.com/api/download/pro/download/windows
+      # example match `example`
+      re_pattern: 'WickrPro-(?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://s3.amazonaws.com/static.wickr.com/downloads/win/pro/WickrPro-5.88.6.msi
-      #download_version: "%version%"
+      url: https://s3.amazonaws.com/static.wickr.com/downloads/win/pro/WickrPro-%version%.msi
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
