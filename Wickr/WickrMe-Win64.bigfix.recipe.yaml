@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest WickrPro
-Identifier: com.github.bigfix.bigfix.WickrPro-Win64
+Description: Generates a BigFix Task for the latest WickrMe
+Identifier: com.github.bigfix.bigfix.WickrMe-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "WickrPro"
+  NAME: "WickrMe"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "WickrPro"
+  DisplayName: "WickrMe"
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.WickrPro-Win64
+ParentRecipe: com.github.bigfix.download.WickrMe-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -25,7 +25,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://play-lh.googleusercontent.com/nNo2R-ZAUuQZqoja9iX70cfB4GqBtgimyLZ3m7Mlvrks91iLKhgVo-xvTWUlddI-og=s180
+      url: https://play-lh.googleusercontent.com/uGaoCAtPTqLlmrHX0NzNb2E0jP4gKNNDrGbzoRFQl3HkruLDxgbBMWCRnRQXlWMc5KjW
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
