@@ -21,8 +21,9 @@ Process:
       re_pattern: 'Version (?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      #url: https://go.microsoft.com/fwlink/?linkid=2170400
-      url: https://sqlopsbuilds.azureedge.net/stable/4a45ba7cf20dd4129f1a08e5e776dfb33e3d1d1e/azuredatastudio-windows-setup-%version%.%FileType%
+      prefetch_filename: True
+      url: https://go.microsoft.com/fwlink/?linkid=2170401
+      #url: https://sqlopsbuilds.azureedge.net/stable/4a45ba7cf20dd4129f1a08e5e776dfb33e3d1d1e/azuredatastudio-windows-setup-%version%.%FileType%
       download_version: "%version%"
       #url: https://sqlopsbuilds.azureedge.net/stable/59c4b8e90cf2d3a24bed72623197f10f8d090fdc/azuredatastudio-windows-setup-1.30.0.exe
       #download_version: "1.30.0"
