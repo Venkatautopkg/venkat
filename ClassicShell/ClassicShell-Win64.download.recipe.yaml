@@ -14,9 +14,9 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: http://www.classicshell.net/
+      url: https://github.com/Open-Shell/Open-Shell-Menu/releases
       # example match `example`
-      re_pattern: The latest stable version .*?\>(?P<version>.*?)<
+      re_pattern: Latest release.*?/v(?P<version>.*?)\"
 
   - Processor: URLTextSearcher
     Arguments:
@@ -26,7 +26,7 @@ Process:
 
   - Processor: URLDownloaderPython
     Arguments:
-      url: '%url%'
+      url: https://www.fosshub.com/Classic-Shell.html?dwl=ClassicShellSetup_4_3_1.exe
       prefetch_filename: True
       User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
