@@ -20,13 +20,13 @@ Process:
 
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.fosshub.com/Classic-Shell.html
+      url: https://github.com/Open-Shell/Open-Shell-Menu/releases/tag/v%version%
       # example match `example`
-      re_pattern: href\=\"(?P<url>.*?)\" data.*?English
+      re_pattern: v%version%.*?Setup(?<fileversion>.*?.exe)
 
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://www.fosshub.com/Classic-Shell.html?dwl=ClassicShellSetup_4_3_1.exe
+      url: https://github.com/Open-Shell/Open-Shell-Menu/releases/download/v%version%/OpenShellSetup_%fileversion%.exe
       prefetch_filename: True
       User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
