@@ -5,7 +5,7 @@ Input:
   NAME: "AzureDataStudio"
   icon_url: https://www.dailyhostnews.com/wp-content/uploads/2019/03/Azure-featured-1050x600.png
   DisplayName: "Azure Data Studio"
-  DocLink: https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15
+#  DocLink: https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15
 MinimumVersion: '1.28'
 ParentRecipe: com.github.bigfix.download.AzureDataStudio-Win64
 Process:
@@ -37,6 +37,10 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DocLink"
+      append_value: "%DocLink%"
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
