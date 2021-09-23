@@ -22,7 +22,7 @@ Process:
     Arguments:
       url: https://github.com/Open-Shell/Open-Shell-Menu/releases/tag/v%version%
       # example match `example`
-      re_pattern: v%version%.*?Setup(?<filename>.*?.exe)
+      re_pattern: v%version%.*?Setup_(?<filename>.*?.exe)
 
   - Processor: URLDownloaderPython
     Arguments:
