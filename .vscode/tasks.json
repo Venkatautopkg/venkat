@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "docker build",
+      "label": "docker build bigfixrecipes:latest",
       "type": "shell",
       "command": "docker build --pull --rm -f \"Dockerfile\" -t bigfixrecipes:latest \".\"",
       "problemMatcher": [],
@@ -15,6 +15,7 @@
       "label": "check-setup-win",
       "type": "shell",
       "runOptions": { "runOn": "folderOpen" },
+      "command": "echo no setup check defined for non-windows",
       "windows": {
         "command": "./check_setup_win.bat"
       },
@@ -26,6 +27,11 @@
       "command": "python3 build-recipes-all.py",
       "windows": {
         "command": "python build-recipes-all.py"
+      },
+      "dependsOn": ["check-setup-win"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
       }
     }
   ]
