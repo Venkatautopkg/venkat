@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest Classic Shell
-Identifier: com.github.bigfix.download.ClassicShell-Win64
+Description: Downloads the latest Open Shell
+Identifier: com.github.bigfix.download.OpenShell-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: ClassicShell
+  NAME: OpenShell
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: Classic Shell
+  DisplayName: Open-Shell
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
