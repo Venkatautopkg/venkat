@@ -12,15 +12,14 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
- # - Processor: URLTextSearcher
-  #  Arguments:
-   #   url: https://example
-      # example match `example`
-    #  re_pattern: 'example(?P<version>\d+)-64.msi'
+# - Processor: URLTextSearcher
+#    Arguments:
+#      url: https://example
+#      example match `example`
+#      re_pattern: 'example(?P<version>\d+)-64.msi'
   - Processor: URLDownloaderPython
     Arguments:
       url: https://dl.google.com/drive/gsync_enterprise64.msi
       # download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
-  #- Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
