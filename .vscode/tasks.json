@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "docker build",
+      "type": "shell",
+      "command": "docker build --pull --rm -f \"Dockerfile\" -t bigfixrecipes:latest \".\"",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "check-setup-win",
+      "type": "shell",
+      "runOptions": { "runOn": "folderOpen" },
+      "windows": {
+        "command": "./check_setup_win.bat"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "run all recipes",
+      "type": "shell",
+      "command": "python3 build-recipes-all.py",
+      "windows": {
+        "command": "python build-recipes-all.py"
+      }
+    }
+  ]
+}
