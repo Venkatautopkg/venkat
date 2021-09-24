@@ -1,13 +1,14 @@
 ---
 Description: Generates a BigFix Task for the latest Audacity for Windows x64
-Identifier: com.github.bigfix.bigfix.audacity-win64
+Identifier: com.github.bigfix.bigfix.Audacity-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "Audacity"
+  NAME: Audacity
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Audacity"
+  DisplayName: Audacity
+  VendorFolder: Audacity
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.audacity-win64
+ParentRecipe: com.github.bigfix.download.Audacity-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -49,7 +50,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Audacity/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
@@ -64,11 +65,11 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: "true"
+      append_value: True
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Audacity/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
 
   - Processor: com.github.jgstew.SharedProcessors/BESImport
