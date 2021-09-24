@@ -23,4 +23,3 @@ Process:
       # download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
-  #- Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
