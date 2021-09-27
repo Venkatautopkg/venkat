@@ -8,5 +8,6 @@ hachoir
 icoextract
 Pillow
 pre-commit
+signify
 validate_bes_xml
 yamllint
