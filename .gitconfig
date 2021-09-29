@@ -1,5 +1,6 @@
 [core]
     hideDotFiles = true
+    editor = code --wait
 [rebase]
     autoStash = true
 [pull]
