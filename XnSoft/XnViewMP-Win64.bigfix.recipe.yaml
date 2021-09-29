@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest XnView
-Identifier: com.github.bigfix.bigfix.XnView-Win64
+Description: Generates a BigFix Task for the latest XnViewMP
+Identifier: com.github.bigfix.bigfix.XnViewMP-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "XnView"
+  NAME: "XnViewMP"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "XnView"
+  DisplayName: "XnViewMP"
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.XnView-Win64
+ParentRecipe: com.github.bigfix.download.XnViewMP-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -25,7 +25,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://www.xnview.com/img/app-xnview-512.png
+      url: https://www.xnview.com/img/app-xnviewmp-512.webp
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64

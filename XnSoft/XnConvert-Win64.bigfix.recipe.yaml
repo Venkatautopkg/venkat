@@ -1,18 +1,18 @@
 ---
-Description: Generates a BigFix Task for the latest AiViewer
-Identifier: com.github.bigfix.bigfix.AiViewer-Win64
+Description: Generates a BigFix Task for the latest XnConvert
+Identifier: com.github.bigfix.bigfix.XnConvert-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "AiViewer"
+  NAME: "XnConvert"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "AI Viewer"
+  DisplayName: "XnConvert"
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.AiViewer-Win64
+ParentRecipe: com.github.bigfix.download.XnConvert-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
 
- # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
 
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
@@ -25,7 +25,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://play-lh.googleusercontent.com/HpVMSLIifhgZAgFc3QYy2eb8wV1ja6HZGM3gKMu23rYg4r7NKHXA26aJn7C7gA53sJu6=s180
+      url: https://www.xnview.com/img/app-xnconvert-512.webp
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -47,7 +47,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./AiViewer/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./XnSoft/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
