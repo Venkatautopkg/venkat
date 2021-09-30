@@ -3,7 +3,9 @@ Description: Generates BigFix Task for latest 7Zip x64 MSI
 Identifier: com.github.bigfix.bigfix.7Zip-Win64
 Input:
   NAME: 7Zip
-MinimumVersion: '2.3'
+  DisplayName: 7-Zip
+  VendorFolder: 7Zip
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.7Zip-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -12,6 +14,10 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
       template_version: "%display_version%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
   # download icon file:
   - Processor: URLDownloaderPython
     Arguments:
@@ -26,9 +32,24 @@ Process:
     Arguments:
       append_key: "icon_base64"
       append_value: "%file_base64%"
+
+  # create install/update content:
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./7Zip/7Zip-Win64-Install_Update.bes.mustache"
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  # create update(patch) only content:
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport

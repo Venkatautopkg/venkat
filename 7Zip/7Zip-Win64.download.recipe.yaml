@@ -5,7 +5,7 @@ Identifier: com.github.bigfix.download.7Zip-Win64
 Input:
   NAME: 7Zip
   FileType: msi
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   - Processor: URLTextSearcher
     Arguments:
