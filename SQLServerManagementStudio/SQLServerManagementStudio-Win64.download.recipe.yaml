@@ -1,0 +1,27 @@
+---
+Description: Downloads the latest SQL Server Management Studio
+Identifier: com.github.bigfix.download.SMSS-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "SSMS"
+  FileType: exe
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "SQL Server Management Studio"
+  DocLink: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15
+MinimumVersion: '1.27'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://docs.microsoft.com/en-us/sql/ssms/release-notes-ssms
+      re_pattern: 'SSMS (?P<bundle_version>\d+\.\d+\.\d+) is the latest general availability \(GA\) release of SSMS'
+  - Processor: URLDownloaderPython
+    Arguments:
+      prefetch_filename: True
+      url: https://aka.ms/ssmsfullsetup
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

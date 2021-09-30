@@ -1,0 +1,66 @@
+---
+Description: Generates a BigFix Task for the latest SQL Server Management Studio
+Identifier: com.github.bigfix.bigfix.SMSS-Win64
+Input:
+  NAME: "SSMS"
+  icon_url: https://i.pinimg.com/originals/32/a0/3a/32a03aee0c76419ec5bde950a62883bc.png
+  DisplayName: "SQL Server Management Studio"
+MinimumVersion: '1.28'
+ParentRecipe: com.github.bigfix.download.SMSS-Win64
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+    Arguments:
+      prefetch_url: "%download_url%"
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+    Arguments:
+      version_first: True
+      exe_path: "%pathname%"
+  # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
+  #   If `SourceReleaseDate` is not provided, it will be set to today
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+# download icon file:
+  - Processor: URLDownloaderPython
+    Arguments:
+      # need to provide filename to not overwrite the setup file
+      filename: "%NAME%-icon.png"
+      url: "%icon_url%"
+      COMPUTE_HASHES: False
+  - Processor: com.github.jgstew.SharedProcessors/FileImageResize
+  # get base64 of icon file
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+    Arguments:
+      file_pathname: "%file_path_resized%"
+  # add base64 of icon file to Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+  # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
+  #   This is only needed if the template uses extra variables
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DocLink"
+      append_value: "%DocLink%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "bundle_version"
+      append_value: "%bundle_version%"
+  # `ContentFromTemplate` generates bigfix content from a mustache template file
+  #   The file is filled out with variables from the Template Dictionary
+  #   If variables are missing from the Template Dictionary, then that area will be blank
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./SQLServerManagementStudio/%NAME%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+  # `BESImport` imports the generated BES content into a BigFix Server
+  #   Which server and credentials are used is dictated by `~/.besapi.conf`
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+  # `BigFixActioner` creates an action from the imported BigFix Content
+  #   The action is an offer that requires user interaction to run in self service application
+  #   The action targets all computers whose name contains `autopkg`
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
