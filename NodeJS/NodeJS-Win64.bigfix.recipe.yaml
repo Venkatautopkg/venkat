@@ -8,7 +8,8 @@ Input:
   DisplayName: Node.js
   VendorFolder: NodeJS
   64BitOnly: True
-  RecipeStatus: To do
+  RecipeStatus: Done
+  icon_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/320px-Node.js_logo.svg.png"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.NodeJS
 Process:
@@ -28,6 +29,21 @@ Process:
     Arguments:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
+
+  # download icon file:
+  - Processor: URLDownloaderPython
+    Arguments:
+      # need to provide filename to not overwrite the setup file
+      filename: "%NAME%-icon.png"
+      url: "%icon_url%"
+      COMPUTE_HASHES: False
+  # get base64 of icon file
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  # add base64 of icon file to Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
