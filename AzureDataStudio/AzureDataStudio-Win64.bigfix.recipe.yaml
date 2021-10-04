@@ -5,6 +5,7 @@ Input:
   NAME: "AzureDataStudio"
   icon_url: https://www.dailyhostnews.com/wp-content/uploads/2019/03/Azure-featured-1050x600.png
   DisplayName: "Azure Data Studio"
+  VendorFolder: AzureDataStudio
 #  DocLink: https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.AzureDataStudio-Win64
@@ -50,7 +51,7 @@ Process:
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./AzureDataStudio/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
@@ -63,7 +64,7 @@ Process:
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./AzureDataStudio/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
 
   - Processor: com.github.jgstew.SharedProcessors/BESImport
