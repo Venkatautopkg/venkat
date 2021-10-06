@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
+	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
+		<Title>Uninstall: {{DisplayName}} v{{bundle_version}} - Windows (x64)</Title>
+		<Description><![CDATA[
+This task will uninstall "{{DisplayName}} v{{bundle_version}}" package from selected endpoints <br><br>
+<b>Run Command As:</b> System User<br><br><b>Download Size:0</b>
+		]]></Description>
+		<Relevance>windows of operating system</Relevance>
+		<Relevance><![CDATA[x64 of operating system]]></Relevance>
+		<Relevance><![CDATA[exists keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		<Category>Software Distribution</Category>
+		<DownloadSize>0</DownloadSize>
+		<Source>BigFix</Source>
+		<SourceID>BigFix</SourceID>
+		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
+		<SourceSeverity></SourceSeverity>
+		<CVENames></CVENames>
+		<SANSID></SANSID>
+		<MIMEField>
+			<Name>action-ui-metadata</Name>
+			<Value>{ {{#version}}"version":"{{version}}",{{/version}}
+			"size":"0" }</Value>
+		</MIMEField>
+		<MIMEField>
+			<Name>x-fixlet-modification-time</Name>
+			<Value>{{x-fixlet-modification-time}}</Value>
+		</MIMEField>
+		<Domain>BESC</Domain>
+		<DefaultAction ID="Action1">
+			<Description>
+				<PreLink>Click </PreLink>
+				<Link>here</Link>
+				<PostLink> to uninstall {{DisplayName}} v{{bundle_version}}.</PostLink>
+			</Description>
+			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[
+// Uninstall:
+override wait
+hidden=true
+completion=job
+wait "{"C:\ProgramData\Package Cache\" & "%7b" & "e853ab1a-5d1f-434a-9e99-7db61597a575" & "%7d" & "\SSMS-Setup-ENU.exe" /uninstall /Quiet]]>
+</ActionScript>
+      		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
+		</DefaultAction>
+	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
+</BES>
