@@ -38,12 +38,12 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 // Download:
 {{{prefetch}}}
 
-// Install:
+// Install: The Visual Studio core shell experience, including syntax-aware code editing, source code control and work item management.
 override wait
 hidden=true
 completion=job
 wait cmd.exe __Download\vs_Community.exe --layout .\vs_Community
-wait cmd.exe __Download\vs_Community\vs_setup.exe --nocache --wait --noUpdateInstaller --noWeb --allWorkloads --includeRecommended --includeOptional --quiet --norestart > VSCommunity2019_Install.log
+wait cmd.exe __Download\vs_Community\vs_setup.exe --nocache --wait --noUpdateInstaller --noWeb --add Microsoft.VisualStudio.Workload.CoreEditor;includeRecommended;includeOptional --quiet --norestart > VSCommunity2019_Install.log
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
