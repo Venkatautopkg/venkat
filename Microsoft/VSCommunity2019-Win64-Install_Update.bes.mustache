@@ -43,7 +43,8 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 override wait
 hidden=true
 completion=job
-wait cmd.exe __Download\vs_community.exe --nocache --wait --force --noUpdateInstaller --noWeb --add Microsoft.VisualStudio.Workload.CoreEditor --quiet --norestart> VSCommunity2019_Install.log
+wait cmd.exe __Download\vs_community.exe --layout {folder "Temp" of windows folder} --add Microsoft.VisualStudio.Workload.CoreEditor
+wait cmd.exe __Download\vs_setup.exe --nocache --wait --force --noUpdateInstaller --noWeb --add Microsoft.VisualStudio.Workload.CoreEditor --quiet --norestart
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
