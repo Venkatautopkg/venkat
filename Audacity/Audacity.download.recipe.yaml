@@ -19,7 +19,8 @@ Process:
       re_pattern: 'Current Version: (?P<latest_version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://github.com/audacity/audacity/releases/download/Audacity-%latest_version%/audacity-win-%latest_version%-x64.exe
+      # https://github.com/audacity/audacity/releases/download/Audacity-3.0.5/audacity-win-3.0.5-64bit.exe
+      url: https://github.com/audacity/audacity/releases/download/Audacity-%latest_version%/audacity-win-%latest_version%-64bit.exe
       download_version: "%latest_version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
