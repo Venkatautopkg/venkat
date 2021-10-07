@@ -7,7 +7,7 @@ Input:
   FileType: exe
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "SQL Server Management Studio"
-  DocLink: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15
+  DocLink: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
@@ -17,7 +17,7 @@ Process:
   - Processor: URLTextSearcher
     Arguments:
       url: https://docs.microsoft.com/en-us/sql/ssms/release-notes-ssms
-      re_pattern: 'SSMS (?P<bundle_version>\d+\.\d+\.\d+) is the latest general availability \(GA\) release of SSMS'
+      re_pattern: 'SSMS (?P<bundle_version>\d+\.\d+(\.\d+)?) is the latest general availability \(GA\) release of SSMS'
   - Processor: URLDownloaderPython
     Arguments:
       prefetch_filename: True

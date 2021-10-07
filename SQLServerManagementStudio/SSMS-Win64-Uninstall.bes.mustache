@@ -8,9 +8,9 @@ This task will download and install "{{DisplayName}} v{{bundle_version}}" packag
 		]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
-		{{#patch}}{{#DisplayName}}
+		{{#uninstall}}{{#DisplayName}}
 		<Relevance><![CDATA[ exists keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries) ]]></Relevance>
-		{{/DisplayName}}{{/patch}}
+		{{/DisplayName}}{{/uninstall}}
 		<Relevance><![CDATA[
 not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)
 		]]></Relevance>
@@ -35,7 +35,7 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 			<Description>
 				<PreLink>Click </PreLink>
 				<Link>here</Link>
-				<PostLink> to deploy {{DisplayName}} v{{bundle_version}}.</PostLink>
+				<PostLink> to uninstall {{DisplayName}} v{{bundle_version}}.</PostLink>
 			</Description>
 			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[// Download:
 {{{prefetch}}}
@@ -44,7 +44,7 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 override wait
 hidden=true
 completion=job
-wait __Download\{{{file_name}}} /Quiet SSMSInstallRoot=%systemdrive%\SSMSto /DoNotInstallAzureDataStudio=1 /norestart]]>
+wait "C:\ProgramData\Package Cache\{{e853ab1a-5d1f-434a-9e99-7db61597a575}\SSMS-Setup-ENU.exe" /uninstall /Quiet /norestart /log %TEMP%\SSMSSetup ]]>
 </ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>

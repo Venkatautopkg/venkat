@@ -57,7 +57,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-bundle_version.bes"
   # `BESImport` imports the generated BES content into a BigFix Server
   #   Which server and credentials are used is dictated by `~/.besapi.conf`
   - Processor: com.github.jgstew.SharedProcessors/BESImport
@@ -76,4 +76,17 @@ Process:
     Arguments:
       template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+
+
+    # create unistall  content:
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "uninstall"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Remove.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Remove.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
