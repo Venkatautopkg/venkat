@@ -12,12 +12,12 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  - Processor: GitHubReleasesInfoProvider
+  - Processor: URLTextSearcher
     Arguments:
-      github_repo: adoptium/temurin16-binaries
-      asset_regex: OpenJDK16U\-jdk\_x64\_windows\_hotspot\_.*\.msi$
-      include_prereleases: False
+      url: https://api.adoptium.net/v3/assets/latest/16/hotspot
+      re_pattern: '\"(?P<url>https\:\/\/.*\/OpenJDK16U\-jdk\_x64\_windows\_hotspot\_.*\.msi)\"'
   - Processor: URLDownloaderPython
     Arguments:
+      url: '%url%'
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
