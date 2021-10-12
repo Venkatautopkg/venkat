@@ -16,7 +16,7 @@ Process:
     Arguments:
       url: https://www.oxygenxml.com/xml_developer/download_oxygenxml_developer.html
       # example match `example`
-      re_pattern: 'Version(?P<version>\:\ \d+\.\d+)'
+      re_pattern: 'Version: (?P<version>\d+\.\d+)'
   - Processor: URLTextSearcher
     Arguments:
       url: https://www.oxygenxml.com/xml_developer/download_oxygenxml_developer.html
