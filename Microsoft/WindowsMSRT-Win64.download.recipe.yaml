@@ -1,0 +1,24 @@
+---
+Description: Downloads the latest Windows Malicious Software Removal Tool
+Identifier: com.github.bigfix.download.WindowsMSRT
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "WindowsMSRT"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Windows Malicious Software Removal Tool"
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      curl_opts: '[-A "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) Gecko/20100101 Firefox/92.0"]'
+      url: https://www.microsoft.com/en-us/download/confirmation.aspx?id=9905
+      re_pattern: '\{url\:\"(?P<url>https\:\/\/.*?)\"'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: "%url%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
