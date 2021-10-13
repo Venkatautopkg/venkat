@@ -1,0 +1,30 @@
+---
+Description: Downloads the latest Oxygen XML Editor
+Identifier: com.github.bigfix.download.OxygenXMLEditor
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "OxygenXMLEditor"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Oxygen XML Editor"
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.oxygenxml.com/xml_editor/download_oxygenxml_editor.html?os=Windows
+      # example match `example`
+      re_pattern: 'Version: (?P<version>\d+\.\d+)'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.oxygenxml.com/xml_editor/download_oxygenxml_editor.html?os=Windows
+      # example match `example`
+      re_pattern: '(?P<url>https:\/\/www\.oxygenxml\.com\/InstData\/Editor\/Windows64\/VM\/oxygen\-64bit\.exe)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: '%url%'
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
