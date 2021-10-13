@@ -14,7 +14,10 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      curl_opts: '[-A "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) Gecko/20100101 Firefox/92.0"]'
+      curl_opts:
+        [
+          '-A "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) Gecko/20100101 Firefox/92.0"',
+        ]
       url: https://www.microsoft.com/en-us/download/confirmation.aspx?id=9905
       re_pattern: '\{url\:\"(?P<url>https\:\/\/.*?)\"'
   - Processor: URLDownloaderPython
