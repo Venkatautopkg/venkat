@@ -49,6 +49,7 @@ hidden=true
 completion=job
 wait {{#exe_file}}__Download\{{{file_name}}}{{/exe_file}}{{^exe_file}}msiexec.exe /i __Download\{{{file_name}}} /qn /norestart{{/exe_file}}{{#cmd_args}} {{{cmd_args}}}{{/cmd_args}}
 {{{PostActionScript}}}
+{{#PublicDesktopShortcutFile}}{{> DeletePublicDesktopIcon}}{{/PublicDesktopShortcutFile}}
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>

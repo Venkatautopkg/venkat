@@ -1,0 +1,3 @@
+if { exists (now - it) whose(it < 2 * minute) of creation times of files "{{{PublicDesktopShortcutFile}}}" of /* C:\Users\Public\Desktop */ csidl folders 25 }
+delete "{pathnames of files "{{{PublicDesktopShortcutFile}}}" of /* C:\Users\Public\Desktop */ csidl folders 25}"
+endif
