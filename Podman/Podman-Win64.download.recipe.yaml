@@ -13,7 +13,7 @@ Process:
       re_pattern: 'v(?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: "https://github.com/containers/containers/releases/download/v%version%/podman-v%version%.msi"
+      url: "https://github.com/containers/podman/releases/download/v%version%/podman-v%version%.msi"
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
