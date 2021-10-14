@@ -43,7 +43,7 @@ override wait
 hidden=true
 completion=job
 runas=currentuser
-wait __Download\Rancher.Desktop.Setup.0.6.0.exe /S --no-desktop-shortcut
+wait __Download\Rancher.Desktop.Setup.{{version}}.exe /S --no-desktop-shortcut
 
 if { exists (now - it) whose(it < 2 * minute) of creation times of files "Rancher Desktop.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
 delete "{pathnames of files "Rancher Desktop.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
