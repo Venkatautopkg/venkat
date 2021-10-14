@@ -1,0 +1,20 @@
+---
+Description: Downloads the latest Tailscale IPN
+Identifier: com.github.bigfix.download.TailscaleIPN-Win
+Input:
+  NAME: Tailscale IPN
+  DisplayName: Tailscale IPN
+MinimumVersion: "2.3"
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: URLTextSearcher
+    Arguments:
+      url: "https://tailscale.com/download/windows"
+      re_pattern: 'tailscale-ipn-setup-(?P<version>\d+\.\d+\.\d+).exe'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: "https://pkgs.tailscale.com/stable/tailscale-ipn-setup-%version%.exe"
+      prefetch_filename: True
+      COMPUTE_HASHES: True
+      download_version: "%version%"
+  - Processor: EndOfCheckPhase
