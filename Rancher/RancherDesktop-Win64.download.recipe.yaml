@@ -1,0 +1,19 @@
+---
+Description: Downloads the latest Rancher Desktop
+Identifier: com.github.bigfix.download.RancherDesktop-Win64
+Input:
+  NAME: Rancher Desktop
+  DisplayName: Rancher Desktop
+MinimumVersion: "2.3"
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: URLTextSearcher
+    Arguments:
+      url: "https://github.com/rancher-sandbox/rancher-desktop/releases"
+      re_pattern: 'Rancher Desktop v(?P<version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: "https://github.com/rancher-sandbox/rancher-desktop/releases/download/v%version%/Rancher.Desktop.Setup.%version%.exe"
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
