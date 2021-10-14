@@ -1,0 +1,19 @@
+---
+Description: Downloads the latest Podman
+Identifier: com.github.bigfix.download.Podman-Win64
+Input:
+  NAME: Podman
+  DisplayName: Podman
+MinimumVersion: "2.3"
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: URLTextSearcher
+    Arguments:
+      url: "https://github.com/containers/podman/releases"
+      re_pattern: 'v(?P<version>\d+\.\d+\.\d+)'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: "https://github.com/containers/containers/releases/download/v%version%/podman-v%version%.msi"
+      download_version: "%version%"
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase

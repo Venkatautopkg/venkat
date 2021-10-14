@@ -1,0 +1,41 @@
+---
+Description: Generates a BigFix Task for the latest Podman for Windows x64
+Identifier: com.github.bigfix.bigfix.Podman-Win64
+Input:
+  NAME: Podman
+  DisplayName: Podman
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.download.Podman-Win64
+Process:
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+
+  # download icon file:
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "podman-logo.png"
+      url: "https://github.com/containers/podman/blob/main/logo/podman-logo.png"
+      COMPUTE_HASHES: False
+      download_version: ""
+
+  # get base64 of icon file:
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "DisplayName"
+      append_value: "%DisplayName%"
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./Podman/Podman-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
