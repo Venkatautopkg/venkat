@@ -45,9 +45,10 @@ completion=job
 runas=currentuser
 wait __Download\Rancher.Desktop.Setup.{{version}}.exe /S --no-desktop-shortcut
 
-if { exists (now - it) whose(it < 2 * minute) of creation times of files "Rancher Desktop.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
-delete "{pathnames of files "Rancher Desktop.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
-endif
+// No desktop shortcut is created by installer.
+//if { exists (now - it) whose(it < 2 * minute) of creation times of files "Rancher Desktop.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
+//delete "{pathnames of files "Rancher Desktop.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
+//endif
 
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
