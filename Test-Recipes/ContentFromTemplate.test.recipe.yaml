@@ -1,0 +1,24 @@
+---
+Description: Test ContentFromTemplate Processor
+Identifier: com.github.bigfix.test.ContentFromTemplate
+Input:
+  NAME: ContentFromTemplateTest
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: ".templates/Shared-Win-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Partials.bes"
+      template_dictionary:
+        {
+          "SourceReleaseDate": "2021-08-14",
+          "x-fixlet-modification-time": "Sat, 14 Aug 2021 04:21:20 +0000",
+          "version": "0.0.0",
+          "DisplayName": "Fake Product DisplayName",
+          "file_name": "fake_setup.exe",
+          "prefetch": "prefetch fake-prefetch",
+          "exe_file": true,
+          "cmd_args": "/S",
+        }
