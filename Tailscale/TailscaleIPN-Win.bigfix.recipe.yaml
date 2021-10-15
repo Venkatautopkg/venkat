@@ -15,8 +15,8 @@ Process:
   # download icon file:
   - Processor: URLDownloaderPython
     Arguments:
-      filename: "%NAME%-icon-147-160.png"
-      url: https://www.zotero.org/static/images/icons/zotero-icon-147-160.png
+      filename: "640px-Tailscale-Logo-Black.svg.png"
+      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Tailscale-Logo-Black.svg/640px-Tailscale-Logo-Black.svg.png"
       COMPUTE_HASHES: False
       download_version: ""
 
