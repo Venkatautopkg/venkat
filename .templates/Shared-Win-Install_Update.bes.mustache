@@ -4,7 +4,7 @@
 		<Title>{{^patch}}Install/{{/patch}}Update: {{DisplayName}} v{{version}} - Windows{{#64BitOnly}} (x64){{/64BitOnly}}{{#32BitOnly}} (x32){{/32BitOnly}}</Title>
 		<Description><![CDATA[
 This task will download and install "{{DisplayName}} v{{version}}" package onto selected endpoints <br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}}
-{{^patch}}{{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:256px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}}{{/patch}}
+{{>DescriptionIcon}}
 		]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		{{#64BitOnly}}<Relevance><![CDATA[x64 of operating system]]></Relevance>{{/64BitOnly}}
@@ -12,7 +12,8 @@ This task will download and install "{{DisplayName}} v{{version}}" package onto 
 		{{#patch}}{{#DisplayName}}
 		<Relevance><![CDATA[ exists keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries) ]]></Relevance>
 		{{/DisplayName}}{{/patch}}
-		{{#PreRelevance}}<Relevance><![CDATA[{{{PreRelevance}}}]]></Relevance>{{/PreRelevance}}
+		{{#PreRelevance}}<Relevance><![CDATA[{{{PreRelevance}}}]]></Relevance>
+		{{/PreRelevance}}
 		<Relevance><![CDATA[
 not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)
 		]]></Relevance>
@@ -32,7 +33,10 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 			<Name>x-fixlet-modification-time</Name>
 			<Value>{{x-fixlet-modification-time}}</Value>
 		</MIMEField>
-		{{#MIMEFields}}{{>MIMEField}}{{/MIMEFields}}
+		{{#MIMEFields}}<MIMEField>
+			{{{MIMEFields}}}
+		</MIMEField>
+		{{/MIMEFields}}
 		<Domain>BESC</Domain>
 		<DefaultAction ID="Action1">
 			<Description>
@@ -50,7 +54,7 @@ hidden=true
 completion=job
 wait {{#exe_file}}__Download\{{{file_name}}}{{/exe_file}}{{^exe_file}}msiexec.exe /i __Download\{{{file_name}}} /qn /norestart{{/exe_file}}{{#cmd_args}} {{{cmd_args}}}{{/cmd_args}}
 {{{PostActionScript}}}
-{{#PublicDesktopShortcutFile}}{{> DeletePublicDesktopIcon}}{{/PublicDesktopShortcutFile}}
+{{#PublicDesktopShortcutFile}}{{>DeletePublicDesktopIcon}}{{/PublicDesktopShortcutFile}}
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>

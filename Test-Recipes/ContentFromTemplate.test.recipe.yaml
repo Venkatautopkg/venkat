@@ -7,18 +7,70 @@ MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # minimal test / example:
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: ".templates/Shared-Win-Install_Update.bes.mustache"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Partials.bes"
-      template_dictionary:
-        {
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Template-Minimal.bes"
+      template_dictionary: {
           "SourceReleaseDate": "2021-08-14",
           "x-fixlet-modification-time": "Sat, 14 Aug 2021 04:21:20 +0000",
           "version": "0.0.0",
           "DisplayName": "Fake Product DisplayName",
           "file_name": "fake_setup.exe",
           "prefetch": "prefetch fake-prefetch",
-          "exe_file": true,
+          "exe_file": True,
           "cmd_args": "/S",
+          # Single Custom MIMEField:
+          "MIMEFields": "<Name>FakeMimeFieldName</Name>
+            <Value>FakeMimeFieldValue</Value>",
+        }
+  # maximum test / example:
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: ".templates/Shared-Win-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Template-More.bes"
+      template_dictionary: {
+          "SourceReleaseDate": "2021-08-14",
+          "x-fixlet-modification-time": "Sat, 14 Aug 2021 04:21:20 +0000",
+          "version": "0.0.0",
+          "DisplayName": "Fake Product DisplayName",
+          "file_name": "fake_setup.exe",
+          "prefetch": "prefetch fake-prefetch",
+          "exe_file": True,
+          "cmd_args": "/S",
+          "PublicDesktopShortcutFile": "fake desktop shortcut.lnk",
+          "icon_base64": "fakebase64",
+          # Multiple Custom MIMEFields:
+          "MIMEFields": [{ "MIMEFields": "<Name>FakeMimeFieldName</Name>
+                  <Value>FakeMimeFieldValue</Value>" }, { "MIMEFields": "<Name>Name2</Name><Value>Value2</Value>" }],
+          "PreRelevance": '"PreRelevance" contains "Relevance"',
+          "64BitOnly": True,
+        }
+  # patch test / example:
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: ".templates/Shared-Win-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Template-Patch.bes"
+      template_dictionary: {
+          "SourceReleaseDate": "2021-08-14",
+          "x-fixlet-modification-time": "Sat, 14 Aug 2021 04:21:20 +0000",
+          "version": "0.0.0",
+          "DisplayName": "Fake Product DisplayName",
+          "file_name": "fake_setup.exe",
+          "prefetch": "prefetch fake-prefetch",
+          "exe_file": True,
+          "cmd_args": "/S",
+          "PublicDesktopShortcutFile": "fake desktop shortcut.lnk",
+          "icon_base64": "fakebase64",
+          # Multiple Custom MIMEFields:
+          "MIMEFields": [{ "MIMEFields": "<Name>FakeMimeFieldName</Name>
+                  <Value>FakeMimeFieldValue</Value>" }, { "MIMEFields": "<Name>Name2</Name><Value>Value2</Value>" }],
+          "PreRelevance":
+            [
+              { "PreRelevance": '"PreRelevance" contains "Relevance"' },
+              { "PreRelevance": '"PreRelevance2" contains "Relevance2"' },
+            ],
+          "32BitOnly": True,
+          "patch": True,
         }

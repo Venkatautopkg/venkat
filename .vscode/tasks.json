@@ -14,7 +14,9 @@
     {
       "label": "check-setup-win",
       "type": "shell",
-      "runOptions": { "runOn": "folderOpen" },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
       "command": "echo no setup check defined for non-windows",
       "windows": {
         "command": "./check_setup_win.bat"
@@ -33,6 +35,22 @@
         "kind": "test",
         "isDefault": true
       }
+    },
+    {
+      "label": "yamllint",
+      "type": "shell",
+      "command": "yamllint ${file}",
+      "dependsOn": ["yaml file only"],
+      "problemMatcher": []
+    },
+    {
+      "label": "yaml file only",
+      "type": "shell",
+      "command": "echo no yaml check for non-windows",
+      "windows": {
+        "command": "if ( [IO.Path]::GetExtension('${file}') -ne '.yaml' ) { Write-Host 'Not YAML File!'; Exit 1 }"
+      },
+      "problemMatcher": []
     }
   ]
 }
