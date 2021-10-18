@@ -16,10 +16,10 @@ Process:
     Arguments:
       url: https://plex.tv/api/downloads/6.json
       # example match `example`
-      re_pattern: '"https://downloads.plex.tv/plex-desktop/.*/windows/Plex-(\d+\.\d+\.\d+\.\d+)-.*-x86_64.exe"'
+      re_pattern: '"https://downloads.plex.tv/plex-desktop/.*/windows/Plex-?P<version>.*-x86_64.exe"'
   # - Processor: URLDownloaderPython
   #   Arguments:
-  #     url: https://example%version%.msi
-  #     # download_version: "%version%"
-  #     COMPUTE_HASHES: True
-  # - Processor: EndOfCheckPhase
+  #     url: https://downloads.plex.tv/plex-desktop/.*/windows/Plex-%version%-x86_64.exe
+  #download_version: "%version%"
+  #    COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
