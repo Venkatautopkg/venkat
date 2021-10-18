@@ -17,7 +17,7 @@ Process:
       url: https://plex.tv/api/downloads/6.json
       # example match `example`
       re_pattern: '"https://downloads.plex.tv/plex-desktop/.*/windows/Plex-?P<version>.*-x86_64.exe"'
-  # - Processor: URLDownloaderPython
+  - Processor: URLDownloaderPython
   #   Arguments:
   #     url: https://downloads.plex.tv/plex-desktop/.*/windows/Plex-%version%-x86_64.exe
   #download_version: "%version%"
