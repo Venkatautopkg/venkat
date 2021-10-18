@@ -14,7 +14,7 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://plex.tv/api/downloads/6.json
+      # url: https://plex.tv/api/downloads/6.json
       # example match `example`
       re_pattern: '"https://downloads.plex.tv/plex-desktop/.*/windows/Plex-?P<version>.*-x86_64.exe"'
   - Processor: URLDownloaderPython
