@@ -42,8 +42,8 @@ Process:
           "PublicDesktopShortcutFile": "fake desktop shortcut.lnk",
           "icon_base64": "fakebase64",
           # Multiple Custom MIMEFields:
-          "MIMEFields": [{ "MIMEFields": "<Name>FakeMimeFieldName</Name>
-                  <Value>FakeMimeFieldValue</Value>" }, { "MIMEFields": "<Name>Name2</Name><Value>Value2</Value>" }],
+          "MIMEFields": [{"MIMEFields": "<Name>FakeMimeFieldName</Name>
+                  <Value>FakeMimeFieldValue</Value>"}, {"MIMEFields": "<Name>Name2</Name><Value>Value2</Value>"}],
           "PreRelevance": '"PreRelevance" contains "Relevance"',
           "64BitOnly": True,
         }
@@ -64,12 +64,12 @@ Process:
           "PublicDesktopShortcutFile": "fake desktop shortcut.lnk",
           "icon_base64": "fakebase64",
           # Multiple Custom MIMEFields:
-          "MIMEFields": [{ "MIMEFields": "<Name>FakeMimeFieldName</Name>
-                  <Value>FakeMimeFieldValue</Value>" }, { "MIMEFields": "<Name>Name2</Name><Value>Value2</Value>" }],
+          "MIMEFields": [{"MIMEFields": "<Name>FakeMimeFieldName</Name>
+                  <Value>FakeMimeFieldValue</Value>"}, {"MIMEFields": "<Name>Name2</Name><Value>Value2</Value>"}],
           "PreRelevance":
             [
-              { "PreRelevance": '"PreRelevance" contains "Relevance"' },
-              { "PreRelevance": '"PreRelevance2" contains "Relevance2"' },
+              {"PreRelevance": '"PreRelevance" contains "Relevance"'},
+              {"PreRelevance": '"PreRelevance2" contains "Relevance2"'},
             ],
           "32BitOnly": True,
           "patch": True,

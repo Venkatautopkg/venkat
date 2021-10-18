@@ -1,4 +1,8 @@
-This {{ TypeTaskOrFixlet }}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}} will
-download and install "{{ DisplayName }} v{{ version }}" package onto selected
-endpoints <br /><br />{{#DownloadSize}}<b>Download Size:</b> {{ DownloadSize
-}}{{/DownloadSize}}
+<div>
+  This {{ TypeTaskOrFixlet }}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}
+  will download and {{#patch}}update{{/patch}}{{^patch}}install{{/patch}}
+  "{{DisplayName}} v{{version}}" onto selected endpoints.
+  {{#DownloadSize}}<br /><br /><b>Download Size:</b> {{DownloadSize}}{{/DownloadSize}}
+  {{^patch}}<br /><br /><b>Note:</b> This will install "{{DisplayName}}" on new endpoints, but also
+  update those that already have "{{DisplayName}}"{{/patch}}
+</div>
