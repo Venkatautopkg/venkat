@@ -12,11 +12,11 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  - Processor: URLTextSearcher
-    Arguments:
-      # url: https://plex.tv/api/downloads/6.json
-      # example match `example`
-      re_pattern: '"https://downloads.plex.tv/plex-desktop/.*/windows/Plex-?P<version>.*-x86_64.exe"'
+  #  - Processor: URLTextSearcher
+  #    Arguments:
+  # url: https://plex.tv/api/downloads/6.json
+  # example match `example`
+  #     re_pattern: '"https://downloads.plex.tv/plex-desktop/.*/windows/Plex-?P<version>.*-x86_64.exe"'
   - Processor: URLDownloaderPython
     Arguments:
       url: https://downloads.plex.tv/plex-desktop/.*/windows/Plex-%version%-x86_64.exe
