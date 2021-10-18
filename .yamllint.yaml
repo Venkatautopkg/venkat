@@ -7,5 +7,6 @@ rules:
   # 88 chars should be enough, but don't fail if a line is longer
   line-length: disable
   new-lines: disable
+  # following rules added to prevent conflicts with Prettier:
   indentation: disable
   braces: disable
