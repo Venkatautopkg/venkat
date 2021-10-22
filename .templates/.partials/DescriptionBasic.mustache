@@ -1,6 +1,8 @@
 <div>
   This {{ TypeTaskOrFixlet }}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}
-  will download and {{#patch}}update{{/patch}}{{^patch}}install{{/patch}}
+  will download and
+  {{^install_only}}{{#patch}}update{{/patch}}{{^patch}}install{{/patch}}{{/install_only}}
+  {{#install_only}}install{{/install_only}}
   "{{DisplayName}} v{{version}}" onto selected endpoints.
   {{#DownloadSize}}<br /><br /><b>Download Size:</b> {{DownloadSize}}{{/DownloadSize}}
   {{^patch}}<br /><br /><b>Note:</b> This will install "{{DisplayName}}" on new endpoints, but also
