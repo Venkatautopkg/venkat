@@ -46,9 +46,8 @@ override wait
 hidden=true
 completion=job
 wait msiexec.exe /i __Download\{{{file_name}}} /qn /norestart
-if { exists (now - it) whose(it < 2 * minute) of creation times of files "Slack.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
-delete "{pathnames of files "Slack.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
-endif
+
+{{#PublicDesktopShortcutFile}}{{>DeletePublicDesktopIcon}}{{/PublicDesktopShortcutFile}}
 ]]></ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>

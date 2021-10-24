@@ -5,17 +5,17 @@ Input:
   NAME: "Slack"
   FileType: msi
   DisplayName: "Slack"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: URLTextSearcher
     Arguments:
       url: https://slack.com/intl/en-au/downloads/windows
-      re_pattern: '__version">Version (?P<latest_version>\d+\.\d+\.\d+)'
+      re_pattern: '__version">Version (?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://downloads.slack-edge.com/releases/windows/%latest_version%/prod/x64/slack-standalone-%latest_version%.0.msi
-      download_version: "%latest_version%"
+      url: https://downloads.slack-edge.com/releases/windows/%version%/prod/x64/slack-standalone-%version%.0.msi
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
