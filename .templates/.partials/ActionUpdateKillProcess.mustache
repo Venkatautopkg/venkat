@@ -1,0 +1,6 @@
+{{#ProcessName}}{{^install_only}}
+if{ exists (processes it) of (if windows of operating system then it & ".exe" else it) of ("{{{ProcessName}}}") whose(it as lowercase != "BESClient" as lowercase) }
+// Process is running, consider killing it:
+// TODO: check for no current user? check if action is offer? check if action is show message, ask user to save work?
+endif
+{{/install_only}}{{/ProcessName}}

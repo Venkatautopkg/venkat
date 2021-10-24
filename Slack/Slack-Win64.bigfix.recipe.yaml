@@ -6,7 +6,9 @@ Input:
   NAME: "Slack"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Slack"
-MinimumVersion: '2.3'
+  64BitOnly: True
+  RecipeStatus: Verified
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Slack-Win64
 Process:
   # `SharedUtilityMethods` must come first
@@ -43,8 +45,13 @@ Process:
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
+      append_key: "64BitOnly"
+      append_value: "%64BitOnly%"
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
       append_key: "version"
-      append_value: '%latest_version%'
+      append_value: "%latest_version%"
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
@@ -59,3 +66,27 @@ Process:
   #   The action is an offer that requires user interaction to run in self service application
   #   The action targets all computers whose name contains `autopkg`
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./%NAME%/%DisplayName%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "install_only"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./%NAME%/%DisplayName%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-InstalOnly.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport

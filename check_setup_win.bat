@@ -229,8 +229,8 @@ git pull
 
 echo.
 echo check pip install requirements for cloned recipes:
-echo pip install -r .\requirements.txt --quiet --quiet
-pip install -r .\requirements.txt --quiet --quiet
+echo pip install --upgrade -r .\requirements.txt --quiet --quiet
+pip install --upgrade -r .\requirements.txt --quiet --quiet
 if errorlevel 0 (
     echo   - pip install for recipes succeeded!  exit code: %errorlevel%
 ) else (
