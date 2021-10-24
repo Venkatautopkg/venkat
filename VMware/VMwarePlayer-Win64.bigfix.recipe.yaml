@@ -80,6 +80,6 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-InstalOnly.bes"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-InstallOnly.bes"
 
   - Processor: com.github.jgstew.SharedProcessors/BESImport

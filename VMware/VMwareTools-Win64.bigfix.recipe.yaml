@@ -6,7 +6,8 @@ Input:
   NAME: "VMwareTools"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "VMware Tools"
-MinimumVersion: '2.3'
+  VendorFolder: VMware
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.VMwareTools-Win64
 Process:
   # `SharedUtilityMethods` must come first
@@ -47,7 +48,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./VMware/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
@@ -58,3 +59,27 @@ Process:
   #   The action is an offer that requires user interaction to run in self service application
   #   The action targets all computers whose name contains `autopkg`
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "install_only"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-InstallOnly.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
