@@ -108,7 +108,7 @@ def get_last_runtime_recipe(recipe_identifier):
     return datetime.datetime.fromtimestamp(os.path.getmtime(latest_file))
 
 
-def run_first_or_oldreceipt_recipes(recipe_identifiers, min_age_hours=12):
+def run_first_or_oldreceipt_recipes(recipe_identifiers, min_age_hours=6):
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
     print(f"Total Recipes: {len(recipe_identifiers)}")
@@ -141,7 +141,7 @@ def main():
     print("main()")
     recipe_path_array = get_all_files()
     recipe_identifiers = get_all_identifiers(recipe_path_array)
-    run_first_or_oldreceipt_recipes(recipe_identifiers)
+    run_first_or_oldreceipt_recipes(recipe_identifiers, 36)
 
 
 if __name__ == "__main__":

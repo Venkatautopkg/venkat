@@ -6,7 +6,12 @@ Input:
   NAME: "VMwareWorkstation"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "VMware Workstation"
-MinimumVersion: '2.3'
+  VendorFolder: VMware
+  64BitOnly: True
+  exe_file: True
+  cmd_args: /s /v/qn EULAS_AGREED=1 ADDLOCAL=ALL DESKTOP_SHORTCUT=0 REBOOT=ReallySuppress
+  template_file_path: ".templates/Shared-Win-Install_Update.bes.mustache"
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.VMwareWorkstation-Win64
 Process:
   # `SharedUtilityMethods` must come first
@@ -35,19 +40,15 @@ Process:
       append_key: "icon_base64"
       append_value: "%file_base64%"
 
-  # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
-  #   This is only needed if the template uses extra variables
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./VMware/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "%template_file_path%"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
@@ -58,3 +59,27 @@ Process:
   #   The action is an offer that requires user interaction to run in self service application
   #   The action targets all computers whose name contains `autopkg`
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "%template_file_path%"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "install_only"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "%template_file_path%"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-InstallOnly.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
