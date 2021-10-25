@@ -12,6 +12,7 @@ Input:
   PublicDesktopShortcutFile: Sandboxie-Plus.lnk
   cmd_args: /verysilent
   exe_file: True
+  icon_url: https://user-images.githubusercontent.com/12372772/123517080-8ab20a00-d69f-11eb-8e82-2e18cf6e0303.png
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.SandboxiePlus-Win64
 Process:
@@ -36,6 +37,19 @@ Process:
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
+
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: "%icon_url%"
+      COMPUTE_HASHES: False
+
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
