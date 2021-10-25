@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>{{^patch}}Install/{{/patch}}Update: {{DisplayName}} v{{version}} - Windows{{#64BitOnly}} (x64){{/64BitOnly}}{{#32BitOnly}} (x32){{/32BitOnly}}</Title>
+		<Title>{{>TitlePrefix}} {{DisplayName}} v{{version}} - Windows{{#64BitOnly}} (x64){{/64BitOnly}}{{#32BitOnly}} (x32){{/32BitOnly}}</Title>
 		<Description><![CDATA[
 {{>DescriptionBasic}}
 {{>DescriptionIcon}}
@@ -14,7 +14,9 @@
 		{{/DisplayName}}{{/patch}}
 		{{#PreRelevance}}<Relevance><![CDATA[{{{PreRelevance}}}]]></Relevance>
 		{{/PreRelevance}}
+		{{^install_only}}
 		<Relevance><![CDATA[not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		{{/install_only}}
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
 		<Source>{{DisplayName}}</Source>
@@ -25,7 +27,7 @@
 		<SANSID></SANSID>
 		<MIMEField>
 			<Name>action-ui-metadata</Name>
-			<Value>{{> action-ui-metadata}}</Value>
+			<Value>{{>action-ui-metadata}}</Value>
 		</MIMEField>
 		<MIMEField>
 			<Name>x-fixlet-modification-time</Name>
