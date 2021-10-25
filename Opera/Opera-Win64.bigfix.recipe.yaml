@@ -3,10 +3,15 @@ Description: Generates a BigFix Task for the latest Opera for Windows 64-bit
 Identifier: com.github.bigfix.bigfix.Opera-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "Opera"
+  NAME: Opera
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Opera"
-MinimumVersion: '2.3'
+  DisplayName: Opera
+  VendorFolder: Opera
+  64BitOnly: True
+  RecipeStatus: To do
+  template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
+
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Opera-Win64
 Process:
   # `SharedUtilityMethods` must come first
@@ -42,6 +47,11 @@ Process:
       append_key: "DisplayName"
       append_value: "%DisplayName%"
 
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "64BitOnly"
+      append_value: "%64BitOnly%"
+
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
@@ -58,3 +68,15 @@ Process:
   #   The action is an offer that requires user interaction to run in self service application
   #   The action targets all computers whose name contains `autopkg`
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
