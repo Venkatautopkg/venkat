@@ -6,7 +6,7 @@ Input:
   NAME: "VSCode"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Microsoft Visual Studio Code"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -16,5 +16,5 @@ Process:
     Arguments:
       url: https://code.visualstudio.com/sha/download?build=stable&os=win32-x64
       COMPUTE_HASHES: True
+      filename: "%NAME%Setup-x64.exe"
   - Processor: EndOfCheckPhase
-  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
