@@ -20,6 +20,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://github.com/sandboxie-plus/Sandboxie/releases/download/%plusVersion%%plusLetter%/Sandboxie-Plus-x64-v%plusVersion%.exe
-      download_version: ""
+      download_version: "%plusVersion%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
