@@ -10,6 +10,7 @@ Input:
   64BitOnly: True
   RecipeStatus: To do
   template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
+# MinimumVersion of AutoPkg - Should always be 2.3 (or higher once a new version is released)
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.{{NAME}}
 Process:
