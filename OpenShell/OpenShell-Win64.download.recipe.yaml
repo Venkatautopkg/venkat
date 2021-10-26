@@ -24,7 +24,7 @@ Process:
       # example match `example`
 #      re_pattern: v%version%.*?Setup_(?P<filename>.*?.exe)
 
-  - Processor: com.github.homebysix.FindAndReplace
+  - Processor: com.github.homebysix.FindAndReplace/FinadAndReplace
     Arguments:
       input_string: "%version%"
       find: .
