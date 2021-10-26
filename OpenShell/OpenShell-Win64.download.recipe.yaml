@@ -24,4 +24,9 @@ Process:
       # example match `example`
       re_pattern: v%version%.*?Setup_(?P<filename>.*?.exe)
 
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://github.com/Open-Shell/Open-Shell-Menu/releases/download/v%version%/OpenShellSetup_%filename%
+      prefetch_filename: True
+      COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
