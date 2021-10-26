@@ -18,11 +18,18 @@ Process:
       # example match `example`
       re_pattern: <a href.*?v(?P<version>.*?)/Open.*?exe"
 
-  - Processor: URLTextSearcher
-    Arguments:
-      url: https://github.com/Open-Shell/Open-Shell-Menu/releases/tag/v%version%
+#  - Processor: URLTextSearcher
+#    Arguments:
+#      url: https://github.com/Open-Shell/Open-Shell-Menu/releases/tag/v%version%
       # example match `example`
-      re_pattern: v%version%.*?Setup_(?P<filename>.*?.exe)
+#      re_pattern: v%version%.*?Setup_(?P<filename>.*?.exe)
+
+  - Processor: com.github.homebysix.FindAndReplace
+    Arguments:
+      input_string: "%version%"
+      find: .
+      replace: _
+
 
   - Processor: URLDownloaderPython
     Arguments:
