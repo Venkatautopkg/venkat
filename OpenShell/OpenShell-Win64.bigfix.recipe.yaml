@@ -6,7 +6,7 @@ Input:
   NAME: OpenShell
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: Open-Shell
-  VendorFolder: Vendor
+  VendorFolder: OpenShell
   RecipeStatus: To do
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.OpenShell-Win64
