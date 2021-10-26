@@ -18,4 +18,10 @@ Process:
       # example match `example`
       re_pattern: <a href.*?v(?P<version>.*?)/Open.*?exe"
 
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://github.com/Open-Shell/Open-Shell-Menu/releases/tag/v%version%
+      # example match `example`
+      re_pattern: v%version%.*?Setup_(?P<filename>.*?.exe)
+
   - Processor: EndOfCheckPhase
