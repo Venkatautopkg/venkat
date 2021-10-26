@@ -16,7 +16,7 @@ Process:
     Arguments:
       url: https://github.com/Open-Shell/Open-Shell-Menu/releases
       # example match `example`
-      re_pattern: tree.*?v(?P<version>.*?)\"
+      re_pattern: <a href.*?v(?P<version>.*?)/Open
 
   - Processor: URLTextSearcher
     Arguments:
