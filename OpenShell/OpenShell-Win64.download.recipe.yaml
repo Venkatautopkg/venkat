@@ -18,16 +18,4 @@ Process:
       # example match `example`
       re_pattern: <a href.*?v(?P<version>.*?)/Open.*?exe"
 
-  - Processor: URLTextSearcher
-    Arguments:
-      url: https://github.com/Open-Shell/Open-Shell-Menu/releases/tag/v%version%
-      # example match `example`
-      re_pattern: v%version%.*?Setup_(?P<filename>.*?.exe)
-
-  - Processor: URLDownloaderPython
-    Arguments:
-      url: https://github.com/Open-Shell/Open-Shell-Menu/releases/download/v%version%/OpenShellSetup_%filename%
-      prefetch_filename: True
-      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
-      COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
