@@ -317,6 +317,12 @@ echo Add/Update hansen-m-recipes in AutoPkg
 echo python ..\autopkg\Code\autopkg repo-add hansen-m-recipes
 python ..\autopkg\Code\autopkg repo-add hansen-m-recipes
 
+REM homebysix-recipes
+echo.
+echo Add/Update homebysix-recipes in AutoPkg
+echo python ..\autopkg\Code\autopkg repo-add homebysix-recipes
+python ..\autopkg\Code\autopkg repo-add homebysix-recipes
+
 REM add pre-commit:
 echo.
 echo Add pre-commit hooks:
