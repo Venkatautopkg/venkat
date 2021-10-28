@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>Install/Update: {{DisplayName}} v{{version}} - Windows (x64)</Title>
+		<Title>{{>TitlePrefix}} {{DisplayName}} v{{version}} - Windows (x64)</Title>
 		<Description><![CDATA[<DIV id=fixletMessage2 class=FixletMessage>
 <DIV id=paramFixletDescription>
 <P>This task will download and install "{{DisplayName}} v{{version}}" package onto selected endpoints <br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB</P></DIV>
 <script>
 loaded = false;
-var CODE_SITE_NAME = 'BES Support'; 
+var CODE_SITE_NAME = 'BES Support';
 function loadScript (siteName, callback) {
 	loaded = false;
 	var relevanceQuery ='( value of it) of (mime fields of (bes fixlets whose ( name of it = "Parameterized Fixlet Library" and  name of site of it = \"' + siteName + '\" ))) whose (name of it = "vrt_utils.js")'
 	var code = EvaluateRelevance(relevanceQuery);
-	var head = document.getElementsByTagName("head")[0]; 
+	var head = document.getElementsByTagName("head")[0];
 	var script   = document.createElement("script");
 	script.type  = "text/javascript";
 	script.text = code;
@@ -20,11 +20,11 @@ function loadScript (siteName, callback) {
 	callback();
 }
 function scriptLoaded(){
-	if (!loaded){ 	
+	if (!loaded){
 		if ( typeof FixletUtils !== 'undefined') {
 			loaded = true;
 	/*
-	* Pleas Note: The following code will be moved to library with next publish of lib and user will have to only call method 	
+	* Pleas Note: The following code will be moved to library with next publish of lib and user will have to only call method
 	*/
 			var relQuery = "(messages of it) of bes fixlets whose (name of it = \"Parameterized Fixlet Library\" and ((name of it ) of site of it = \"" + CODE_SITE_NAME +"\" ))";
 			var messages = EvaluateRelevance(relQuery);
@@ -33,11 +33,11 @@ function scriptLoaded(){
 			matches[1]=matches[1].replace(/<br>/gi,"");
 			eval(matches[1]);
 			FixletUtils.initFixletRender();
-		} 
-	} 
+		}
+	}
 }
 loadScript(CODE_SITE_NAME, scriptLoaded);
-</script> 
+</script>
 <DIV class=FixletProperty></DIV></DIV>]]>
         </Description>
 		<Relevance>windows of operating system</Relevance>
@@ -45,7 +45,7 @@ loadScript(CODE_SITE_NAME, scriptLoaded);
 		<Relevance><![CDATA[not exists (it as string as version) whose(it <= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>BigFix</Source>
+		<Source>{{VendorFolder}}</Source>
 		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
@@ -53,7 +53,7 @@ loadScript(CODE_SITE_NAME, scriptLoaded);
 		<SANSID></SANSID>
 		<MIMEField>
 			<Name>action-ui-metadata</Name>
-			<Value>{ {{#version}}"version":"{{version}}",{{/version}}"size":{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}{{#icon_base64}},"icon":"data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}"{{/icon_base64}} }</Value>
+			<Value>{{>action-ui-metadata}}</Value>
 		</MIMEField>
         <MIMEField>
 			<Name>parametermetadatatag</Name>

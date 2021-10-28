@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>Install/Update: {{DisplayName}} v{{version}} - Windows (x64)</Title>
+		<Title>{{>TitlePrefix}} {{DisplayName}} v{{version}} - Windows (x64)</Title>
 		<Description><![CDATA[
-This task will download and install "{{DisplayName}} v{{version}}" package onto selected endpoints <br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}}
-{{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:256px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}}
+{{>DescriptionBasic}}
+{{>DescriptionIcon}}
 		]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
@@ -13,7 +13,7 @@ if (exists folder ((program files x64 folder as string) & "\Sublime Text")) then
 		]]></Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>BigFix</Source>
+		<Source>{{VendorFolder}}</Source>
 		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
@@ -21,7 +21,7 @@ if (exists folder ((program files x64 folder as string) & "\Sublime Text")) then
 		<SANSID></SANSID>
 		<MIMEField>
 			<Name>action-ui-metadata</Name>
-			<Value>{ {{#version}}"version":"{{version}}",{{/version}}"size":{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}{{#icon_base64}},"icon":"data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}"{{/icon_base64}} }</Value>
+			<Value>{{>action-ui-metadata}}</Value>
 		</MIMEField>
 		<MIMEField>
 			<Name>x-fixlet-modification-time</Name>

@@ -16,7 +16,7 @@
 		{{/install_only}}
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>BigFix</Source>
+		<Source>{{VendorFolder}}</Source>
 		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
@@ -24,7 +24,7 @@
 		<SANSID></SANSID>
 		<MIMEField>
 			<Name>action-ui-metadata</Name>
-			<Value>{ {{#version}}"version":"{{version}}",{{/version}}"size":{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}{{#icon_base64}},"icon":"data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}"{{/icon_base64}} }</Value>
+			<Value>{{>action-ui-metadata}}</Value>
 		</MIMEField>
 		<MIMEField>
 			<Name>x-fixlet-modification-time</Name>

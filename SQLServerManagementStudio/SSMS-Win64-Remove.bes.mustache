@@ -11,7 +11,7 @@ This task will uninstall "{{DisplayName}} v{{bundle_version}}" package from sele
 		<Relevance><![CDATA[exists keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
 		<Category>Uninstall</Category>
 		<DownloadSize>0</DownloadSize>
-		<Source>BigFix</Source>
+		<Source>{{VendorFolder}}</Source>
 		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>Install/Update: {{DisplayName}} v{{version}} - Windows (x64)</Title>
+		<Title>{{>TitlePrefix}} {{DisplayName}} v{{version}} - Windows (x64)</Title>
 		<Description><![CDATA[
-This task will download and install "{{DisplayName}} v{{version}}" package onto selected endpoints <br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}}
-{{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:256px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}}
+{{>DescriptionBasic}}
+{{>DescriptionIcon}}
 		]]></Description>
 <Relevance>windows of operating system</Relevance>
 		<Relevance>(if( name of operating system starts with "Win" ) then platform id of operating system != 3 else false) AND (if exists property "in proxy agent context" then ( not in proxy agent context ) else true ) </Relevance>
@@ -13,7 +13,7 @@ This task will download and install "{{DisplayName}} v{{version}}" package onto 
 		<Relevance>/*App exist but older version*/(exists value "DisplayVersion" whose (it as string as version &lt; "{{version}}") of keys whose (value "DisplayName" of it as string as lowercase contains "oracle vm virtualbox")  of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\" of native registry) OR /*App does not exist*/ not exist keys whose (value "DisplayName" of it as string as lowercase contains "oracle vm virtualbox")  of keys "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\" of native registry</Relevance>
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
-		<Source>BigFix</Source>
+		<Source>{{VendorFolder}}</Source>
 		<SourceID>BigFix</SourceID>
 		<SourceReleaseDate>{{SourceReleaseDate}}</SourceReleaseDate>
 		<SourceSeverity></SourceSeverity>
@@ -21,7 +21,7 @@ This task will download and install "{{DisplayName}} v{{version}}" package onto 
 		<SANSID></SANSID>
 		<MIMEField>
 			<Name>action-ui-metadata</Name>
-			<Value>{ {{#version}}"version":"{{version}}",{{/version}}"size":{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}{{#icon_base64}},"icon":"data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}"{{/icon_base64}} }</Value>
+			<Value>{{>action-ui-metadata}}</Value>
 		</MIMEField>
 		<MIMEField>
 			<Name>x-fixlet-modification-time</Name>

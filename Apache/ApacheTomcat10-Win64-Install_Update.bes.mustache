@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>Install/Update: {{DisplayName}} v{{version}} - Windows (x64)</Title>
+		<Title>{{>TitlePrefix}} {{DisplayName}} v{{version}} - Windows (x64)</Title>
 		<Description><![CDATA[
 This task will download and install "{{DisplayName}} v{{version}}" package onto selected endpoints <br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}}
 <br><br><b>Prerequisite:</b> Supported Java versions 8 and later with a JAVA_HOME environment variable set to the installed JDK or JRE on the target endpoint.
@@ -10,9 +10,12 @@ This task will download and install "{{DisplayName}} v{{version}}" package onto 
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
 		<Relevance><![CDATA[/* Prerequisite for a JAVA_HOME environment variable which needs to be set to a JDK or JRE path */ exists value "JAVA_HOME" whose (it as string as lowercase contains "jdk" or it as string as lowercase contains "jre") of keys "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" of (x32 registries; x64 registries)]]></Relevance>
-		<Relevance><![CDATA[
-not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)
-		]]></Relevance>
+		{{#patch}}{{#DisplayName}}
+		<Relevance><![CDATA[{{#install_only}}not {{/install_only}}exists keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		{{/DisplayName}}{{/patch}}
+		{{^install_only}}
+		<Relevance><![CDATA[not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		{{/install_only}}
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
 		<Source>Apache</Source>
@@ -23,7 +26,7 @@ not exists (it as string as version) whose(it >= "{{version}}") of values "Displ
 		<SANSID></SANSID>
 		<MIMEField>
 			<Name>action-ui-metadata</Name>
-			<Value>{ {{#version}}"version":"{{version}}",{{/version}}"size":{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}{{#icon_base64}},"icon":"data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}"{{/icon_base64}} }</Value>
+			<Value>{{>action-ui-metadata}}</Value>
 		</MIMEField>
 		<MIMEField>
 			<Name>x-fixlet-modification-time</Name>
