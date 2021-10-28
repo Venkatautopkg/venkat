@@ -3,8 +3,8 @@
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 		<Title>{{^patch}}Install/{{/patch}}Update: {{DisplayName}} v{{version}} - Windows{{#64BitOnly}} (x64){{/64BitOnly}}</Title>
 		<Description><![CDATA[
-This task will download and install "{{DisplayName}} v{{version}}" package onto selected endpoints <br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}}
-{{^patch}}{{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:256px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}}{{/patch}}
+{{>DescriptionBasic}}
+{{>DescriptionIcon}}
 		]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		{{#64BitOnly}}
