@@ -28,7 +28,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://static.techspot.com/images2/downloads/topdownload/2014/12/classicshell.png
+      url: https://www.fosshub.com/media/img/project/icons/5b964ee25dc7e865ea596356.png
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
