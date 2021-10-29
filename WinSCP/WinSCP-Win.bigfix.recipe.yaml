@@ -3,6 +3,7 @@ Description: Download WinSCP Generates BigFix Task for latest WinSCP
 Identifier: com.github.bigfix.bigfix.WinSCP-Win
 Input:
   NAME: WinSCP
+  DisplayName: WinSCP
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.WinSCP-Win
 Process:
@@ -30,15 +31,3 @@ Process:
       bes_file: "%RECIPE_CACHE_DIR%/%NAME%.bes"
       bes_customsite: "AutoPKG"
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
-
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "patch"
-      append_value: True
-
-  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
-    Arguments:
-      # template_file_path: "%template_file_path%"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
-  - Processor: com.github.jgstew.SharedProcessors/BESImport
