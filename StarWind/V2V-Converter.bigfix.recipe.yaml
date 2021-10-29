@@ -25,10 +25,8 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
     Arguments:
       file_pathname: "StarWind/%NAME%-icon.png"
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"

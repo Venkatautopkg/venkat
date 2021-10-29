@@ -6,6 +6,7 @@ Input:
   NAME: "AdoptOpenJDK8-JDK"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Eclipse Temurin JDK with Hotspot"
+  VendorFolder: AdoptOpenJDK
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.AdoptOpenJDK8-JDK
 Process:
@@ -35,12 +36,8 @@ Process:
       append_key: "icon_base64"
       append_value: "%file_base64%"
 
-  # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
-  #   This is only needed if the template uses extra variables
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:

@@ -24,11 +24,8 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      dictionary_name: template_dictionary
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       dictionary_name: template_dictionary

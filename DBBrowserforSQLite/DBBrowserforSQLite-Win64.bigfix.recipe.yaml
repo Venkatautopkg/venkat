@@ -4,6 +4,7 @@ Identifier: com.github.bigfix.bigfix.DBBrowserforSQLite-Win64
 Input:
   NAME: DBBrowserforSQLite
   DisplayName: DB Browser for SQLite
+  VendorFolder: DBBrowserforSQLite
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.DBBrowserforSQLite-Win64
 Process:
@@ -14,10 +15,8 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
     Arguments:
       file_pathname: "%NAME%/%NAME%-icon.png"
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"

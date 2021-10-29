@@ -6,7 +6,7 @@ Input:
   icon_url: https://i.pinimg.com/originals/32/a0/3a/32a03aee0c76419ec5bde950a62883bc.png
   DisplayName: "SQL Server Management Studio"
   VendorFolder: SQLServerManagementStudio
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.SMSS-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -20,7 +20,7 @@ Process:
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
-# download icon file:
+  # download icon file:
   - Processor: URLDownloaderPython
     Arguments:
       # need to provide filename to not overwrite the setup file
@@ -37,12 +37,8 @@ Process:
     Arguments:
       append_key: "icon_base64"
       append_value: "%file_base64%"
-  # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
-  #   This is only needed if the template uses extra variables
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "DocLink"
@@ -77,7 +73,6 @@ Process:
       template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
-
 
     # create unistall  content:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend

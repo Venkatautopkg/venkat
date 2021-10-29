@@ -35,12 +35,8 @@ Process:
     Arguments:
       append_key: "version"
       append_value: "%msi_property_value%"
-  # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
-  #   This is only needed if the template uses extra variables
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary

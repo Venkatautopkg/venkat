@@ -4,6 +4,7 @@ Identifier: com.github.bigfix.bigfix.iCloud-Win64
 Input:
   NAME: "iCloud"
   DisplayName: "iCloud"
+  VendorFolder: Apple
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.iCloud-Win64
 Process:
@@ -17,10 +18,8 @@ Process:
       url: https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/ICloud_logo.svg/100px-ICloud_logo.svg.png
       COMPUTE_HASHES: False
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"

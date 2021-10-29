@@ -19,12 +19,8 @@ Process:
     Arguments:
       # TODO: get version from file!
       template_version: "11.0.0.1"
-  # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
-  #   This is only needed if the template uses extra variables
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
     Arguments:
       file_pathname: "MSI-Tools/%NAME%-icon.png"

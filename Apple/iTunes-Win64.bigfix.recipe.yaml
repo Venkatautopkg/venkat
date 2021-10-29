@@ -4,6 +4,7 @@ Identifier: com.github.bigfix.bigfix.iTunes-Win64
 Input:
   NAME: "iTunes"
   DisplayName: "iTunes"
+  VendorFolder: Apple
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.iTunes-Win64
 Process:
@@ -17,10 +18,8 @@ Process:
       url: https://support.apple.com/library/content/dam/edam/applecare/images/en_US/macos/macos-high-sierra-itunes-app-icon.png
       COMPUTE_HASHES: False
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"
