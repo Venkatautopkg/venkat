@@ -8,7 +8,7 @@ Input:
   DisplayName: "Microsoft ASP.NET Core Hosting Bundle Runtime"
   UninstallName1: "Microsoft .NET"
   UninstallName2: "Windows Server Hosting"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.ASPDotNetCoreHostingBundle5-Win64
 Process:
   # `SharedUtilityMethods` must come first
@@ -71,3 +71,15 @@ Process:
   #   The action is an offer that requires user interaction to run in self service application
   #   The action targets all computers whose name contains `autopkg`
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      # template_file_path: "%template_file_path%"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport

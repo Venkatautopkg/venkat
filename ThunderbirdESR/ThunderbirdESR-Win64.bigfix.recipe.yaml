@@ -6,7 +6,7 @@ Input:
   icon_url: https://www.dailyhostnews.com/wp-content/uploads/2019/03/Azure-featured-1050x600.png
   DisplayName: "Thunderbird ESR"
   DocLink: https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15
-MinimumVersion: '1.28'
+MinimumVersion: "1.28"
 ParentRecipe: com.github.bigfix.download.ThunderbirdESR-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -14,7 +14,7 @@ Process:
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
-# download icon file:
+  # download icon file:
   - Processor: URLDownloaderPython
     Arguments:
       # need to provide filename to not overwrite the setup file
@@ -51,3 +51,15 @@ Process:
   #   The action is an offer that requires user interaction to run in self service application
   #   The action targets all computers whose name contains `autopkg`
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      # template_file_path: "%template_file_path%"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport

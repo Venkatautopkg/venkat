@@ -4,7 +4,7 @@ Identifier: com.github.bigfix.bigfix.Sysinternals-Win64
 Input:
   NAME: Sysinternals
   icon_url: https://api.nuget.org/v3-flatcontainer/rb.sysinternals/2019.6.12.20190614/icon
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Sysinternals-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -37,3 +37,15 @@ Process:
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      # template_file_path: "%template_file_path%"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport

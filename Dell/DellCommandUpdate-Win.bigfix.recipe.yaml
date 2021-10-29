@@ -42,5 +42,17 @@ Process:
   #   The action is an offer that requires user interaction to run in self service application
   #   The action targets all computers whose name contains `autopkg`
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
-# <Relevance>/* DELL Only */ exists values "vendor" whose(it as string as uppercase contains "DELL") of structures "bios_information" of smbios</Relevance>
-# <Relevance>/* check for supported model: OptiPlex, Latitude, Precision, Venue Tablets, XPS */ exists ((value "product_name" of structures "system_information" of smbios) as string as uppercase) whose(it starts with "OPTIPLEX" OR it starts with "LATITUDE" OR it starts with "PRECISION" OR it starts with "XPS" OR it starts with "VENUE")</Relevance>
+  # <Relevance>/* DELL Only */ exists values "vendor" whose(it as string as uppercase contains "DELL") of structures "bios_information" of smbios</Relevance>
+  # <Relevance>/* check for supported model: OptiPlex, Latitude, Precision, Venue Tablets, XPS */ exists ((value "product_name" of structures "system_information" of smbios) as string as uppercase) whose(it starts with "OPTIPLEX" OR it starts with "LATITUDE" OR it starts with "PRECISION" OR it starts with "XPS" OR it starts with "VENUE")</Relevance>
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      # template_file_path: "%template_file_path%"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport

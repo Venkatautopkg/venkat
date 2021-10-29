@@ -4,7 +4,7 @@ Identifier: com.github.bigfix.bigfix.Nessus-Agent-Win64
 Input:
   NAME: Nessus-Agent-Win64
   DisplayName: Nessus Agent
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.jgstew.download.Nessus-Agent-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/FileHasher
@@ -32,3 +32,15 @@ Process:
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      # template_file_path: "%template_file_path%"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
