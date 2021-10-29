@@ -42,6 +42,7 @@ Process:
       append_value: "%file_base64%"
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file

@@ -20,6 +20,7 @@ Process:
       # TODO: get version from file!
       template_version: "11.0.0.1"
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
     Arguments:
