@@ -11,6 +11,7 @@ Input:
   exe_file: True
   cmd_args: /verysilent /suppressmsgboxes /CLOSEAPPLICATIONS /mergetasks="!runcode,!desktopicon,addcontextmenufiles,addcontextmenufolders,associatewithfiles"
   template_file_path: ".templates/Shared-Win-Install_Update.bes.mustache"
+  icon_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/240px-Visual_Studio_Code_1.35_icon.svg.png"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.VSCode-Win64
 Process:
@@ -30,7 +31,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/240px-Visual_Studio_Code_1.35_icon.svg.png
+      url: "%icon_url%"
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
