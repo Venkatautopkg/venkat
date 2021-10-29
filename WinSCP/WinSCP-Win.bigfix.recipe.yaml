@@ -12,6 +12,8 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
       template_version: "%version%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"

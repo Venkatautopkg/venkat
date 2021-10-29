@@ -18,7 +18,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "DisplayName"
-      append_value: "%NAME%"
+      append_value: "%DisplayName%"
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"

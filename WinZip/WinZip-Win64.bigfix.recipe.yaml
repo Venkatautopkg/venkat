@@ -7,6 +7,7 @@ Input:
     WinZip
     # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: WinZip
+  64BitOnly: True
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.WinZip-Win64
 Process:
@@ -26,7 +27,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
-      append_key: "ProductVersion"
+      append_key: "version"
       append_value: "%msi_property_value%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:

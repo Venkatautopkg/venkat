@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>{{>TitlePrefix}} mRemoteNG v{{version}} - Windows (x64)</Title>
+		<Title>{{>TitlePrefix}} {{DisplayName}} v{{version}} - Windows (x64)</Title>
 		<Description><![CDATA[This task will download and install "mRemoteNG v{{version}}" package onto selected endpoints <br><br><b>Installation Command:</b> {{file_name}}  /qn /norestart<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}} KB]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
-		<Relevance><![CDATA[not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "mRemoteNG") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		{{#patch}}{{#DisplayName}}
+		<Relevance><![CDATA[{{#install_only}}not {{/install_only}}exists keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		{{/DisplayName}}{{/patch}}
+		{{^install_only}}
+		<Relevance><![CDATA[not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		{{/install_only}}
 		<Category></Category>
 		<DownloadSize>{{DownloadSize}}{{^DownloadSize}}0{{/DownloadSize}}</DownloadSize>
 		<Source>{{VendorFolder}}</Source>
