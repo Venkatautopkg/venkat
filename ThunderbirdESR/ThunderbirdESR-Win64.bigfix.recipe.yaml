@@ -6,7 +6,7 @@ Input:
   icon_url: https://www.dailyhostnews.com/wp-content/uploads/2019/03/Azure-featured-1050x600.png
   DisplayName: "Thunderbird ESR"
   DocLink: https://docs.microsoft.com/en-us/sql/azure-data-studio/download-azure-data-studio?view=sql-server-ver15
-MinimumVersion: "1.28"
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.ThunderbirdESR-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -15,22 +15,22 @@ Process:
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
   # download icon file:
-  - Processor: URLDownloaderPython
-    Arguments:
-      # need to provide filename to not overwrite the setup file
-      filename: "%NAME%-icon.png"
-      url: "%icon_url%"
-      COMPUTE_HASHES: False
-  - Processor: com.github.jgstew.SharedProcessors/FileImageResize
-  # get base64 of icon file
-  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
-    Arguments:
-      file_pathname: "%file_path_resized%"
-  # add base64 of icon file to Template Dictionary
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "icon_base64"
-      append_value: "%file_base64%"
+  # - Processor: URLDownloaderPython
+  #   Arguments:
+  #     # need to provide filename to not overwrite the setup file
+  #     filename: "%NAME%-icon.png"
+  #     url: "%icon_url%"
+  #     COMPUTE_HASHES: False
+  # - Processor: com.github.jgstew.SharedProcessors/FileImageResize
+  # # get base64 of icon file
+  # - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  #   Arguments:
+  #     file_pathname: "%file_path_resized%"
+  # # add base64 of icon file to Template Dictionary
+  # - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+  #   Arguments:
+  #     append_key: "icon_base64"
+  #     append_value: "%file_base64%"
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
