@@ -6,18 +6,15 @@ Input:
   NAME: "DockerDesktop"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Docker Desktop"
-  VendorFolder: Docker
+  64BitOnly: True
+  exe_file: True
+  cmd_args: install --quiet
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.DockerDesktop-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
-  #- Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      dictionary_name: download_info
-      append_key: file_name
-      append_value: DockerDesktop.exe
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -35,17 +32,11 @@ Process:
     Arguments:
       append_key: "icon_base64"
       append_value: "%file_base64%"
-  # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
-  #   If `SourceReleaseDate` is not provided, it will be set to today
-  #- Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      dictionary_name: template_dictionary
-      append_key: file_name
-      append_value: DockerDesktop.exe
+
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
@@ -70,5 +61,17 @@ Process:
     Arguments:
       # template_file_path: "%template_file_path%"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "install_only"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      # template_file_path: "%template_file_path%"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-InstallOnly.bes"
 
   - Processor: com.github.jgstew.SharedProcessors/BESImport
