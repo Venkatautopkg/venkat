@@ -7,11 +7,11 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Mozilla Thunderbird (x64 en-US)"
   FilePrefix: Thunderbird%20Setup%20
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
- # NOTE: every download recipe is going to be a bit different depending on the software
+  # NOTE: every download recipe is going to be a bit different depending on the software
   #        that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
@@ -22,5 +22,6 @@ Process:
     Arguments:
       url: https://download-installer.cdn.mozilla.net/pub/thunderbird/releases/%version%/win64/en-US/%FilePrefix%%version%.msi
       download_version: "%version%"
+      filename: ThunderbirdSetup.msi
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
