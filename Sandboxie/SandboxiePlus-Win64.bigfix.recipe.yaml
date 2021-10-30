@@ -36,6 +36,7 @@ Process:
       append_value: "%plusVersion%%plusLetter%"
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
   - Processor: URLDownloaderPython

@@ -5,7 +5,7 @@ Input:
   NAME: "TableauDesktop"
   DisplayName: "Tableau Desktop"
   UninstallName: "Tableau"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.TableauDesktop-Win64
 Process:
   # `BigFixPrefetchItem` takes the hashes from `FileHasher` and in the future `URLDownloaderPython`
@@ -23,10 +23,9 @@ Process:
     Arguments:
       append_key: "icon_base64"
       append_value: "%file_base64%"
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "SourceReleaseDate"

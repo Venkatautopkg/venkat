@@ -4,7 +4,7 @@ Identifier: com.github.bigfix.bigfix.Sysinternals-Win64
 Input:
   NAME: Sysinternals
   icon_url: https://api.nuget.org/v3-flatcontainer/rb.sysinternals/2019.6.12.20190614/icon
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Sysinternals-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem

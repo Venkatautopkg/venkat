@@ -4,7 +4,8 @@ Identifier: com.github.bigfix.bigfix.iTunes-Win64
 Input:
   NAME: "iTunes"
   DisplayName: "iTunes"
-MinimumVersion: '2.3'
+  VendorFolder: Apple
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.iTunes-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -17,10 +18,9 @@ Process:
       url: https://support.apple.com/library/content/dam/edam/applecare/images/en_US/macos/macos-high-sierra-itunes-app-icon.png
       COMPUTE_HASHES: False
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"
@@ -31,3 +31,15 @@ Process:
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      # template_file_path: "%template_file_path%"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport

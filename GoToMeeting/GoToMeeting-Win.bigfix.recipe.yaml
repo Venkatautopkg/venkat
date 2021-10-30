@@ -3,7 +3,8 @@ Description: Download GoToMeeting for Windows Generates BigFix Task for latest G
 Identifier: com.github.bigfix.bigfix.GoToMeeting-Win
 Input:
   NAME: GoToMeeting
-MinimumVersion: '2.3'
+  DisplayName: "%NAME%"
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.GoToMeeting-Win
 Process:
   # - Processor: com.github.jgstew.SharedProcessors/FileHasher
@@ -14,10 +15,9 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
     Arguments:
       file_pathname: GoToMeeting/GoToMeeting-Icon.png
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%NAME%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "icon_base64"

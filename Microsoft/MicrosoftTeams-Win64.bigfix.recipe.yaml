@@ -5,7 +5,7 @@ Input:
   NAME: "MicrosoftTeams"
   DisplayName: "Microsoft Teams"
   UninstallName: "Teams Machine-Wide Installer"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.MicrosoftTeams-Win64
 Process:
   # `FileHasher` will not be required in the future due to hashing behing handled by `URLDownloaderPython` instead
@@ -30,10 +30,9 @@ Process:
     Arguments:
       append_key: "icon_base64"
       append_value: "%file_base64%"
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "UninstallName"

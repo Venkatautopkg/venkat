@@ -338,4 +338,3 @@ echo Expected output `Found Version: 19.0.0.0`
 echo.
 echo Check the _setup folder for other items
 echo.
-pause

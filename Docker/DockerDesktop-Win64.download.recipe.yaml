@@ -7,7 +7,7 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Docker Desktop"
   FilePrefix: Docker%20Desktop%20Installer
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -22,5 +22,6 @@ Process:
     Arguments:
       url: https://desktop.docker.com/win/main/amd64/%FilePrefix%.exe
       download_version: "%version%"
+      filename: "DockerDesktopInstaller.exe"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

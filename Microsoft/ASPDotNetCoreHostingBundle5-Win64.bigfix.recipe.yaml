@@ -8,7 +8,7 @@ Input:
   DisplayName: "Microsoft ASP.NET Core Hosting Bundle Runtime"
   UninstallName1: "Microsoft .NET"
   UninstallName2: "Windows Server Hosting"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.ASPDotNetCoreHostingBundle5-Win64
 Process:
   # `SharedUtilityMethods` must come first
@@ -38,12 +38,9 @@ Process:
       append_key: "icon_base64"
       append_value: "%file_base64%"
 
-  # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
-  #   This is only needed if the template uses extra variables
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "DisplayName"
-      append_value: "%DisplayName%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
