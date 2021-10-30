@@ -42,9 +42,10 @@ def get_recipe_identifier(recipe_path):
             if "com.github.jgstew.SharedProcessors/FileGetBase64" in item["Processor"]:
                 return yaml_data["Identifier"]
             else:
+                # get all items that generate patch content:
                 if "Arguments" in item:
                     if "append_key" in item["Arguments"]:
-                        if "icon_base64" in item["Arguments"]["append_key"]:
+                        if "patch" in item["Arguments"]["append_key"]:
                             return yaml_data["Identifier"]
     except KeyError:
         print(f"ERROR: Yaml KeyError {recipe_path}")
