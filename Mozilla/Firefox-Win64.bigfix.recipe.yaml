@@ -15,13 +15,13 @@ Process:
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
-  # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
-  #   If `SourceReleaseDate` is not provided, it will be set to today
+    Arguments:
+      prefetch_url: "%download_url%"
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
-  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+ #- Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary

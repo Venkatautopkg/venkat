@@ -14,15 +14,14 @@ Process:
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
-
+    Arguments:
+      prefetch_url: "%download_url%"
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
-
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
-
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
   #   If variables are missing from the Template Dictionary, then that area will be blank
@@ -30,24 +29,19 @@ Process:
     Arguments:
       template_file_path: "./Microsoft/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
-
   # `BESImport` imports the generated BES content into a BigFix Server
   #   Which server and credentials are used is dictated by `~/.besapi.conf`
   - Processor: com.github.jgstew.SharedProcessors/BESImport
-
   # `BigFixActioner` creates an action from the imported BigFix Content
   #   The action is an offer that requires user interaction to run in self service application
   #   The action targets all computers whose name contains `autopkg`
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
-
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
       append_value: True
-
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       # template_file_path: "%template_file_path%"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
   - Processor: com.github.jgstew.SharedProcessors/BESImport
