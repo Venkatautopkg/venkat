@@ -154,6 +154,8 @@ if not exist %VSToolsPATH%\Microsoft.PythonTools.BuildCore* (
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %VSToolsPATH%\Microsoft.PythonTools.BuildCore*
+    echo Download URL:
+    echo   https://aka.ms/vs/16/release/vs_buildtools.exe
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
@@ -165,6 +167,8 @@ if not exist %VSToolsPATH%\Microsoft.VisualStudio.PackageGroup.VC.Tools* (
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %VSToolsPATH%\Microsoft.VisualStudio.PackageGroup.VC.Tools*
+    echo Download URL:
+    echo   https://aka.ms/vs/16/release/vs_buildtools.exe
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
@@ -176,6 +180,8 @@ if not exist %VSToolsPATH%\Microsoft.VisualStudio.Workload.MSBuildTools* (
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %VSToolsPATH%\Microsoft.VisualStudio.Workload.MSBuildTools*
+    echo Download URL:
+    echo   https://aka.ms/vs/16/release/vs_buildtools.exe
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
@@ -187,6 +193,8 @@ if not exist %VSToolsPATH%\Microsoft.VisualStudio.Workload.VCTools* (
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %VSToolsPATH%\Microsoft.VisualStudio.Workload.VCTools*
+    echo Download URL:
+    echo   https://aka.ms/vs/16/release/vs_buildtools.exe
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
@@ -198,6 +206,8 @@ if not exist %VSToolsPATH%\Win10SDK* (
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %VSToolsPATH%\Win10SDK*
+    echo Download URL:
+    echo   https://aka.ms/vs/16/release/vs_buildtools.exe
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.
