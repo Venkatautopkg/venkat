@@ -101,7 +101,12 @@ if exist %UserProfile%\AppData\Local\Autopkg\config.json (
     echo {} > %UserProfile%\AppData\Local\Autopkg\config.json
 )
 
-REM TODO: check visual studio build tools
+REM Check visual studio build tools
+REM download from here: https://aka.ms/vs/16/release/vs_buildtools.exe
+REM https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-build-tools?view=vs-2019
+REM https://docs.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist?view=msvc-160
+REM https://aka.ms/vs/16/release/vc_redist.x86.exe
+REM https://aka.ms/vs/16/release/vc_redist.x64.exe
 REM VSWhere check:
 REM   .\vswhere.exe -all -legacy -products * -format json
 REM WMI Relevance check:
@@ -136,6 +141,8 @@ if not exist %VSToolsPATH%\Microsoft.Build* (
     echo.
     echo ERROR: missing required Visual Studio Build Tools - Required for Python Pip installs
     echo ERROR: missing folder %VSToolsPATH%\Microsoft.Build*
+    echo Download URL:
+    echo   https://aka.ms/vs/16/release/vs_buildtools.exe
     echo Install Command:
     echo   vs_BuildTools.exe --norestart --passive --downloadThenInstall --includeRecommended --add Microsoft.VisualStudio.Workload.VCTools --add Microsoft.VisualStudio.Workload.MSBuildTools
     echo.

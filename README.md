@@ -15,6 +15,7 @@ Check your Windows Dev Env Setup using `check_setup_win.bat`
 - all recipes with duplicated "patch" processing: `descendants whose(name of it ends with "bigfix.recipe.yaml" and 2 = number of lines containing "append_key: " whose(it contains "patch") of it) of folders "Documents\_Code\bigfix-recipes" of folders of folders "C:\Users"`
 - recipes missing DisplayName in Input: `following texts of firsts "bigfix-recipes\" of pathnames of descendants whose(name of it ends with "bigfix.recipe.yaml" and 0 = number of lines containing " DisplayName:" whose(it starts with " DisplayName:") of it) of folders "Documents\_Code\bigfix-recipes" of folders of folders "C:\Users"`
 - recipes missing VendorFolder and what the vendor folder should be: `(it, (" VendorFolder: " & it) of preceding texts of firsts "\" of it) of following texts of firsts "bigfix-recipes\" of pathnames of descendants whose(name of it ends with ".bigfix.recipe.yaml" and 0 = number of lines containing " VendorFolder: " of it) of folders "Documents\_Code\bigfix-recipes" of folders of folders "C:\Users"`
+- get bes patch files: `pathnames of files whose(name of it ends with "-Update.bes") of folders whose(name of it starts with "com.github.bigfix.bigfix.") of folders "Library/AutoPkg/Cache" of folders of folders "/Users"`
 
 ## Related Documentation:
 

@@ -6,6 +6,8 @@ Input:
   NAME: "ZoomClient"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Zoom"
+  cpe_product: meetings
+  # example CPE: cpe:2.3:a:zoom:meetings:5.8.0:*:*:*:*:windows:*:*
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.zoomclient-win64
 Process:
