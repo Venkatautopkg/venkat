@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest AllwaySync
-Identifier: com.github.bigfix.download.AllwaySync-Win64
+Description: Downloads the latest OpenShot
+Identifier: com.github.bigfix.download.OpenShot-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "AllwaySync"
+  NAME: "OpenShot"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Allway Sync"
+  DisplayName: "OpenShot"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://allwaysync.com/download/
+      url: https://www.openshot.org/download/
       # example match `example`
-      re_pattern: 'Latest version: <strong>(?P<version>\d+\.\d+\.\d+)'
+      re_pattern: '>OpenShot (?P<version>\d+\.\d+\.\d+) Released'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://allwaysync.com/content/download/allwaysync-x64.exe
+      url: https://github.com/OpenShot/openshot-qt/releases/download/v%version%/OpenShot-v%version%-x86_64.exe
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
