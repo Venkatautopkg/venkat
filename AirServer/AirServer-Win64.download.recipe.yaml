@@ -1,12 +1,12 @@
 ---
-Description: Downloads the latest PDF24
-Identifier: com.github.bigfix.download.PDF24Creator-Win64
+Description: Downloads the latest AirServer
+Identifier: com.github.bigfix.download.AirServer-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "PDF24Creator"
+  NAME: "AirServer"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "PDF24 Creator"
-MinimumVersion: "2.3"
+  DisplayName: "AirServer"
+MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://tools.pdf24.org/en/creator
+      url: https://support.airserver.com/support/solutions/articles/43000516018-airserver-universal-for-windows-7-8-1-10-release-notes
       # example match `example`
-      re_pattern: '"softwareVersion": "(?P<version>\d+\.\d+\.\d+)'
+      re_pattern: '<strong>Version (?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://stx.pdf24.org/products/pdf-creator/download/pdf24-creator-%version%.msi
-      download_version: "%version%"
+      url: https://dl.airserver.com/pc32/AirServer-5.6.3-x64.msi
+#      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

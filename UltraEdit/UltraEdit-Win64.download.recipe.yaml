@@ -1,25 +1,25 @@
 ---
-Description: Downloads the latest PDF24
-Identifier: com.github.bigfix.download.PDF24Creator-Win64
+Description: Downloads the latest UltraEdit
+Identifier: com.github.bigfix.download.UltraEdit-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "PDF24Creator"
+  NAME: "UltraEdit"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "PDF24 Creator"
+  DisplayName: "UltraEdit"
 MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  - Processor: URLTextSearcher
-    Arguments:
-      url: https://tools.pdf24.org/en/creator
-      # example match `example`
-      re_pattern: '"softwareVersion": "(?P<version>\d+\.\d+\.\d+)'
+  # - Processor: URLTextSearcher
+  #   Arguments:
+  #     url: https://www.ultraedit.com/
+  #     # example match `example`
+  #     re_pattern: 'Download UltraEdit <small>v(?P<version>\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://stx.pdf24.org/products/pdf-creator/download/pdf24-creator-%version%.msi
-      download_version: "%version%"
+      url: https://downloads.ultraedit.com/main/ue/win/ue_english_64.exe
+      #download_version: ""
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

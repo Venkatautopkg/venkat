@@ -1,0 +1,69 @@
+---
+Description: Generates a BigFix Task for the latest AirServer
+Identifier: com.github.bigfix.bigfix.AirServer-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "AirServer"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "AirServer"
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.download.AirServer-Win64
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+  # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
+  #   Then it assembles them into a BigFix Prefetch Statement or Block
+  - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+
+  # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
+  #   If `SourceReleaseDate` is not provided, it will be set to today
+  - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAb1BMVEX///83SFgwQlN2gIkbNEiKkpkrP1CYn6YxQ1QgNkpncnzc3uB/iJH09fYpPU+jqa6RmKAWMEXLztG0ub59ho+us7nk5uhUYW4+Tl1FVGO+wsaGjpYAJz6epKvHys7m6OldaXVXY3DT1tltd4IAIztul3bcAAADO0lEQVR4nO3cjVLiMBiFYQOltgqFCqKIiIt7/9e46iomJG3ThpBvnPdxxhmRhhwo4ZS/qysAAAAAAAAAAAAAAAAAAAAAAAAAACDcU+oJxDZ+vk09hbh2pcpnqScR00umVPGQehYR7d8DKlWNU88jnsfiI6Eq56knEsvrSP1X36WeShyTSn0r96knE8MyOwZUxWPq2URwWytNfpN6Pmc3y5WhWqSekWU23n6Y+hsftM0fCjOhyvT6tl31GPfD6j5CwudRP6X+sDeu1Klaq2/rOu85+DZCwsyaY6uRXl3mpescWn276zl6PkmfMO+cf/d1IDphpu2D+4ZNq5U2vmM/Fp2w1teRx9NV5luprxfWWiQ6ofFYcCxrjitCq2+zPjdi6oTG4/mibeZ6fTv0uYS0CY1Otmzdrth4n1VSQv2GMcuaY6r6zT3x3lHTJjTuXM33wS+l511WUELj+NZjgTTqm/JcUFMmzPWytvLZ7bL1zwZND50pEuZu1YCiUmj156VuGNjcfy+QcLNw2w4om6M/2uUsJ+6Bp0bE+AkLjyPYvXfVrKbdo62N0WQkbCxrtqz7cO9WXsKbk6P6VvWhazh5CVvLmq3seq5fXMKnnoeTRn1zkZawq6zZ8reOEWUlnPU51vtSXrcOKSzhg2+/1NWtL57KSuhV1mx6fbOIStjzWaWfQYuWBVVSwkPvVebb6LV5VEEJ/cuaraW+CUq4GbCOHjXXNzkJe5U1W2N9E5NwEbCPfqoaVhspCfuWNVtTfROScD14GdUm765vMhLOwvO9K3dyEw4qazZnfRORcDqsrNlc9U1CwvvgVeY4urIXVAEJh5c1m6O+pU+4P9cu+qmyXqdPnzCorNmypbSEN1nDc9XWk+Ke/p7Ut9QJ19fzczvp4KkTxkfCcCSMjYThSBgbCcORMDYShiNhbCQMR8LYSBiOhLGRMBwJYyNhOBLGRsJwJIyNhOFIGNulP2+hNqvxZb0VF06oen46P5j5InrqT8nGR0ISkjA9EpKQhOmRkITOhM+ebz4803sT20X5nqjF9Xnsjr93nz/m6dofO+Okk3//+i96BQAAAAAAAAAAAAAAAAAAAAAAAAAAEf0Dt3JWxLHLS94AAAAASUVORK5CYII=
+      COMPUTE_HASHES: False
+
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "version"
+      append_value: "%msi_property_value%"
+  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
+  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
+
+  # `ContentFromTemplate` generates bigfix content from a mustache template file
+  #   The file is filled out with variables from the Template Dictionary
+  #   If variables are missing from the Template Dictionary, then that area will be blank
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      template_file_path: "./AirServer/%NAME%-Win64-Install_Update.bes.mustache"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
+
+  # `BESImport` imports the generated BES content into a BigFix Server
+  #   Which server and credentials are used is dictated by `~/.besapi.conf`
+  - Processor: com.github.jgstew.SharedProcessors/BESImport
+
+  # `BigFixActioner` creates an action from the imported BigFix Content
+  #   The action is an offer that requires user interaction to run in self service application
+  #   The action targets all computers whose name contains `autopkg`
+  - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "patch"
+      append_value: True
+
+  - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
+    Arguments:
+      # template_file_path: "%template_file_path%"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+
+  - Processor: com.github.jgstew.SharedProcessors/BESImport

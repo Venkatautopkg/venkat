@@ -1,12 +1,12 @@
 ---
-Description: Downloads the latest PDF24
-Identifier: com.github.bigfix.download.PDF24Creator-Win64
+Description: Downloads the latest Filebeat
+Identifier: com.github.bigfix.download.Filebeat-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "PDF24Creator"
+  NAME: "Filebeat"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "PDF24 Creator"
-MinimumVersion: "2.3"
+  DisplayName: "Filebeat"
+MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://tools.pdf24.org/en/creator
+      url: https://www.elastic.co/downloads/beats/filebeat
       # example match `example`
-      re_pattern: '"softwareVersion": "(?P<version>\d+\.\d+\.\d+)'
+      re_pattern: 'Version: </strong>(?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://stx.pdf24.org/products/pdf-creator/download/pdf24-creator-%version%.msi
+      url: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-%version%-windows-x86_64.msi
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
