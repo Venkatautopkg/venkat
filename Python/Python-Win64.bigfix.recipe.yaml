@@ -13,6 +13,7 @@ Process:
     Arguments:
       template_version: "%latest_version%"
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:

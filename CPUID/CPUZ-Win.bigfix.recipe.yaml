@@ -22,6 +22,7 @@ Process:
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
   # download icon file:

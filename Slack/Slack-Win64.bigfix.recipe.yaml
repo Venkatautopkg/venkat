@@ -40,6 +40,7 @@ Process:
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate

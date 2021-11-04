@@ -6,11 +6,11 @@ Input:
   NAME: "VSCode"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Microsoft Visual Studio Code"
-  VendorFolder: Microsoft
   64BitOnly: True
   exe_file: True
   cmd_args: /verysilent /suppressmsgboxes /CLOSEAPPLICATIONS /mergetasks="!runcode,!desktopicon,addcontextmenufiles,addcontextmenufolders,associatewithfiles"
   template_file_path: ".templates/Shared-Win-Install_Update.bes.mustache"
+  cpe_product: visual_studio_code
   icon_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/240px-Visual_Studio_Code_1.35_icon.svg.png"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.VSCode-Win64
@@ -43,6 +43,7 @@ Process:
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
