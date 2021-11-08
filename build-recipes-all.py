@@ -93,13 +93,16 @@ def copy_update_fixlet(raw_output):
 
     re_update_filepath = "ContentFromTemplate: +Content File += +(.*-Update.bes)"
 
-    update_filepath = re.search(re_update_filepath, raw_output).group(1)
+    re_match = re.search(re_update_filepath, raw_output)
 
-    # print(update_filepath)
+    if re_match:
+        update_filepath = re_match.group(1)
 
-    if os.path.isfile(update_filepath):
-        # copy file found in output to destination folder
-        return shutil.copy(update_filepath, dst_dir_pathstring)
+        # print(update_filepath)
+
+        if os.path.isfile(update_filepath):
+            # copy file found in output to destination folder
+            return shutil.copy(update_filepath, dst_dir_pathstring)
 
 
 def run_recipe(recipe_id):
