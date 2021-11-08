@@ -7,7 +7,6 @@ import glob
 import os
 import random
 import subprocess
-import sys
 import time
 import shutil
 import re
@@ -153,7 +152,7 @@ def get_last_runtime_recipe(recipe_identifier):
 def run_first_or_oldreceipt_recipes(recipe_identifiers, min_age_hours=6):
     """run recipes that have never been run, or last run min_age_hours ago"""
     # print function name:
-    print(sys._getframe().f_code.co_name + "()")
+    print("run_first_or_oldreceipt_recipes(recipe_identifiers, min_age_hours=6)")
     print(f"Total Recipes: {len(recipe_identifiers)}")
     # ~/Library/AutoPkg/Cache
     autopkg_cache_path = os.path.expanduser("~/Library/AutoPkg/Cache")
