@@ -22,18 +22,18 @@ Process:
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
 
-  - Processor: URLDownloaderPython
-    Arguments:
-      filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/en/a/a0/GOM_Player_Logo.png
-      COMPUTE_HASHES: False
+  # - Processor: URLDownloaderPython
+  #   Arguments:
+  #     filename: "%NAME%-icon.png"
+  #     url: https://upload.wikimedia.org/wikipedia/en/a/a0/GOM_Player_Logo.png
+  #     COMPUTE_HASHES: False
 
-  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  # - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
 
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "icon_base64"
-      append_value: "%file_base64%"
+  # - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+  #   Arguments:
+  #     append_key: "icon_base64"
+  #     append_value: "%file_base64%"
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
