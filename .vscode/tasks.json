@@ -26,9 +26,9 @@
     {
       "label": "run all recipes",
       "type": "shell",
-      "command": "python3 build-recipes-all.py",
+      "command": "python3 build_recipes_all.py",
       "windows": {
-        "command": "python build-recipes-all.py"
+        "command": "python build_recipes_all.py"
       },
       "dependsOn": ["check-setup-win"],
       "group": {
