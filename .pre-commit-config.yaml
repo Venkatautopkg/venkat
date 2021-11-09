@@ -2,6 +2,7 @@
 # run on only items staged in git:  pre-commit
 # automatically run on commit:      pre-commit install
 # check all files in repo:          pre-commit run --all-files
+# update all checks to latest:      pre-commit autoupdate
 # https://github.com/pre-commit/pre-commit-hooks
 repos:
   - repo: https://github.com/homebysix/pre-commit-macadmin
@@ -45,3 +46,11 @@ repos:
     hooks:
       - id: yamllint
         args: [-c=.yamllint.yaml]
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.4.2
+    hooks:
+      - id: isort
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+      - id: black
