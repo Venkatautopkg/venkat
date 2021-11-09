@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "GitHubDesktop-Win64"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "GitHub Desktop for Windows"
+  DisplayName: "GitHub Desktop"
   VendorFolder: GitHubDesktop
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.GitHubDesktop-Win64
@@ -15,6 +15,8 @@ Process:
   # `BigFixPrefetchItem` takes the hashes from `FileHasher` and in the future `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+    Arguments:
+      prefetch_url: "%download_url%"
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary

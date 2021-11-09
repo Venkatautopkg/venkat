@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "GitHubDesktop-Win64"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "GitHub Desktop for Windows"
+  DisplayName: "GitHub Desktop"
 MinimumVersion: '2.3'
 Process:
   - Processor: com.github.jgstew.SharedProcessors/URLTextSearcherArray
@@ -16,7 +16,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://central.github.com/deployments/desktop/desktop/latest/win32
-      filename: GitHubDesktopSetup-x64.exe
       prefetch_filename: True
       User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
