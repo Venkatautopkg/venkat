@@ -16,6 +16,7 @@ Check your Windows Dev Env Setup using `check_setup_win.bat`
 - recipes missing DisplayName in Input: `following texts of firsts "bigfix-recipes\" of pathnames of descendants whose(name of it ends with "bigfix.recipe.yaml" and 0 = number of lines containing " DisplayName:" whose(it starts with " DisplayName:") of it) of folders "Documents\_Code\bigfix-recipes" of folders of folders "C:\Users"`
 - recipes missing VendorFolder and what the vendor folder should be: `(it, (" VendorFolder: " & it) of preceding texts of firsts "\" of it) of following texts of firsts "bigfix-recipes\" of pathnames of descendants whose(name of it ends with ".bigfix.recipe.yaml" and 0 = number of lines containing " VendorFolder: " of it) of folders "Documents\_Code\bigfix-recipes" of folders of folders "C:\Users"`
 - get bes patch files: `pathnames of files whose(name of it ends with "-Update.bes") of folders whose(name of it starts with "com.github.bigfix.bigfix.") of folders "Library/AutoPkg/Cache" of folders of folders "/Users"`
+- get generated CPE vendor:product that are not in real world list: `elements of (it - set of (it as trimmed string) of lines of files "/tmp/cpe vendor product.txt") of sets of preceding texts of lasts ":" of preceding texts of firsts ":*" of following texts of firsts "cpe:2.3:a:" of lines containing "cpe:2.3:a:" of files whose(exists lines containing "cpe:2.3:a:" of it AND name of it ends with ".bes") of (it; folders of it) of folders "updates-for-win-apps" of folders "Documents/_Code" of folders of folders "/Users"`
 
 ## Related Documentation:
 

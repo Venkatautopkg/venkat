@@ -5,6 +5,7 @@ Input:
   NAME: Podman
   DisplayName: "%NAME%"
   VendorFolder: "%NAME%"
+  cpe_vendor: podman_project
   template_file_path: ".templates/Shared-Win-Install_Update.bes.mustache"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Podman-Win64
