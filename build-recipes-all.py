@@ -5,12 +5,12 @@ run all AutoPkg recipes in repo
 import datetime
 import glob
 import os
+import pathlib
 import random
+import re
+import shutil
 import subprocess
 import time
-import shutil
-import re
-import pathlib
 
 import yaml
 
@@ -43,7 +43,6 @@ def get_recipe_identifier(recipe_path):
         # check if recipe has icon
         recipe_process = yaml_data["Process"]
         for item in recipe_process:
-            # print(item["Processor"])
             if "com.github.jgstew.SharedProcessors/FileGetBase64" in item["Processor"]:
                 return yaml_data["Identifier"]
             else:
