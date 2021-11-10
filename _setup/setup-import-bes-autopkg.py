@@ -13,17 +13,19 @@ import validate_bes_xml
 
 
 def rand_password(length=20):
+    """get a random password"""
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
 
-    all = string.ascii_letters + string.digits + "!#()*+,-.:;<=>?[]^_|~"
-    # print(all)
+    all_safe_chars = string.ascii_letters + string.digits + "!#()*+,-.:;<=>?[]^_|~"
+
     # https://medium.com/analytics-vidhya/create-a-random-password-generator-using-python-2fea485e9da9
-    password = "".join(random.sample(all, length))
+    password = "".join(random.sample(all_safe_chars, length))
     return password
 
 
 def bigfix_login():
+    """do login with besapi"""
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
 
@@ -44,6 +46,7 @@ def bigfix_login():
 
 
 def get_user_resource(bigfix_conn, user_name="autopkg"):
+    """get bigfix operator resource URI"""
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
 
@@ -55,6 +58,7 @@ def get_user_resource(bigfix_conn, user_name="autopkg"):
 
 
 def create_user(bigfix_conn, bes_file_path):
+    """create new user"""
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
 
@@ -74,6 +78,7 @@ def create_user(bigfix_conn, bes_file_path):
 def get_group_resource(
     bigfix_conn, site_path="master", group_name="AutoPkg Test Machines"
 ):
+    """get computer group resource URI"""
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
 
@@ -85,6 +90,7 @@ def get_group_resource(
 
 
 def create_group(bigfix_conn, bes_file_path, site_path="master"):
+    """create a new group"""
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
     xml_parsed = lxml.etree.parse(bes_file_path)
@@ -104,6 +110,7 @@ def create_group(bigfix_conn, bes_file_path, site_path="master"):
 
 
 def get_site_output(bigfix_conn, site_path="custom", site_name="autopkg"):
+    """get output of site"""
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
     result_site = bigfix_conn.get(f"site/{site_path}/{site_name}")
@@ -115,6 +122,7 @@ def get_site_output(bigfix_conn, site_path="custom", site_name="autopkg"):
 
 
 def create_site(bigfix_conn, bes_file_path, site_path="custom"):
+    """create new site"""
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
     xml_parsed = lxml.etree.parse(bes_file_path)
@@ -132,6 +140,7 @@ def create_site(bigfix_conn, bes_file_path, site_path="custom"):
 
 
 def main():
+    """execution starts here:"""
     # print function name:
     print(sys._getframe().f_code.co_name + "()")
 
