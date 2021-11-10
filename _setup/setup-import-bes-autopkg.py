@@ -66,7 +66,7 @@ def create_user(bigfix_conn, bes_file_path):
         print(f"WARNING: User Already Exists: {new_user_name}")
         return result_user
     print(f"Creating User {new_user_name}")
-    _user_result = bigfix_conn.post("operators", lxml.etree.tostring(xml_parsed))
+    _ = bigfix_conn.post("operators", lxml.etree.tostring(xml_parsed))
     # print(user_result)
     return get_user_resource(bigfix_conn, new_user_name)
 
@@ -126,7 +126,7 @@ def create_site(bigfix_conn, bes_file_path, site_path="custom"):
         print(f"WARNING: Site already exists: {new_site_name}")
         return result_site
 
-    _ = bigfix_conn.post(f"sites", lxml.etree.tostring(xml_parsed))
+    _ = bigfix_conn.post("sites", lxml.etree.tostring(xml_parsed))
 
     return get_site_output(bigfix_conn, site_path, new_site_name)
 
@@ -142,8 +142,7 @@ def main():
         sys.exit(exit_code)
     bigfix_cli = bigfix_login()
     group_resource = create_group(
-        bigfix_cli.bes_conn,
-        r"./_setup/Group-AutoPkgTestMachines.bes",
+        bigfix_cli.bes_conn, r"./_setup/Group-AutoPkgTestMachines.bes",
     )
     print(group_resource)
     print(create_user(bigfix_cli.bes_conn, r"./_setup/Operator-API_AutoPkg.bes"))
