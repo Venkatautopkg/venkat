@@ -1,0 +1,28 @@
+---
+Description: Downloads the latest PowerShell
+Identifier: com.github.bigfix.download.PowerShell
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "PowerShell"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "PowerShell"
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://github.com/PowerShell/powershell/releases
+      # example match `example`
+      re_pattern: 'v(?P<version>\d+\.\d+\.\d+) Release of PowerShell'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://github.com/PowerShell/PowerShell/releases/download/v%version%/PowerShell-%version%-win-x64.msi
+      prefetch_filename: True
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+      download_version: ""
+      COMPUTE_HASHES: True
+
+  - Processor: EndOfCheckPhase
