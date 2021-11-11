@@ -1,0 +1,30 @@
+---
+Description: Downloads the latest Total Commander
+Identifier: com.github.bigfix.download.TotalCommander
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "TotalCommander"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "Total Commander"
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.ghisler.com/download.htm
+      # example match `example`
+      re_pattern: 'tcmd(?P<version>\d+)x64.exe'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.ghisler.com/download.htm
+      # example match `example`
+      re_pattern: 'Download\s+version (?P<display_version>\d+\.\d+) of Total Commander'
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://totalcommander.ch/win/tcmd%version%x64.exe
+      download_version: ""
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
