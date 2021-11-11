@@ -50,9 +50,10 @@ hidden=true
 completion=job
 wait __Download\{{{file_name}}} /AHMGDU
 
-if { exists (now - it) whose(it < 2 * minute) of creation times of files "Total Commander 64 bit.lnk" of /* C:\Users\monishada.reddy\Desktop */ csidl folders 25 }
-delete "{pathnames of files "Total Commander 64 bit.lnk" of /* C:\Users\monishada.reddy\Desktop */ csidl folders 25}"
+if { exists (now - it) whose(it < 2 * minute) of creation times of files "Total Commander 64 bit.lnk" of folder "Desktop" of folder (name of current user as string) of folder "C:\users"}
+delete "{pathnames of files "Total Commander 64 bit.lnk" of folder "Desktop" of folder (name of current user as string) of folder "C:\users"}"
 endif
+
 // End]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
