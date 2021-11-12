@@ -15,8 +15,7 @@ MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.PowerShell
 Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
-    Arguments:
-      prefetch_url: "%download_url%"
+
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
       template_version: "%version%"
