@@ -1,19 +1,20 @@
 ---
-Description: Generates a BigFix Task for the latest Geekbench
-Identifier: com.github.bigfix.bigfix.Geekbench-Win64
+Description: Generates a BigFix Task for the latest CutePDFWriter-Win64
+Identifier: com.github.bigfix.bigfix.CutePDFWriter-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "Geekbench"
+  NAME: "CutePDFWriter"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Geekbench 5"
+  DisplayName: "CutePDF Writer"
   64BitOnly: True
+  RecipeStatus: To do
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.Geekbench-Win64
+ParentRecipe: com.github.bigfix.download.CutePDFWriter-Win64
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
 
-  # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
 
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
@@ -26,7 +27,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://www.geekbench.com/img/corktown/app-icon.png
+      url: https://www.cutepdf.com/images/cutepdfwriter.png
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -46,7 +47,7 @@ Process:
   #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Geekbench/%NAME%-Win64-Install_Update.bes.mustache"
+      template_file_path: "./CutePDF/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
