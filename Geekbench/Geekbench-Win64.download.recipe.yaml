@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest Krita
-Identifier: com.github.bigfix.download.Krita-Win64
+Description: Downloads the latest Geekbench
+Identifier: com.github.bigfix.download.Geekbench-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "Krita"
+  NAME: "Geekbench"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Krita"
+  DisplayName: "Geekbench 5"
 MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://krita.org/en/download/krita-desktop/
+      url: https://www.geekbench.com/download/windows/
       # example match `example`
-      re_pattern: 'stable/krita/(?P<version>\d+\.\d+\.\d+)'
+      re_pattern: 'are downloading Geekbench (?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://download.kde.org/stable/krita/%version%/krita-x64-%version%-setup.exe
+      url: https://cdn.geekbench.com/Geekbench-%version%-WindowsSetup.exe
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
