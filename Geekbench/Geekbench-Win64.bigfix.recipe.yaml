@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "Geekbench"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Geekbench 5"
+  DisplayName: "Geekbench"
   64BitOnly: True
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Geekbench-Win64
