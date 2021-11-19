@@ -1,0 +1,20 @@
+---
+Description: Downloads the latest AnyVideoConverter-Pro for Win64
+Identifier: com.github.bigfix.download.AnyVideoConverter-Pro-Win64
+Input:
+  # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
+  NAME: "AnyVideoConverter-Pro-Win64"
+  # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
+  DisplayName: "AnyVideoConverter-Pro"
+MinimumVersion: '2.3'
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  # NOTE: every download recipe is going to be a bit different depending on the software
+  #         that said, there a few common cases to use as examples.
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: https://www.any-video-converter.com/any-video-converter.exe
+      prefetch_filename: True
+      COMPUTE_HASHES: True
+  - Processor: EndOfCheckPhase
