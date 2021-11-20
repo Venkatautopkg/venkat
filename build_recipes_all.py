@@ -145,10 +145,14 @@ def get_last_runtime_recipe(recipe_identifier):
     # https://stackoverflow.com/a/39327156/861745
     files_path = os.path.join(recipe_receipt_dir, "*.plist")
     list_of_files = glob.iglob(files_path)
-    latest_file = max(list_of_files, key=os.path.getctime)
-    # print(latest_file)
-    # datetime.datetime.fromtimestamp(t)
-    return datetime.datetime.fromtimestamp(os.path.getmtime(latest_file))
+    try:
+        latest_file = max(list_of_files, key=os.path.getctime)
+        # print(latest_file)
+        # datetime.datetime.fromtimestamp(t)
+        return datetime.datetime.fromtimestamp(os.path.getmtime(latest_file))
+    except ValueError as err:
+        print(f"{err} for `{recipe_identifier}`")
+        return None
 
 
 def run_first_or_oldreceipt_recipes(recipe_identifiers, min_age_hours=6):
@@ -170,7 +174,13 @@ def run_first_or_oldreceipt_recipes(recipe_identifiers, min_age_hours=6):
     max_age_minutes = 0
     # add back recipes that haven't been run for min_age_hours
     for recipe_id in previous_recipes:
-        duration_s = (datetime_NOW - get_last_runtime_recipe(recipe_id)).total_seconds()
+        last_runtime = get_last_runtime_recipe(recipe_id)
+        # if last runtime not found, then it has never run
+        # by default, this will include unrun recipes
+        if not last_runtime:
+            recipe_identifiers.append(recipe_id)
+            continue
+        duration_s = (datetime_NOW - last_runtime).total_seconds()
         # https://stackoverflow.com/a/47207182/861745
         max_age_minutes = max(max_age_minutes, int(divmod(duration_s, 60)[0]))
         duration_h = int(divmod(duration_s, 3600)[0])

@@ -57,10 +57,10 @@ Process:
   #   The action targets all computers whose name contains `autopkg`
   - Processor: com.github.jgstew.SharedProcessors/BigFixActioner
 
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
-    Arguments:
-      append_key: "patch"
-      append_value: True
+  # - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+  #   Arguments:
+  #     append_key: "patch"
+  #     append_value: True
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
