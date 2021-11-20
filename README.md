@@ -18,6 +18,10 @@ Check your Windows Dev Env Setup using `check_setup_win.bat`
 - get bes patch files: `pathnames of files whose(name of it ends with "-Update.bes") of folders whose(name of it starts with "com.github.bigfix.bigfix.") of folders "Library/AutoPkg/Cache" of folders of folders "/Users"`
 - get generated CPE vendor:product that are not in real world list: `elements of (it - set of (it as trimmed string) of lines of files "/tmp/cpe vendor product.txt") of sets of preceding texts of lasts ":" of preceding texts of firsts ":*" of following texts of firsts "cpe:2.3:a:" of lines containing "cpe:2.3:a:" of files whose(exists lines containing "cpe:2.3:a:" of it AND name of it ends with ".bes") of (it; folders of it) of folders "updates-for-win-apps" of folders "Documents/_Code" of folders of folders "/Users"`
 
+## Helpful RegEx:
+
+- parse flat ini file for vendor_id: `^\s*vendor_id\s*=\s*(\d+)`
+
 ## Related Documentation:
 
 - https://github.com/jgstew/jgstew-recipes/wiki/Getting-Started-with-AutoPkg-Recipes
