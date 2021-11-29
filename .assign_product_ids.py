@@ -18,8 +18,8 @@ def patch_ruamel_yaml_emitter_no_blank_lines():
     def write_comment(self, comment, *args, **kwargs):
         # print("{:02d} {:02d} {!r}".format(self.column, comment.start_mark.column, comment.value))
         comment.value = comment.value.replace("\r\n", "\n")
-        if comment.value.strip():
-            self.old_write_comment(comment, *args, **kwargs)
+        # if comment.value.strip():
+        self.old_write_comment(comment, *args, **kwargs)
 
     ruamel.yaml.emitter.Emitter.write_comment = write_comment
 
@@ -83,7 +83,9 @@ def write_missing_product_id(file_item, next_id):
 
     with open(file_item, "rb") as stream:
         yaml_data = ruamel_yaml.load(stream)
-    yaml_data["Input"]["content_id_product"] = "00" + str(next_id)
+    yaml_data["Input"][
+        "content_id_product"
+    ] = ruamel.yaml.scalarstring.DoubleQuotedScalarString("00" + str(next_id))
     print(yaml_data["Input"])
     with open(file_item, "w") as f:
         ruamel_yaml.dump(yaml_data, f)
