@@ -7,11 +7,12 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "3D XML Player"
   VendorFolder: "%NAME%"
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.3DXMLPlayer-Win64
 Process:
   # `SharedUtilityMethods` must come first
-  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  #- Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
 
   # - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
 

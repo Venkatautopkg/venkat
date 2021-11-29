@@ -1,0 +1,16 @@
+---
+Description: This recipe is meant to be the parent recipe of all download recipes and help setup shared items and vars
+Identifier: com.github.bigfix.shared.parent-recipe
+Input:
+  NAME: "SHARED-PARENT-RECIPE"
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      search_path: "%VendorFolder%/vendor_metadata.cfg"
+      search_pattern: '^\s*content_id_vendor\s*=\s*(\d+)'
+      file_search_results_var: content_id_vendor
+      first_result_only: True
