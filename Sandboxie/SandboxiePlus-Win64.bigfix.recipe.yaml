@@ -10,7 +10,7 @@ Input:
   64BitOnly: True
   RecipeStatus: In Progress
   PublicDesktopShortcutFile: Sandboxie-Plus.lnk
-  cmd_args: /verysilent
+  cmd_args: /VERYSILENT /ALLUSERS
   exe_file: True
   icon_url: https://user-images.githubusercontent.com/12372772/123517080-8ab20a00-d69f-11eb-8e82-2e18cf6e0303.png
 MinimumVersion: "2.3"
@@ -33,7 +33,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "version"
-      append_value: "%plusVersion%%plusLetter%"
+      append_value: "%plusFilenameVersion64%"
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName

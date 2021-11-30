@@ -22,11 +22,11 @@ Process:
     Arguments:
       url: https://github.com/sandboxie-plus/Sandboxie/releases/latest
       # example match `example`
-      re_pattern: 'Sandboxie-Plus-x64-v(?P<plusFilename64>.*).exe'
+      re_pattern: 'Sandboxie-Plus-x64-v(?P<plusFilenameVersion64>.*).exe'
 
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://github.com/sandboxie-plus/Sandboxie/releases/download/%plusVersion%%plusLetter%/Sandboxie-Plus-x64-v%plusFilename64%.exe
+      url: https://github.com/sandboxie-plus/Sandboxie/releases/download/%plusVersion%%plusLetter%/Sandboxie-Plus-x64-v%plusFilenameVersion64%.exe
       download_version: "%plusVersion%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
