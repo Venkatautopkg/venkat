@@ -38,15 +38,16 @@
 				<Link>here</Link>
 				<PostLink> to deploy {{DisplayName}} v{{version}}.</PostLink>
 			</Description>
-			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[// Download:
+			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[
+// Download:
 {{{prefetch}}}
 
 // Install:
 override wait
 hidden=true
 completion=job
-wait __Download\{{{file_name}}} /VERYSILENT /MERGETASKS=!runcode]]>
-</ActionScript>
+wait __Download\{{{file_name}}} /VERYSILENT /MERGETASKS=!runcode
+// End]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
 		<Action ID="InfoPage">
