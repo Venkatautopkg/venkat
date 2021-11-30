@@ -115,22 +115,36 @@ def write_missing_product_ids(folder_item):
     return product_ids
 
 
+def assign_all_product_ids(root_folder=None):
+    """main execution"""
+    if not root_folder:
+        root_folder = os.path.abspath(os.path.curdir)
+
+    vendor_folders = get_vendor_folders(root_folder)
+
+    for folder_item in vendor_folders:
+        # print(folder_item)
+        write_missing_product_ids(folder_item)
+
+
 def main(root_folder=None):
     """Execution starts here"""
     print("main()")
 
     patch_ruamel_yaml_emitter_no_blank_lines()
 
-    if not root_folder:
-        root_folder = os.path.abspath(os.path.curdir)
+    assign_all_product_ids(root_folder)
 
-    vendor_folders = get_vendor_folders(root_folder)
-    # print(vendor_folders)
+    # if not root_folder:
+    #     root_folder = os.path.abspath(os.path.curdir)
 
-    print(write_missing_product_ids(vendor_folders[0]))
-    print(write_missing_product_ids(vendor_folders[1]))
-    print(write_missing_product_ids(vendor_folders[2]))
-    print(write_missing_product_ids(vendor_folders[3]))
+    # vendor_folders = get_vendor_folders(root_folder)
+    # # print(vendor_folders)
+
+    # print(write_missing_product_ids(vendor_folders[0]))
+    # print(write_missing_product_ids(vendor_folders[1]))
+    # print(write_missing_product_ids(vendor_folders[2]))
+    # print(write_missing_product_ids(vendor_folders[3]))
 
     # write a for loop to iterate over all the vendor folder
 
