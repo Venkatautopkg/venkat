@@ -8,7 +8,7 @@ Input:
   DisplayName: "Royal TS"
   VendorFolder: RoyalApps
   64BitOnly: True
-  RecipeStatus: To do
+  RecipeStatus: Verified
   template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
 # MinimumVersion of AutoPkg - Should always be 2.3 (or higher once a new version is released)
 MinimumVersion: "2.3"
@@ -20,10 +20,6 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
     Arguments:
       template_version: "%version%"
-  # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
-  - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
-  - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
-  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   # download icon file:
   - Processor: URLDownloaderPython
     Arguments:
