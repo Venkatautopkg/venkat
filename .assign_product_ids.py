@@ -66,13 +66,14 @@ def get_folder_product_ids(folder_item):
             if product_id:
                 product_ids.append(product_id)
 
+    if len(product_ids) != len(set(product_ids)):
+        raise ValueError("duplicate product ID found!", product_ids)
+
     return product_ids
 
 
 def write_missing_product_id(file_item, next_id):
     """write product id into yaml file"""
-    print("00" + str(next_id))
-    print(file_item)
     ruamel_yaml = ruamel.yaml.YAML()
     # keep current quotes in place:
     ruamel_yaml.preserve_quotes = True
@@ -81,14 +82,15 @@ def write_missing_product_id(file_item, next_id):
     # https://stackoverflow.com/a/44389139/861745
     ruamel_yaml.indent(mapping=2, sequence=4, offset=2)
 
-    with open(file_item, "rb") as stream:
-        yaml_data = ruamel_yaml.load(stream)
+    with open(file_item, "rb") as fr_stream:
+        yaml_data = ruamel_yaml.load(fr_stream)
+    # https://stackoverflow.com/a/339013/861745
     yaml_data["Input"][
         "content_id_product"
-    ] = ruamel.yaml.scalarstring.DoubleQuotedScalarString("00" + str(next_id))
+    ] = ruamel.yaml.scalarstring.DoubleQuotedScalarString(str(next_id).zfill(3))
     print(yaml_data["Input"])
-    with open(file_item, "w") as f:
-        ruamel_yaml.dump(yaml_data, f)
+    with open(file_item, "w") as fw_stream:
+        ruamel_yaml.dump(yaml_data, fw_stream)
     return next_id
 
 
@@ -127,6 +129,10 @@ def main(root_folder=None):
 
     print(write_missing_product_ids(vendor_folders[0]))
     print(write_missing_product_ids(vendor_folders[1]))
+    print(write_missing_product_ids(vendor_folders[2]))
+    print(write_missing_product_ids(vendor_folders[3]))
+
+    # write a for loop to iterate over all the vendor folder
 
 
 if __name__ == "__main__":
