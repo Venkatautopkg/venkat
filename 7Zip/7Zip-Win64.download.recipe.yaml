@@ -6,6 +6,7 @@ Input:
   NAME: 7Zip
   FileType: msi
 MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.shared.parent-recipe
 Process:
   - Processor: URLTextSearcher
     Arguments:

@@ -5,6 +5,7 @@ Input:
   NAME: 7Zip
   DisplayName: 7-Zip
   VendorFolder: 7Zip
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.7Zip-Win64
 Process:
@@ -24,7 +25,7 @@ Process:
       # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
       url: https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/7ziplogo.svg/320px-7ziplogo.svg.png
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
   # get base64 of icon file
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
   # add base64 of icon file to Template Dictionary
@@ -45,11 +46,10 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%content_id_vendor%%content_id_product%01 %NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
