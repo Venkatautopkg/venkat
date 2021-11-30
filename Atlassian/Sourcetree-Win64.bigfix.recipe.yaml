@@ -7,7 +7,7 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Sourcetree"
   VendorFolder: Atlassian
-  RecipeStatus: To do
+  RecipeStatus: Verified
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Sourcetree-Win64
 Process:
