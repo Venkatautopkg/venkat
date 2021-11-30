@@ -25,7 +25,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Flat_logo%2C_wordmark_and_slogan_mark_of_Inkscape.svg/1200px-Flat_logo%2C_wordmark_and_slogan_mark_of_Inkscape.svg.png
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Inkscape_Logo.svg/240px-Inkscape_Logo.svg.png
       COMPUTE_HASHES: False
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
