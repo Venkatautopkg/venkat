@@ -6,6 +6,8 @@ Input:
   NAME: "AdoptOpenJDK16-JDK"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Eclipse Temurin JDK with Hotspot"
+  OlderDisplayName: "AdoptOpenJDK JDK with Hotspot"
+  MajorVersion: "16"
   VendorFolder: AdoptOpenJDK
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.AdoptOpenJDK16-JDK
@@ -45,6 +47,18 @@ Process:
     Arguments:
       append_key: "version"
       append_value: "%msi_property_value%"
+
+  # AdoptOpenJDK had a product rename, handle looking for the old product name too.
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "OlderDisplayName"
+      append_value: "%OlderDisplayName%"
+
+  # To keep "Patch" content within the same Major Version, so a patch for JRE 16 doesn't upgrade JRE 8 for example.
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "MajorVersion"
+      append_value: "%MajorVersion%"
 
   # `ContentFromTemplate` generates bigfix content from a mustache template file
   #   The file is filled out with variables from the Template Dictionary
