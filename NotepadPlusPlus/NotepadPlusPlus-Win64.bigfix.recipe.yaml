@@ -13,7 +13,6 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
-  - Processor: com.github.jgstew.SharedProcessors/FileHasher
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
 
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
@@ -46,7 +45,7 @@ Process:
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./NotepadPlusPlus/NotepadPlusPlus-Win64-Install_Update.bes.mustache"
+      template_file_path: "./NotepadPlusPlus/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server
