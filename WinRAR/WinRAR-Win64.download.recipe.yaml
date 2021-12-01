@@ -5,7 +5,7 @@ Input:
   NAME: "WinRAR"
   FileType: exe
   DisplayName: "WinRAR"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -13,12 +13,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.win-rar.com/download.html?&L=0
+      url: "https://www.win-rar.com/download.html?&L=0"
       re_pattern: 'WinRAR (?P<version>\d+\.\d+) English 64 bit'
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.win-rar.com/download.html?&L=0
-      re_pattern: '<a href="/fileadmin/winrar-versions/winrar/winrar-x64-(?P<major_version>\d+\.)'
+      url: "https://www.win-rar.com/download.html?&L=0"
+      re_pattern: '/fileadmin/winrar-versions/winrar/winrar-x64-(?P<major_version>\d+\.)'
   - Processor: URLDownloaderPython
     Arguments:
       url: https://www.win-rar.com/fileadmin/winrar-versions/winrar/winrar-x64-%major_version%%FileType%
