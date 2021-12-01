@@ -17,10 +17,10 @@ Process:
   - Processor: URLTextSearcher
     Arguments:
       url: https://notepad-plus-plus.org/update/getDownloadUrl.php
-      re_pattern: "<Location>(?P<url>http.*)</Location>"
+      re_pattern: "<Location>(?P<url>http.*).exe</Location>"
   - Processor: URLDownloaderPython
     Arguments:
-      # url: "%url%"
+      url: "%url%.x64.exe"
       download_version: "%latest_version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
