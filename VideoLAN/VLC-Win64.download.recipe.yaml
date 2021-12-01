@@ -5,7 +5,7 @@ Input:
   NAME: "VLC"
   FileType: exe
   DisplayName: "VLC"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -13,7 +13,7 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: 'https://www.videolan.org/vlc/download-windows.html'
+      url: "https://www.videolan.org/vlc/download-windows.html"
       re_pattern: 'vlc-(?P<version>\d+\.\d+.\d+)-win64.exe'
   - Processor: URLDownloaderPython
     Arguments:

@@ -3,13 +3,13 @@
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 		<Title>{{>TitlePrefix}} {{DisplayName}} {{ComponentName}} v{{version}} - Windows (x64)</Title>
 		<Description><![CDATA[
-This task will download and install "{{DisplayName}} {{ComponentName}} v{{version}}" package onto selected endpoints <br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}}
-{{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:256px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}}
+{{>DescriptionBasic}}
+{{>DescriptionIcon}}
 		]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
 		{{#patch}}{{#DisplayName}}
-		<Relevance><![CDATA[{{#install_only}}not {{/install_only}}exists keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
+		<Relevance><![CDATA[{{#install_only}}not {{/install_only}}( (exists keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)) AND (exists files "tvnviewer.exe" of folders "TightVNC" of (program files folders; program files x64 folders)) ) ]]></Relevance>
 		{{/DisplayName}}{{/patch}}
 		{{^install_only}}
 		<Relevance><![CDATA[not exists (it as string as version) whose(it >= "{{version}}") of values "DisplayVersion" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
@@ -42,11 +42,13 @@ This task will download and install "{{DisplayName}} {{ComponentName}} v{{versio
 // Download:
 {{{prefetch}}}
 
+parameter "components" = "{ concatenations "," of unique values of ( "{{{ComponentName}}}";( ( if it = "tvnviewer.exe" then "Viewer" else NOTHINGS ); ( if it = "tvnserver.exe" then "Server" else NOTHINGS ) ) of names of (files "tvnserver.exe" of it; files "tvnviewer.exe" of it) of folders "TightVNC" of (program files folders; program files x64 folders) ) }"
+
 // Install:
 override wait
 hidden=true
 completion=job
-wait msiexec.exe /i __Download\{{{file_name}}} /qn ADDLOCAL={{{ComponentName}}}
+wait msiexec.exe /i __Download\{{{file_name}}} /qn ADDLOCAL={parameter "components"}
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>

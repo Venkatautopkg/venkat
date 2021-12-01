@@ -6,7 +6,7 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "TightVNC"
   ComponentName: "Viewer"
-MinimumVersion: "2.3.2"
+MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.tightvnc-win64
 Process:
   # `SharedUtilityMethods` must come first

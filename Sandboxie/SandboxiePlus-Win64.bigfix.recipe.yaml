@@ -8,7 +8,7 @@ Input:
   DisplayName: "Sandboxie Plus"
   VendorFolder: "Sandboxie"
   64BitOnly: True
-  RecipeStatus: In Progress
+  RecipeStatus: Verified
   PublicDesktopShortcutFile: Sandboxie-Plus.lnk
   cmd_args: /VERYSILENT /ALLUSERS
   exe_file: True

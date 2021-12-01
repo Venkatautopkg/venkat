@@ -1,14 +1,22 @@
 ---
-Description: Generates a BigFix Task for the latest VLC For Windows x64
-Identifier: com.github.bigfix.bigfix.VLC-Win64
+Description: Generates a BigFix Task for the latest AdoptOpenJDK16 (JDK) for Win64
+Identifier: com.github.bigfix.bigfix.AdoptOpenJDK17-JDK
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "VLC"
+  NAME: "AdoptOpenJDK17-JDK"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "VLC"
+  DisplayName: "Eclipse Temurin JDK with Hotspot"
+  OlderDisplayName: "AdoptOpenJDK JDK with Hotspot"
+  MajorVersion: "17"
+  VendorFolder: AdoptOpenJDK
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.VLC-Win64
+ParentRecipe: com.github.bigfix.download.AdoptOpenJDK17-JDK
 Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+
+  - Processor: com.github.jgstew.SharedProcessors/WinGetPropertyMSI
+
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
@@ -16,14 +24,13 @@ Process:
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
-  # download icon file:
+
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
-      url: https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/VLC_Icon.svg/212px-VLC_Icon.svg.png
+      url: https://projects.eclipse.org/sites/default/files/Logo_Adoptium_2021_03_08_JRR_RGB-V3C%20%281%29.png
       COMPUTE_HASHES: False
 
-  # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
@@ -36,9 +43,29 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "version"
+      append_value: "%msi_property_value%"
+
+  # AdoptOpenJDK had a product rename, handle looking for the old product name too.
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "OlderDisplayName"
+      append_value: "%OlderDisplayName%"
+
+  # To keep "Patch" content within the same Major Version, so a patch for JRE 16 doesn't upgrade JRE 8 for example.
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "MajorVersion"
+      append_value: "%MajorVersion%"
+
+  # `ContentFromTemplate` generates bigfix content from a mustache template file
+  #   The file is filled out with variables from the Template Dictionary
+  #   If variables are missing from the Template Dictionary, then that area will be blank
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./VideoLAN/VLC-Win64-Install_Update.bes.mustache"
+      template_file_path: "./AdoptOpenJDK/%NAME%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

@@ -1,12 +1,12 @@
 ---
-Description: Downloads the latest GlavSoft TightVNC For Windows x64
-Identifier: com.github.bigfix.download.tightvnc-win64
+Description: Downloads the latest AdoptOpenJDK11 (JRE) for Win64
+Identifier: com.github.bigfix.download.AdoptOpenJDK11-JRE
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "TightVNC"
+  NAME: "AdoptOpenJDK11-JRE"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "TightVNC"
-MinimumVersion: "2.3"
+  DisplayName: "Eclipse Temurin JRE with Hotspot"
+MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -14,12 +14,10 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.tightvnc.com/download.php
-      re_pattern: '<h3>Download TightVNC for Windows \(Version (?P<version>\d+\.\d+.\d+)'
-  - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
+      url: https://api.adoptium.net/v3/assets/latest/11/hotspot
+      re_pattern: '\"(?P<url>https\:\/\/.*\/OpenJDK11U\-jre\_x64\_windows\_hotspot\_.*\.msi)\"'
+  - Processor: URLDownloaderPython
     Arguments:
-      url: https://www.tightvnc.com/download/%version%/tightvnc-%version%-gpl-setup-64bit.msi
-      # prefetch_filename: True
-      download_version: "%version%"
+      url: '%url%'
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
