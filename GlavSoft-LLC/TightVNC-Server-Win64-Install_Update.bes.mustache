@@ -42,11 +42,13 @@
 // Download:
 {{{prefetch}}}
 
+parameter "components" = "{ concatenations "," of unique values of ( "{{{ComponentName}}}";( ( if it = "tvnviewer.exe" then "Viewer" else NOTHINGS ); ( if it = "tvnserver.exe" then "Server" else NOTHINGS ) ) of names of (files "tvnserver.exe" of it; files "tvnviewer.exe" of it) of folders "TightVNC" of (program files folders; program files x64 folders) ) }"
+
 // Install:
 override wait
 hidden=true
 completion=job
-wait msiexec.exe /i __Download\{{{file_name}}} /qn ADDLOCAL={{{ComponentName}}}
+wait msiexec.exe /i __Download\{{{file_name}}} /qn ADDLOCAL={parameter "components"}
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
