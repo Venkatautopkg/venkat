@@ -42,11 +42,16 @@
 // Download:
 {{{prefetch}}}
 
+if {exists (it as string & " /VERYSILENT /NORESTART") of values "UninstallString" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)}
+// Uninstall:
+waithidden {(it as string & " /VERYSILENT /NORESTART") of values "UninstallString" of keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)}
+endif
+
 // Install:
 override wait
 hidden=true
 completion=job
-wait __Download\{{{file_name}}} /VERYSILENT /NORESTART /MERGETASKS=desktopicon
+wait __Download\{{{file_name}}} /VERYSILENT /NORESTART /MERGETASKS=!desktopicon
 ]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
