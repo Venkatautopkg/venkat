@@ -8,9 +8,8 @@ Input:
   DisplayName: Opera
   VendorFolder: Opera
   64BitOnly: True
-  RecipeStatus: To do
+  RecipeStatus: Verified
   template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
-
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Opera-Win64
 Process:

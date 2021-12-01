@@ -22,7 +22,7 @@ Process:
     Arguments:
       url: https://download.mozilla.org/?product=firefox-latest-ssl&os=win64&lang=en-US
       filename: firefox_setup.exe
-      download_version: "%version%"
+      # download_version: "%version%"
       User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

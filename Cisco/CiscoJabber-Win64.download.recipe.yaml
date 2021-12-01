@@ -6,20 +6,20 @@ Input:
   NAME: "CiscoJabber"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Cisco Jabber"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  # - Processor: URLTextSearcher
-  #   Arguments:
-  #     url: https://example
-  #     # example match `example`
-  #     re_pattern: 'example(?P<version>\d+)-64.msi'
+  - Processor: URLTextSearcher
+    Arguments:
+      url: https://www.webex.com/downloads/jabber.html
+      # example match `https://binaries.webex.com/jabberclientwindows/20210902045826/CiscoJabberSetup.msi`
+      re_pattern: '(?P<url>https://binaries.webex.com/jabberclientwindows/\d+/CiscoJabberSetup.msi)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://binaries.webex.com/jabberclientwindows/20210603033202/CiscoJabberSetup.msi
-#      download_version: "%version%"
+      #url: https://binaries.webex.com/jabberclientwindows/20210902045826/CiscoJabberSetup.msi
+      #      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

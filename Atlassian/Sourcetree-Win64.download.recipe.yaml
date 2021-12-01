@@ -19,7 +19,7 @@ Process:
       re_pattern: 'SourcetreeEnterpriseSetup_(?P<version>\d+\.\d+\.\d+).msi'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://product-downloads.atlassian.com/software/sourcetree/windows/ga/SourcetreeEnterpriseSetup_3.4.6.msi
+      url: https://product-downloads.atlassian.com/software/sourcetree/windows/ga/SourcetreeEnterpriseSetup_%version%.msi
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

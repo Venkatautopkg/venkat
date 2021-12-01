@@ -1,12 +1,12 @@
 ---
-Description: Downloads the latest TeamViewer
-Identifier: com.github.bigfix.download.TeamViewer-Win64
+Description: Downloads the latest WinPcap for Windows x64
+Identifier: com.github.bigfix.download.winpcap-win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "TeamViewer"
+  NAME: "WinPcap"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "TeamViewer"
-MinimumVersion: "2.3"
+  DisplayName: "WinPcap"
+MinimumVersion: '2.3'
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -14,12 +14,12 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLTextSearcher
     Arguments:
-      url: https://www.teamviewer.com/en-us/download/windows/
-      # example match `example`
-      re_pattern: 'Current version: (?P<version>\d+\.\d+\.\d+)'
+      url: https://nmap.org/download.html
+      # example match `<b>Latest <u>stable</u> release self-installer: <a href="https://nmap.org/dist/nmap-7.92-setup.exe`
+      re_pattern: '<b>Latest <u>stable<\/u> release self-installer: <a href="https:\/\/nmap\.org\/dist\/nmap-(?P<version>\d+\.\d+)-setup\.exe'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe
-      #download_version: "%version%"
+      url: https://nmap.org/dist/nmap-%version%-setup.exe
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

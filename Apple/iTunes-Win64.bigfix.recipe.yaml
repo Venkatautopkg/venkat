@@ -11,6 +11,8 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
+    Arguments:
+      prefetch_url: "%download_url%"
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
   - Processor: URLDownloaderPython
     Arguments:

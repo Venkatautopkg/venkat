@@ -5,7 +5,7 @@ Input:
   NAME: "NotepadPlusPlus"
   FileType: exe
   DisplayName: "Notepad++"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -13,14 +13,14 @@ Process:
   - Processor: URLTextSearcher
     Arguments:
       url: https://notepad-plus-plus.org/update/getDownloadUrl.php
-      re_pattern: '<Version>(?P<latest_version>\d+\.\d+\.\d+)</Version>'
+      re_pattern: '<Version>(?P<latest_version>\d+\.\d+\.\d+[\.\d+]*)</Version>'
   - Processor: URLTextSearcher
     Arguments:
       url: https://notepad-plus-plus.org/update/getDownloadUrl.php
-      re_pattern: '<Location>(?P<url>http.*)</Location>'
+      re_pattern: "<Location>(?P<url>http.*).exe</Location>"
   - Processor: URLDownloaderPython
     Arguments:
-      url: '%url%'
+      url: "%url%.x64.exe"
       download_version: "%latest_version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

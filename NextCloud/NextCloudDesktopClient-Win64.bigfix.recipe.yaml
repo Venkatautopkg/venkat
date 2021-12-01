@@ -7,7 +7,7 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Nextcloud"
   VendorFolder: Nextcloud
-  RecipeStatus: To do
+  RecipeStatus: Verified
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.NextCloudDesktopClient-Win64
 Process:
