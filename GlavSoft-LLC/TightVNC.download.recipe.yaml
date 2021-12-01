@@ -6,7 +6,7 @@ Input:
   NAME: "TightVNC"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "TightVNC"
-MinimumVersion: '2.3.2'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -19,7 +19,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
     Arguments:
       url: https://www.tightvnc.com/download/%version%/tightvnc-%version%-gpl-setup-64bit.msi
-     # prefetch_filename: True
+      # prefetch_filename: True
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
