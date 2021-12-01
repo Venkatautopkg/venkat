@@ -5,26 +5,28 @@ Input:
   NAME: "Foxit_PDF_Reader"
   FileType: exe
   DisplayName: "Foxit PDF Reader"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   # NOTE: every download recipe is going to be a bit different depending on the software
   #         that said, there a few common cases to use as examples.
-  - Processor: URLTextSearcher
-    Arguments:
-      url: 'https://www.foxit.com/pdf-reader/version-history.html'
-      re_pattern: '<p><h3>Version (?P<version>\d+\.\d+.\d+)'
+  # - Processor: URLTextSearcher
+  #   Arguments:
+  #     url: 'https://www.foxit.com/pdf-reader/version-history.html'
+  #     re_pattern: '<p><h3>Version (?P<version>\d+\.\d+.\d+)'
 
-  - Processor: com.github.homebysix.FindAndReplace/FindAndReplace
-    Arguments:
-      input_string: '%version%'
-      find: '.'
-      replace: ''
+  # - Processor: com.github.homebysix.FindAndReplace/FindAndReplace
+  #   Arguments:
+  #     input_string: '%version%'
+  #     find: '.'
+  #     replace: ''
 
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://cdn01.foxitsoftware.com/product/reader/desktop/win/%version%/FoxitPDFReader%output_string%_enu_Setup_Prom.%FileType%
-      download_version: "%version%"
+      url: https://www.foxit.com/downloads/latest.html?product=Foxit-Reader&platform=Windows&version=&package_type=&language=English&distID=
+      filename: FoxitPDFReader_Setup.exe
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
+      #download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
