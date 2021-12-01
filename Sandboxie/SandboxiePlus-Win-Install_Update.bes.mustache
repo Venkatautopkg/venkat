@@ -53,7 +53,7 @@ wait {{#exe_file}}__Download\{{{file_name}}}{{/exe_file}}{{^exe_file}}msiexec.ex
 waithidden "{pathname of native system folder}\taskkill.exe" /im sandman.exe /f
 // In case the installer hangs:
 waithidden "{pathname of native system folder}\taskkill.exe" /im {{{file_name}}} /f
-waithidden "{pathname of native system folder}\taskkill.exe" /im { (it & ".tmp") of preceding texts of lasts ".exe" of {{{file_name}}} } /f
+waithidden "{pathname of native system folder}\taskkill.exe" /im { (it & ".tmp") of preceding texts of lasts ".exe" of "{{{file_name}}}" } /f
 {{{PostActionScript}}}
 {{#PublicDesktopShortcutFile}}{{> DeletePublicDesktopIcon}}{{/PublicDesktopShortcutFile}}
 // End]]></ActionScript>
