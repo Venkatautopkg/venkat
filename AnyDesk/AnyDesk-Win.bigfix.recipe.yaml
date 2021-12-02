@@ -5,7 +5,7 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "AnyDesk"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "AnyDesk MSI"
+  DisplayName: "AnyDesk"
   VendorFolder: AnyDesk
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.AnyDesk-Win
@@ -20,6 +20,18 @@ Process:
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
 
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/AnyDesk-logo.svg/512px-AnyDesk-logo.svg.png
+      COMPUTE_HASHES: False
+
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
