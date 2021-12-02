@@ -19,7 +19,8 @@ Process:
       re_pattern: 'Current version: (?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://dl.teamviewer.com/download/version_15x/TeamViewer_Setup_x64.exe
+      url: https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe
       #download_version: "%version%"
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
