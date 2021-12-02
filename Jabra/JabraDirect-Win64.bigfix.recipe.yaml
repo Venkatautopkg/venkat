@@ -1,13 +1,13 @@
 ---
 Description: Generates a BigFix Task for the latest JabraDirect
-Identifier: com.github.bigfix.bigfix.JabraDirect-Win64
+Identifier: com.github.bigfix.bigfix.JabraDirect-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "JabraDirect"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Jabra Direct"
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.JabraDirect-Win64
+ParentRecipe: com.github.bigfix.download.JabraDirect-Win
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
