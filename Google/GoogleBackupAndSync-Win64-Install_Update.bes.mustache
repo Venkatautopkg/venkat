@@ -47,6 +47,18 @@ override wait
 hidden=true
 completion=job
 wait msiexec.exe /i __Download\{{{file_name}}} /quiet /norestart
+
+if { exists (now - it) whose(it < 2 * minute) of creation times of files "Google Sheets.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
+delete "{pathnames of files "Google Sheets.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
+endif
+
+if { exists (now - it) whose(it < 2 * minute) of creation times of files "Google Slides.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
+delete "{pathnames of files "Google Slides.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
+endif
+
+if { exists (now - it) whose(it < 2 * minute) of creation times of files "Google Docs.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
+delete "{pathnames of files "Google Docs.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
+endif
 ]]></ActionScript>
       <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
