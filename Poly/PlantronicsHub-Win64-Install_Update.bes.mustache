@@ -5,7 +5,7 @@
 		<Description><![CDATA[
 {{>DescriptionBasic}}
 {{>DescriptionIcon}}
-		]]></Description>
+		]]>		</Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
 		{{#patch}}{{#DisplayName}}
@@ -50,8 +50,8 @@ wait __Download\{{{file_name}}} /install /quiet /norestart
 if { exists (now - it) whose(it < 2 * minute) of creation times of files "Plantronics Hub.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25 }
 delete "{pathnames of files "Plantronics Hub.lnk" of /* C:\Users\Public\Desktop */ csidl folders 25}"
 endif
-]]></ActionScript>
-      <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
+]]>			</ActionScript>
+			<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 </BES>
