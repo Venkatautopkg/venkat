@@ -1,13 +1,13 @@
 ---
-Description: Generates a BigFix Task for the latest Pidgin For Windows x64
-Identifier: com.github.bigfix.bigfix.Pidgin-Win64
+Description: Generates a BigFix Task for the latest Pidgin For Windows
+Identifier: com.github.bigfix.bigfix.Pidgin-Win
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "Pidgin"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Pidgin"
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.Pidgin-Win64
+ParentRecipe: com.github.bigfix.download.Pidgin-Win
 Process:
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
@@ -44,7 +44,7 @@ Process:
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      template_file_path: "./Pidgin/Pidgin-Win64-Install_Update.bes.mustache"
+      template_file_path: "./Pidgin/Pidgin-Win-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%.bes"
 
   # `BESImport` imports the generated BES content into a BigFix Server

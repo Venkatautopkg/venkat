@@ -1,11 +1,11 @@
 ---
-Description: Downloads the latest Pidgin For Windows x64
-Identifier: com.github.bigfix.download.Pidgin-Win64
+Description: Downloads the latest Pidgin For Windows
+Identifier: com.github.bigfix.download.Pidgin-Win
 Input:
   NAME: "Pidgin"
   FileType: exe
   DisplayName: "Pidgin"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -17,7 +17,7 @@ Process:
       re_pattern: '<a href="https://sourceforge.net/projects/pidgin/files/Pidgin/(?P<latest_version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: 'https://sourceforge.net/projects/pidgin/files/Pidgin/%latest_version%/pidgin-%latest_version%-offline.%FileType%'
+      url: "https://sourceforge.net/projects/pidgin/files/Pidgin/%latest_version%/pidgin-%latest_version%-offline.%FileType%"
       download_version: "%latest_version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
