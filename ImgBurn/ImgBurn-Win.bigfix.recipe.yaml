@@ -1,11 +1,11 @@
 ---
-Description: Generates a BigFix Task for the latest {{DisplayName}}
+Description: Generates a BigFix Task for the latest ImgBurn
 Identifier: com.github.bigfix.bigfix.ImgBurn-Win
 Input:
   NAME: "ImgBurn"
   DisplayName: "ImgBurn"
   VendorFolder: ImgBurn
-  RecipeStatus: To do
+  RecipeStatus: Verified
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.ImgBurn-Win
 Process:
