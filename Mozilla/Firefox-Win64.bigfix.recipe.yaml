@@ -18,6 +18,16 @@ Process:
     Arguments:
       prefetch_url: "%download_url%"
   - Processor: com.github.jgstew.SharedProcessors/BigFixSetupTemplateDictionary
+  - Processor: URLDownloaderPython
+    Arguments:
+      filename: "%NAME%-icon.png"
+      url: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/231px-Firefox_logo%2C_2019.svg.png
+      COMPUTE_HASHES: False
+  - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
+  - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
+    Arguments:
+      append_key: "icon_base64"
+      append_value: "%file_base64%"
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
