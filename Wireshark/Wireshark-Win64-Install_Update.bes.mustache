@@ -3,10 +3,9 @@
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 		<Title>{{>TitlePrefix}} {{DisplayName}} v{{version}} - Windows (x64)</Title>
 		<Description><![CDATA[
-This task will download and install "{{DisplayName}} v{{version}}" package onto selected endpoints
+{{>DescriptionBasic}}
 <br><br><b>Prerequisite Software:</b> Npcap (or WinPcap) may be required for this software to work properly
-<br><br><b>Run Command As:</b> System User<br><br><b>Download Size:</b> {{DownloadSize}}
-{{#icon_base64}}<br/><br/><b>Icon:</b><br/><img style="display:block; width:256px;" src="data:{{icon_type}}{{^icon_type}}image/png{{/icon_type}};base64,{{icon_base64}}" />{{/icon_base64}}
+{{>DescriptionIcon}}
 		]]></Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
@@ -49,7 +48,7 @@ override wait
 hidden=true
 completion=job
 wait __Download\{{{file_name}}} /S
-]]></ActionScript>
+// End]]></ActionScript>
       		<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
