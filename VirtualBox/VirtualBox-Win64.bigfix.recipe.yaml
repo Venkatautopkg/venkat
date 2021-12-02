@@ -6,6 +6,7 @@ Input:
   NAME: "VirtualBox"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Oracle VM VirtualBox"
+  64BitOnly: True
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.VirtualBox
 Process:

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>{{>TitlePrefix}} {{DisplayName}} v{{version}} - Windows (x64)</Title>
+		<Title>{{>TitlePrefix}} {{DisplayName}} v{{version}} - Windows{{#64BitOnly}} (x64){{/64BitOnly}}{{#32BitOnly}} (x32){{/32BitOnly}}</Title>
 		<Description><![CDATA[
 {{>DescriptionBasic}}
 {{>DescriptionIcon}}
 		]]></Description>
 		<Relevance>windows of operating system</Relevance>
+		{{#64BitOnly}}<Relevance><![CDATA[x64 of operating system]]></Relevance>{{/64BitOnly}}
+		{{#32BitOnly}}<Relevance><![CDATA[not x64 of operating system]]></Relevance>{{/32BitOnly}}
 		{{#patch}}{{#DisplayName}}
 		<Relevance><![CDATA[{{#install_only}}not {{/install_only}}exists keys whose(value "DisplayName" of it as string starts with "{{DisplayName}}") of keys "HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall" of (x32 registries; x64 registries)]]></Relevance>
 		{{/DisplayName}}{{/patch}}
