@@ -12,7 +12,7 @@ Process:
   # `BigFixPrefetchItem` takes the hashes from `URLDownloaderPython`
   #   Then it assembles them into a BigFix Prefetch Statement or Block
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
-  #- Processor: com.github.jgstew.SharedProcessors/FileHasher
+  - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem
 
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
