@@ -5,8 +5,8 @@ Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "VirtualBox"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "{{DisplayName}}"
-MinimumVersion: '2.3'
+  DisplayName: "Oracle VM VirtualBox"
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -25,6 +25,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://download.virtualbox.org/virtualbox/%version%/VirtualBox-%downloadFile%-Win.exe
-      download_version: "%version%"
+      download_version: "%downloadFile%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
