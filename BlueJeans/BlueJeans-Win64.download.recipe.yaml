@@ -6,7 +6,7 @@ Input:
   NAME: "BlueJeans"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "BlueJeans"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -19,7 +19,7 @@ Process:
       re_pattern: 'https://swdl.bluejeans.com/desktop-app/win/(?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://swdl.bluejeans.com/desktop-app/win/2.31.114.0/BlueJeans.2.31.114m.msi
-  #   download_version: "%version%"
+      url: https://swdl.bluejeans.com/desktop-app/win/%version%.0/BlueJeans.%version%m.msi
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
