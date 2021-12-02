@@ -5,7 +5,7 @@ Input:
   NAME: "AdobeDigitalEditions"
   DisplayName: "Adobe Digital Editions"
   VendorFolder: Adobe
-  RecipeStatus: To do
+  RecipeStatus: Verified
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.AdobeDigitalEditions-Win
 Process:
@@ -29,7 +29,7 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "MajorVersion"
-      append_value: "%major_version%"
+      append_value: "%version_major_minor%"
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./%VendorFolder%/%NAME%-Win-Install_Update.bes.mustache"
