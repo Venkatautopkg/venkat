@@ -16,7 +16,7 @@ Process:
     Arguments:
       url: https://www.airsquirrels.com/airparrot/download
       # example match `example`
-      re_pattern: '>Version (?P<version>\d+\.\d+\.\d+)'
+      re_pattern: '.*>AirParrot 3 for Windows<.*\n.*>Version (?P<version>\d+\.\d+\.\d+)<'
   - Processor: URLDownloaderPython
     Arguments:
       url: https://download.airsquirrels.com/AirParrot3/Windows/AirParrot-%version%-64.msi
