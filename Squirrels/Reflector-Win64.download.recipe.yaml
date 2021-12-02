@@ -19,7 +19,7 @@ Process:
       re_pattern: '>Version (?P<version>\d+\.\d+\.\d+)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://download.airsquirrels.com/Reflector4/Windows/Reflector-4.0.2-64.msi
+      url: https://download.airsquirrels.com/Reflector4/Windows/Reflector-%version%-64.msi
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
