@@ -1,12 +1,12 @@
 ---
-Description: Downloads the latest Microsoft Visual C++ 2015-2019 Redistributable (x86) for Win64
+Description: Downloads the latest Microsoft Visual C++ 2015-2022 Redistributable (x86) for Win64
 Identifier: com.github.bigfix.download.VisualC++Redistx86-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
   NAME: "VisualC++Redistx86"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
-  DisplayName: "Microsoft Visual C++ 2015-2019 Redistributable (x86)"
-MinimumVersion: '2.3'
+  DisplayName: "Microsoft Visual C++ 2015-2022 Redistributable (x86)"
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -14,6 +14,6 @@ Process:
   #         that said, there a few common cases to use as examples.
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://aka.ms/vs/16/release/vc_redist.x86.exe
+      url: https://aka.ms/vs/17/release/vc_redist.x86.exe
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
