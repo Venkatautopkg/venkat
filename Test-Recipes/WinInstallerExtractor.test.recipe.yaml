@@ -1,0 +1,24 @@
+---
+Description: Test WinInstallerExtractor Processor
+Identifier: com.github.bigfix.test.WinInstallerExtractor
+Input:
+  NAME: WinInstallerExtractorTest
+MinimumVersion: "2.3"
+Process:
+  # `SharedUtilityMethods` must come first
+  - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
+  - Processor: URLDownloaderPython
+    Arguments:
+      url: http://software.bigfix.com/download/redist/unzip-5.52.exe
+      COMPUTE_HASHES: False
+  - Processor: com.github.jgstew.SharedProcessors/FileGetExecutable
+    Arguments:
+      path_array:
+        [
+          "/Program Files/7-Zip/7z.exe",
+          "/Program Files (x86)/7-Zip/7z.exe",
+          "/usr/local/bin/7z",
+        ]
+  - Processor: com.github.hansen-m.SharedProcessors/WinInstallerExtractor
+    Arguments:
+      extract_dir: "test"
