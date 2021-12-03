@@ -14,7 +14,7 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: "https://pkgs.tailscale.com/stable/tailscale-ipn-setup-%version%.exe"
-      prefetch_filename: True
+      # prefetch_filename: True
       COMPUTE_HASHES: True
       download_version: "%version%"
   - Processor: EndOfCheckPhase
