@@ -5,7 +5,7 @@
 		<Description><![CDATA[
 {{>DescriptionBasic}}
 {{>DescriptionIcon}}
-		]]></Description>
+		]]>		</Description>
 		<Relevance>windows of operating system</Relevance>
 		{{#64BitOnly}}
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
@@ -46,6 +46,7 @@
 {{>ActionPrefetchUnzipExe}}
 
 // Extract:
+delete paint.net.{{{version}}}.winmsi.x64.msi
 waithidden __Download\unzip.exe __Download\{{file_name}}
 
 // Install:
