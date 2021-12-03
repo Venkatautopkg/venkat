@@ -9,16 +9,16 @@ MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
-
-  - Processor: URLTextSearcher
-    Arguments:
-      url: https://github.com/paintdotnet/release #href="/paintdotnet/release/releases/tag/v4.3.3">
-      re_pattern: '/paintdotnet/release/releases/tag/v(?P<version>\d+\.\d+\.\d+)'
+  # - Processor: URLTextSearcher
+  #   Arguments:
+  #     url: https://github.com/paintdotnet/release #href="/paintdotnet/release/releases/tag/v4.3.3">
+  #     re_pattern: '/paintdotnet/release/releases/tag/v(?P<version>\d+\.\d+\.\d+)'
   - Processor: GitHubReleasesInfoProvider
     Arguments:
       github_repo: paintdotnet/release #paint.net.4.3.3.winmsi.x64.zip
       asset_regex: paint\.net\..*\.winmsi\.x64\.%FileType%
   - Processor: com.github.jgstew.SharedProcessors/URLDownloaderPython
     Arguments:
+      download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
