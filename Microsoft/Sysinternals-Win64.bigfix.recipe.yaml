@@ -1,9 +1,11 @@
 ---
-Description: Generates a BigFix Prefetch for the latest Sysinternals Utilities for Win64
+Description: Generates a BigFix Prefetch for the latest Sysinternals Utilities for
+  Win64
 Identifier: com.github.bigfix.bigfix.Sysinternals-Win64
 Input:
   NAME: Sysinternals
   icon_url: https://api.nuget.org/v3-flatcontainer/rb.sysinternals/2019.6.12.20190614/icon
+  content_id_product: "021"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Sysinternals-Win64
 Process:
@@ -19,7 +21,7 @@ Process:
       # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
       url: "%icon_url%"
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
   # resize / shrink icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileImageResize
   # get base64 of icon file:

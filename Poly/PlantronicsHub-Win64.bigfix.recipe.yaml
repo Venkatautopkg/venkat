@@ -6,6 +6,7 @@ Input:
   NAME: "PlantronicsHub"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Plantronics Hub Software"
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.PlantronicsHub-Win64
 Process:
@@ -23,8 +24,9 @@ Process:
     Arguments:
       filename: "%NAME%-icon.png"
       url: https://cdn6.aptoide.com/imgs/f/3/d/f3ddec8d1ba646e312fda38e40694720_icon.png?w=256
-      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
-      COMPUTE_HASHES: False
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101
+        Firefox/47.0
+      COMPUTE_HASHES: false
   # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
 
@@ -35,6 +37,14 @@ Process:
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
@@ -42,7 +52,6 @@ Process:
     Arguments:
       append_key: "version"
       append_value: "%latest_version%"
-
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./Poly/PlantronicsHub-Win64-Install_Update.bes.mustache"
@@ -60,11 +69,10 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       # template_file_path: "%template_file_path%"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%content_id_vendor%%content_id_product%01 %NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport

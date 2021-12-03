@@ -7,10 +7,11 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: paint.net
   VendorFolder: Paint.net
-  64BitOnly: True
+  64BitOnly: true
   RecipeStatus: Verified
   template_file_path: "Paint.net/Paint.net-Win64-Install_Update.bes.mustache"
-# MinimumVersion of AutoPkg - Should always be 2.3 (or higher once a new version is released)
+  # MinimumVersion of AutoPkg - Should always be 2.3 (or higher once a new version is released)
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Paint.net-Win64
 Process:
@@ -28,7 +29,7 @@ Process:
     Arguments:
       filename: "%NAME%-icon.png"
       url: http://www.syprus.com/paintnet/PaintDotNet_3.png
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
       download_version: ""
 
   # get base64 of icon file:
@@ -38,8 +39,15 @@ Process:
     Arguments:
       append_key: "icon_base64"
       append_value: "%file_base64%"
-
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
@@ -63,11 +71,10 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       # template_file_path: "%template_file_path%"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%content_id_vendor%%content_id_product%01 %NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport

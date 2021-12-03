@@ -4,6 +4,7 @@ Identifier: com.github.bigfix.bigfix.WinSCP-Win
 Input:
   NAME: WinSCP
   DisplayName: WinSCP
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.WinSCP-Win
 Process:
@@ -14,13 +15,21 @@ Process:
       template_version: "%version%"
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: URLDownloaderPython
     Arguments:
       filename: "%NAME%-icon.png"
       url: https://upload.wikimedia.org/wikipedia/commons/d/de/WinSCP_Logo.png
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:

@@ -6,6 +6,7 @@ Input:
   NAME: "AirServer"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "AirServer"
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.AirServer-Win64
 Process:
@@ -23,7 +24,7 @@ Process:
     Arguments:
       filename: "%NAME%-icon.png"
       url: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAb1BMVEX///83SFgwQlN2gIkbNEiKkpkrP1CYn6YxQ1QgNkpncnzc3uB/iJH09fYpPU+jqa6RmKAWMEXLztG0ub59ho+us7nk5uhUYW4+Tl1FVGO+wsaGjpYAJz6epKvHys7m6OldaXVXY3DT1tltd4IAIztul3bcAAADO0lEQVR4nO3cjVLiMBiFYQOltgqFCqKIiIt7/9e46iomJG3ThpBvnPdxxhmRhhwo4ZS/qysAAAAAAAAAAAAAAAAAAAAAAAAAACDcU+oJxDZ+vk09hbh2pcpnqScR00umVPGQehYR7d8DKlWNU88jnsfiI6Eq56knEsvrSP1X36WeShyTSn0r96knE8MyOwZUxWPq2URwWytNfpN6Pmc3y5WhWqSekWU23n6Y+hsftM0fCjOhyvT6tl31GPfD6j5CwudRP6X+sDeu1Klaq2/rOu85+DZCwsyaY6uRXl3mpescWn276zl6PkmfMO+cf/d1IDphpu2D+4ZNq5U2vmM/Fp2w1teRx9NV5luprxfWWiQ6ofFYcCxrjitCq2+zPjdi6oTG4/mibeZ6fTv0uYS0CY1Otmzdrth4n1VSQv2GMcuaY6r6zT3x3lHTJjTuXM33wS+l511WUELj+NZjgTTqm/JcUFMmzPWytvLZ7bL1zwZND50pEuZu1YCiUmj156VuGNjcfy+QcLNw2w4om6M/2uUsJ+6Bp0bE+AkLjyPYvXfVrKbdo62N0WQkbCxrtqz7cO9WXsKbk6P6VvWhazh5CVvLmq3seq5fXMKnnoeTRn1zkZawq6zZ8reOEWUlnPU51vtSXrcOKSzhg2+/1NWtL57KSuhV1mx6fbOIStjzWaWfQYuWBVVSwkPvVebb6LV5VEEJ/cuaraW+CUq4GbCOHjXXNzkJe5U1W2N9E5NwEbCPfqoaVhspCfuWNVtTfROScD14GdUm765vMhLOwvO9K3dyEw4qazZnfRORcDqsrNlc9U1CwvvgVeY4urIXVAEJh5c1m6O+pU+4P9cu+qmyXqdPnzCorNmypbSEN1nDc9XWk+Ke/p7Ut9QJ19fzczvp4KkTxkfCcCSMjYThSBgbCcORMDYShiNhbCQMR8LYSBiOhLGRMBwJYyNhOBLGRsJwJIyNhOFIGNulP2+hNqvxZb0VF06oen46P5j5InrqT8nGR0ISkjA9EpKQhOmRkITOhM+ebz4803sT20X5nqjF9Xnsjr93nz/m6dofO+Okk3//+i96BQAAAAAAAAAAAAAAAAAAAAAAAAAAEf0Dt3JWxLHLS94AAAAASUVORK5CYII=
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
 
@@ -37,6 +38,14 @@ Process:
       append_value: "%msi_property_value%"
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
@@ -60,11 +69,10 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       # template_file_path: "%template_file_path%"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%content_id_vendor%%content_id_product%01 %NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport

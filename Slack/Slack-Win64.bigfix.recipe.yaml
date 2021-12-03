@@ -6,9 +6,10 @@ Input:
   NAME: "Slack"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "%NAME%"
-  64BitOnly: True
+  64BitOnly: true
   RecipeStatus: Verified
   PublicDesktopShortcutFile: "%DisplayName%.lnk"
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.Slack-Win64
 Process:
@@ -27,7 +28,7 @@ Process:
     Arguments:
       filename: "%NAME%-icon.png"
       url: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Slack_Technologies_Logo.svg/320px-Slack_Technologies_Logo.svg.png
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
 
   # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -40,6 +41,14 @@ Process:
   # `TemplateDictionaryAppend` adds extra variables to the Template Dictionary
   #   This is only needed if the template uses extra variables
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
@@ -60,23 +69,21 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./%NAME%/%DisplayName%-Win64-Install_Update.bes.mustache"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%content_id_vendor%%content_id_product%01 %NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "install_only"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./%NAME%/%DisplayName%-Win64-Install_Update.bes.mustache"
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-InstalOnly.bes"
-
   - Processor: com.github.jgstew.SharedProcessors/BESImport

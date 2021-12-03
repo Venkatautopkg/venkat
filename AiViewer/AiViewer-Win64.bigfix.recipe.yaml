@@ -7,6 +7,7 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "AI Viewer"
   VendorFolder: AiViewer
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.AiViewer-Win64
 Process:
@@ -27,7 +28,7 @@ Process:
     Arguments:
       filename: "%NAME%-icon.png"
       url: https://play-lh.googleusercontent.com/HpVMSLIifhgZAgFc3QYy2eb8wV1ja6HZGM3gKMu23rYg4r7NKHXA26aJn7C7gA53sJu6=s180
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
 
@@ -38,6 +39,14 @@ Process:
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 

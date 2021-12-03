@@ -1,3 +1,4 @@
+---
 Description: Generates a BigFix Task for the latest TightVNC Server for Windows x64
 Identifier: com.github.bigfix.bigfix.tightvnc-server-win64
 Input:
@@ -6,6 +7,7 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "TightVNC"
   ComponentName: "Server"
+  content_id_product: "001"
 MinimumVersion: "2.3.2"
 ParentRecipe: com.github.bigfix.download.tightvnc-win64
 Process:
@@ -24,7 +26,7 @@ Process:
     Arguments:
       filename: "%NAME%-icon.png"
       url: https://www.tightvnc.com/logo/tightvnc-logo-90x90.png
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
 
   # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -42,6 +44,14 @@ Process:
       append_value: "%version%"
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
@@ -68,11 +78,10 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       # template_file_path: "%template_file_path%"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%content_id_vendor%%content_id_product%01 %NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport

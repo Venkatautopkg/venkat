@@ -7,10 +7,11 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Advanced Renamer"
   VendorFolder: AdvancedRenamer
-  64BitOnly: True
+  64BitOnly: true
   RecipeStatus: Verified
   template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
-# MinimumVersion of AutoPkg - Should always be 2.3 (or higher once a new version is released)
+  # MinimumVersion of AutoPkg - Should always be 2.3 (or higher once a new version is released)
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.AdvancedRenamer
 Process:
@@ -26,7 +27,7 @@ Process:
       # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
       url: https://www.softexia.com/wp-content/uploads/2016/03/Advanced_Renamer.png
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
   # get base64 of icon file
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
   # add base64 of icon file to Template Dictionary
@@ -37,6 +38,14 @@ Process:
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   # `ContentFromTemplate` generates bigfix content from a mustache template file
@@ -59,11 +68,10 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       # template_file_path: "%template_file_path%"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%content_id_vendor%%content_id_product%01 %NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport

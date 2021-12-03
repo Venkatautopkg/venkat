@@ -5,6 +5,7 @@ Input:
   NAME: OBSWin64
   DisplayName: OBS Studio
   # icon_url: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/OBS_Studio_Logo.svg/240px-OBS_Studio_Logo.svg.png
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.OBS-Win64
 Process:

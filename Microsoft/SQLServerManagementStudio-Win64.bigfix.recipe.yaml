@@ -6,6 +6,7 @@ Input:
   icon_url: https://i.pinimg.com/originals/32/a0/3a/32a03aee0c76419ec5bde950a62883bc.png
   DisplayName: "SQL Server Management Studio"
   VendorFolder: SQLServerManagementStudio
+  content_id_product: "020"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.SMSS-Win64
 Process:
@@ -15,7 +16,7 @@ Process:
       prefetch_url: "%download_url%"
   - Processor: com.github.jgstew.SharedProcessors/FileExeVersionExtractor
     Arguments:
-      version_first: True
+      version_first: true
       exe_path: "%pathname%"
   # `BigFixSetupTemplateDictionary` creates a dictionary to fill out a bigix content template
   #   If `SourceReleaseDate` is not provided, it will be set to today
@@ -26,7 +27,7 @@ Process:
       # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
       url: "%icon_url%"
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
   - Processor: com.github.jgstew.SharedProcessors/FileImageResize
   # get base64 of icon file
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
@@ -39,6 +40,14 @@ Process:
       append_value: "%file_base64%"
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
@@ -68,19 +77,19 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       template_file_path: "./%VendorFolder%/%NAME%-Win64-Install_Update.bes.mustache"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%content_id_vendor%%content_id_product%01 %NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
 
     # create unistall  content:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "uninstall"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:

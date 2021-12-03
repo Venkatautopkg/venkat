@@ -6,6 +6,7 @@ Input:
   DisplayName: "ImgBurn"
   VendorFolder: ImgBurn
   RecipeStatus: Verified
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.ImgBurn-Win
 Process:
@@ -16,7 +17,7 @@ Process:
     Arguments:
       filename: "%NAME%-icon.png"
       url: https://upload.wikimedia.org/wikipedia/en/f/fc/ImgBurn_logo.png
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
@@ -24,6 +25,14 @@ Process:
       append_value: "%file_base64%"
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
@@ -36,11 +45,10 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       # template_file_path: "%template_file_path%"
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%content_id_vendor%%content_id_product%01 %NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport

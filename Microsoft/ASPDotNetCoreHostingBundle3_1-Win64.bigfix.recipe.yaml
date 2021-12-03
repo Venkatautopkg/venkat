@@ -1,5 +1,6 @@
 ---
-Description: Generates a BigFix Task for the latest Microsoft ASP.NET Core Hosting Bundle Runtime 3.1.x for Win64
+Description: Generates a BigFix Task for the latest Microsoft ASP.NET Core Hosting
+  Bundle Runtime 3.1.x for Win64
 Identifier: com.github.bigfix.bigfix.ASPDotNetCoreHostingBundle3_1-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
@@ -8,6 +9,7 @@ Input:
   DisplayName: "Microsoft ASP.NET Core Hosting Bundle Runtime"
   UninstallName1: "Microsoft .NET Core"
   UninstallName2: "Windows Server Hosting"
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.ASPDotNetCoreHostingBundle3_1-Win64
 Process:
@@ -29,7 +31,7 @@ Process:
       # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
       url: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/.NET_Logo.svg/240px-.NET_Logo.svg.png
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
 
@@ -40,6 +42,14 @@ Process:
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
@@ -47,7 +57,6 @@ Process:
     Arguments:
       append_key: "UninstallName1"
       append_value: "%UninstallName1% %DotNetVer%"
-
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "UninstallName2"

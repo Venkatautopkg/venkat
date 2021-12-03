@@ -1,5 +1,6 @@
 ---
-Description: Generates a BigFix Task for the latest Microsoft .NET Desktop Runtime 3.1.x (x86) for Win64
+Description: Generates a BigFix Task for the latest Microsoft .NET Desktop Runtime
+  3.1.x (x86) for Win64
 Identifier: com.github.bigfix.bigfix.DotNetDesktopRuntime3_1_x86-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
@@ -7,6 +8,7 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "Microsoft .NET Desktop Runtime (x86)"
   UninstallName: "Microsoft Windows Desktop Runtime"
+  content_id_product: "008"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.DotNetDesktopRuntime3_1_x86-Win64
 Process:
@@ -28,7 +30,7 @@ Process:
       # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
       url: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/.NET_Logo.svg/240px-.NET_Logo.svg.png
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
 
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
 
@@ -39,6 +41,14 @@ Process:
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 

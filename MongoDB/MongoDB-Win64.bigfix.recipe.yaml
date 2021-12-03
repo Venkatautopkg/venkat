@@ -5,6 +5,7 @@ Input:
   NAME: MongoDB
   DisplayName: MongoDB
   icon_url: https://webimages.mongodb.com/_com_assets/cms/MongoDB_Logo_FullColorBlack_RGB-4td3yuxzjs.png
+  content_id_product: "001"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.MongoDB-Win64
 Process:
@@ -19,7 +20,7 @@ Process:
       # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
       url: "%icon_url%"
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
   - Processor: com.github.jgstew.SharedProcessors/FileImageResize
   # get base64 of icon file
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64

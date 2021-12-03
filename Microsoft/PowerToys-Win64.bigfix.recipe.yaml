@@ -7,11 +7,12 @@ Input:
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: PowerToys
   VendorFolder: Microsoft
-  64BitOnly: True
+  64BitOnly: true
   RecipeStatus: To do
-  exe_file: True
+  exe_file: true
   cmd_args: --silent --skip_dotnet_install
   template_file_path: ".templates/Shared-Win-Install_Update.bes.mustache"
+  content_id_product: "018"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.PowerToys-Win64
 Process:
@@ -27,6 +28,14 @@ Process:
 
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
 
@@ -35,7 +44,7 @@ Process:
       filename: "PowerToysAppList.targetsize-256.png"
       url: "https://github.com/microsoft/PowerToys/raw/fa92f2e581e8c74c8968c385b49a72af4266a352/doc/images/icons/PowerToys%20icon/PNG/PowerToysAppList.targetsize-256.png"
       download_version: ""
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
@@ -62,21 +71,19 @@ Process:
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "patch"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
-      content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-Update.bes"
-
+      content_file_pathname: "%RECIPE_CACHE_DIR%/%content_id_vendor%%content_id_product%01 %NAME%-Update.bes"
   - Processor: com.github.jgstew.SharedProcessors/BESImport
 
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
       append_key: "install_only"
-      append_value: True
+      append_value: true
 
   - Processor: com.github.jgstew.SharedProcessors/ContentFromTemplate
     Arguments:
       content_file_pathname: "%RECIPE_CACHE_DIR%/%NAME%-InstallOnly.bes"
-
   - Processor: com.github.jgstew.SharedProcessors/BESImport

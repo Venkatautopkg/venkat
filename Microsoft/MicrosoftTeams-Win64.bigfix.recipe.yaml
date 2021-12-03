@@ -5,6 +5,7 @@ Input:
   NAME: "MicrosoftTeams"
   DisplayName: "Microsoft Teams"
   UninstallName: "Teams Machine-Wide Installer"
+  content_id_product: "015"
 MinimumVersion: "2.3"
 ParentRecipe: com.github.bigfix.download.MicrosoftTeams-Win64
 Process:
@@ -24,7 +25,7 @@ Process:
       # need to provide filename to not overwrite the setup file
       filename: "%NAME%-icon.png"
       url: https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Teams_hi-res_icon_%282019%29.svg/262px-Teams_hi-res_icon_%282019%29.svg.png
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend
     Arguments:
@@ -32,6 +33,14 @@ Process:
       append_value: "%file_base64%"
   # `TemplateDictionaryAppendInput` adds extra variables to the Template Dictionary
   - Processor: com.github.jgstew.SharedProcessors/GetRecipeParentFolderName
+  - Processor: com.github.jgstew.SharedProcessors/FileTextSearcher
+    Arguments:
+      first_result_only: True
+      search_path: '%VendorFolder%\vendor_metadata.cfg'
+      # output_variable: "file_search_results"
+      file_search_results_var: "content_id_vendor"
+      search_pattern: 'content_id_vendor *= *(\d+)'
+      search_extension: ".cfg"
   - Processor: com.github.jgstew.SharedProcessors/GetCommonPlatformEnumeration
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppendInput
   - Processor: com.github.jgstew.SharedProcessors/TemplateDictionaryAppend

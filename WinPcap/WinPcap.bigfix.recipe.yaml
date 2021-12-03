@@ -6,6 +6,7 @@ Input:
   NAME: "WinPcap"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "WinPcap"
+  content_id_product: "001"
 MinimumVersion: '2.3'
 ParentRecipe: com.github.bigfix.download.winpcap-win64
 Process:
@@ -24,7 +25,7 @@ Process:
     Arguments:
       filename: "%NAME%-icon.png"
       url: https://www.winpcap.org/docs/docs_411/html/winpcap.gif
-      COMPUTE_HASHES: False
+      COMPUTE_HASHES: false
 
   # get base64 of icon file:
   - Processor: com.github.jgstew.SharedProcessors/FileGetBase64
