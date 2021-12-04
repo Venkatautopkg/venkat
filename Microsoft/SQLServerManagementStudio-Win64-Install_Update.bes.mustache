@@ -37,9 +37,9 @@ This task will download and install "{{DisplayName}} v{{bundle_version}}" packag
 		<Domain>BESC</Domain>
 		<DefaultAction ID="Action1">
 			<Description>
-				<PreLink>Click </PreLink>
+				<PreLink><![CDATA[Click ]]></PreLink>
 				<Link>here</Link>
-				<PostLink> to deploy {{DisplayName}} v{{bundle_version}}.</PostLink>
+				<PostLink><![CDATA[ to deploy {{DisplayName}} v{{bundle_version}}.]]></PostLink>
 			</Description>
 			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[// Download:
 {{{prefetch}}}
@@ -54,9 +54,9 @@ wait __Download\{{{file_name}}} /Quiet SSMSInstallRoot=%systemdrive%\SSMSto /DoN
 		</DefaultAction>
 		<Action ID="InfoPage">
 			<Description>
-				<PreLink>Click </PreLink>
+				<PreLink><![CDATA[Click ]]></PreLink>
 				<Link>here</Link>
-				<PostLink> to visit {{DisplayName}}'s information and download page on the Web</PostLink>
+				<PostLink><![CDATA[ to visit {{DisplayName}}'s information and download page on the Web]]></PostLink>
 			</Description>
 			<ActionScript MIMEType="text/x-uri">{{DocLink}}</ActionScript>
 		</Action>

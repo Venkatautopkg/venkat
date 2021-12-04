@@ -37,9 +37,9 @@ This task will download and install "{{DisplayName}} v{{bundle_version}}" packag
 		<Domain>BESC</Domain>
 		<DefaultAction ID="Action1">
 			<Description>
-				<PreLink>Click </PreLink>
+				<PreLink><![CDATA[Click ]]></PreLink>
 				<Link>here</Link>
-				<PostLink> to uninstall {{DisplayName}} v{{bundle_version}}.</PostLink>
+				<PostLink><![CDATA[ to uninstall {{DisplayName}} v{{bundle_version}}.]]></PostLink>
 			</Description>
 			<ActionScript MIMEType="application/x-Fixlet-Windows-Shell"><![CDATA[// Download:
 {{{prefetch}}}
@@ -54,9 +54,9 @@ wait "C:\ProgramData\Package Cache\{{e853ab1a-5d1f-434a-9e99-7db61597a575}\SSMS-
 		</DefaultAction>
 		<Action ID="InfoPage">
 			<Description>
-				<PreLink>Click </PreLink>
+				<PreLink><![CDATA[Click ]]></PreLink>
 				<Link>here</Link>
-				<PostLink> to visit {{DisplayName}}'s information and download page on the Web</PostLink>
+				<PostLink><![CDATA[ to visit {{DisplayName}}'s information and download page on the Web]]></PostLink>
 			</Description>
 			<ActionScript MIMEType="text/x-uri">{{DocLink}}</ActionScript>
 		</Action>
