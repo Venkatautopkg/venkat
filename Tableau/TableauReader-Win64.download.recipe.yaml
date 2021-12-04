@@ -5,7 +5,8 @@ Input:
   NAME: "TableauReader"
   FileType: exe
   DisplayName: "Tableau Reader"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.shared.parent-recipe
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -18,7 +19,7 @@ Process:
       re_pattern: 'current version (?P<build_version>\d{4}\.\d\.?\d*)'
   - Processor: URLDownloaderPython
     Arguments:
-      url: 'https://www.tableau.com/downloads/reader/pc64'
+      url: "https://www.tableau.com/downloads/reader/pc64"
       download_version: "%build_version%"
       COMPUTE_HASHES: True
       prefetch_filename: True

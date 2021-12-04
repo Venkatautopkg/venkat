@@ -4,7 +4,8 @@ Identifier: com.github.bigfix.download.MicrosoftTeams-Win64
 Input:
   NAME: "MicrosoftTeams"
   DisplayName: "Microsoft Teams"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.shared.parent-recipe
 Process:
   - Processor: URLTextSearcher
     Arguments:

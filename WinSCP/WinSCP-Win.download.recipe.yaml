@@ -3,7 +3,8 @@ Description: Download laytest version of WinSCP
 Identifier: com.github.bigfix.download.WinSCP-Win
 Input:
   NAME: WinsCP
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.shared.parent-recipe
 Process:
   - Processor: URLTextSearcher
     Arguments:

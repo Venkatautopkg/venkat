@@ -6,7 +6,7 @@ Input:
   NAME: "AnyVideoConverter-Pro-Win64"
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "AnyVideoConverter-Pro"
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -15,6 +15,6 @@ Process:
   - Processor: URLDownloaderPython
     Arguments:
       url: https://www.any-video-converter.com/any-video-converter.exe
-      prefetch_filename: True
+      User_Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

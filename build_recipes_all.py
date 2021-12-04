@@ -196,7 +196,7 @@ def main():
     print("main()")
     recipe_path_array = get_all_files()
     recipe_identifiers = get_all_identifiers(recipe_path_array)
-    run_first_or_oldreceipt_recipes(recipe_identifiers, 36)
+    run_first_or_oldreceipt_recipes(recipe_identifiers, 10)
 
 
 if __name__ == "__main__":

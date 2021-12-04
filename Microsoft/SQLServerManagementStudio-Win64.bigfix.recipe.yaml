@@ -1,14 +1,13 @@
 ---
 Description: Generates a BigFix Task for the latest SQL Server Management Studio
-Identifier: com.github.bigfix.bigfix.SMSS-Win64
+Identifier: com.github.bigfix.bigfix.SQLServerManagementStudio-Win64
 Input:
-  NAME: "SSMS"
+  NAME: "SQLServerManagementStudio"
   icon_url: https://i.pinimg.com/originals/32/a0/3a/32a03aee0c76419ec5bde950a62883bc.png
   DisplayName: "SQL Server Management Studio"
-  VendorFolder: SQLServerManagementStudio
   content_id_product: "020"
 MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.download.SMSS-Win64
+ParentRecipe: com.github.bigfix.download.SQLServerManagementStudio-Win64
 Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: com.github.jgstew.SharedProcessors/BigFixPrefetchItem

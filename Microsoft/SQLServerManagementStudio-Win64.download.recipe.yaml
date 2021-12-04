@@ -1,14 +1,15 @@
 ---
 Description: Downloads the latest SQL Server Management Studio
-Identifier: com.github.bigfix.download.SMSS-Win64
+Identifier: com.github.bigfix.download.SQLServerManagementStudio-Win64
 Input:
   # Name: Short Name of the Software, No spaces, Example: "DBBrowserforSQLite"
-  NAME: "SSMS"
+  NAME: "SQLServerManagementStudio"
   FileType: exe
   # DisplayName: The start of the DisplayName key in the Windows Registry, Example: "DB Browser for SQLite"
   DisplayName: "SQL Server Management Studio"
   DocLink: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
 MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.shared.parent-recipe
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods

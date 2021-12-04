@@ -6,6 +6,7 @@ Input:
   FileType: exe
   DisplayName: "Filezilla"
 MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.shared.parent-recipe
 Process:
   - Processor: URLTextSearcher
     Arguments:
@@ -13,7 +14,7 @@ Process:
       re_pattern: "The latest stable version of FileZilla Client is (?P<version>([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}))"
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://download.filezilla-project.org/client/FileZilla_%latest_version%_win64-setup.%FileType%
+      url: https://download.filezilla-project.org/client/FileZilla_%version%_win64-setup.%FileType%
       download_version: "%version%"
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase

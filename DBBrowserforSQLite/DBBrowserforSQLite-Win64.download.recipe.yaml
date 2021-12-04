@@ -4,7 +4,8 @@ Identifier: com.github.bigfix.download.DBBrowserforSQLite-Win64
 Input:
   NAME: DBBrowserforSQLite
   FileType: msi
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.shared.parent-recipe
 Process:
   - Processor: URLTextSearcher
     Arguments:

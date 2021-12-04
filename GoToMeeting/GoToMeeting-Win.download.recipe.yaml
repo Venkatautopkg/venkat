@@ -3,7 +3,8 @@ Description: Download GoToMeeting for Windows
 Identifier: com.github.bigfix.download.GoToMeeting-Win
 Input:
   NAME: GoToMeeting
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.shared.parent-recipe
 Process:
   - Processor: URLTextSearcher
     Arguments:
