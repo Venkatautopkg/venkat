@@ -2,8 +2,9 @@
 Description: Downloads the latest OBS for Windows x64
 Identifier: com.github.bigfix.download.OBS-Win64
 Input:
-  NAME: OBSWin64
-MinimumVersion: '2.3'
+  NAME: OBS
+MinimumVersion: "2.3"
+ParentRecipe: com.github.bigfix.shared.parent-recipe
 Process:
   # `SharedUtilityMethods` must come first
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
@@ -11,10 +12,10 @@ Process:
   - Processor: URLTextSearcher
     Arguments:
       url: https://obsproject.com/download
-      # Example: https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.0.1-Full-Installer-x64.exe
-      re_pattern: 'OBS-Studio-(?P<latest_version>\d+\.\d+\.\d+)-Full-Installer-x64.exe'
+      re_pattern: 'OBS-Studio-(?P<version>\d+\.\d+\.\d+)-Full-Installer-x64.exe'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://cdn-fastly.obsproject.com/downloads/OBS-Studio-%latest_version%-Full-Installer-x64.exe
+      # Example: https://cdn-fastly.obsproject.com/downloads/OBS-Studio-27.0.1-Full-Installer-x64.exe
+      url: https://cdn-fastly.obsproject.com/downloads/OBS-Studio-%version%-Full-Installer-x64.exe
       COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
