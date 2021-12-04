@@ -42,9 +42,6 @@
 // Download:
 {{{prefetch}}}
 
-// Is 7-zip open? Pause.
-pause while {exists process "7zFM.exe"}
-
 // Remove the 64-bit EXE version
 if {exists file "C:\Program Files (x86)\7-Zip\Uninstall.exe"}
     waithidden "C:\Program Files (x86)\7-Zip\Uninstall.exe" /S
