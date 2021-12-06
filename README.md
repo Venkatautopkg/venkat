@@ -8,7 +8,7 @@ Check your Windows Dev Env Setup using `check_setup_win.bat`
 
 - Get issue statuses: `gh issue list --label recipe --limit 333 --state all --json state,assignees,projectCards,number,title --template '{{range .}}{{range .assignees}}{{if ne .name \"\"}}{{.name}}{{else}}{{.login}}{{end}},{{end}}{{range .projectCards}}{{if eq .column.name \"To do\"}}0.5{{ end }}{{if eq .column.name \"In progress\"}}1{{ end }}{{if eq .column.name \"Done\"}}2{{ end }}{{if eq .column.name \"Verified\"}}4{{ end }},{{.column.name}}{{end}},{{.number}},{{.title}}{{println}}{{end}}'`
 - Get issues without project assignment: `gh issue list --label recipe --search no:project --json createdAt,number,url,title`
-- Get closed patch recipes issues for publish: `gh issue list --label recipe,patch --limit 333 --state all --json title --template '{{range .}}{{.title}}{{println}}{{end}}'`
+- Get closed patch recipes issues for publish: `gh issue list --label recipe,patch --limit 333 --state closed --json title --template '{{range .}}{{.title}}{{println}}{{end}}'`
 
 ## Helpful Relevance Queries:
 
