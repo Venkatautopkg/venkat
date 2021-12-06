@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BES xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BES.xsd">
 	<{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
-		<Title>{{>TitlePrefix}} OBS v{{version}} - Windows (x64)</Title>
+		<Title>{{>TitlePrefix}} {{DisplayName}} v{{version}} - Windows (x64)</Title>
 		<Description><![CDATA[
 {{>DescriptionBasic}}
 {{>DescriptionIcon}}
-		]]></Description>
+		]]>		</Description>
 		<Relevance>windows of operating system</Relevance>
 		<Relevance><![CDATA[x64 of operating system]]></Relevance>
 		{{#patch}}{{#DisplayName}}
@@ -49,7 +49,7 @@ completion=job
 wait __Download\{{{file_name}}} /S
 {{#PublicDesktopShortcutFile}}{{>DeletePublicDesktopIcon}}{{/PublicDesktopShortcutFile}}
 // End]]></ActionScript>
-      <SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
+			<SuccessCriteria Option="OriginalRelevance"></SuccessCriteria>
 		</DefaultAction>
 	</{{TypeTaskOrFixlet}}{{^TypeTaskOrFixlet}}Task{{/TypeTaskOrFixlet}}>
 </BES>
