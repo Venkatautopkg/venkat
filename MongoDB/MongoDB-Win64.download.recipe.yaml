@@ -3,8 +3,9 @@ Description: Downloads the latest version MongoDB for Windows.
 Identifier: com.github.bigfix.download.MongoDB-Win64
 Input:
   NAME: MongoDB
+  DisplayName: MongoDB
   FileType: msi
-MinimumVersion: '2.3'
+MinimumVersion: "2.3"
 Process:
   - Processor: com.github.jgstew.SharedProcessors/SharedUtilityMethods
   - Processor: URLTextSearcher
