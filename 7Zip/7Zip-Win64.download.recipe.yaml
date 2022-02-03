@@ -1,18 +1,24 @@
 ---
-Description: Downloads the latest version 7Zip for Windows.
+Description: Downloads the latest version 7Zip 64-bit for Windows.
 # based upon https://github.com/autopkg/hansen-m-recipes/blob/master/UnixUtils/7zip-Win64.download.recipe
 Identifier: com.github.bigfix.download.7Zip-Win64
 Input:
   NAME: 7Zip
-  FileType: msi
-MinimumVersion: "2.3"
-ParentRecipe: com.github.bigfix.shared.parent-recipe
+  MinimumVersion: '2.3'
+#<<<<<<< Updated upstream
+  #FileType: msi
+#MinimumVersion: "2.3"
+#ParentRecipe: com.github.bigfix.shared.parent-recipe
+#=======
+  #FileType: msi
+#MinimumVersion: '2.3'
+#>>>>>>> Stashed changes
 Process:
   - Processor: URLTextSearcher
     Arguments:
       url: https://7-zip.org/download.html
       # Example: https://www.7-zip.org/a/7z1604.msi
-      re_pattern: 'a/7z(?P<latest_version>\d+)-x64.%FileType%'
+      re_pattern: 'a/7z(?P<latest_version>\d+)-x64.msi'
   - Processor: URLTextSearcher
     Arguments:
       url: https://7-zip.org/download.html
@@ -20,6 +26,6 @@ Process:
       re_pattern: 'Download 7-Zip (?P<display_version>\d+(\.\d+))'
   - Processor: URLDownloaderPython
     Arguments:
-      url: https://d.7-zip.org/a/7z%latest_version%-x64.%FileType%
-      COMPUTE_HASHES: True
+      url: http://d.7-zip.org/a/7z%latest_version%-x64.msi
+      #COMPUTE_HASHES: True
   - Processor: EndOfCheckPhase
